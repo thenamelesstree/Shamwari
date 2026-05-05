@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shamwari — Post-Quantum Financial OS</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<style>
+:root{--bg:#080F1E;--teal:#00D4C8;--gold:#F0C55A;--white:#F0F4FC;--muted:#8EA8C4}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:var(--bg);color:var(--white);overflow:hidden;font-family:'DM Sans',sans-serif}
+.intro{position:relative;width:100vw;height:100vh}
+.slide{position:absolute;inset:0;opacity:0}
+.slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.7);transform:scale(1.12)}
+.scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,15,30,.4) 0%,rgba(8,15,30,.85) 70%,rgba(8,15,30,.95) 100%),radial-gradient(ellipse at center,transparent 30%,rgba(0,0,0,.6) 100%)}
+.content{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:5vw}
+.eyebrow{font-family:'DM Sans',sans-serif;font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:1.2rem;font-weight:500}
+.h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.4rem,6.5vw,5rem);line-height:1.02;letter-spacing:-.02em}
+.h1.teal{color:var(--teal)}.h1.gold{color:var(--gold)}
+.h2{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(1.8rem,4.5vw,3.2rem);line-height:1.15;margin:.5rem 0}
+.body{font-size:clamp(1rem,2vw,1.25rem);color:var(--muted);max-width:900px;margin:1rem auto;line-height:1.6}
+.list{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(1.4rem,3.5vw,2.4rem);line-height:1.4}
+.list span{display:block;margin:.3rem 0}
+.badge{display:inline-block;padding:.35rem.8rem;border:1px solid rgba(0,212,200,.3);background:rgba(0,212,200,.08);color:var(--teal);border-radius:999px;font-size:.75rem;letter-spacing:.12em;margin:0.25rem}
+.typed-cursor{color:var(--teal);font-weight:300}
+.vignette{position:fixed;inset:0;box-shadow:inset 0 180px #000;pointer-events:none;z-index:10}
+.letterbox::before,.letterbox::after{content:'';position:fixed;left:0;right:0;height:7vh;background:#000;z-index:20}
+.letterbox::before{top:0}.letterbox::after{bottom:0}
+.logo{width:140px;opacity:.9;margin-bottom:1.5rem;filter:drop-shadow(0 20px rgba(0,212,200,.3))}
+</style>
+</head>
+<body class="letterbox">
+<div class="intro">
+
+<!-- 1 -->
+<div class="slide">
+  <img src="photo7211113943788528388.jpeg" alt="">
+  <div class="scrim"></div>
+  <div class="content">
+    <div class="eyebrow"><span class="badge">POST-QUANTUM</span><span class="badge">NIST FIPS 203/204</span></div>
+    <h1 class="h1"><span id="t1a"></span><br><span class="teal" id="t1b"></span><br><span id="t1c"></span></h1>
+  </div>
+</div>
+
+<!-- 2 -->
+<div class="slide">
+  <img src="photo2472860885810370014.jpeg" alt="">
+  <div class="scrim"></div>
+  <div class="content">
+    <h2 class="h2" id="t2a"></h2>
+    <p class="body" id="t2b"></p>
+  </div>
+</div>
+
+<!-- 3 -->
+<div class="slide">
+  <img src="photo3817455862728496576.jpeg" alt="">
+  <div class="scrim"></div>
+  <div class="content">
+    <div class="list">
+      <span class="gold" id="t3a"></span>
+      <span id="t3b"></span>
+      <span class="teal" id="t3c"></span>
+      <span id="t3d"></span>
+    </div>
+  </div>
+</div>
+
+<!-- 4 -->
+<div class="slide">
+  <img src="photo2338269299102190962.jpeg" alt="">
+  <div class="scrim"></div>
+  <div class="content">
+    <div class="eyebrow">THREE SIMULTANEOUS FAILURES</div>
+    <h1 class="h1" id="t4a"></h1>
+    <p class="body" id="t4b"></p>
+  </div>
+</div>
+
+<!-- 5 -->
+<div class="slide">
+  <img src="photo7467082387563199615.jpeg" alt="">
+  <div class="scrim"></div>
+  <div class="content">
+    <div class="list" style="text-align:left;max-width:900px">
+      <span class="teal" id="t5a"></span>
+      <span style="font-size:1rem;color:var(--muted);font-family:'DM Sans'" id="t5a2"></span>
+      <span class="gold" style="margin-top:1rem" id="t5b"></span>
+      <span style="font-size:1rem;color:var(--muted);font-family:'DM Sans'" id="t5b2"></span>
+      <span class="teal" style="margin-top:1rem" id="t5c"></span>
+      <span style="font-size:1rem;color:var(--muted);font-family:'DM Sans'" id="t5c2"></span>
+    </div>
+  </div>
+</div>
+
+<!-- 6 -->
+<div class="slide">
+  <img src="photo7649019236676186073.jpeg" alt="">
+  <div class="scrim"></div>
+  <div class="content">
+    <div class="eyebrow">SIX PROTOCOL SYSTEMS</div>
+    <h2 class="h2" id="t6a"></h2>
+    <div class="list" style="font-size:clamp(1.2rem,2.8vw,2rem);margin-top:1rem">
+      <span id="t6b"></span>
+    </div>
+  </div>
+</div>
+
+<!-- 7 -->
+<div class="slide">
+  <img src="photo3362808712099304464.jpeg" alt="">
+  <div class="scrim"></div>
+  <div class="content">
+    <div class="eyebrow">CRYPTOGRAPHIC FOUNDATION</div>
+    <h1 class="h1" style="font-size:clamp(2rem,5vw,4rem)" id="t7a"></h1>
+    <p class="body" id="t7b"></p>
+    <p class="body" id="t7c"></p>
+  </div>
+</div>
+
+<!-- 8 -->
+<div class="slide">
+  <img src="photo5796520989063622760.jpeg" alt="">
+  <div class="scrim"></div>
+  <div class="content">
+    <h1 class="h1" id="t8a"></h1>
+    <p class="body" id="t8b"></p>
+  </div>
+</div>
+
+<!-- 9 -->
+<div class="slide">
+  <img src="photo6048726753063016447.jpeg" alt="">
+  <div class="scrim"></div>
+  <div class="content">
+    <div class="eyebrow">WITHOUT vs WITH SHAMWARI</div>
+    <h2 class="h2" id="t9a"></h2>
+    <p class="body" id="t9b"></p>
+  </div>
+</div>
+
+<!-- 10 -->
+<div class="slide">
+  <img src="photo5810462694776950659.jpeg" alt="">
+  <div class="scrim" style="background:rgba(8,15,30,.85)"></div>
+  <div class="content">
+    <img src="photo5810462694776950659.jpeg" class="logo" style="width:220px">
+    <h2 class="h2" id="t10a"></h2>
+    <p class="body" id="t10b"></p>
+    <div class="eyebrow" style="margin-top:2rem;color:var(--gold)">shamwari.network</div>
+  </div>
+</div>
+
+</div>
+<div class="vignette"></div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const tl = gsap.timeline({repeat:-1,repeatDelay:2});
+
+const type = (el, text, speed=32) => new Promise(res=>{
+  if(!el || el.dataset.done) return res();
+  el.dataset.done=1;
+  new Typed(el,{strings:[text],typeSpeed:speed,showCursor:true,cursorChar:'▌',onComplete:()=>{setTimeout(()=>{document.querySelectorAll('.typed-cursor').forEach(c=>c.remove());res()},400)}});
+});
+
+const seq = [
+  async ()=>{await type(t1a,'The Financial');await type(t1b,'Operating System');await type(t1c,'for Emerging Markets',28);},
+  async ()=>{await type(t2a,'Six complete protocol systems. Zero smart contracts.');await type(t2b,'One quantum-resistant blockchain for 4 billion people across Africa, LATAM, ASEAN & MENA.',18);},
+  async ()=>{await type(t3a,'6 Complete Protocol Systems');await type(t3b,'$949B FaaS Market by 2030');await type(t3c,'4B People in Target Markets');await type(t3d,'2030 NIST Quantum Ready Now');},
+  async ()=>{await type(t4a,'One infrastructure gap. Four billion people waiting.');await type(t4b,'Emerging markets share financial exclusion, legacy costs, and quantum threat.',20);},
+  async ()=>{await type(t5a,'FINANCIAL EXCLUSION • 1.7B Unbanked');await type(t5a2,'Sub-Saharan Africa: 57% exclusion rate',18);await type(t5b,'LEGACY INFRASTRUCTURE • $3.8B+ Lost');await type(t5b2,'Smart contract exploits, no native KYC',18);await type(t5c,'QUANTUM THREAT • 2030');await type(t5c2,'Harvest-now decrypt-later attacks',18);},
+  async ()=>{await type(t6a,'Everything finance needs. Nothing it doesn\'t.');await type(t6b,'ShamwariPay • Totem Exchange • Insurance • Commerce • Subscriptions • AI-READY',22);},
+  async ()=>{await type(t7a,'Quantum-resistant from genesis block zero.');await type(t7b,'ML-DSA (Dilithium) NIST FIPS 204 — lattice-based signatures');await type(t7c,'ML-KEM (Kyber) NIST FIPS 203 — key encapsulation');},
+  async ()=>{await type(t8a,'Built for these markets. Not retrofitted.');await type(t8b,'Engineered for Africa, LATAM, ASEAN & MENA — not a general-purpose chain.',20);},
+  async ()=>{await type(t9a,'Account creation from any phone. No branch. No 8-12% fees.');await type(t9b,'Cross-border settlement in 12 seconds. On-chain insurance and credit history.',20);},
+  async ()=>{await type(t10a,'The financial infrastructure the world needs is ready.');await type(t10b,'Full source code, documentation, and testnet access available now.',20);}
+];
+
+slides.forEach((s,i)=>{
+  const img = s.querySelector('img');
+  tl.to(s,{opacity:1,duration:0.7},i*4)
+   .fromTo(img,{scale:1.15},{scale:1,duration:4,ease:'power1.out'},'<')
+   .add(()=>seq[i](),'<+0.3')
+   .to(s,{opacity:0,duration:0.7},i*4+3.6);
+});
+</script>
+</body>
+</html>

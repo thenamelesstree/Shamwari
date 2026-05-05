@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Post-Quantum Security on Shamwari</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Shamwari deploys NIST FIPS 203/204 post-quantum cryptography from genesis — ML-DSA Dilithium, ML-KEM Kyber, AES-GCM, and BIP39 PQ Adaptation protecting every transaction against quantum and classical attack.">
+<link href="img/favicon.ico" rel="icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/pages.css" rel="stylesheet">
+<style>
+.pg-toc{position:sticky;top:72px;background:rgba(8,15,30,.95);border-bottom:1px solid var(--border-dk);z-index:100;padding:0 2rem;backdrop-filter:blur(12px)}
+.pg-toc__inner{max-width:1240px;margin:0 auto;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.pg-toc__inner::-webkit-scrollbar{display:none}
+.pg-toc__link{font-family:var(--font-display);font-size:.7rem;font-weight:600;letter-spacing:.06em;color:var(--txt-muted);padding:.82rem 1rem;border-bottom:2px solid transparent;white-space:nowrap;transition:color .2s,border-color .2s;text-decoration:none}
+.pg-toc__link:hover,.pg-toc__link.is-active{color:var(--teal);border-bottom-color:var(--teal)}
+.pg-sh{display:flex;align-items:flex-start;gap:1.5rem;margin-bottom:3rem}
+.pg-sh__num{font-family:var(--font-display);font-size:4rem;font-weight:800;color:rgba(255,255,255,.06);line-height:1;letter-spacing:-.05em;flex-shrink:0;user-select:none}
+.pg-sh__copy{flex:1}
+.pg-sh__title{font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:var(--txt-primary);line-height:1.2;letter-spacing:-.02em;margin-bottom:.75rem}
+.pg-sh__sub{font-size:.975rem;color:var(--txt-secondary);line-height:1.72;max-width:720px}
+@media(max-width:768px){.pg-toc{display:none}.pg-sh{flex-direction:column;gap:.5rem}.pg-sh__num{font-size:2.5rem}}
+</style><style>
+.qstack{display:flex;flex-direction:column;gap:1rem}
+.qcard{background:var(--bg-card-dk);border:1px solid var(--border-dk);border-radius:var(--radius);padding:1.75rem;position:relative;overflow:hidden;transition:border-color .25s,box-shadow .25s}
+.qcard:hover{box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.qcard--teal{border-left:3px solid var(--teal)}.qcard--teal:hover{border-color:rgba(0,168,158,.5)}
+.qcard--gold{border-left:3px solid var(--gold)}.qcard--gold:hover{border-color:rgba(200,155,60,.5)}
+.qcard__algo{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.14em;margin-bottom:.5rem}
+.qcard--teal .qcard__algo{color:var(--teal)}.qcard--gold .qcard__algo{color:var(--gold)}
+.qcard__name{font-family:var(--font-display);font-size:1.1rem;font-weight:800;color:var(--txt-primary);margin-bottom:.5rem}
+.qcard__role{font-size:.9rem;color:var(--txt-secondary);line-height:1.65;margin-bottom:1rem}
+.qcard__uses{display:flex;flex-wrap:wrap;gap:.4rem}
+.qcard__use{font-size:.68rem;color:var(--txt-secondary);background:rgba(255,255,255,.04);border:1px solid var(--border-dk);border-radius:40px;padding:.15rem .65rem;font-family:var(--font-display);font-weight:600;letter-spacing:.04em}
+.qcard__fips{position:absolute;top:1rem;right:1rem}
+.qcard__badge{font-family:var(--font-display);font-size:.6rem;font-weight:700;letter-spacing:.1em;padding:.2rem .65rem;border-radius:40px}
+.qcard--teal .qcard__badge{background:rgba(0,168,158,.12);color:var(--teal-lt);border:1px solid rgba(0,168,158,.25)}
+.qcard--gold .qcard__badge{background:rgba(200,155,60,.12);color:var(--gold-lt);border:1px solid rgba(200,155,60,.25)}
+.qcard__detail{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border-dk);display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.qcard__spec{font-size:.78rem;color:var(--txt-secondary)}.qcard__spec strong{color:var(--txt-primary);font-weight:600;font-family:var(--font-mono);font-size:.75rem}
+.qtl{display:flex;flex-direction:column;gap:0}
+.qtl-item{display:flex;gap:1rem;padding:.9rem 0;border-left:2px solid var(--border-dk);padding-left:1.25rem;margin-left:.6rem;position:relative}
+.qtl-item:last-child{border-color:transparent}
+.qtl-dot{position:absolute;left:-.52rem;top:1rem;width:1rem;height:1rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.4rem;flex-shrink:0}
+.qtl-dot--red{background:var(--red);color:#fff}.qtl-dot--gold{background:var(--gold);color:#fff}.qtl-dot--teal{background:var(--teal);color:#fff}.qtl-dot--grey{background:var(--border-dk);border:1.5px solid var(--txt-muted)}
+.qtl-year{font-family:var(--font-display);font-size:.75rem;font-weight:700;white-space:nowrap;min-width:40px;margin-top:.05rem}
+.qtl-item:nth-child(1) .qtl-year{color:var(--red)}.qtl-item:nth-child(2) .qtl-year{color:var(--gold)}.qtl-item:nth-child(3) .qtl-year{color:var(--gold)}.qtl-item:nth-child(4) .qtl-year,.qtl-item:nth-child(5) .qtl-year{color:var(--teal)}
+.qtl-text{font-size:.82rem;color:var(--txt-secondary);line-height:1.55}.qtl-text strong{color:var(--txt-primary);font-weight:600;display:block;margin-bottom:.1rem}
+.qcmp{border:1px solid var(--border-dk);border-radius:var(--radius-xs);overflow:hidden}
+.qcmp__head{display:grid;grid-template-columns:1fr 1fr 1fr;background:rgba(255,255,255,.03);border-bottom:1px solid var(--border-dk)}
+.qcmp__hc{padding:.65rem 1rem;font-family:var(--font-display);font-size:.6rem;font-weight:700;letter-spacing:.12em;color:var(--txt-muted)}
+.qcmp__hc:nth-child(2){color:var(--red)}.qcmp__hc:nth-child(3){color:var(--teal);border-left:1px solid rgba(0,168,158,.2);background:rgba(0,168,158,.04)}
+.qcmp__row{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--border-dk);transition:background .15s}
+.qcmp__row:last-child{border-bottom:none}.qcmp__row:hover{background:rgba(255,255,255,.02)}
+.qcmp__c{padding:.65rem 1rem;font-size:.8rem;color:var(--txt-secondary);line-height:1.4;display:flex;align-items:center}
+.qcmp__c:first-child{font-family:var(--font-display);font-size:.7rem;font-weight:600;color:var(--txt-primary);letter-spacing:.02em}
+.qcmp__c:nth-child(3){border-left:1px solid rgba(0,168,158,.2);background:rgba(0,168,158,.025)}
+.qcmp__bad{color:var(--red)}.qcmp__good{color:var(--teal);font-weight:500}
+.deriv-flow{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;background:var(--bg-card-dk);border:1px solid var(--border-dk);border-radius:var(--radius-xs);padding:1.25rem 1.4rem}
+.deriv-node{flex:1;min-width:85px;border:1px solid var(--border-dk);border-radius:6px;padding:.65rem .75rem;text-align:center}
+.deriv-node--seed{border-color:rgba(200,155,60,.3);background:rgba(200,155,60,.04)}
+.deriv-node--teal{border-color:rgba(0,168,158,.3);background:rgba(0,168,158,.04)}
+.deriv-node--gold{border-color:rgba(200,155,60,.3);background:rgba(200,155,60,.04)}
+.deriv-label{font-family:var(--font-display);font-size:.56rem;font-weight:700;letter-spacing:.1em;margin-bottom:.2rem}
+.deriv-node--seed .deriv-label{color:var(--gold)}.deriv-node--teal .deriv-label{color:var(--teal)}.deriv-node--gold .deriv-label{color:var(--gold)}
+.deriv-val{font-family:var(--font-mono);font-size:.68rem;color:var(--txt-primary);line-height:1.35}
+.deriv-arrow{color:var(--txt-muted);font-size:.75rem;flex-shrink:0}
+.deriv-split{display:flex;flex-direction:column;gap:.4rem;flex:1;min-width:85px}
+@media(max-width:768px){.qcard__detail{grid-template-columns:1fr}.deriv-flow{flex-direction:column;align-items:stretch}.deriv-arrow{transform:rotate(90deg);align-self:center}}
+</style>
+</head>
+<body>
+<nav class="sh-nav" id="sh-nav">
+<div class="sh-nav__inner">
+  <a href="index.html" class="sh-nav__brand">
+    <div>
+    		<img src="img/banner.png" alt="Shamwari Logo" height="40">
+    </div>
+  </a>
+  <button class="sh-nav__toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="sh-nav__menu" id="nav-menu">
+    <a href="architecture.html" class="sh-nav__link">Architecture</a>
+    <a href="compliance.html" class="sh-nav__link">Compliance</a>
+    <a href="security.html" class="sh-nav__link sh-nav__link--active">Security</a>
+    <a href="solutions.html" class="sh-nav__link">Solutions</a>
+    <a href="developers.html" class="sh-nav__link">Developers</a>
+  </div>
+  <div class="sh-nav__actions">
+    <a href="https://shamwari.thenamelesstree.co.zw:22024" class="sh-btn sh-btn--ghost sh-btn--sm">Wallet</a>
+    <a href="https://bitbucket.org/thenamelesstree/shamwari/src/main/docs" class="sh-btn sh-btn--teal sh-btn--sm">Docs</a>
+  </div>
+</div>
+</nav>
+<section class="pg-hero" style="background: url('img/cyber_blue_cyan.jpg') center/cover no-repeat;">
+  <div class="pg-hero__glow"></div>
+  <div class="sh-container pg-hero__inner">
+    <div class="pg-hero__content">
+      <div class="sh-eyebrow sh-eyebrow--teal">CRYPTOGRAPHIC INFRASTRUCTURE</div>
+      <h1 class="pg-hero__title">Post-Quantum<br>Security</h1>
+      <p class="pg-hero__sub">Adversaries are harvesting encrypted blockchain data today to decrypt once quantum computers reach cryptographic relevance. Shamwari has been quantum-safe since genesis block zero — no legacy ECDSA history, no retroactive exposure, no migration required.</p>
+      <div class="pg-hero__badges"><span class="sh-badge sh-badge--teal">ML-DSA DILITHIUM</span><span class="sh-badge sh-badge--gold">ML-KEM KYBER</span><span class="sh-badge sh-badge--teal">NIST FIPS 203/204</span><span class="sh-badge sh-badge--gold">AES-GCM</span><span class="sh-badge sh-badge--teal">BIP39 PQ</span><span class="sh-badge sh-badge--gold">HARVEST-NOW THREAT</span></div>
+    </div>
+    <div class="pg-hero__icon-wrap"><div class="pg-hero__icon-bg"></div><i class="fa-solid fa-lock pg-hero__icon"></i></div>
+  </div>
+</section>
+<div class="pg-stats"><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--teal">2</div><div class="pg-stats__l">NIST post-quantum standards deployed</div></div><div class="pg-stats__div"></div><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--gold">0</div><div class="pg-stats__l">Legacy ECDSA history — PQC from genesis block zero</div></div><div class="pg-stats__div"></div><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--teal">2030</div><div class="pg-stats__l">Quantum threat window — Shamwari ready today</div></div><div class="pg-stats__div"></div><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--gold">100%</div><div class="pg-stats__l">Historical transactions protected retroactively</div></div></div><nav class="pg-toc" data-toc="1"><div class="pg-toc__inner"><a href="#threat" class="pg-toc__link">01 — Harvest-Now Threat</a><a href="#stack" class="pg-toc__link">02 — Cryptographic Stack</a><a href="#dilithium" class="pg-toc__link">03 — ML-DSA Dilithium</a><a href="#kyber" class="pg-toc__link">04 — ML-KEM Kyber</a><a href="#bip39" class="pg-toc__link">05 — BIP39 PQ Adaptation</a><a href="#derivation" class="pg-toc__link">06 — Key Derivation</a><a href="#timeline" class="pg-toc__link">07 — Threat Timeline</a><a href="#comparison" class="pg-toc__link">08 — Comparison</a></div></nav><section class="sh-section" id="threat"><div class="sh-container"><div class="pg-sh">
+  <div class="pg-sh__num">01</div>
+  <div class="pg-sh__copy">
+    <div class="sh-eyebrow sh-eyebrow--red">THREAT MODEL</div>
+    <div class="pg-sh__title">The harvest-now, decrypt-later attack</div>
+    <p class="pg-sh__sub">This is not a 2030 problem. It is a 2024 problem that will manifest in 2030. Nation-state adversaries are actively capturing and archiving encrypted blockchain traffic today — every transaction, every identity proof, every certificate — with the explicit intent to decrypt it once a cryptographically relevant quantum computer exists.</p>
+  </div>
+</div>
+  <div class="sh-threat-banner pg-reveal">
+    <div class="sh-threat-banner__icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+    <div>
+      <div class="sh-threat-banner__label">ACTIVE THREAT — NOT THEORETICAL</div>
+      <div class="sh-threat-banner__text">Intelligence agencies and state-level actors are known to operate large-scale traffic interception and archival programmes. The objective: archive now, decrypt later. Financial records, identity proofs, and transaction histories recorded <strong>today on ECDSA chains will be decryptable</strong> by a sufficiently powerful quantum computer. The vulnerability window is the entire historical archive of the chain.</div>
+    </div>
+  </div>
+  <div class="sh-qsec-intro" style="margin-top:2.5rem">
+    <div class="sh-qsec-intro-card sh-qsec-intro-card--red pg-reveal"><div class="sh-qsec-intro-card__bar"></div><div class="sh-qsec-intro-card__eyebrow">THE THREAT</div><div class="sh-qsec-intro-card__title">Active Interception Today</div><div class="sh-qsec-intro-card__body">Traffic is being captured now. Every ECDSA-signed transaction published to any blockchain is permanently archived by multiple state-level adversaries. The clock starts at publication, not at quantum availability.</div></div>
+    <div class="sh-qsec-intro-card sh-qsec-intro-card--gold pg-reveal"><div class="sh-qsec-intro-card__bar"></div><div class="sh-qsec-intro-card__eyebrow">THE DEADLINE</div><div class="sh-qsec-intro-card__title">NIST Migration Deadline: 2030</div><div class="sh-qsec-intro-card__body">NIST has finalised FIPS 203 and FIPS 204. The 2030 compliance deadline gives chains that migrate in 2028 two years of fully exposed transaction history. Chains that migrate in 2029 leave three years exposed.</div></div>
+    <div class="sh-qsec-intro-card sh-qsec-intro-card--teal pg-reveal"><div class="sh-qsec-intro-card__bar"></div><div class="sh-qsec-intro-card__eyebrow">THE SOLUTION</div><div class="sh-qsec-intro-card__title">PQC from Genesis Block Zero</div><div class="sh-qsec-intro-card__body">Every Shamwari transaction since block 1 is signed with Dilithium and encrypted with Kyber. There is no ECDSA history to expose. No migration window. No retroactive vulnerability regardless of when quantum computers reach relevance.</div></div>
+  </div>
+  <div class="pg-cards3" style="margin-top:2.5rem">
+    <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--red"><i class="fa-solid fa-satellite-dish"></i></div><h3 class="pg-card__title">State-Level Interception</h3><p class="pg-card__body">Intelligence agencies operate dedicated programmes to capture and archive encrypted internet traffic. Blockchain transactions — public by design and broadcast globally — are the highest-value targets. Every hash, signature, and public key ever broadcast to a peer-to-peer network is permanently archived.</p></div>
+    <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--red"><i class="fa-solid fa-clock-rotate-left"></i></div><h3 class="pg-card__title">Retroactive Exposure</h3><p class="pg-card__body">Financial records, identity proofs, and transaction histories created today will be decryptable by future quantum computers. For a chain that launches PQC in 2028, every transaction from 2015 to 2028 — years of user activity, institutional flows, and identity data — is permanently compromised.</p></div>
+    <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--red"><i class="fa-solid fa-file-shield"></i></div><h3 class="pg-card__title">Fiduciary Obligation</h3><p class="pg-card__body">For financial institutions holding sensitive user data on blockchain infrastructure, deploying quantum-safe cryptography is no longer optional. NIST, the European Union, and major central banks have all issued guidance requiring PQC migration. 2026 fiduciary standards require action, not planning.</p></div>
+  </div>
+</div></section><section class="sh-section sh-section--navy" id="stack"><div class="sh-container"><div class="pg-sh">
+  <div class="pg-sh__num">02</div>
+  <div class="pg-sh__copy">
+    <div class="sh-eyebrow sh-eyebrow--teal">CRYPTOGRAPHIC STACK</div>
+    <div class="pg-sh__title">Four-layer post-quantum defence</div>
+    <p class="pg-sh__sub">Shamwari deploys a complete post-quantum cryptographic stack covering digital signatures, key encapsulation, symmetric encryption, and wallet key derivation. Every operation at every layer uses a NIST-standardised or NIST-compatible algorithm.</p>
+  </div>
+</div>
+  <div class="pg-two-col">
+    <div class="qstack">
+      <div class="qcard qcard--teal pg-reveal">
+        <div class="qcard__fips"><span class="qcard__badge">NIST FIPS 204</span></div>
+        <div class="qcard__algo">LAYER 1 &middot; DIGITAL SIGNATURES</div>
+        <div class="qcard__name">ML-DSA: Dilithium</div>
+        <div class="qcard__role">Lattice-based digital signature scheme. Used for every transaction signature, every block generated by a forger, every certificate issued. Secure against Shor&rsquo;s algorithm on any quantum computer of any size.</div>
+        <div class="qcard__uses"><span class="qcard__use">Transaction signing</span><span class="qcard__use">Block signatures (2420B)</span><span class="qcard__use">Certificate issuance</span><span class="qcard__use">Identity attestation</span><span class="qcard__use">Forger key</span></div>
+        <div class="qcard__detail">
+          <div class="qcard__spec">Security level: <strong>ML-DSA-2 (Level 2)</strong></div>
+          <div class="qcard__spec">Signature size: <strong>2420 bytes</strong></div>
+          <div class="qcard__spec">Public key: <strong>1312 bytes</strong></div>
+          <div class="qcard__spec">Algorithm basis: <strong>Module lattices (MLWE)</strong></div>
+        </div>
+      </div>
+      <div class="qcard qcard--gold pg-reveal">
+        <div class="qcard__fips"><span class="qcard__badge">NIST FIPS 203</span></div>
+        <div class="qcard__algo">LAYER 2 &middot; KEY ENCAPSULATION</div>
+        <div class="qcard__name">ML-KEM: Kyber</div>
+        <div class="qcard__role">Module-lattice key encapsulation mechanism. Public key stored on-chain for every account. Used to encrypt account identity metadata, purchase payloads, insurance policy details, messages, and delivery proofs.</div>
+        <div class="qcard__uses"><span class="qcard__use">Account identity</span><span class="qcard__use">Purchase payloads</span><span class="qcard__use">KYC data</span><span class="qcard__use">Messages</span><span class="qcard__use">Delivery proofs</span><span class="qcard__use">Policy metadata</span></div>
+        <div class="qcard__detail">
+          <div class="qcard__spec">Security level: <strong>ML-KEM-512</strong></div>
+          <div class="qcard__spec">Public key: <strong>800 bytes</strong></div>
+          <div class="qcard__spec">Ciphertext: <strong>768 bytes</strong></div>
+          <div class="qcard__spec">Algorithm basis: <strong>Module lattices (MLWE)</strong></div>
+        </div>
+      </div>
+      <div class="qcard qcard--teal pg-reveal">
+        <div class="qcard__fips"><span class="qcard__badge">AEAD</span></div>
+        <div class="qcard__algo">LAYER 3 &middot; SYMMETRIC ENCRYPTION</div>
+        <div class="qcard__name">AES-256-GCM</div>
+        <div class="qcard__role">Authenticated Encryption with Associated Data. Used after Kyber key establishment for high-throughput bulk data encryption. Provides both confidentiality and integrity verification where a tampered payload fails authentication and is rejected.</div>
+        <div class="qcard__uses"><span class="qcard__use">Bulk data encryption</span><span class="qcard__use">Payload integrity</span><span class="qcard__use">Post-KEM sessions</span><span class="qcard__use">Hardware-accelerated</span></div>
+        <div class="qcard__detail">
+          <div class="qcard__spec">Key size: <strong>256 bits</strong></div>
+          <div class="qcard__spec">Mode: <strong>Galois/Counter Mode</strong></div>
+          <div class="qcard__spec">Authentication: <strong>128-bit GCM tag</strong></div>
+          <div class="qcard__spec">Hardware: <strong>AES-NI accelerated</strong></div>
+        </div>
+      </div>
+      <div class="qcard qcard--gold pg-reveal">
+        <div class="qcard__fips"><span class="qcard__badge">WALLET RECOVERY</span></div>
+        <div class="qcard__algo">LAYER 4 &middot; KEY DERIVATION</div>
+        <div class="qcard__name">BIP39 PQ Adaptation</div>
+        <div class="qcard__role">The familiar BIP39 mnemonic standard adapted for post-quantum key derivation. A single 12&ndash;15&ndash;18&ndash;21&ndash;24 word seed phrase deterministically derives both the Dilithium signing key and the Kyber encryption key. No separate backup required for each key.</div>
+        <div class="qcard__uses"><span class="qcard__use">Single seed phrase</span><span class="qcard__use">Both PQC keys</span><span class="qcard__use">No cloud backup</span><span class="qcard__use">Hardware wallet UX</span><span class="qcard__use">Deterministic</span></div>
+        <div class="qcard__detail">
+          <div class="qcard__spec">Mnemonic: <strong>12 or 24 BIP39 words</strong></div>
+          <div class="qcard__spec">KDF: <strong>PBKDF2-HMAC-SHA512</strong></div>
+          <div class="qcard__spec">Output: <strong>64-byte root entropy</strong></div>
+          <div class="qcard__spec">Keys derived: <strong>Dilithium + Kyber pair</strong></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1.25rem">COMBINED KEY STRUCTURE PER ACCOUNT</div>
+      <div class="pg-card2 pg-reveal" style="margin-bottom:1.25rem">
+        <div class="pg-card2__accent pg-card2__accent--teal"></div>
+        <h3 class="pg-card2__title">Generator Public Key Size: 2112 bytes</h3>
+        <p class="pg-card2__body">Every Shamwari account's public identity is a combined 2112-byte structure: 800 bytes of Kyber-512 encryption public key concatenated with 1312 bytes of Dilithium-2 signing public key. This combined key is stored in the block header for forgers and in the account table for all participants.</p>
+        <ul class="pg-card2__list">
+          <li><strong>Kyber public key (800B)</strong> : for encrypting data to this account</li>
+          <li><strong>Dilithium public key (1312B)</strong> : for verifying this account's signatures</li>
+          <li>Both keys derived deterministically from the same seed phrase</li>
+          <li>Single key rotation updates both keys atomically via one transaction</li>
+        </ul>
+      </div>
+      <div class="pg-card2 pg-reveal" style="margin-bottom:1.25rem">
+        <div class="pg-card2__accent pg-card2__accent--gold"></div>
+        <h3 class="pg-card2__title">Block Signatures : 2420 bytes each</h3>
+        <p class="pg-card2__body">Every forged block carries a 2420-byte ML-DSA-2 (Dilithium Level 2) signature over the full block header. This is the quantum-resistant proof that a specific forger with a specific stake committed to this specific block content at this specific height. Verification is deterministic on every node.</p>
+        <ul class="pg-card2__list">
+          <li>Covers: previous block hash, payload hash, generator key, timestamp</li>
+          <li>Deterministic: same input always produces same verifiable signature</li>
+          <li>Constant-time verification to ensure no timing side-channel leakage</li>
+          <li>Resistant to Shor&rsquo;s algorithm at any key size</li>
+        </ul>
+      </div>
+      <div class="pg-card2 pg-reveal">
+        <div class="pg-card2__accent pg-card2__accent--teal"></div>
+        <h3 class="pg-card2__title">Why Lattice-Based Cryptography?</h3>
+        <p class="pg-card2__body">Both Dilithium and Kyber are built on the hardness of Module Learning With Errors (MLWE); a lattice problem for which no efficient quantum algorithm is known. Shor&rsquo;s algorithm, which breaks ECDSA and RSA in polynomial time on a quantum computer, has no known application to lattice problems. NIST reviewed all known quantum attacks and standardised both algorithms in 2024.</p>
+        <ul class="pg-card2__list">
+          <li>Hardness assumption: Module Learning With Errors (MLWE)</li>
+          <li>No quantum algorithm reduces MLWE to polynomial time</li>
+          <li>NIST 7-year evaluation with global academic review (2017&ndash;2024)</li>
+          <li>Both algorithms resistant to all known classical and quantum attacks</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div></section><section class="sh-section" id="dilithium"><div class="sh-container"><div class="pg-sh">
+  <div class="pg-sh__num">03</div>
+  <div class="pg-sh__copy">
+    <div class="sh-eyebrow sh-eyebrow--teal">ML-DSA DILITHIUM FIPS 204</div>
+    <div class="pg-sh__title">Transaction signatures and block signing</div>
+    <p class="pg-sh__sub">ML-DSA (Module Lattice-Based Digital Signature Algorithm) is NIST FIPS 204, finalised in 2024. It is the primary signature algorithm for all Shamwari blockchain operations from individual transaction signing to block production by forger nodes.</p>
+  </div>
+</div>
+  <div class="pg-two-col">
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1.25rem">WHERE DILITHIUM IS USED</div>
+      <div class="pg-features">
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Every Transaction Signature</div><div class="pg-feature__body">Every transaction submitted to the Shamwari network carries a Dilithium signature over the serialised transaction body. This signature is verified at gate 1 of the 7-gate consensus pipeline before any other validation logic runs. A transaction with an invalid Dilithium signature is rejected immediately and never enters the mempool.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Block Production Signatures</div><div class="pg-feature__body">The forger node that wins the proof-of-stake block production right signs the full block header with its Dilithium private key. The resulting 2420-byte signature is included in the block header. Every node in the network independently verifies this signature before accepting the block into their chain.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Digital Certificate Issuance</div><div class="pg-feature__body">ShamwariCertificate implements <span class="sh-code">java.security.cert.Certificate</span> and uses Dilithium for all certificate signatures. JVM-based applications e.g web servers, payment terminals, enterprise middleware can verify Shamwari certificates natively using standard Java PKI interfaces, with post-quantum security underneath.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Identity Attestation</div><div class="pg-feature__body">All TotemApproval state transitions, permission grants, insurance approvals, and regulatory authority actions require Dilithium-signed transactions from designated authority accounts. The signature is the proof of regulatory action verified by every node independently, permanently recorded on-chain.</div></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1.25rem">TECHNICAL PARAMETERS</div>
+      <div class="pg-card2 pg-reveal" style="margin-bottom:1rem">
+        <div class="pg-card2__accent pg-card2__accent--teal"></div>
+        <h3 class="pg-card2__title">ML-DSA-2 (Dilithium Level 2)</h3>
+        <p class="pg-card2__body">Shamwari uses the Level 2 parameter set, which targets NIST security category 2 comparable to AES-128 against both classical and quantum adversaries. This balances signature size, key size, and signing/verification performance for high-throughput blockchain operation.</p>
+        <ul class="pg-card2__list">
+          <li>Public key: 1312 bytes (vs 32 bytes for ECDSA secp256k1)</li>
+          <li>Private key: 2528 bytes (stored client-side only)</li>
+          <li>Signature: 2420 bytes (vs 64 bytes for ECDSA)</li>
+          <li>Signing: ~0.15ms on modern hardware</li>
+          <li>Verification: ~0.1ms &mdash; constant-time, deterministic</li>
+          <li>Security: NIST Category 2 against quantum adversaries</li>
+        </ul>
+      </div>
+      <div class="pg-card2 pg-reveal">
+        <div class="pg-card2__accent pg-card2__accent--gold"></div>
+        <h3 class="pg-card2__title">Why Larger Signatures Are Acceptable</h3>
+        <p class="pg-card2__body">Dilithium signatures (2420B) are larger than ECDSA (64B). This is an acceptable trade-off for financial infrastructure. A 10MB block at ~12-second intervals accommodates thousands of transactions. The security guarantee is significant: no quantum attack, no migration risk, no retroactive exposure which justifies the storage overhead at any financial transaction volume.</p>
+        <ul class="pg-card2__list">
+          <li>Block size: 10MB hard limit accommodates high volumes</li>
+          <li>~12-second block times ensure storage overhead is linear, bounded</li>
+          <li>Prunable signatures for old payloads removal with hash commitment retained</li>
+          <li>Zero migration cost with no legacy data exposure at any future date</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div></section><section class="sh-section sh-section--navy" id="kyber"><div class="sh-container"><div class="pg-sh">
+  <div class="pg-sh__num">04</div>
+  <div class="pg-sh__copy">
+    <div class="sh-eyebrow sh-eyebrow--gold">ML-KEM KYBER FIPS 203</div>
+    <div class="pg-sh__title">Key encapsulation and data encryption</div>
+    <p class="pg-sh__sub">ML-KEM (Module Lattice-Based Key Encapsulation Mechanism) is NIST FIPS 203, finalised in 2024. It is used across all Shamwari ecosystem to encrypt sensitive on-chain data ensuring that account identities, purchase payloads, and insurance metadata remain confidential even if the encrypted ciphertext is captured and archived today.</p>
+  </div>
+</div>
+  <div class="pg-two-col">
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1.25rem">WHERE KYBER IS USED</div>
+      <div class="pg-features">
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">Account Encrypted Data Identity (AccountInfo)</div><div class="pg-feature__body">When an account sets its identity metadata i.e legal name, contact information, personal identification information details etc; this data is Kyber-encrypted to the account's public key before being stored on-chain. Only the account holder (who has the corresponding Kyber private key) can decrypt and read their own identity data. Third parties see only ciphertext.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">Store Purchase Payloads</div><div class="pg-feature__body">Every store purchase transaction encrypts its payload, customer delivery address, order details, and payment metadata, to the merchant's Kyber public key. Only the merchant with the corresponding private key can decrypt the delivery instructions. Customer privacy is protected at the transaction layer, not by the merchant's data handling policies.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">KYC Permission Records</div><div class="pg-feature__body">BetaChainPermission records include an EncryptedData payload where CHAIN_ADMIN accounts store Kyber-encrypted KYC documentation references. Likewise, the ciphertext is permanently stored on-chain; only the granting institution's key and the recipient key can decrypt the underlying compliance attestation data. The blockchain stores proof of compliance without storing the compliance data in plaintext.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">Private Messages &amp; Delivery Proofs</div><div class="pg-feature__body">The messaging layer uses Kyber to encrypt messages between accounts. 3PL delivery providers submit Kyber-encrypted delivery proofs that only the buyer can decrypt. This creates a tamper-proof, privacy-preserving delivery confirmation system where the blockchain stores the commitment but not the readable proof content.</div></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1.25rem">HYBRID ENCRYPTION PATTERN</div>
+      <div class="pg-card2 pg-reveal" style="margin-bottom:1rem">
+        <div class="pg-card2__accent pg-card2__accent--gold"></div>
+        <h3 class="pg-card2__title">KEM + AES-GCM Hybrid</h3>
+        <p class="pg-card2__body">Kyber is a Key Encapsulation Mechanism which encapsulates a symmetric key, not the data directly. The pattern is: (1) use Kyber KEM to establish a shared secret with the recipient's public key, (2) use that shared secret as an AES-256 key to encrypt the actual payload. This hybrid approach gives both the quantum resistance of Kyber and the performance of AES-256 for data.</p>
+        <ul class="pg-card2__list">
+          <li>Kyber encapsulates a 32-byte shared secret</li>
+          <li>AES-256 encrypts payload using the shared secret</li>
+          <li>Decryption requires Kyber private key and only recipient can decrypt</li>
+        </ul>
+      </div>
+      <div class="pg-card2 pg-reveal">
+        <div class="pg-card2__accent pg-card2__accent--teal"></div>
+        <h3 class="pg-card2__title">ML-KEM-512 Parameters</h3>
+        <p class="pg-card2__body">Shamwari uses ML-KEM-512 (the Level 1 parameter set), which targets NIST security category 1 comparable to AES-128 against both classical and quantum adversaries. This is the right choice for data encryption where the value of the data does not need 30+ years of quantum-resistant protection, while maintaining excellent performance for high-volume on-chain storage.</p>
+        <ul class="pg-card2__list">
+          <li>Public key: 800 bytes</li>
+          <li>Ciphertext (encapsulation): 768 bytes</li>
+          <li>Shared secret: 32 bytes (used as AES-256 key)</li>
+          <li>Security: NIST Category 1 against quantum adversaries</li>
+          <li>Performance: ~0.05ms encapsulation/decapsulation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div></section><section class="sh-section" id="bip39"><div class="sh-container"><div class="pg-sh">
+  <div class="pg-sh__num">05</div>
+  <div class="pg-sh__copy">
+    <div class="sh-eyebrow sh-eyebrow--teal">BIP39 PQ ADAPTATION</div>
+    <div class="pg-sh__title">One seed phrase. Both post-quantum keys.</div>
+    <p class="pg-sh__sub">Shamwari adapts the familiar BIP39 mnemonic standard for post-quantum key derivation. The same 12/15/18/21/24 word seed phrase that users already know from Bitcoin and Ethereum wallets now derives two NIST-standard post-quantum keys; the Dilithium signing key and Kyber encryption key with no additional complexity for the user.</p>
+  </div>
+</div>
+  <div class="pg-two-col">
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1.25rem">KEY DERIVATION ARCHITECTURE</div>
+      <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:.75rem;font-size:.62rem">SEED TO KEYS &mdash; DETERMINISTIC DERIVATION FLOW</div>
+      <div class="deriv-flow pg-reveal">
+        <div class="deriv-node deriv-node--seed"><div class="deriv-label">SEED PHRASE</div><div class="deriv-val">12/15/18/21/24 BIP39<br>mnemonic words</div></div>
+        <div class="deriv-arrow">&rarr;</div>
+        <div class="deriv-node deriv-node--seed"><div class="deriv-label">PBKDF2 ROOT</div><div class="deriv-val">64-byte entropy<br>HMAC-SHA512</div></div>
+        <div class="deriv-arrow">&rarr;</div>
+        <div class="deriv-split">
+          <div class="deriv-node deriv-node--teal"><div class="deriv-label">DILITHIUM KEYPAIR</div><div class="deriv-val">1312B pub<br>2528B priv</div></div>
+          <div class="deriv-node deriv-node--gold"><div class="deriv-label">KYBER KEYPAIR</div><div class="deriv-val">800B pub<br>1632B priv</div></div>
+        </div>
+      </div>
+      <div style="margin-top:1.75rem">
+        <div class="pg-features">
+          <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Single Backup, Two Keys</div><div class="pg-feature__body">Users back up one seed phrase and recover both their signing key and encryption key from it. No second backup. No key file. No cloud storage required. The same seed recovery UX that crypto users already understand works identically for post-quantum keys.</div></div></div>
+          <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">Deterministic - Same Seed, Same Keys</div><div class="pg-feature__body">Given the same seed phrase, the same Dilithium and Kyber keypairs are always derived. There is no randomness in the derivation after the initial seed generation. A user can recover their keys from any device, any wallet implementation, at any time, from just their seed phrase.</div></div></div>
+          <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Hardware Wallet Compatible</div><div class="pg-feature__body">The BIP39 PQ Adaptation is designed to be implementable on hardware security modules and hardware wallets. Private keys never leave the device. The signing and decryption operations execute on the hardware wallet; only the public keys and signatures are transmitted to the network.</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1.25rem">KEY STORAGE &amp; SECURITY MODEL</div>
+      <div class="pg-card2 pg-reveal" style="margin-bottom:1rem">
+        <div class="pg-card2__accent pg-card2__accent--gold"></div>
+        <h3 class="pg-card2__title">What Goes On-Chain</h3>
+        <p class="pg-card2__body">Only public keys are stored on-chain. The combined 2112-byte generator public key (Kyber 800B + Dilithium 1312B) is written to the account record when first activated. Public keys are public by design &mdash; their security comes from the hardness of the lattice problem, not from secrecy.</p>
+        <ul class="pg-card2__list">
+          <li>Kyber public key (800B): stored in account table</li>
+          <li>Dilithium public key (1312B): stored in account table</li>
+          <li>Account ID: derived from Dilithium public key hash</li>
+          <li>Account Address: A Reed-Solomon representation of the accountId</li>
+          <li>No private key material ever touches the blockchain</li>
+        </ul>
+      </div>
+      <div class="pg-card2 pg-reveal">
+        <div class="pg-card2__accent pg-card2__accent--teal"></div>
+        <h3 class="pg-card2__title">What Never Leaves the Device</h3>
+        <p class="pg-card2__body">Private keys are held exclusively by the account holder in the wallet application or hardware device. They are used to sign transactions (Dilithium) and decrypt received data (Kyber). The Shamwari protocol never requests, stores, or transmits private keys.</p>
+        <ul class="pg-card2__list">
+          <li>Dilithium private key (2528B): signs transactions locally</li>
+          <li>Kyber private key (1632B): decrypts received payloads locally</li>
+          <li>Seed phrase: never transmitted, stored offline</li>
+          <li>Signing is always local: nodes receive signed tx, not the key</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div></section><section class="sh-section sh-section--navy" id="derivation"><div class="sh-container"><div class="pg-sh">
+  <div class="pg-sh__num">06</div>
+  <div class="pg-sh__copy">
+    <div class="sh-eyebrow sh-eyebrow--gold">JVM-NATIVE PKI</div>
+    <div class="pg-sh__title">The first quantum-safe JVM certificate</div>
+    <p class="pg-sh__sub">ShamwariCertificate extends java.security.cert.Certificate directly; the standard Java certificate interface. Any JVM application that currently accepts X.509 certificates accepts Shamwari certificates without modification, while gaining post-quantum security underneath.</p>
+  </div>
+</div>
+  <div class="pg-two-col">
+    <div>
+      <div class="pg-features">
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">java.security.cert.Certificate Interface</div><div class="pg-feature__body">ShamwariCertificate is not an X.509 wrapper &mdash; it implements the raw Java Certificate interface that all JVM applications rely on. Web servers using JSSE, payment terminals using JCE, and enterprise middleware using Bouncy Castle all call the same interface methods. Shamwari certificates work natively with all of them.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Dilithium-Signed Certificates</div><div class="pg-feature__body">Every ShamwariCertificate is signed by the issuing authority account&rsquo;s Dilithium key. The certificate contains the subject&rsquo;s Dilithium public key, issuer account ID, validity block height range, and optional metadata. Verification uses the issuer&rsquo;s on-chain Dilithium public key and is independently resolvable by any node.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">Instant On-Chain Revocation</div><div class="pg-feature__body">A CERT_REVOCATION transaction is effective at the next block &mdash; approximately 12 seconds. There is no Certificate Revocation List (CRL) to distribute, no OCSP server to poll, and no propagation delay. Certificate status is blockchain state, queryable in real time by any verifier.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Global or Chain-Scoped Validity</div><div class="pg-feature__body">Setting <span class="sh-code">isGlobal = true</span> makes a certificate valid across all BetaChains simultaneously from a single issuance transaction. Scoped certificates are valid only on their issuing chain. This enables KYC credentials valid network-wide alongside jurisdiction-specific professional licences.</div></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="pg-cards3" style="grid-template-columns:1fr;gap:1rem">
+        <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--gold"><i class="fa-solid fa-id-card"></i></div><h3 class="pg-card__title">KYC Credentials</h3><p class="pg-card__body">Issue verified identity credentials that any chain participant verifies on-chain. KYC data Kyber-encrypted &mdash; verifiable without exposing underlying identity information to third parties. Institution-issued, blockchain-anchored, quantum-resistant.</p></div>
+        <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--teal"><i class="fa-solid fa-building-columns"></i></div><h3 class="pg-card__title">Institutional Licences</h3><p class="pg-card__body">Central Banks issue operating licences as on-chain certificates with block-height expiry. Licence status is verifiable by any counterparty in real time. No third-party registry, no manual verification phone call, no risk of stale data.</p></div>
+        <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--gold"><i class="fa-solid fa-lock"></i></div><h3 class="pg-card__title">TLS for Node Infrastructure</h3><p class="pg-card__body">Node operators use Shamwari certificates for TLS mutual authentication. Accepted natively by JVM-based infrastructure without custom certificate authorities. Quantum-safe TLS for all inter-node communication in the Shamwari network.</p></div>
+      </div>
+    </div>
+  </div>
+</div></section><section class="sh-section" id="timeline"><div class="sh-container"><div class="pg-sh">
+  <div class="pg-sh__num">07</div>
+  <div class="pg-sh__copy">
+    <div class="sh-eyebrow sh-eyebrow--red">QUANTUM THREAT TIMELINE</div>
+    <div class="pg-sh__title">From harvest-now to cryptographic relevance</div>
+    <p class="pg-sh__sub">The quantum threat to blockchain cryptography is not binary. It is a rolling window of increasing risk, where the value of currently-captured data increases as quantum computing capabilities advance. Shamwari has zero exposure at any point on this timeline.</p>
+  </div>
+</div>
+  <div class="pg-two-col">
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1.25rem">TIMELINE</div>
+      <div class="qtl pg-reveal">
+        <div class="qtl-item"><div class="qtl-dot qtl-dot--red"></div><div class="qtl-year">Now</div><div class="qtl-text"><strong>Harvest-now attacks active</strong>State-level adversaries archiving encrypted blockchain traffic. Value of archive increases over time as quantum capability grows.</div></div>
+        <div class="qtl-item"><div class="qtl-dot qtl-dot--gold"></div><div class="qtl-year">2024</div><div class="qtl-text"><strong>NIST standards published</strong>FIPS 203 (Kyber) and FIPS 204 (Dilithium) finalised. Enterprise migration guidance issued. Shamwari already compliant from genesis.</div></div>
+        <div class="qtl-item"><div class="qtl-dot qtl-dot--gold"></div><div class="qtl-year">2026</div><div class="qtl-text"><strong>Fiduciary requirement emerges</strong>Central banks and regulators begin requiring PQC migration plans from financial institutions. Non-compliant chains begin losing institutional depositors.</div></div>
+        <div class="qtl-item"><div class="qtl-dot qtl-dot--gold"></div><div class="qtl-year">2028</div><div class="qtl-text"><strong>Most blockchains begin migration</strong>Chains migrating now leave years of ECDSA transaction history permanently exposed to future decryption. Migration does not retroactively protect historical data.</div></div>
+        <div class="qtl-item"><div class="qtl-dot qtl-dot--teal"></div><div class="qtl-year">2030</div><div class="qtl-text"><strong>NIST compliance deadline</strong>Cryptographically relevant quantum computers approaching viability. Harvest-now archives from 2020&ndash;2030 become increasingly decryptable. Shamwari: zero exposure window at any date.</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1.25rem">SHAMWARI vs COMPETITORS</div>
+      <div class="qcmp pg-reveal">
+        <div class="qcmp__head"><div class="qcmp__hc">Property</div><div class="qcmp__hc">Classical Chains</div><div class="qcmp__hc">Shamwari</div></div>
+        <div class="qcmp__row"><div class="qcmp__c">Transaction signing</div><div class="qcmp__c qcmp__bad">ECDSA (vulnerable)</div><div class="qcmp__c qcmp__good">Dilithium FIPS 204</div></div>
+        <div class="qcmp__row"><div class="qcmp__c">Key encapsulation</div><div class="qcmp__c qcmp__bad">ECDH (vulnerable)</div><div class="qcmp__c qcmp__good">Kyber FIPS 203</div></div>
+        <div class="qcmp__row"><div class="qcmp__c">Block signing</div><div class="qcmp__c qcmp__bad">ECDSA &mdash; 64 bytes</div><div class="qcmp__c qcmp__good">Dilithium &mdash; 2420 bytes</div></div>
+        <div class="qcmp__row"><div class="qcmp__c">Historical exposure</div><div class="qcmp__c qcmp__bad">Entire chain history</div><div class="qcmp__c qcmp__good">Zero &mdash; PQC from genesis</div></div>
+        <div class="qcmp__row"><div class="qcmp__c">Migration required</div><div class="qcmp__c qcmp__bad">Complex, disruptive</div><div class="qcmp__c qcmp__good">None needed</div></div>
+        <div class="qcmp__row"><div class="qcmp__c">NIST compliance</div><div class="qcmp__c qcmp__bad">Not yet / in progress</div><div class="qcmp__c qcmp__good">FIPS 203 + 204 deployed</div></div>
+        <div class="qcmp__row"><div class="qcmp__c">Data encryption</div><div class="qcmp__c qcmp__bad">None native</div><div class="qcmp__c qcmp__good">Kyber + AES-GCM</div></div>
+        <div class="qcmp__row"><div class="qcmp__c">PKI integration</div><div class="qcmp__c qcmp__bad">Custom required</div><div class="qcmp__c qcmp__good">JVM-native Certificate</div></div>
+        <div class="qcmp__row"><div class="qcmp__c">Wallet recovery</div><div class="qcmp__c qcmp__bad">Single key (ECDSA)</div><div class="qcmp__c qcmp__good">BIP39 PQ &mdash; both keys</div></div>
+      </div>
+    </div>
+  </div>
+</div></section><section class="sh-section sh-section--navy" id="comparison"><div class="sh-container"><div class="pg-sh">
+  <div class="pg-sh__num">08</div>
+  <div class="pg-sh__copy">
+    <div class="sh-eyebrow sh-eyebrow--teal">KEY METRICS</div>
+    <div class="pg-sh__title">Post-quantum by the numbers</div>
+    <p class="pg-sh__sub">Quantified security parameters for the Shamwari cryptographic stack. All values reference the deployed parameter sets as implemented in the protocol codebase.</p>
+  </div>
+</div>
+  <div class="sh-qsec-stats pg-reveal" style="margin-bottom:3rem">
+    <div class="sh-qsec-stat"><div class="sh-qsec-stat__n sh-text--teal">2420</div><div class="sh-qsec-stat__l">Bytes per Dilithium block signature</div></div>
+    <div class="sh-qsec-stat"><div class="sh-qsec-stat__n sh-text--gold">2112</div><div class="sh-qsec-stat__l">Bytes per combined account public key</div></div>
+    <div class="sh-qsec-stat"><div class="sh-qsec-stat__n sh-text--teal">FIPS<br>203</div><div class="sh-qsec-stat__l">Kyber standard &mdash; deployed</div></div>
+    <div class="sh-qsec-stat"><div class="sh-qsec-stat__n sh-text--gold">FIPS<br>204</div><div class="sh-qsec-stat__l">Dilithium standard &mdash; deployed</div></div>
+  </div>
+  <div class="sh-contrast-grid">
+    <div class="sh-contrast-card sh-contrast-card--teal pg-reveal">
+      <div class="sh-contrast-card__header"><i class="fa-solid fa-check-circle"></i>WHAT SHAMWARI PROTECTS AGAINST</div>
+      <ul class="sh-contrast-card__list">
+        <li><strong>Shor&rsquo;s algorithm:</strong> ML-DSA and ML-KEM are not vulnerable, lattice problems are not reducible to period-finding</li>
+        <li><strong>Grover&rsquo;s algorithm:</strong> AES-256-GCM provides 128-bit post-quantum symmetric security</li>
+        <li><strong>Harvest-now attacks:</strong> No ECDSA history exists as all archived traffic is Kyber-encrypted from day one</li>
+        <li><strong>Key extraction from signatures:</strong> Lattice problems have no known polynomial-time quantum solution</li>
+        <li><strong>Classical attacks:</strong> All algorithms also provide strong classical security guarantees</li>
+      </ul>
+    </div>
+    <div class="sh-contrast-card sh-contrast-card--red pg-reveal">
+      <div class="sh-contrast-card__header"><i class="fa-solid fa-times-circle"></i>WHAT ECDSA CHAINS CANNOT PROTECT AGAINST</div>
+      <ul class="sh-contrast-card__list">
+        <li><strong>Shor&rsquo;s algorithm:</strong> Breaks ECDSA private key derivation from public key in polynomial time on a sufficiently powerful quantum computer</li>
+        <li><strong>Retroactive key compromise:</strong> Any ECDSA public key ever broadcast is permanently archived and decryptable in future</li>
+        <li><strong>Historical transaction exposure:</strong> Every transaction ever published is subject to retroactive private key recovery once quantum threshold is reached</li>
+        <li><strong>Identity exposure:</strong> All ECDH-encrypted data (messages, identity) will be decryptable once the corresponding key is broken</li>
+      </ul>
+    </div>
+  </div>
+</div></section><section class="sh-cta">
+  <div class="sh-cta__glow"></div>
+  <div class="sh-cta__inner">
+    <div class="sh-eyebrow sh-eyebrow--teal">BUILD ON QUANTUM-SAFE INFRASTRUCTURE</div>
+    <h2 class="sh-cta__title">Post-quantum from genesis. No migration. No exposure window.</h2>
+    <p class="sh-cta__sub">Deploy applications on the only blockchain that has been quantum-safe from its first block.</p>
+    <div class="sh-cta__actions"><a href="accounts.html" class="sh-btn sh-btn--teal sh-btn--lg">Accounts</a><a href="digitalcertificates.html" class="sh-btn sh-btn--ghost sh-btn--lg">Digital Certificates</a><a href="developers.html" class="sh-btn sh-btn--gold sh-btn--lg">Developer Hub</a></div>
+  </div> 
+</section><footer class="sh-footer">
+  <div class="sh-footer__grid">
+    <div>
+      <div class="sh-footer__wordmark">SHAMWARI</div>
+      <p class="sh-footer__tagline">Quantum-resistant financial infrastructure for 4 billion people across Africa, LATAM, ASEAN and MENA.</p>
+      <div class="sh-footer__socials">
+        <a href="https://bitbucket.org/thenamelesstree/shamwari" class="sh-footer__social"><i class="fa-brands fa-bitbucket"></i></a>
+        <a href="#" class="sh-footer__social"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" class="sh-footer__social"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Platform</div>
+      <a href="shamwaripay.html" class="sh-footer__link">ShamwariPay</a>
+      <a href="digitalassets.html" class="sh-footer__link">Totem Exchange</a>
+      <a href="insurance.html" class="sh-footer__link">Insurance</a>
+      <a href="store.html" class="sh-footer__link">Commerce</a>
+      <a href="subscriptions.html" class="sh-footer__link">Subscriptions</a>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Technology</div>
+      <a href="architecture.html" class="sh-footer__link">Architecture</a>
+      <a href="security.html" class="sh-footer__link">Post-Quantum Security</a>
+      <a href="accounts.html" class="sh-footer__link">Accounts &amp; Identity</a>
+      <a href="digitalcertificates.html" class="sh-footer__link">Certificates</a>
+      <a href="compliance.html" class="sh-footer__link">Compliance</a>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Resources</div>
+      <a href="solutions.html" class="sh-footer__link">Solutions</a>
+      <a href="developers.html" class="sh-footer__link">Developer Hub</a>
+      <a href="roadmap.html" class="sh-footer__link">Roadmap</a>
+      <a href="https://bitbucket.org/thenamelesstree/shamwari/src/main/docs" class="sh-footer__link">Documentation</a>
+      <a href="https://shamwari.thenamelesstree.co.zw:22024" class="sh-footer__link">Launch Wallet</a>
+    </div>
+  </div>
+  <div class="sh-footer__bottom">
+    <span>&copy; 2026 TheNamelessTree Networks. All rights reserved.</span>
+    <span class="sh-footer__bottom-right">thenamelesstree.co.zw</span>
+  </div>
+</footer>
+<a href="#" class="sh-back-top" id="back-top" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></a>
+<script>
+(function(){
+  var nav=document.getElementById('sh-nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('sh-nav--scrolled',window.scrollY>50);});
+  var tgl=document.getElementById('nav-toggle'),menu=document.getElementById('nav-menu');
+  if(tgl&&menu){tgl.addEventListener('click',function(){tgl.classList.toggle('is-open');menu.classList.toggle('is-open');});}
+  var bt=document.getElementById('back-top');
+  if(bt){window.addEventListener('scroll',function(){bt.classList.toggle('is-visible',window.scrollY>400);});bt.addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});});}
+  var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');ro.unobserve(e.target);}});},{threshold:0.07,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.sh-reveal,.pg-reveal').forEach(function(el){ro.observe(el);});
+  var tocLinks=document.querySelectorAll('[data-toc] a');
+  var sections=Array.from(tocLinks).map(function(l){return document.querySelector(l.getAttribute('href'));});
+  window.addEventListener('scroll',function(){
+    var sy=window.scrollY+150,cur=0;
+    sections.forEach(function(s,i){if(s&&s.offsetTop<=sy)cur=i;});
+    tocLinks.forEach(function(l,i){l.classList.toggle('is-active',i===cur);});
+  });
+})();
+</script>
+</body></html>

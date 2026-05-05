@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Subscriptions — Recurring Payments — Shamwari</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Protocol-native recurring payment subscriptions enforced at the consensus layer. Automated billing, configurable frequencies, and account-type restrictions.">
+<link href="img/favicon.ico" rel="icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/pages.css" rel="stylesheet">
+</head>
+<body><nav class="sh-nav" id="sh-nav">
+<div class="sh-nav__inner">
+  <a href="index.html" class="sh-nav__brand">
+    <div><div class="sh-nav__wordmark">SHAMWARI</div><div class="sh-nav__tag">BLOCKCHAIN</div></div>
+  </a>
+  <button class="sh-nav__toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="sh-nav__menu" id="nav-menu">
+    <a href="index.html#platform" class="sh-nav__link">Platform</a>
+    <a href="architecture.html" class="sh-nav__link">Architecture</a>
+    <a href="compliance.html" class="sh-nav__link">Compliance</a>
+    <a href="security.html" class="sh-nav__link">Security</a>
+    <a href="solutions.html" class="sh-nav__link">Solutions</a>
+    <a href="developers.html" class="sh-nav__link">Developers</a>
+  </div>
+  <div class="sh-nav__actions">
+    <a href="https://shamwari.thenamelesstree.co.zw:22024" class="sh-btn sh-btn--ghost sh-btn--sm">Wallet</a>
+    <a href="https://bitbucket.org/thenamelesstree/shamwari/src/main/docs" class="sh-btn sh-btn--teal sh-btn--sm">Docs</a>
+  </div>
+</div>
+</nav>
+
+<section class="pg-hero">
+  <div class="pg-hero__glow"></div>
+  <div class="sh-container pg-hero__inner">
+    <div class="pg-hero__content">
+      <div class="sh-eyebrow sh-eyebrow--teal">BILLING LAYER · VOL V</div>
+      <h1 class="pg-hero__title">Subscriptions</h1>
+      <p class="pg-hero__sub">Recurring payments enforced at the blockchain consensus layer — no payment processor, no webhook infrastructure, no failed-charge handling. The protocol collects, or the subscription lapses.</p>
+      <div class="pg-hero__badges"><span class="sh-badge sh-badge--teal">AUTOMATED BILLING</span><span class="sh-badge sh-badge--gold">FLEXIBLE FREQUENCY</span><span class="sh-badge sh-badge--teal">CONSENSUS-ENFORCED</span><span class="sh-badge sh-badge--gold">AI-AGENT PERMITTED</span></div>
+    </div>
+    <div class="pg-hero__icon-wrap"><div class="pg-hero__icon-bg"></div><i class="fa-solid fa-rotate pg-hero__icon"></i></div>
+  </div>
+</section>
+<div class="pg-stats"><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--teal">100%</div><div class="pg-stats__l">On-chain billing — no external payment processor</div></div><div class="pg-stats__div"></div><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--gold">∞</div><div class="pg-stats__l">Configurable billing frequency in blocks</div></div><div class="pg-stats__div"></div><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--teal">1</div><div class="pg-stats__l">Transaction type: SUBSCRIBE — covers full lifecycle</div></div><div class="pg-stats__div"></div><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--gold">0</div><div class="pg-stats__l">Webhooks, callbacks, or off-chain logic required</div></div></div>
+
+<section class="sh-section">
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--teal">ARCHITECTURE</div>
+      <h2 class="sh-section__title">How protocol subscriptions work</h2>
+      <p class="sh-section__sub">Subscriptions in Shamwari are stored as first-class account entities. The protocol processes billing automatically at the configured block height interval.</p>
+    </div>
+    <div class="subs-how-grid">
+      <div class="subs-step pg-reveal"><div class="subs-step__num">01</div><div class="subs-step__title">Service Creation</div><div class="subs-step__body">SERVICE_PROVIDER creates a subscription service with configurable billing frequency (in blocks), price, accepted asset types, and account type restrictions. Persisted on-chain as a service entity.</div></div>
+      <div class="subs-step pg-reveal"><div class="subs-step__title">Subscriber Opt-In</div><div class="subs-step__body">Subscriber submits SUBSCRIBE transaction specifying the service ID. Subscription entity created on-chain with expirationHeight = current height + billing period. First payment taken immediately.</div></div>
+      <div class="subs-step pg-reveal"><div class="subs-step__title">Automatic Renewal</div><div class="subs-step__body">At expirationHeight, AFTER_BLOCK_APPLY checks all expiring subscriptions. If funds available, payment is collected and expirationHeight extended. If not, subscription lapses automatically. Zero manual intervention.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sh-section sh-section--navy">
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--gold">KEY FEATURES</div>
+      <h2 class="sh-section__title">Subscription capabilities</h2>
+    </div>
+    <div class="pg-cards3">
+      <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--teal"><i class="fa-solid fa-clock"></i></div><h3 class="pg-card__title">Block-Height Billing</h3><p class="pg-card__body">Billing frequency configured in blocks — daily (~7200 blocks), weekly, monthly, or any custom interval. Exact and deterministic — no timezone issues, no ambiguous billing dates.</p></div>
+      <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--gold"><i class="fa-solid fa-coins"></i></div><h3 class="pg-card__title">Any Asset Type</h3><p class="pg-card__body">Services can accept payment in chain coin, ShamwariPay currency, or Totem digital assets. The same subscription infrastructure supports any monetary instrument the protocol supports.</p></div>
+      <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--teal"><i class="fa-solid fa-users-gear"></i></div><h3 class="pg-card__title">Account Type Restrictions</h3><p class="pg-card__body">Services can restrict subscriptions to specific account types — BUSINESS, DEVELOPER, or PERSONAL only. Enforced at consensus — the protocol rejects subscriptions from non-permitted account types.</p></div>
+      <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--gold"><i class="fa-solid fa-robot"></i></div><h3 class="pg-card__title">AI Agent Compatible</h3><p class="pg-card__body">AccountType.AI agents can subscribe to services within their configured permission matrix. Subscription payments are included in the rolling spend window calculation for limit enforcement.</p></div>
+      <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--teal"><i class="fa-solid fa-rotate-left"></i></div><h3 class="pg-card__title">Automatic Lapse</h3><p class="pg-card__body">If funds are unavailable at renewal, the subscription lapses immediately. No retry logic, no dunning management, no failed payment handler. Protocol state reflects economic reality instantly.</p></div>
+      <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--gold"><i class="fa-solid fa-ban"></i></div><h3 class="pg-card__title">Instant Cancellation</h3><p class="pg-card__body">CANCEL_SUBSCRIPTION is a consensus transaction — effective at the next block. No notice period ambiguity. Subscription entity deleted from state immediately.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="sh-cta">
+  <div class="sh-cta__glow"></div>
+  <div class="sh-cta__inner">
+    <div class="sh-eyebrow sh-eyebrow--teal">BUILD SUBSCRIPTION PRODUCTS</div>
+    <h2 class="sh-cta__title">No payment processor. Just the protocol.</h2>
+    <p class="sh-cta__sub">Create subscription services that bill automatically — SaaS, media, data feeds, or any recurring revenue model.</p>
+    <div class="sh-cta__actions"><a href="developers.html" class="sh-btn sh-btn--teal sh-btn--lg">Get Started</a><a href="shamwaripay.html" class="sh-btn sh-btn--ghost sh-btn--lg">ShamwariPay</a></div>
+  </div>
+</section>
+<footer class="sh-footer">
+  <div class="sh-footer__grid">
+    <div>
+      <div class="sh-footer__wordmark">SHAMWARI</div>
+      <p class="sh-footer__tagline">Quantum-resistant financial infrastructure for 4 billion people across Africa, LATAM, ASEAN and MENA.</p>
+      <div class="sh-footer__socials">
+        <a href="https://bitbucket.org/thenamelesstree/shamwari" class="sh-footer__social"><i class="fa-brands fa-bitbucket"></i></a>
+        <a href="#" class="sh-footer__social"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" class="sh-footer__social"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Platform</div>
+      <a href="shamwaripay.html" class="sh-footer__link">ShamwariPay</a>
+      <a href="digitalassets.html" class="sh-footer__link">Totem Exchange</a>
+      <a href="insurance.html" class="sh-footer__link">Insurance</a>
+      <a href="store.html" class="sh-footer__link">Commerce</a>
+      <a href="subscriptions.html" class="sh-footer__link">Subscriptions</a>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Technology</div>
+      <a href="architecture.html" class="sh-footer__link">Architecture</a>
+      <a href="security.html" class="sh-footer__link">Post-Quantum Security</a>
+      <a href="accounts.html" class="sh-footer__link">Accounts &amp; Identity</a>
+      <a href="digitalcertificates.html" class="sh-footer__link">Certificates</a>
+      <a href="compliance.html" class="sh-footer__link">Compliance</a>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Resources</div>
+      <a href="solutions.html" class="sh-footer__link">Solutions</a>
+      <a href="developers.html" class="sh-footer__link">Developer Hub</a>
+      <a href="roadmap.html" class="sh-footer__link">Roadmap</a>
+      <a href="https://bitbucket.org/thenamelesstree/shamwari/src/main/docs" class="sh-footer__link">Documentation</a>
+      <a href="https://shamwari.thenamelesstree.co.zw:22024" class="sh-footer__link">Launch Wallet</a>
+    </div>
+  </div>
+  <div class="sh-footer__bottom">
+    <span>© 2026 TheNamelessTree Networks. All rights reserved.</span>
+    <span class="sh-footer__bottom-right">thenamelesstree.co.zw</span>
+  </div>
+</footer>
+<a href="#" class="sh-back-top" id="back-top" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></a><script>
+(function(){
+  var nav=document.getElementById('sh-nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('sh-nav--scrolled',window.scrollY>50);});
+  var tgl=document.getElementById('nav-toggle'),menu=document.getElementById('nav-menu');
+  if(tgl&&menu){tgl.addEventListener('click',function(){tgl.classList.toggle('is-open');menu.classList.toggle('is-open');});}
+  var bt=document.getElementById('back-top');
+  if(bt){window.addEventListener('scroll',function(){bt.classList.toggle('is-visible',window.scrollY>400);});bt.addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});});}
+  var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');ro.unobserve(e.target);}});},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.sh-reveal,.pg-reveal').forEach(function(el){ro.observe(el);});
+  var tocLinks=document.querySelectorAll('.arch-toc__link,.sp-toc__link');
+  if(tocLinks.length){
+    var secs=[].slice.call(tocLinks).map(function(l){return document.querySelector(l.getAttribute('href'));}).filter(Boolean);
+    var io2=new IntersectionObserver(function(entries){entries.forEach(function(e){var l=document.querySelector('[href="#'+e.target.id+'"]');if(l)l.classList.toggle('is-active',e.isIntersecting);});},{rootMargin:'-20% 0px -75% 0px'});
+    secs.forEach(function(s){io2.observe(s);});
+  }
+})();
+</script>
+</body></html>

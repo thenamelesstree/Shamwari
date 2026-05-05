@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en light">
+<head>
+<meta charset="utf-8">
+<title>Shamwari: A Financial OS for Emerging Markets</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The world's first post-quantum financial protocol for emerging markets.">
+<link href="img/favicon.ico" rel="icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body><nav class="sh-nav" id="sh-nav">
+<div class="sh-nav__inner">
+  <a href="index.html" class="sh-nav__brand">
+    <div>
+    		<img src="img/banner.png" alt="Shamwari Logo" height="40">
+    </div>
+  </a>
+  <button class="sh-nav__toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="sh-nav__menu" id="nav-menu">
+    <a href="index.html#platform" class="sh-nav__link">Platform</a>
+    <a href="architecture.html" class="sh-nav__link">Architecture</a>
+    <a href="compliance.html" class="sh-nav__link">Compliance</a>
+    <a href="security.html" class="sh-nav__link">Security</a>
+    <a href="solutions.html" class="sh-nav__link">Solutions</a>
+    <a href="developers.html" class="sh-nav__link">Developers</a>
+  </div>
+  <div class="sh-nav__actions">
+    <a href="https://wallet.shamwari.network" class="sh-btn sh-btn--ghost sh-btn--sm">Wallet</a>
+    <a href="https://bitbucket.org/thenamelesstree/shamwari/src/main/docs/" class="sh-btn sh-btn--teal sh-btn--sm">Docs</a>
+  </div>
+</div>
+</nav>
+<section class="sh-hero" id="home" style="background: url('img/shamwari_inclusione.jpg') center/cover no-repeat;">
+  <div class="sh-hero__inner">
+    <div class="sh-hero__content">
+      <div class="sh-hero__eyebrow">
+        <span class="sh-badge sh-badge--teal">POST-QUANTUM</span>
+        <span class="sh-badge sh-badge--gold">NIST FIPS 203/204</span>
+      </div>
+      <h1 class="sh-hero__headline">The Financial<br><span class="sh-text--teal">Operating System</span><br>for Emerging Markets</h1>
+      <p class="sh-hero__sub">Six complete protocol systems. Zero smart contracts. One quantum-resistant blockchain for 4 billion people across Africa, LATAM, ASEAN &amp; MENA.</p>
+      <div class="sh-hero__ctas">
+        <a href="#platform" class="sh-btn sh-btn--teal sh-btn--lg"><i class="fa-solid fa-layer-group"></i> Explore Platform</a>
+        <a href="https://bitbucket.org/thenamelesstree/shamwari/downloads" class="sh-btn sh-btn--ghost sh-btn--lg">Download Client</a>
+      </div>
+    </div>
+    <div class="sh-hero__stats">
+      <div class="sh-hero__stat sh-reveal"><div class="sh-hero__stat-n sh-text--teal">6</div><div class="sh-hero__stat-l">Complete Protocol<br>Systems</div></div>
+      <div class="sh-hero__stat-divider"></div>
+      <div class="sh-hero__stat sh-reveal sh-reveal--delay-1"><div class="sh-hero__stat-n sh-text--gold">$949B</div><div class="sh-hero__stat-l">FaaS Market<br>by 2030</div></div>
+      <div class="sh-hero__stat-divider"></div>
+      <div class="sh-hero__stat sh-reveal sh-reveal--delay-2"><div class="sh-hero__stat-n sh-text--teal">4B</div><div class="sh-hero__stat-l">People in<br>Target Markets</div></div>
+      <div class="sh-hero__stat-divider"></div>
+      <div class="sh-hero__stat sh-reveal sh-reveal--delay-3"><div class="sh-hero__stat-n sh-text--gold">2030</div><div class="sh-hero__stat-l">NIST Quantum<br> Ready Now</div></div>
+    </div>
+  </div>
+  <div class="sh-hero__scroll-hint" aria-hidden="true"><span>Scroll</span><div class="sh-hero__scroll-line"></div></div>
+</section>
+ 
+<section class="sh-section sh-section--navy " id="problem" style="background: url('img/digital_varied_amber.jpg') center/cover no-repeat;">
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--red">THREE SIMULTANEOUS FAILURES</div>
+      <h2 class="sh-section__title" >One infrastructure gap.<br>Four billion people waiting.</h2>
+      <p class="sh-section__sub">Emerging markets across Africa, LATAM, ASEAN and MENA all share system inadequacies that include financial exclusion, legacy infrastructure costs, and the looming quantum computing threat to existing cryptography.</p>
+    </div>
+    <div class="sh-problem-grid">
+      <div class="sh-problem-card sh-problem-card--teal sh-reveal"><div class="sh-problem-card__accent"></div><div class="sh-mono" style="color:var(--txt-muted);font-size:.63rem;letter-spacing:.15em;">FINANCIAL EXCLUSION</div><div class="sh-problem-card__stat">1.7B</div><div class="sh-problem-card__title">Unbanked Adults Globally</div><ul class="sh-problem-card__list"><li>Sub-Saharan Africa: 57% exclusion rate</li><li>LATAM &amp; Caribbean: 46% fintech growth gap</li><li>ASEAN: 44% annual expansion potential</li><li>Existing rails cannot serve mobile-first populations</li></ul></div>
+      <div class="sh-problem-card sh-problem-card--red sh-reveal sh-reveal--delay-1"><div class="sh-problem-card__accent"></div><div class="sh-mono" style="color:var(--txt-muted);font-size:.63rem;letter-spacing:.15em;">LEGACY INFRASTRUCTURE</div><div class="sh-problem-card__stat">$3.8B+</div><div class="sh-problem-card__title">Lost to Smart Contract Exploits</div><ul class="sh-problem-card__list"><li>General-purpose chains adapted for modern finance</li><li>Compliance is self-determined posing great risk</li><li>No protocol-native KYC, taxation, or identity systems</li><li>No fit-for-purpose financial services like insurance or credit facilities</li></ul></div>
+      <div class="sh-problem-card sh-problem-card--gold sh-reveal sh-reveal--delay-2"><div class="sh-problem-card__accent"></div><div class="sh-mono" style="color:var(--txt-muted);font-size:.63rem;letter-spacing:.15em;">QUANTUM THREAT</div><div class="sh-problem-card__stat">2030</div><div class="sh-problem-card__title">Cryptographic Relevance Window</div><ul class="sh-problem-card__list"><li>All existing ECDSA/RSA chains and systems are vulnerable to harvest-now; decrypt later attacks</li><li>Historical transactions will be retroactively exposed and compromised</li><li>Q-Day: 2030  and most chains are still unprepared</li><li>Shamwari: PQC from genesis block zero</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="sh-section" id="platform" style="background: url('img/digital_varied_cyan.jpg') center/cover no-repeat;"> 
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--teal">SIX PROTOCOL SYSTEMS</div>
+      <h2 class="sh-section__title">Everything finance needs.<br>Nothing it doesn't.</h2>
+      <p class="sh-section__sub" >Every financial system is enforced through consensus and not delegated to application code which can be modified or bypassed.</p>
+    </div>
+    <div class="sh-platform-grid">
+      <div class="sh-sys-card sh-reveal"><div class="sh-sys-card__top"><div class="sh-sys-card__icon"><i class="fa-solid fa-coins"></i></div><div><div class="sh-sys-card__name">ShamwariPay</div><div class="sh-sys-card__layer sh-text--teal">MONETARY SYSTEM</div></div></div><div class="sh-sys-card__lines"><div class="sh-sys-card__line sh-sys-card__line--bright">5 currency types · CBDC-ready · Programmable taxation</div><div class="sh-sys-card__line">Savings goals, time-locked vaults, credit markets with 8-tier risk scoring and crowd-funded lending</div></div><a href="shamwaripay.html" class="sh-sys-card__link sh-text--teal">Explore ShamwariPay <i class="fa-solid fa-arrow-right"></i></a></div>
+      <div class="sh-sys-card sh-reveal sh-reveal--delay-1"><div class="sh-sys-card__top"><div class="sh-sys-card__icon sh-sys-card__icon--gold"><i class="fa-solid fa-chart-bar"></i></div><div><div class="sh-sys-card__name">Totem Exchange</div><div class="sh-sys-card__layer sh-text--gold">ASSET LAYER</div></div></div><div class="sh-sys-card__lines"><div class="sh-sys-card__line sh-sys-card__line--bright">3 asset types · TotemApproval compliance · On-chain dividends</div><div class="sh-sys-card__line">Price-time priority order book, SEC authority at genesis, snapshot dividend distribution with tax withholding</div></div><a href="digitalassets.html" class="sh-sys-card__link sh-text--gold">Explore Totem Exchange <i class="fa-solid fa-arrow-right"></i></a></div>
+      <div class="sh-sys-card sh-reveal sh-reveal--delay-2"><div class="sh-sys-card__top"><div class="sh-sys-card__icon"><i class="fa-solid fa-shield-halved"></i></div><div><div class="sh-sys-card__name">Insurance Marketplace</div><div class="sh-sys-card__layer sh-text--teal">RISK LAYER</div></div></div><div class="sh-sys-card__lines"><div class="sh-sys-card__line sh-sys-card__line--bright">19 transaction types · 9-state lifecycle · Actuarial reserves</div><div class="sh-sys-card__line">Automatic reserve redistribution on insurer failure ensuring policyholder protection</div></div><a href="insurance.html" class="sh-sys-card__link sh-text--teal">Explore Insurance <i class="fa-solid fa-arrow-right"></i></a></div>
+      <div class="sh-sys-card sh-reveal"><div class="sh-sys-card__top"><div class="sh-sys-card__icon sh-sys-card__icon--gold"><i class="fa-solid fa-bag-shopping"></i></div><div><div class="sh-sys-card__name">E-Commerce Store</div><div class="sh-sys-card__layer sh-text--gold">COMMERCE LAYER</div></div></div><div class="sh-sys-card__lines"><div class="sh-sys-card__line sh-sys-card__line--bright">5 fulfilment modes · Kyber-encrypted · Auto escrow</div><div class="sh-sys-card__line">Direct customer to merchant payments and delivery fulfillment management, multi-asset pricing, payments and rewards, automatic delivery deadline-triggered refunds</div></div><a href="store.html" class="sh-sys-card__link sh-text--gold">Explore Commerce <i class="fa-solid fa-arrow-right"></i></a></div>
+      <div class="sh-sys-card sh-reveal sh-reveal--delay-1"><div class="sh-sys-card__top"><div class="sh-sys-card__icon"><i class="fa-solid fa-rotate"></i></div><div><div class="sh-sys-card__name">Subscriptions</div><div class="sh-sys-card__layer sh-text--teal">BILLING LAYER</div></div></div><div class="sh-sys-card__lines"><div class="sh-sys-card__line sh-sys-card__line--bright">On chain service listing, payment and subscription data storage· No webhooks · Multi-asset type billing</div><div class="sh-sys-card__line">The system tracks all subscriptions and unsubscribes automatically if no renewal payment is submitted meaning no payment processor fees, data-handling required</div></div><a href="subscriptions.html" class="sh-sys-card__link sh-text--teal">Explore Subscriptions <i class="fa-solid fa-arrow-right"></i></a></div>
+      <div class="sh-sys-card sh-sys-card--ai sh-arch-visual sh-reveal sh-reveal--delay-2"><div class="sh-sys-card__ai-badge">AI-READY</div><div class="sh-sys-card__top"><div class="sh-sys-card__icon sh-sys-card__icon--purple"><i class="fa-solid fa-robot"></i></div><div><div class="sh-sys-card__name">Autonomous Agent Accounts</div><div class="sh-sys-card__layer sh-text--purple">AGENTIC LAYER</div></div></div><div class="sh-sys-card__lines"><div class="sh-sys-card__line sh-sys-card__line--bright">AccountType.AUTONOMOUS · Spending limits · Transaction whitelist</div><div class="sh-sys-card__line">Hard on-chain limits and controls for autonomous agents agents through transaction authorization, recipient controls, rolling spend caps</div></div><a href="accounts.html" class="sh-sys-card__link sh-text--purple">Explore Accounts <i class="fa-solid fa-arrow-right"></i></a></div>
+    </div>
+  </div>
+</section>
+
+<section class="sh-section sh-section--navy" id="technology" style="background: url('img/network_sapphire_medium.jpg') center/cover no-repeat;">
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--gold">CRYPTOGRAPHIC FOUNDATION</div>
+      <h2 class="sh-section__title">Quantum-resistant from<br>genesis block zero.</h2>
+      <p class="sh-section__sub">Two NIST-standardised post-quantum algorithms deployed across all protocol operations for secure signatures, encryption, identity, and certificates.</p>
+    </div>
+    <div class="sh-tech__layout">
+      <div class="sh-crypto-cards">
+        <div class="sh-crypto-card sh-reveal"><div class="sh-crypto-card__top"><div class="sh-crypto-card__name">ML-DSA (Dilithium)</div><span class="sh-badge sh-badge--teal">NIST FIPS 204</span></div><div class="sh-crypto-card__role">Lattice-based 2420-byte signatures for all transactions, block signing, certificate issuance and account token generation.</div></div>
+        <div class="sh-crypto-card sh-reveal sh-reveal--delay-1"><div class="sh-crypto-card__top"><div class="sh-crypto-card__name">ML-KEM (Kyber)</div><span class="sh-badge sh-badge--gold">NIST FIPS 203</span></div><div class="sh-crypto-card__role">Key encapsulation for encrypting account identity, purchase payloads, messages, and delivery proofs across all chains.</div></div>
+        <div class="sh-crypto-card sh-reveal sh-reveal--delay-2"><div class="sh-crypto-card__top"><div class="sh-crypto-card__name">BIP39 PQ Adaptation</div><span class="sh-badge sh-badge--gold">WALLET RECOVERY</span></div><div class="sh-crypto-card__role">Single seed phrase derives both Dilithium signing key and Kyber encryption key with optional hardware wallet UX with PQC key support.</div></div>
+        <div class="sh-crypto-card sh-reveal sh-reveal--delay-3"><div class="sh-crypto-card__top"><div class="sh-crypto-card__name">JVM-Native PKI</div><span class="sh-badge sh-badge--teal">CERTIFICATES</span></div><div class="sh-crypto-card__role">ShamwariCertificate implements java.security.cert.Certificate  compatibile with any JVM PKI infrastructure without modification.</div></div>
+      </div>
+      <div class="sh-arch-visual sh-reveal">
+        <div class="sh-arch__node--root"><div><div class="sh-arch__node-label">FXTCHAIN · SETTLEMENT LAYER</div><div class="sh-arch__node-name">SHAMWARI / WEALTH</div><div class="sh-arch__node-meta">Proof-of-Stake · Dilithium Block Signatures · Binder Protocol</div></div><div class="sh-arch__node-badge">SETTLEMENT</div></div>
+        <div class="sh-arch__connector"></div>
+        <div class="sh-arch__children-label"><span>BETACHAINS</span></div>
+        <div class="sh-arch__children">
+          <div class="sh-arch-card sh-arch-card--teal"><div class="sh-arch-card__bar"></div><div class="sh-arch-card__body"><div class="sh-arch-card__flag">🌍</div><div class="sh-arch-card__name">CAPITAL</div><div class="sh-arch-card__reg">GLOBAL ASSET CHAIN</div><div class="sh-arch-card__items"><div class="sh-arch-card__item">Global transactions</div><div class="sh-arch-card__item">Developer ecosystem</div></div></div></div>
+          <div class="sh-arch-card sh-arch-card--gold"><div class="sh-arch-card__bar"></div><div class="sh-arch-card__body"><div class="sh-arch-card__flag">🏳️</div><div class="sh-arch-card__name">COUNTRY A</div><div class="sh-arch-card__reg">DOLLAR · RESERVE BANK •INSURANCE REGULATOR</div><div class="sh-arch-card__items"><div class="sh-arch-card__item">Full monetary system</div><div class="sh-arch-card__item">Insurance System</div></div></div></div>
+          <div class="sh-arch-card sh-arch-card--purple"><div class="sh-arch-card__bar"></div><div class="sh-arch-card__body"><div class="sh-arch-card__flag">🏴</div><div class="sh-arch-card__name">COUNTRY B</div><div class="sh-arch-card__reg">POUND · CENTRAL BANK · SEC</div><div class="sh-arch-card__items"><div class="sh-arch-card__item">Asset Exchange</div><div class="sh-arch-card__item">Full monetary system</div></div></div></div>
+        </div>
+        <div style="text-align:center;margin-top:1.75rem;margin-bottom:1.50rem;position:relative;z-index:1;"><a href="architecture.html" class="sh-btn sh-btn--ghost sh-btn--sm">Full Architecture <i class="fa-solid fa-arrow-right"></i></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+	
+
+<section class="sh-section sh-section--mid" id="ai" style="background: url('img/agentic_finance.jpg') center/cover no-repeat;">
+  <div class="sh-container">
+  	 <div class="sh-section__header">
+  	 	<div class="sh-eyebrow sh-eyebrow--gold">AI-READY ACCOUNTS</div>
+      </div>
+  	<div class="sh-ai__layout"> 
+      <div class="sh-arch-visual sh-reveal"> 
+        <div class="sh-eyebrow sh-eyebrow--purple">AGENTIC FINANCE</div>
+        <h2 class="sh-section__title sh-section__title--left" style="font-size:clamp(1.9rem,3.5vw,2.6rem);">AI-native from the ground up.</h2>
+        <p class="sh-ai__body">Shamwari introduces <code class="sh-code">AccountType.AUTONOMOUS </code> accounts assigned to AI operators. Each of the 17 ShamwariPay transaction types exposes an isAgentAllowed() gate applied for agent-submitted transaction validation and agents may only invoke the syscalls explicitly permitted for their account type and only operate within control parameters preset by a human-controlled account.</p>
+        <div class="sh-perm-matrix"><div class="sh-perm-matrix__title">AI ACCOUNT PERMISSION MATRIX</div><div class="sh-perm-grid">
+          <div class="sh-perm-row sh-perm-row--allowed"><span class="sh-perm-badge sh-perm-badge--allowed">ALLOW</span> Currency payments</div>
+          <div class="sh-perm-row sh-perm-row--allowed"><span class="sh-perm-badge sh-perm-badge--allowed">ALLOW</span> Asset trading</div>
+          <div class="sh-perm-row sh-perm-row--allowed"><span class="sh-perm-badge sh-perm-badge--allowed">ALLOW</span> Subscribe services</div>
+          <div class="sh-perm-row sh-perm-row--allowed"><span class="sh-perm-badge sh-perm-badge--allowed">ALLOW</span> Commerce purchases</div>
+          <div class="sh-perm-row sh-perm-row--denied"><span class="sh-perm-badge sh-perm-badge--denied">DENY</span> Exceeding spend cap</div>
+          <div class="sh-perm-row sh-perm-row--denied"><span class="sh-perm-badge sh-perm-badge--denied">DENY</span> Non-whitelisted recipients</div>
+          <div class="sh-perm-row sh-perm-row--denied"><span class="sh-perm-badge sh-perm-badge--denied">DENY</span> Blocked tx types</div>
+          <div class="sh-perm-row sh-perm-row--denied"><span class="sh-perm-badge sh-perm-badge--denied">DENY</span> Min balance breach</div>
+        </div></div>
+      </div>
+      <div>
+        <div class="sh-usecase sh-reveal"><div class="sh-usecase__icon sh-usecase__icon--purple"><i class="fa-solid fa-chart-line"></i></div><div><div class="sh-usecase__title">Parametric Insurance Triggers</div><div class="sh-usecase__body">Agent submits an insurance claim when on-chain oracle data crosses a threshold e.g. drought index, temperature event, flight cancellation. Fully automated. Immutably auditable. No loss assessor.</div></div></div>
+        <div class="sh-usecase sh-reveal sh-reveal--delay-1"><div class="sh-usecase__icon sh-usecase__icon--teal"><i class="fa-solid fa-file-invoice-dollar"></i></div><div><div class="sh-usecase__title">Automated Loan Processing</div><div class="sh-usecase__body">MFI agents process applications, verify credit scores, and disburse loans automatically based on preset limits and logic systems.</div></div></div>
+        <div class="sh-usecase sh-reveal sh-reveal--delay-2"><div class="sh-usecase__icon sh-usecase__icon--gold"><i class="fa-solid fa-rotate"></i></div><div><div class="sh-usecase__title">Supervised Treasury Optimisation</div><div class="sh-usecase__body">DeFi-style yield routing within hard limits set by a human treasury manager. Agent places exchange orders on Totem DEX and rotates stablecoin positions </div></div></div>
+        <div class="sh-usecase sh-reveal sh-reveal--delay-2"><div class="sh-usecase__icon sh-usecase__icon--gold"><i class="fa-solid fa-robot"></i></div><div><div class="sh-usecase__title">M2M Supply Chain Payments</div><div class="sh-usecase__body">AI procurement agents verify delivery via IoT oracle, then settle invoices autonomously using ShamwariPay for pre-authorised counterparties. This eliminates time-consuming human sign-offs with settlement in the next block.</div></div></div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sh-section-solutions" id="solutions">
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--gold">REAL-WORLD DEPLOYMENT</div>
+      <h2 class="sh-section__title" style="">Built for these markets.<br>Not retrofitted.</h2>
+      <p class="sh-section__sub">Engineered for the specific financial infrastructure challenges of emerging economies by moving away from a general-purpose blockchain architecture to targeted independent systems integration.</p> 
+    </div>
+    <div class="sh-solutions-grid">
+      <div class="sh-sol-card sh-reveal"><div class="sh-sys-card__icon"><i class="fa-solid fa-coins"></i></div><div class="sh-sol-card__title">Central Bank Digital Currency</div><div class="sh-sol-card__body">Deploy CBDC with protocol-native monetary authority accounts, transfer limits, tax withholding, and AML controls through a private permissioned child-chain.</div></div>
+      <div class="sh-sol-card sh-reveal sh-reveal--delay-1"><div class="sh-sys-card__icon"><i class="fa-solid fa-tractor"></i></div><div class="sh-sol-card__title">Agricultural Finance</div><div class="sh-sol-card__body">Parametric crop insurance, supply chain payments, seasonal loan products, and cooperative savings all on one integrated protocol for Africa's smallholder farmers.</div></div>
+      <div class="sh-sol-card sh-reveal sh-reveal--delay-2"><div class="sh-sys-card__icon"><i class="fa-solid fa-ship"></i></div><div class="sh-sol-card__title">FMCG Supply Chain</div><div class="sh-sol-card__body">Tokenise inventory, automate distributor payments, issue loyalty rewards, and enforce supplier compliance using Totem assets and Commerce protocol primitives.</div></div>
+      <div class="sh-sol-card sh-reveal"><div class="sh-sys-card__icon"><i class="fa-solid fa-hand-holding-usd"></i></div><div class="sh-sol-card__title">Cross-Border Remittances</div><div class="sh-sol-card__body">Fast, low-cost transfers using ShamwariPay currencies, with built-in FX rate management, tax withholding, and KYC-gated recipient accounts.</div></div>
+      <div class="sh-sol-card sh-reveal sh-reveal--delay-1"><div class="sh-sys-card__icon"><i class="fa-solid fa-shield"></i></div><div class="sh-sol-card__title">Community Insurance Pools</div><div class="sh-sol-card__body">Cooperative insurance with on-chain actuarial reserves, automatic claims processing, and regulator oversight for previously overlooked populations and SMEs.</div></div>
+      <div class="sh-sol-card sh-reveal sh-reveal--delay-2"><div class="sh-sys-card__icon"><i class="fa-solid fa-robot"></i></div><div class="sh-sol-card__title">Agentic Commerce</div><div class="sh-sol-card__body">Autonomous procurement agents that  operate within governance-enforced limits aiding autonomous stock and inventory management, as well as supply chain transactions.</div></div>
+    </div>
+    <div style="text-align:center;margin-top:3rem;"><a href="solutions.html" class="sh-btn sh-btn--ghost">All Solutions <i class="fa-solid fa-arrow-right"></i></a></div>
+  </div>
+</section>
+
+<section class="sh-section"> 
+  <div class="sh-container">
+    <div class="sh-section__header">
+      
+      <h2 class="sh-section__title" style="">Why Shamwari?</h2>
+    </div>
+    <!-- Barriers left / Solutions right -->
+        <div class="sh-excl-layout">
+
+            <!-- Left: the five barriers -->
+            <div>
+                <div class="sh-eyebrow sh-eyebrow--red" style="margin-bottom:1.5rem">WHY EXISTING SYSTEMS FAIL</div>
+                <div class="sh-barrier-list">
+
+                    <div class="sh-barrier pg-reveal">
+                        <div class="sh-barrier__num sh-barrier__num--red">1</div>
+                        <div>
+                            <div class="sh-barrier__title">No protocol-native identity</div>
+                            <div class="sh-barrier__body">Banks require government-issued ID and a fixed address to open an account. <strong>1.1 billion people globally have no legal identity.</strong> Without identity, there is no account. Without an account, there is no access to savings, credit, insurance, or remittances.</div>
+                        </div>
+                    </div>
+
+                    <div class="sh-barrier pg-reveal">
+                        <div class="sh-barrier__num sh-barrier__num--red">2</div>
+                        <div>
+                            <div class="sh-barrier__title">Remittance corridors extract 8–12%</div>
+                            <div class="sh-barrier__body">The Sub-Saharan Africa remittance corridor is the most expensive in the world. <strong>$48B in fees is extracted annually</strong> from the people who can least afford it by reducing the money reaching families.</div>
+                        </div>
+                    </div>
+
+                    <div class="sh-barrier pg-reveal">
+                        <div class="sh-barrier__num sh-barrier__num--gold">3</div>
+                        <div>
+                            <div class="sh-barrier__title">Insurance is inaccessible or unaffordable</div>
+                            <div class="sh-barrier__body">Smallholder farmers, informal traders, and gig workers are locked out of insurance markets designed for salaried employees with bank accounts. <strong>A single crop failure or medical emergency eliminates years of savings</strong> with no recourse.</div>
+                        </div>
+                    </div>
+
+                    <div class="sh-barrier pg-reveal">
+                        <div class="sh-barrier__num sh-barrier__num--gold">4</div>
+                        <div>
+                            <div class="sh-barrier__title">Credit is unavailable without credit history</div>
+                            <div class="sh-barrier__body">Microfinance institutions serve underbanked borrowers but rely on informal credit assessment, high operational costs, and manual loan administration. <strong>There is no on-chain credit record, no automated underwriting, and no collateral mechanism</strong> that works without a bank account.</div>
+                        </div>
+                    </div>
+
+                    <div class="sh-barrier pg-reveal">
+                        <div class="sh-barrier__num sh-barrier__num--slate">5</div>
+                        <div>
+                            <div class="sh-barrier__title">Smart-contract blockchains don't solve it</div>
+                            <div class="sh-barrier__body">Ethereum's gas model, ECDSA wallet complexity, and lack of protocol-native compliance make it unsuitable for regulated, mass-market financial inclusion. <strong>A DeFi app is not a bank replacement</strong> for someone who earns $3 per day on a feature phone.</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Right: Shamwari's mapped responses -->
+            <div>
+                <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1.5rem">HOW SHAMWARI RESPONDS</div>
+                <div class="sh-excl-solutions">
+
+                    <div class="sh-excl-sol pg-reveal">
+                        <div class="sh-excl-sol__accent sh-excl-sol__accent--teal"></div>
+                        <div class="sh-excl-sol__icon sh-excl-sol__icon--teal">
+                            <i class="fa-solid fa-id-card"></i>
+                        </div>
+                        <div>
+                            <div class="sh-excl-sol__barrier">BARRIER 1: IDENTITY</div>
+                            <div class="sh-excl-sol__title">Protocol-native typed identity</div>
+                            <div class="sh-excl-sol__body">Type-based account distinctions that include: PERSONAL, MFI, MERCHANT, AUTONOMOUS types; each with encrypted on-chain identity metadata secured by Kyber. Regulator-issued digital certificates replace document-based KYC. Account creation is free and accessible from any internet-enabled smartphone, no branch required.</div>
+                        </div>
+                    </div>
+
+                    <div class="sh-excl-sol pg-reveal">
+                        <div class="sh-excl-sol__accent sh-excl-sol__accent--teal"></div>
+                        <div class="sh-excl-sol__icon sh-excl-sol__icon--teal">
+                            <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                        </div>
+                        <div>
+                            <div class="sh-excl-sol__barrier">BARRIER 2: REMITTANCES</div>
+                            <div class="sh-excl-sol__title">Built-in DEX with instant cross-border settlement</div>
+                            <div class="sh-excl-sol__body">ShamwariPay settles cross-border transfers between any two onboarded country-based betaChains through the monetary system within a 12 second block-generation window. No correspondent bank. No delay. No extra corridor charge fee.</div>
+                        </div>
+                    </div>
+
+                    <div class="sh-excl-sol pg-reveal">
+                        <div class="sh-excl-sol__accent sh-excl-sol__accent--gold"></div>
+                        <div class="sh-excl-sol__icon sh-excl-sol__icon--gold">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <div class="sh-excl-sol__barrier">BARRIER 3: INSURANCE</div>
+                            <div class="sh-excl-sol__title">Protocol-native insurance with publicly-verifiable premium payments and claim records.</div>
+                            <div class="sh-excl-sol__body">Insurance companies, cooperatives and mutual funds can list insurance products directly on-chain. Premiums, claims, and reserve distributions are executed and processed as protocol transactions enhancing transparency and reducing processing fees. Policies payouts and settlements history are immutably stored on the blockchain enabling real-time data analysis.</div>
+                        </div>
+                    </div>
+
+                    <div class="sh-excl-sol pg-reveal">
+                        <div class="sh-excl-sol__accent sh-excl-sol__accent--gold"></div>
+                        <div class="sh-excl-sol__icon sh-excl-sol__icon--gold">
+                            <i class="fa-solid fa-hand-holding-dollar"></i>
+                        </div>
+                        <div>
+                            <div class="sh-excl-sol__barrier">BARRIER 4: CREDIT</div>
+                            <div class="sh-excl-sol__title">On-chain credit history and P2P lending</div>
+                            <div class="sh-excl-sol__body">Every repayment, default, and collateral event is an immutable on-chain record creating the first verifiable credit history for people outside the banking system. MFI accounts access the full loan lifecycle: offer, collateral lock, repayment schedule, and automated default handling.</div>
+                        </div>
+                    </div>
+
+                    <div class="sh-excl-sol pg-reveal">
+                        <div class="sh-excl-sol__accent sh-excl-sol__accent--purple"></div>
+                        <div class="sh-excl-sol__icon sh-excl-sol__icon--purple">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <div>
+                            <div class="sh-excl-sol__barrier">BARRIER 5: INFRASTRUCTURE</div>
+                            <div class="sh-excl-sol__title">Compliance and commerce at the consensus layer</div>
+                            <div class="sh-excl-sol__body">Shamwari is not a DeFi application running on a general-purpose chain. Every financial primitive from payments, lending, insurance, commerce, identity is enforced at the consensus layer. Regulators control monetary policy and asset status directly. No processing fees. No smart contract risk. Accessible from feature phones and in low-bandwidth environments.</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div><!-- /.sh-excl-layout -->
+
+        <!-- Before / After comparison -->
+        <div class="sh-excl-compare pg-reveal">
+            <div class="sh-excl-compare__col sh-excl-compare__col--before">
+                <div class="sh-excl-compare__heading">WITHOUT SHAMWARI</div>
+                <div class="sh-excl-compare__rows">
+                    <div class="sh-excl-compare__item">
+                        <i class="fa-solid fa-xmark"></i>
+                        Branch visit required to open an account. Average distance to nearest bank branch: 9.4km in rural Sub-Saharan Africa.
+                    </div>
+                    <div class="sh-excl-compare__item">
+                        <i class="fa-solid fa-xmark"></i>
+                        Remittance fees of 8–12% on every transfer. $200 sent home costs $16–24 in fees.
+                    </div>
+                    <div class="sh-excl-compare__item">
+                        <i class="fa-solid fa-xmark"></i>
+                        Insurance requires a bank account, formal employment, and a credit record. Smallholder farmers and informal traders deemed uninsurable.
+                    </div>
+                    <div class="sh-excl-compare__item">
+                        <i class="fa-solid fa-xmark"></i>
+                        No credit history means no loan access. Informal moneylenders charge 40–200% annual interest rates with no borrower protection.
+                    </div>
+                    <div class="sh-excl-compare__item">
+                        <i class="fa-solid fa-xmark"></i>
+                        Crop failure, access to emergency medical care, or job loss without savings leaves victims economically vulnerable with no recovery mechanism.
+                    </div>
+                </div>
+            </div>
+            <div class="sh-excl-compare__divider">
+                <div class="sh-excl-compare__divider-badge">VS</div>
+            </div>
+            <div class="sh-excl-compare__col sh-excl-compare__col--after">
+                <div class="sh-excl-compare__heading">WITH SHAMWARI</div>
+                <div class="sh-excl-compare__rows">
+                    <div class="sh-excl-compare__item">
+                        <i class="fa-solid fa-check"></i>
+                        Account creation from any internet-enabled device. Quantum-safe keypair generated locally. Account private key encrypted data and digital certificates replace document KYC.
+                    </div>
+                    <div class="sh-excl-compare__item">
+                        <i class="fa-solid fa-check"></i>
+                        Cross-border settlement in less than a minute. Built-in DEX allows seamless currency conversions eliminating arbitrary losses.
+                    </div> 
+                    <div class="sh-excl-compare__item">
+                        <i class="fa-solid fa-check"></i>
+                       Insurance products listed directly on-chain. Premium payments and claims recorded on-chain for immutable history records.
+                    </div>
+                    <div class="sh-excl-compare__item">
+                        <i class="fa-solid fa-check"></i>
+                        Every transaction builds an immutable, verifiable credit history. MFI lenders access the full on-chain loan lifecycle with collateral enforcement.
+                    </div>
+                    <div class="sh-excl-compare__item">
+                        <i class="fa-solid fa-check"></i>
+                        Insurance payouts and settlements transaction types. No office-to-office workflow,No processing delays.
+                    </div>
+                </div>
+            </div>
+        </div>
+  </div>
+</section>
+
+<section class="sh-cta">
+  <div class="sh-cta__glow"></div>
+  <div class="sh-cta__inner">
+    <div class="sh-eyebrow sh-eyebrow--teal">GET STARTED</div>
+    <h2 class="sh-cta__title">The financial infrastructure the world needs is ready.</h2>
+    <img src="img/shamwari_multidevice_transparent_upright.png" />
+    <p class="sh-cta__sub">Full source code, documentation, and testnet access available now.</p>
+    <div class="sh-cta__actions"><a href="developers.html" class="sh-btn sh-btn--teal sh-btn--lg"><i class="fa-solid fa-code"></i> Developer Hub</a><a href="https://bitbucket.org/thenamelesstree/shamwari/downloads" class="sh-btn sh-btn--ghost sh-btn--lg">Download Client</a><a href="solutions.html" class="sh-btn sh-btn--gold sh-btn--lg">View Solutions</a></div>
+  </div>
+</section>
+<footer class="sh-footer">
+  <div class="sh-footer__grid">
+    <div>
+      <div class="sh-footer__wordmark">
+      	<img src="img/icon.png" height="100px" width="100px"/>
+      </div>
+      <p class="sh-footer__tagline">Quantum-resistant financial infrastructure for 4 billion people across Africa, LATAM, ASEAN and MENA.</p>
+      <div class="sh-footer__socials">
+        <a href="https://bitbucket.org/thenamelesstree/shamwari" class="sh-footer__social"><i class="fa-brands fa-bitbucket"></i></a>
+        <a href="#" class="sh-footer__social"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" class="sh-footer__social"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Platform</div>
+      <a href="shamwaripay.html" class="sh-footer__link">ShamwariPay</a>
+      <a href="digitalassets.html" class="sh-footer__link">Totem Exchange</a>
+      <a href="insurance.html" class="sh-footer__link">Insurance</a>
+      <a href="store.html" class="sh-footer__link">Commerce</a>
+      <a href="subscriptions.html" class="sh-footer__link">Subscriptions</a>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Technology</div>
+      <a href="architecture.html" class="sh-footer__link">Architecture</a>
+      <a href="security.html" class="sh-footer__link">Post-Quantum Security</a>
+      <a href="accounts.html" class="sh-footer__link">Accounts &amp; Identity</a>
+      <a href="digitalcertificates.html" class="sh-footer__link">Certificates</a>
+      <a href="compliance.html" class="sh-footer__link">Compliance</a>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Resources</div>
+      <a href="solutions.html" class="sh-footer__link">Solutions</a>
+      <a href="developers.html" class="sh-footer__link">Developer Hub</a>
+      <a href="roadmap.html" class="sh-footer__link">Roadmap</a>
+      <a href="https://bitbucket.org/thenamelesstree/shamwari/src/main/docs/" class="sh-footer__link">Documentation</a>
+      <a href="https://wallet.shamwari.network" class="sh-footer__link">Launch Wallet</a>
+    </div>
+  </div>
+  <div class="sh-footer__bottom">
+    <span>© 2026 TheNamelessTree Networks. All rights reserved.</span>
+    <span class="sh-footer__bottom-right">shamwari.network</span>
+  </div>
+</footer>
+<a href="#" class="sh-back-top" id="back-top" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></a><script>
+(function(){
+  var nav=document.getElementById('sh-nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('sh-nav--scrolled',window.scrollY>50);});
+  var tgl=document.getElementById('nav-toggle'),menu=document.getElementById('nav-menu');
+  if(tgl&&menu){tgl.addEventListener('click',function(){tgl.classList.toggle('is-open');menu.classList.toggle('is-open');});}
+  var bt=document.getElementById('back-top');
+  if(bt){window.addEventListener('scroll',function(){bt.classList.toggle('is-visible',window.scrollY>400);});bt.addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});});}
+  var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');ro.unobserve(e.target);}});},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.sh-reveal,.pg-reveal').forEach(function(el){ro.observe(el);});
+  var tocLinks=document.querySelectorAll('.arch-toc__link,.sp-toc__link');
+  if(tocLinks.length){
+    var secs=[].slice.call(tocLinks).map(function(l){return document.querySelector(l.getAttribute('href'));}).filter(Boolean);
+    var io2=new IntersectionObserver(function(entries){entries.forEach(function(e){var l=document.querySelector('[href="#'+e.target.id+'"]');if(l)l.classList.toggle('is-active',e.isIntersecting);});},{rootMargin:'-20% 0px -75% 0px'});
+    secs.forEach(function(s){io2.observe(s);});
+  }
+})();
+</script>
+</body></html>

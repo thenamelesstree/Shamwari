@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>E-Commerce Store  Shamwari</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Protocol-native commerce with five fulfilment modes, Kyber-encrypted payloads, automatic escrow, buyer protection, and multi-asset loyalty rewards.">
+<link href="img/favicon.ico" rel="icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/pages.css" rel="stylesheet">
+</head>
+<body><nav class="sh-nav" id="sh-nav">
+<div class="sh-nav__inner">
+  <a href="index.html" class="sh-nav__brand">
+    <div><div class="sh-nav__wordmark">SHAMWARI</div><div class="sh-nav__tag">BLOCKCHAIN</div></div>
+  </a>
+  <button class="sh-nav__toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="sh-nav__menu" id="nav-menu">
+    <a href="index.html#platform" class="sh-nav__link">Platform</a>
+    <a href="architecture.html" class="sh-nav__link">Architecture</a>
+    <a href="compliance.html" class="sh-nav__link">Compliance</a>
+    <a href="security.html" class="sh-nav__link">Security</a>
+    <a href="solutions.html" class="sh-nav__link">Solutions</a>
+    <a href="developers.html" class="sh-nav__link">Developers</a>
+  </div>
+  <div class="sh-nav__actions">
+    <a href="https://shamwari.thenamelesstree.co.zw:22024" class="sh-btn sh-btn--ghost sh-btn--sm">Wallet</a>
+    <a href="https://bitbucket.org/thenamelesstree/shamwari/src/main/docs" class="sh-btn sh-btn--teal sh-btn--sm">Docs</a>
+  </div>
+</div>
+</nav>
+
+<section class="pg-hero">
+  <div class="pg-hero__glow pg-hero__glow--gold"></div>
+  <div class="sh-container pg-hero__inner">
+    <div class="pg-hero__content">
+      <div class="sh-eyebrow sh-eyebrow--gold">COMMERCE LAYER · VOL IV</div>
+      <h1 class="pg-hero__title">E-Commerce Store</h1>
+      <p class="pg-hero__sub">The blockchain itself is the commerce backbone — it holds the escrow, enforces merchant identity, routes rewards, and processes expiry refunds automatically. No payment processor. No delivery platform. No loyalty programme operator.</p>
+      <div class="pg-hero__badges"><span class="sh-badge sh-badge--teal">5 FULFILMENT MODES</span><span class="sh-badge sh-badge--gold">KYBER-ENCRYPTED</span><span class="sh-badge sh-badge--teal">AUTO ESCROW</span><span class="sh-badge sh-badge--gold">MULTI-ASSET REWARDS</span></div>
+    </div>
+    <div class="pg-hero__icon-wrap"><div class="pg-hero__icon-bg"></div><i class="fa-solid fa-bag-shopping pg-hero__icon"></i></div>
+  </div>
+</section>
+<div class="pg-stats"><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--teal">5</div><div class="pg-stats__l">Fulfilment modes: Instant / Digital / Physical / 3PL / Pickup</div></div><div class="pg-stats__div"></div><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--gold">4</div><div class="pg-stats__l">Store transaction types</div></div><div class="pg-stats__div"></div><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--teal">3</div><div class="pg-stats__l">Asset types for loyalty rewards: Coin / Currency / Totem</div></div><div class="pg-stats__div"></div><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--gold">100%</div><div class="pg-stats__l">Payloads Kyber ML-KEM encrypted</div></div></div>
+
+<section class="sh-section">
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--gold">DELIVERY ARCHITECTURE</div>
+      <h2 class="sh-section__title">Five fulfilment modes</h2>
+      <p class="sh-section__sub">A single purchase entity supports five distinct fulfilment patterns — all enforced at the consensus layer with automatic escrow and deadline management.</p>
+    </div>
+    <div class="store-mode-grid">
+      <div class="store-mode store-mode--instant pg-reveal"><div class="store-mode__bar"></div><div class="store-mode__body"><div class="store-mode__icon">⚡</div><div class="store-mode__name">INSTANT</div><div class="store-mode__desc">Payment and delivery atomic in the same transaction. No escrow period. Used for immediate digital goods — access keys, software licences, on-chain content.</div></div></div>
+      <div class="store-mode store-mode--digital pg-reveal"><div class="store-mode__bar"></div><div class="store-mode__body"><div class="store-mode__icon">📱</div><div class="store-mode__name">DIGITAL</div><div class="store-mode__desc">Payment escrowed until seller delivers a Kyber-encrypted payload. Buyer decrypts with private key — delivery automatically confirmed by successful decryption.</div></div></div>
+      <div class="store-mode store-mode--physical pg-reveal"><div class="store-mode__bar"></div><div class="store-mode__body"><div class="store-mode__icon">📦</div><div class="store-mode__name">PHYSICAL</div><div class="store-mode__desc">Payment held in escrow until buyer confirms receipt — or delivery deadline expires and funds automatically refund. No dispute intermediary required.</div></div></div>
+      <div class="store-mode store-mode--thirdpl pg-reveal"><div class="store-mode__bar"></div><div class="store-mode__body"><div class="store-mode__icon">🚚</div><div class="store-mode__name">3PL</div><div class="store-mode__desc">Third-party logistics provider submits a Kyber-encrypted delivery proof. Protocol releases funds to seller upon valid proof — logistics verifiable on-chain.</div></div></div>
+      <div class="store-mode store-mode--pickup pg-reveal"><div class="store-mode__bar"></div><div class="store-mode__body"><div class="store-mode__icon">🏪</div><div class="store-mode__name">PICKUP</div><div class="store-mode__desc">Customer collects from merchant location. Funds released on seller's DELIVERY_CONFIRMATION. No courier required — ideal for local commerce in emerging markets.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sh-section sh-section--navy">
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--teal">KEY FEATURES</div>
+      <h2 class="sh-section__title">Commerce without intermediaries</h2>
+    </div>
+    <div class="pg-two-col">
+      <div class="pg-features">
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">Automatic Escrow</div><div class="pg-feature__body">Funds are locked in protocol escrow at purchase. Released to merchant on delivery confirmation, or refunded to buyer if the delivery deadline expires. No escrow agent, no trust required.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Kyber-Encrypted Payloads</div><div class="pg-feature__body">All purchase data — customer identity, delivery address, payment details — encrypted with the recipient's Kyber public key. Only the intended recipient can decrypt. Zero data exposure on-chain.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">Multi-Asset Loyalty Rewards</div><div class="pg-feature__body">Merchants configure loyalty reward amounts in any asset type — chain coin, ShamwariPay currency, or Totem digital asset. Rewards distributed automatically at purchase confirmation.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">MERCHANT Account Type</div><div class="pg-feature__body">MERCHANT-typed accounts are required to list products. The protocol enforces merchant identity at every transaction — no anonymous store fronts, full accountability for all listings.</div></div></div>
+      </div>
+      <div>
+        <div class="sh-contrast-card sh-contrast-card--teal pg-reveal" style="margin-bottom:1.25rem;"><div class="sh-contrast-card__header"><i class="fa-solid fa-check-circle"></i>WHAT THE PROTOCOL HANDLES</div><ul class="sh-contrast-card__list"><li>Escrow creation and release — zero trust in merchant</li><li>Delivery deadline enforcement — automatic refund on expiry</li><li>Loyalty reward calculation and distribution</li><li>Merchant identity verification via account type</li><li>Tax withholding on purchase transactions</li><li>Kyber encryption of all sensitive purchase data</li></ul></div>
+        <div class="sh-contrast-card sh-contrast-card--red pg-reveal"><div class="sh-contrast-card__header"><i class="fa-solid fa-times-circle"></i>WHAT YOU DON'T NEED</div><ul class="sh-contrast-card__list"><li>Payment processor (Stripe, PayPal, etc.)</li><li>Escrow service or trust intermediary</li><li>Loyalty programme platform</li><li>Delivery tracking integration for confirmations</li><li>Tax calculation software</li><li>Data encryption middleware</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="sh-cta">
+  <div class="sh-cta__glow"></div>
+  <div class="sh-cta__inner">
+    <div class="sh-eyebrow sh-eyebrow--teal">BUILD A MARKETPLACE</div>
+    <h2 class="sh-cta__title">No payment processor. No escrow agent. Just the protocol.</h2>
+    <p class="sh-cta__sub">List products, accept payments, and distribute loyalty rewards — all from one Commerce protocol.</p>
+    <div class="sh-cta__actions"><a href="developers.html" class="sh-btn sh-btn--gold sh-btn--lg">Get Started</a><a href="shamwaripay.html" class="sh-btn sh-btn--ghost sh-btn--lg">ShamwariPay</a></div>
+  </div>
+</section>
+<footer class="sh-footer">
+  <div class="sh-footer__grid">
+    <div>
+      <div class="sh-footer__wordmark">SHAMWARI</div>
+      <p class="sh-footer__tagline">Quantum-resistant financial infrastructure for 4 billion people across Africa, LATAM, ASEAN and MENA.</p>
+      <div class="sh-footer__socials">
+        <a href="https://bitbucket.org/thenamelesstree" class="sh-footer__social"><i class="fa-brands fa-bitbucket"></i></a>
+        <a href="#" class="sh-footer__social"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" class="sh-footer__social"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Platform</div>
+      <a href="shamwaripay.html" class="sh-footer__link">ShamwariPay</a>
+      <a href="digitalassets.html" class="sh-footer__link">Totem Exchange</a>
+      <a href="insurance.html" class="sh-footer__link">Insurance</a>
+      <a href="store.html" class="sh-footer__link">Commerce</a>
+      <a href="subscriptions.html" class="sh-footer__link">Subscriptions</a>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Technology</div>
+      <a href="architecture.html" class="sh-footer__link">Architecture</a>
+      <a href="security.html" class="sh-footer__link">Post-Quantum Security</a>
+      <a href="accounts.html" class="sh-footer__link">Accounts &amp; Identity</a>
+      <a href="digitalcertificates.html" class="sh-footer__link">Certificates</a>
+      <a href="compliance.html" class="sh-footer__link">Compliance</a>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Resources</div>
+      <a href="solutions.html" class="sh-footer__link">Solutions</a>
+      <a href="developers.html" class="sh-footer__link">Developer Hub</a>
+      <a href="roadmap.html" class="sh-footer__link">Roadmap</a>
+      <a href="https://bitbucket.org/thenamelesstree/shamwari/wiki" class="sh-footer__link">Documentation</a>
+      <a href="https://shamwari.thenamelesstree.co.zw:22024" class="sh-footer__link">Launch Wallet</a>
+    </div>
+  </div>
+  <div class="sh-footer__bottom">
+    <span>© 2026 TheNamelessTree Networks. All rights reserved.</span>
+    <span class="sh-footer__bottom-right">thenamelesstree.co.zw</span>
+  </div>
+</footer>
+<a href="#" class="sh-back-top" id="back-top" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></a><script>
+(function(){
+  var nav=document.getElementById('sh-nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('sh-nav--scrolled',window.scrollY>50);});
+  var tgl=document.getElementById('nav-toggle'),menu=document.getElementById('nav-menu');
+  if(tgl&&menu){tgl.addEventListener('click',function(){tgl.classList.toggle('is-open');menu.classList.toggle('is-open');});}
+  var bt=document.getElementById('back-top');
+  if(bt){window.addEventListener('scroll',function(){bt.classList.toggle('is-visible',window.scrollY>400);});bt.addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});});}
+  var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');ro.unobserve(e.target);}});},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.sh-reveal,.pg-reveal').forEach(function(el){ro.observe(el);});
+  var tocLinks=document.querySelectorAll('.arch-toc__link,.sp-toc__link');
+  if(tocLinks.length){
+    var secs=[].slice.call(tocLinks).map(function(l){return document.querySelector(l.getAttribute('href'));}).filter(Boolean);
+    var io2=new IntersectionObserver(function(entries){entries.forEach(function(e){var l=document.querySelector('[href="#'+e.target.id+'"]');if(l)l.classList.toggle('is-active',e.isIntersecting);});},{rootMargin:'-20% 0px -75% 0px'});
+    secs.forEach(function(s){io2.observe(s);});
+  }
+})();
+</script>
+</body></html>
