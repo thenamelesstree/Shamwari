@@ -7,6 +7,7 @@
 
 /* ── Tokens ──────────────────────────────────────────────────────────────── */
 :root {
+  color-scheme: dark;
   /* Backgrounds */
   --bg-dark:    #080F1E;
   --bg-navy:    #0B1424;
@@ -239,7 +240,7 @@ ul { list-style: none; padding: 0; }
 .sh-eyebrow--muted  { color: var(--txt-muted); }
 
 /* ── Section wrappers ────────────────────────────────────────────────────── */
-.sh-section          { padding: 6rem 0; background: var(--bg-dark); margin-top: 5rem; margin-bottom: 5rem; position: relative; }
+.sh-section          { padding: 6rem 0; background: var(--bg-dark); position: relative; }
 
 .sh-section::before {
     content: "";
@@ -369,16 +370,13 @@ ul { list-style: none; padding: 0; }
   padding: 9rem 2rem 6rem;
 }
 
-.sh-hero::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 130%;
-    opacity: 0.4;   /* adjust as needed */
-    background: url('../img/shamwari_inclusion.jpg') center/cover no-repeat;
-    z-index: -1;
+.sh-hero__bg-image {
+  position: absolute;
+  inset: 0;
+  background: url('../img/shamwari_inclusion.jpg') center/cover no-repeat;
+  opacity: 0.22;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .sh-hero__grid-bg {
@@ -826,16 +824,31 @@ ul { list-style: none; padding: 0; }
 /* ═══════════════════════════════════════════════════════ SOLUTIONS */
 .sh-solutions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
 
-.sh-section-solutions { position: relative; }
-.sh-section-solutions::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 200%;
-    background: url('../img/shamwari_real_farmer.jpg') center/cover no-repeat;
-    opacity: 0.4;   /* adjust as needed */
-    z-index: -1;
+.sh-section-solutions {
+  padding: 6rem 0;
+  background: var(--bg-dark);
+  position: relative;
 }
+.sh-section-solutions::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('../img/shamwari_real_farmer.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.18;
+  z-index: 0;
+  pointer-events: none;
+}
+.sh-section-solutions::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,155,60,0.06) 0%, transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+.sh-section-solutions > .sh-container { position: relative; z-index: 1; }
  
 .sh-sol-card {
   background: var(--bg-card-dk); border: 1px solid var(--border-dk);
@@ -1294,6 +1307,87 @@ ul { list-style: none; padding: 0; }
   .sh-excl-mkt__stat:last-child { border-bottom: none; }
   .sh-qsec-stats { grid-template-columns: 1fr; }
   .arch-schema-label, .arch-schema-size { display: none; }
+}
+
+
+
+/* ═══════════════════════════════════════════════════════ LIGHT MODE OVERRIDE
+   Shamwari is a dark-primary design. Forcefully override OS-level light mode
+   so every component renders correctly regardless of system settings.
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: dark;
+    /* Re-assert dark tokens so CSS variables are never overridden by the browser */
+    --bg-dark:    #080F1E;
+    --bg-navy:    #0B1424;
+    --bg-mid:     #111d30;
+    --bg-card-dk: #131f33;
+    --txt-primary:   #F0F4FC;
+    --txt-secondary: #8EA8C4;
+    --txt-muted:     #4E6A87;
+    --border-dk: rgba(255,255,255,0.07);
+  }
+  html  { background: #080F1E; }
+  body  { background: #080F1E; color: #8EA8C4; }
+  /* Force every component that might inherit a light background to stay dark */
+  .sh-nav,
+  .sh-section, .sh-section--navy, .sh-section--mid,
+  .sh-section--dark-alt, .sh-section--ai,
+  .sh-section-solutions,
+  .sh-cta, .sh-footer,
+  .pg-hero, .pg-stats,
+  .arch-toc, .sp-toc, .pg-toc,
+  .sh-hero {
+    background-color: inherit;
+    color: inherit;
+  }
+  /* Nav stays dark */
+  .sh-nav {
+    background: rgba(8,15,30,0.70) !important;
+  }
+  .sh-nav--scrolled {
+    background: rgba(8,15,30,0.95) !important;
+  }
+  /* Ensure all text defaults stay on dark */
+  h1, h2, h3, h4, h5, h6 { color: #F0F4FC; }
+  p, li, span, div { color: inherit; }
+  /* Cards stay dark */
+  .sh-sys-card, .sh-sol-card, .sh-problem-card,
+  .sh-arch-card, .sh-crypto-card, .sh-arch-visual,
+  .sh-usecase, .sh-excl-sol,
+  .pg-card, .pg-card2,
+  .sp-tx-card, .sp-ctype-card, .sp-vault-card, .sp-risk-card,
+  .acc-type-card, .dev-resource, .dev-vol-card,
+  .store-mode, .sol-case,
+  .arch-tx-cluster, .arch-auto-card, .arch-beta-card,
+  .arch-perm-rung, .arch-pipe-step,
+  .sh-ins__step, .sh-lifecycle__state,
+  .sh-qsec-intro-card, .sh-qsec-card, .sh-qtimeline {
+    background: var(--bg-card-dk) !important;
+    color: var(--txt-secondary) !important;
+    border-color: var(--border-dk) !important;
+  }
+  /* Override any stray white or light backgrounds */
+  .sh-section--light, .sh-section--white {
+    background: var(--bg-dark) !important;
+  }
+  /* Tables */
+  table, th, td {
+    border-color: var(--border-dk) !important;
+    background: var(--bg-card-dk);
+    color: var(--txt-secondary);
+  }
+  thead tr, .arch-prop-table thead tr,
+  .comp-audit-table thead tr, .dev-endpoint-table thead tr {
+    background: rgba(255,255,255,0.03) !important;
+  }
+  /* Inputs */
+  input, select, textarea {
+    background: var(--bg-card-dk) !important;
+    color: var(--txt-primary) !important;
+    border-color: var(--border-dk) !important;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════ LIVE VIDEO HERO */
