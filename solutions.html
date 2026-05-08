@@ -1,205 +1,269 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>Solutions Shamwari</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Shamwari solutions for emerging markets: CBDC infrastructure, agricultural finance, FMCG supply chain, community insurance, cross-border remittances, and agentic commerce.">
-<link href="img/favicon.ico" rel="icon">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<link href="css/pages.css" rel="stylesheet">
-<style>
-.sol-case-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Solutions &mdash; Shamwari</title><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Shamwari solutions for emerging markets: CBDC, agricultural finance, FMCG supply chain, community insurance, remittances, AI commerce, and public health payment infrastructure."><link href="img/favicon.ico" rel="icon"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"><link href="css/style.css" rel="stylesheet"><link href="css/pages.css" rel="stylesheet"><style>.pg-toc{position:sticky;top:72px;background:rgba(8,15,30,.95);border-bottom:1px solid var(--border-dk);z-index:100;padding:0 2rem;backdrop-filter:blur(12px)}.pg-toc__inner{max-width:1240px;margin:0 auto;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}.pg-toc__inner::-webkit-scrollbar{display:none}.pg-toc__link{font-family:var(--font-display);font-size:.7rem;font-weight:600;letter-spacing:.06em;color:var(--txt-muted);padding:.82rem 1rem;border-bottom:2px solid transparent;white-space:nowrap;transition:color .2s,border-color .2s;text-decoration:none}.pg-toc__link:hover,.pg-toc__link.is-active{color:var(--teal);border-bottom-color:var(--teal)}.pg-sh{display:flex;align-items:flex-start;gap:1.5rem;margin-bottom:3rem}.pg-sh__num{font-family:var(--font-display);font-size:4rem;font-weight:800;color:rgba(255,255,255,.06);line-height:1;letter-spacing:-.05em;flex-shrink:0;user-select:none}.pg-sh__copy{flex:1}.pg-sh__title{font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:var(--txt-primary);line-height:1.2;letter-spacing:-.02em;margin-bottom:.75rem}.pg-sh__sub{font-size:.975rem;color:var(--txt-secondary);line-height:1.72;max-width:720px}@media(max-width:768px){.pg-toc{display:none}.pg-sh{flex-direction:column;gap:.5rem}.pg-sh__num{font-size:2.5rem}}</style><style>
+.sol-case-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
 .sol-case{background:var(--bg-card-dk);border:1px solid var(--border-dk);border-radius:var(--radius);padding:2rem;position:relative;overflow:hidden;transition:border-color .25s,box-shadow .25s}
-.sol-case:hover{box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.sol-case:hover{box-shadow:0 12px 40px rgba(0,0,0,.4)}
 .sol-case__accent{position:absolute;top:0;left:0;right:0;height:2px}
-.sol-case--cbdc       .sol-case__accent{background:var(--teal)}
-.sol-case--cbdc:hover {border-color:rgba(0,168,158,.45)}
-.sol-case--agri       .sol-case__accent{background:var(--green)}
-.sol-case--agri:hover {border-color:rgba(34,197,94,.35)}
-.sol-case--fmcg       .sol-case__accent{background:var(--gold)}
-.sol-case--fmcg:hover {border-color:rgba(200,155,60,.45)}
-.sol-case--insurance  .sol-case__accent{background:var(--red)}
-.sol-case--insurance:hover{border-color:rgba(224,82,82,.35)}
-.sol-case--remittance .sol-case__accent{background:var(--purple)}
-.sol-case--remittance:hover{border-color:rgba(139,92,246,.35)}
-.sol-case--ai         .sol-case__accent{background:linear-gradient(90deg,var(--teal),var(--purple))}
-.sol-case--ai:hover   {border-color:rgba(139,92,246,.35)}
-.sol-case__icon{font-size:2rem;margin-bottom:1rem}
-.sol-case__title{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--txt-primary);margin-bottom:.75rem}
-.sol-case__desc{font-size:.9rem;color:var(--txt-secondary);line-height:1.68;margin-bottom:1.25rem}
-.sol-case__tags{display:flex;flex-wrap:wrap;gap:.4rem}
-.sol-case__tag{font-size:.66rem;color:var(--txt-muted);background:rgba(255,255,255,.04);border:1px solid var(--border-dk);border-radius:40px;padding:.15rem .6rem;font-family:var(--font-display);font-weight:600;letter-spacing:.03em}
-@media(max-width:1100px){.sol-case-grid{grid-template-columns:1fr}}
-</style>
-</head>
-<body>
-<nav class="sh-nav" id="sh-nav"><div class="sh-nav__inner">
-	<a href="index.html" class="sh-nav__brand">
-    <div>
-    		<img src="img/banner.png" alt="Shamwari Logo" height="40">
-    </div>
-  </a><button class="sh-nav__toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button><div class="sh-nav__menu" id="nav-menu"><a href="architecture.html" class="sh-nav__link">Architecture</a><a href="compliance.html" class="sh-nav__link">Compliance</a><a href="security.html" class="sh-nav__link">Security</a><a href="solutions.html" class="sh-nav__link sh-nav__link--active">Solutions</a><a href="developers.html" class="sh-nav__link">Developers</a></div><div class="sh-nav__actions"><a href="https://wallet.shamwari.network" class="sh-btn sh-btn--ghost sh-btn--sm">Wallet</a><a href="https://bitbucket.org/thenamelesstree/shamwari/src/main/docs" class="sh-btn sh-btn--teal sh-btn--sm">Docs</a></div></div></nav>
-
-<section class="pg-hero" style="background: url('img/hands.jpg') center/cover no-repeat;">
-  <div class="pg-hero__glow pg-hero__glow--gold"></div>
-  <div class="sh-container pg-hero__inner">
-    <div class="pg-hero__content">
-      <div class="sh-eyebrow sh-eyebrow--gold">REAL-WORLD APPLICATIONS</div>
-      <h1 class="pg-hero__title">Solutions</h1>
-      <p class="pg-hero__sub">Built for the specific financial infrastructure challenges of emerging markets across Africa, LATAM, ASEAN, and MENA &mdash; not retrofitted from a general-purpose chain designed for Ethereum developers in wealthy economies.</p>
-      <div class="pg-hero__badges">
-        <span class="sh-badge sh-badge--teal">CBDC INFRASTRUCTURE</span>
-        <span class="sh-badge sh-badge--gold">AGRICULTURAL FINANCE</span>
-        <span class="sh-badge sh-badge--teal">FMCG SUPPLY CHAIN</span>
-        <span class="sh-badge sh-badge--gold">PARAMETRIC INSURANCE</span>
-        <span class="sh-badge sh-badge--teal">CROSS-BORDER REMITTANCE</span>
-        <span class="sh-badge sh-badge--gold">AGENTIC COMMERCE</span>
-      </div>
-    </div>
-    <div class="pg-hero__icon-wrap"><div class="pg-hero__icon-bg"></div><i class="fa-solid fa-earth-africa pg-hero__icon"></i></div>
-  </div>
-</section>
-
-<div class="pg-stats">
-  <div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--teal">4B</div><div class="pg-stats__l">People in target emerging market economies</div></div>
-  <div class="pg-stats__div"></div>
-  <div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--gold">$949B</div><div class="pg-stats__l">FaaS global market by 2030</div></div>
-  <div class="pg-stats__div"></div>
-  <div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--teal">57%</div><div class="pg-stats__l">Sub-Saharan Africa financial exclusion rate</div></div>
-  <div class="pg-stats__div"></div>
-  <div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--gold">$5B+</div><div class="pg-stats__l">African fintech investment annually</div></div>
-</div>
-
-<section class="sh-section">
-<div class="sh-container">
-  <div class="sh-section__header">
-    <div class="sh-eyebrow sh-eyebrow--red">FINANCIAL EXCLUSION MAP</div>
-    <h2 class="sh-section__title">Where the need is greatest</h2>
-    <p class="sh-section__sub">These are not theoretical markets. They are the largest underserved financial populations on earth, with existing mobile infrastructure ready for blockchain-native services.</p>
-  </div>
-  <div class="sh-excl-heat">
-    <div class="sh-excl-heat__region sh-excl-heat__region--1 pg-reveal"><div class="sh-excl-heat__bar-bg"></div><div class="sh-excl-heat__pct">57%</div><div class="sh-excl-heat__name">Sub-Saharan Africa</div><div class="sh-excl-heat__label">Financial exclusion rate</div></div>
-    <div class="sh-excl-heat__region sh-excl-heat__region--2 pg-reveal"><div class="sh-excl-heat__bar-bg"></div><div class="sh-excl-heat__pct">52%</div><div class="sh-excl-heat__name">MENA Region</div><div class="sh-excl-heat__label">Unbanked adult population</div></div>
-    <div class="sh-excl-heat__region sh-excl-heat__region--3 pg-reveal"><div class="sh-excl-heat__bar-bg"></div><div class="sh-excl-heat__pct">46%</div><div class="sh-excl-heat__name">LATAM &amp; Caribbean</div><div class="sh-excl-heat__label">Fintech revenue growth potential</div></div>
-    <div class="sh-excl-heat__region sh-excl-heat__region--4 pg-reveal"><div class="sh-excl-heat__bar-bg"></div><div class="sh-excl-heat__pct">44%</div><div class="sh-excl-heat__name">ASEAN</div><div class="sh-excl-heat__label">Annual expansion opportunity</div></div>
-    <div class="sh-excl-heat__region sh-excl-heat__region--5 pg-reveal"><div class="sh-excl-heat__bar-bg"></div><div class="sh-excl-heat__pct">28%</div><div class="sh-excl-heat__name">South Asia</div><div class="sh-excl-heat__label">Mobile-first ready population</div></div>
-  </div>
-  <div class="sh-excl-layout">
-    <div>
-      <div class="sh-eyebrow sh-eyebrow--red" style="margin-bottom:1.25rem">THE THREE BARRIERS</div>
-      <div class="sh-barrier-list">
-        <div class="sh-barrier pg-reveal"><div class="sh-barrier__num sh-barrier__num--red">1</div><div><div class="sh-barrier__title">No Identity Infrastructure</div><div class="sh-barrier__body">Without verifiable identity, financial institutions cannot onboard customers. Traditional KYC requires bank accounts to open bank accounts. Shamwari&rsquo;s <strong>on-chain account types with Kyber-encrypted KYC data</strong> solve identity at the protocol layer &mdash; no intermediary registry required.</div></div></div>
-        <div class="sh-barrier pg-reveal"><div class="sh-barrier__num sh-barrier__num--gold">2</div><div><div class="sh-barrier__title">No Credit History</div><div class="sh-barrier__body">Traditional credit scoring requires banking history. Shamwari&rsquo;s <strong>6-dimension RiskCalculator</strong> builds credit scores from on-chain behaviour &mdash; transaction velocity, account age, repayment history. First-time borrowers with no banking history can qualify from on-chain activity alone.</div></div></div>
-        <div class="sh-barrier pg-reveal"><div class="sh-barrier__num sh-barrier__num--slate">3</div><div><div class="sh-barrier__title">No Insurance Access</div><div class="sh-barrier__body">Insurance intermediaries are economically unviable in low-premium markets. Shamwari&rsquo;s <strong>protocol-native insurance marketplace</strong> eliminates intermediary costs entirely &mdash; no agent, no back-office, no claims administrator. Sub-$1 monthly premium microinsurance is viable.</div></div></div>
-      </div>
-    </div>
-    <div>
-      <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1rem">SHAMWARI SOLUTIONS</div>
-      <div class="sh-excl-solutions">
-        <div class="sh-excl-sol pg-reveal"><div class="sh-excl-sol__accent sh-excl-sol__accent--teal"></div><div class="sh-excl-sol__icon sh-excl-sol__icon--teal"><i class="fa-solid fa-id-card"></i></div><div><div class="sh-excl-sol__barrier">SOLVES BARRIER 01</div><div class="sh-excl-sol__title">Protocol Identity</div><div class="sh-excl-sol__body">10 typed accounts, on-chain KYC with Kyber encryption, .shamwari.network domains. Verifiable by any counterparty without a central registry.</div></div></div>
-        <div class="sh-excl-sol pg-reveal"><div class="sh-excl-sol__accent sh-excl-sol__accent--gold"></div><div class="sh-excl-sol__icon sh-excl-sol__icon--gold"><i class="fa-solid fa-chart-line"></i></div><div><div class="sh-excl-sol__barrier">SOLVES BARRIER 02</div><div class="sh-excl-sol__title">On-Chain Credit Scoring</div><div class="sh-excl-sol__body">RiskCalculator scores from blockchain behaviour. First-time borrowers with no banking history qualify from on-chain activity: transaction velocity, account age, repayment history.</div></div></div>
-        <div class="sh-excl-sol pg-reveal"><div class="sh-excl-sol__accent sh-excl-sol__accent--purple"></div><div class="sh-excl-sol__icon sh-excl-sol__icon--purple"><i class="fa-solid fa-shield-halved"></i></div><div><div class="sh-excl-sol__barrier">SOLVES BARRIER 03</div><div class="sh-excl-sol__title">Intermediary-Free Insurance</div><div class="sh-excl-sol__body">Protocol handles applications, premiums, claims, and payouts directly. Microinsurance at sub-$1 monthly premiums &mdash; previously impossible with traditional infrastructure costs.</div></div></div>
-      </div>
+.sol-case--cbdc      {border-color:rgba(0,168,158,.15)}   .sol-case--cbdc:hover      {border-color:rgba(0,168,158,.4)}     .sol-case--cbdc      .sol-case__accent{background:var(--teal)}
+.sol-case--agri      {border-color:rgba(34,197,94,.15)}   .sol-case--agri:hover      {border-color:rgba(34,197,94,.4)}      .sol-case--agri      .sol-case__accent{background:var(--green)}
+.sol-case--fmcg      {border-color:rgba(200,155,60,.15)}  .sol-case--fmcg:hover      {border-color:rgba(200,155,60,.4)}     .sol-case--fmcg      .sol-case__accent{background:var(--gold)}
+.sol-case--insurance {border-color:rgba(224,82,82,.15)}   .sol-case--insurance:hover {border-color:rgba(224,82,82,.4)}      .sol-case--insurance .sol-case__accent{background:var(--red)}
+.sol-case--remittance{border-color:rgba(139,92,246,.15)}  .sol-case--remittance:hover{border-color:rgba(139,92,246,.4)}     .sol-case--remittance .sol-case__accent{background:var(--purple)}
+.sol-case--ai        {border-color:rgba(139,92,246,.12)}  .sol-case--ai:hover        {border-color:rgba(139,92,246,.4)}     .sol-case--ai        .sol-case__accent{background:linear-gradient(90deg,var(--teal),var(--purple))}
+.sol-case--health    {border-color:rgba(0,168,158,.12)}   .sol-case--health:hover    {border-color:rgba(0,168,158,.4)}      .sol-case--health    .sol-case__accent{background:var(--teal)}
+.sol-case--gov       {border-color:rgba(200,155,60,.12)}  .sol-case--gov:hover       {border-color:rgba(200,155,60,.4)}     .sol-case--gov       .sol-case__accent{background:var(--gold)}
+.sol-case__header{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.25rem}
+.sol-case__icon{font-size:2.4rem;line-height:1;flex-shrink:0;padding-top:.1rem}
+.sol-case__titlewrap{flex:1}
+.sol-case__sector{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.14em;margin-bottom:.3rem}
+.sol-case--cbdc       .sol-case__sector{color:var(--teal)}
+.sol-case--agri       .sol-case__sector{color:var(--green)}
+.sol-case--fmcg       .sol-case__sector{color:var(--gold)}
+.sol-case--insurance  .sol-case__sector{color:var(--red)}
+.sol-case--remittance .sol-case__sector{color:var(--purple)}
+.sol-case--ai         .sol-case__sector{color:var(--purple)}
+.sol-case--health     .sol-case__sector{color:var(--teal)}
+.sol-case--gov        .sol-case__sector{color:var(--gold)}
+.sol-case__title{font-family:var(--font-display);font-size:1.1rem;font-weight:800;color:var(--txt-primary);line-height:1.2}
+.sol-case__desc{font-size:.9rem;color:var(--txt-secondary);line-height:1.72;margin-bottom:1.25rem}
+.sol-case__primitives{margin-bottom:1.25rem}
+.sol-case__primitives-label{font-family:var(--font-display);font-size:.62rem;font-weight:700;letter-spacing:.1em;color:var(--txt-muted);text-transform:uppercase;margin-bottom:.5rem}
+.sol-case__prim-list{display:flex;flex-direction:column;gap:.3rem}
+.sol-case__prim{display:flex;align-items:flex-start;gap:.55rem;font-size:.82rem;color:var(--txt-secondary)}
+.sol-case__prim i{font-size:.65rem;flex-shrink:0;margin-top:.2rem}
+.sol-case--cbdc       .sol-case__prim i{color:var(--teal)}
+.sol-case--agri       .sol-case__prim i{color:var(--green)}
+.sol-case--fmcg       .sol-case__prim i{color:var(--gold)}
+.sol-case--insurance  .sol-case__prim i{color:var(--red)}
+.sol-case--remittance .sol-case__prim i{color:var(--purple)}
+.sol-case--ai         .sol-case__prim i{color:var(--purple)}
+.sol-case--health     .sol-case__prim i{color:var(--teal)}
+.sol-case--gov        .sol-case__prim i{color:var(--gold)}
+.sol-case__tags{display:flex;flex-wrap:wrap;gap:.35rem;padding-top:1rem;border-top:1px solid var(--border-dk)}
+.sol-case__tag{font-size:.64rem;color:var(--txt-muted);background:rgba(255,255,255,.04);border:1px solid var(--border-dk);border-radius:40px;padding:.13rem .55rem;font-family:var(--font-display);font-weight:600;letter-spacing:.03em}
+.sol-market-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:3rem}
+.sol-market-card{background:var(--bg-card-dk);border:1px solid var(--border-dk);border-radius:var(--radius-xs);padding:1.5rem;text-align:center;transition:border-color .2s,transform .2s}
+.sol-market-card:hover{border-color:rgba(200,155,60,.35);transform:translateY(-2px)}
+.sol-market-card__n{font-family:var(--font-display);font-size:2rem;font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:.3rem}
+.sol-market-card__label{font-size:.7rem;color:var(--txt-muted);line-height:1.4;text-transform:uppercase;letter-spacing:.04em}
+@media(max-width:1100px){.sol-case-grid{grid-template-columns:1fr}.sol-market-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.sol-market-grid{grid-template-columns:1fr 1fr}}
+</style></head><body><nav class="sh-nav" id="sh-nav"><div class="sh-nav__inner"><a href="index.html" class="sh-nav__brand"><div><div class="sh-nav__wordmark">SHAMWARI</div><div class="sh-nav__tag">BLOCKCHAIN</div></div></a><button class="sh-nav__toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button><div class="sh-nav__menu" id="nav-menu"><a href="index.html#platform" class="sh-nav__link">Platform</a><a href="architecture.html" class="sh-nav__link">Architecture</a><a href="compliance.html" class="sh-nav__link">Compliance</a><a href="security.html" class="sh-nav__link">Security</a><a href="solutions.html" class="sh-nav__link sh-nav__link--active">Solutions</a><a href="developers.html" class="sh-nav__link">Developers</a></div><div class="sh-nav__actions"><a href="https://wallet.shamwari.network" class="sh-btn sh-btn--ghost sh-btn--sm">Wallet</a><a href="https://docs.shamwari.network" class="sh-btn sh-btn--teal sh-btn--sm">Docs</a></div></div></nav>
+<section class="pg-hero"><div class="pg-hero__glow pg-hero__glow--gold"></div><div class="sh-container pg-hero__inner"><div class="pg-hero__content"><div class="sh-eyebrow sh-eyebrow--gold">REAL-WORLD APPLICATIONS</div><h1 class="pg-hero__title">Solutions for Emerging Markets</h1><p class="pg-hero__sub">Built for the specific financial infrastructure challenges of emerging markets across Africa, LATAM, ASEAN, and MENA. Different from a general-purpose chains designed for developers and trading or existing banking systems design for developed countries with matching infrastructure.</p><div class="pg-hero__badges"><span class="sh-badge sh-badge--teal">CBDC INFRASTRUCTURE</span><span class="sh-badge sh-badge--gold">AGRICULTURAL FINANCE</span><span class="sh-badge sh-badge--teal">FMCG SUPPLY CHAIN</span><span class="sh-badge sh-badge--gold">PARAMETRIC INSURANCE</span><span class="sh-badge sh-badge--teal">CROSS-BORDER REMITTANCE</span><span class="sh-badge sh-badge--gold">AGENTIC COMMERCE</span></div></div><div class="pg-hero__icon-wrap"><div class="pg-hero__icon-bg"></div><i class="fa-solid fa-earth-africa pg-hero__icon"></i></div></div></section><div class="pg-stats"><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--teal">4B</div><div class="pg-stats__l">People in target emerging market economies</div></div><div class="pg-stats__div"></div><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--gold">$949B</div><div class="pg-stats__l">FaaS global market by 2030</div></div><div class="pg-stats__div"></div><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--red">57%</div><div class="pg-stats__l">Sub-Saharan Africa financial exclusion rate</div></div><div class="pg-stats__div"></div><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--teal">0</div><div class="pg-stats__l">Smart contracts with all compliance and logic handled at consensus level.</div></div></div><nav class="pg-toc"><div class="pg-toc__inner"><a href="#exclusion" class="pg-toc__link">01 - Financial Exclusion</a><a href="#barriers" class="pg-toc__link">02 - Three Barriers</a><a href="#cbdc" class="pg-toc__link">03 - CBDC</a><a href="#agri" class="pg-toc__link">04 - Agricultural Finance</a><a href="#fmcg" class="pg-toc__link">05 - FMCG Supply Chain</a><a href="#insurance" class="pg-toc__link">06 - Community Insurance</a><a href="#remittance" class="pg-toc__link">07 - Remittances</a><a href="#ai" class="pg-toc__link">08 - Agentic Commerce</a><a href="#health" class="pg-toc__link">09 - Public Health</a><a href="#market" class="pg-toc__link">10 - Market Opportunity</a></div></nav><section class="sh-section" id="exclusion"><div class="sh-container"><div class="pg-sh"><div class="pg-sh__num">01</div><div class="pg-sh__copy"><div class="sh-eyebrow sh-eyebrow--red">FINANCIAL EXCLUSION MAP</div><div class="pg-sh__title">Where the need is greatest</div><p class="pg-sh__sub">These are not insignificant markets but are the largest underserved financial populations on earth, with existing mobile infrastructure ready for blockchain-native services and without legacy banking systems creating path dependency.</p></div></div><div class="sh-excl-heat pg-reveal">
+  <div class="sh-excl-heat__region sh-excl-heat__region--1"><div class="sh-excl-heat__bar-bg"></div><div class="sh-excl-heat__pct">57%</div><div class="sh-excl-heat__name">Sub-Saharan Africa</div><div class="sh-excl-heat__label">Financial exclusion rate (World Bank)</div></div>
+  <div class="sh-excl-heat__region sh-excl-heat__region--2"><div class="sh-excl-heat__bar-bg"></div><div class="sh-excl-heat__pct">52%</div><div class="sh-excl-heat__name">MENA Region</div><div class="sh-excl-heat__label">Unbanked adult population</div></div>
+  <div class="sh-excl-heat__region sh-excl-heat__region--3"><div class="sh-excl-heat__bar-bg"></div><div class="sh-excl-heat__pct">46%</div><div class="sh-excl-heat__name">LATAM &amp; Caribbean</div><div class="sh-excl-heat__label">Fintech revenue growth potential</div></div>
+  <div class="sh-excl-heat__region sh-excl-heat__region--4"><div class="sh-excl-heat__bar-bg"></div><div class="sh-excl-heat__pct">44%</div><div class="sh-excl-heat__name">ASEAN</div><div class="sh-excl-heat__label">Annual expansion opportunity</div></div>
+  <div class="sh-excl-heat__region sh-excl-heat__region--5"><div class="sh-excl-heat__bar-bg"></div><div class="sh-excl-heat__pct">28%</div><div class="sh-excl-heat__name">South Asia</div><div class="sh-excl-heat__label">Mobile-first ready population</div></div>
+</div><p style="font-size:.9rem;color:var(--txt-secondary);line-height:1.7;max-width:760px;margin:0 auto;text-align:center">1.7 billion adults globally remain unbanked. The mobile penetration rate across Sub-Saharan Africa exceeds 50% meaning the infrastructure for financial inclusion exists. The missing piece is a financial protocol that operates viably at low transaction values, without requiring legacy banking infrastructure, and with regulatory controls that satisfy central banks and insurance authorities.</p></div></section><section class="sh-section sh-section--navy" id="barriers"><div class="sh-container"><div class="pg-sh"><div class="pg-sh__num">02</div><div class="pg-sh__copy"><div class="sh-eyebrow sh-eyebrow--gold">THE THREE BARRIERS</div><div class="pg-sh__title">Why financial inclusion fails without Shamwari</div><p class="pg-sh__sub">Three structural problems prevent traditional fintech from reaching the 1.7 billion unbanked. Shamwari solves all three at the design layer and not with app-layer workarounds.</p></div></div><div class="sh-excl-layout pg-reveal"><div><div class="sh-eyebrow sh-eyebrow--red" style="margin-bottom:1.25rem">THE BARRIERS</div><div class="sh-barrier-list"><div class="sh-barrier pg-reveal"><div class="sh-barrier__num sh-barrier__num--red">!</div><div><div class="sh-barrier__title">No Identity Infrastructure</div><div class="sh-barrier__body">Without verifiable identity, financial institutions cannot onboard customers. Traditional KYC requires a bank account to open a bank account creating a circular dependency that structurally excludes billions. National ID systems in many SADC countries currently lack the requisite digital infrastructure.</div></div></div><div class="sh-barrier pg-reveal"><div class="sh-barrier__num sh-barrier__num--gold">!</div><div><div class="sh-barrier__title">No Credit History</div><div class="sh-barrier__body">Credit scoring requires years of banking transaction history. First-time borrowers with no bank account have no credit score, regardless of their economic activity. Smallholder farmers with decades of successful harvests have credit scores of zero.</div></div></div><div class="sh-barrier pg-reveal"><div class="sh-barrier__num sh-barrier__num--slate">!</div><div><div class="sh-barrier__title">No Insurance Access</div><div class="sh-barrier__body">Insurance intermediaries like agents, brokers, back-office administrators, claims adjusters, are economically unviable at sub-$5 monthly premium levels. The minimum viable insurance product for traditional infrastructure costs more than the premium the market can bear.</div></div></div></div></div><div><div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1.25rem">SHAMWARI SOLUTIONS</div><div class="sh-excl-solutions"><div class="sh-excl-sol pg-reveal"><div class="sh-excl-sol__accent sh-excl-sol__accent--teal"></div><div class="sh-excl-sol__icon sh-excl-sol__icon--teal"><i class="fa-solid fa-check"></i></div><div><div class="sh-excl-sol__barrier">SOLVES BARRIER 01</div><div class="sh-excl-sol__title">Protocol Identity</div><div class="sh-excl-sol__body">Ten typed account categories with Kyber-encrypted KYC data on-chain. .shamwari.network human-readable domains. Digital certificates issued by regulatory authority accounts. Verifiable by any counterparty without a central registry or third-party identity provider.</div></div></div><div class="sh-excl-sol pg-reveal"><div class="sh-excl-sol__accent sh-excl-sol__accent--gold"></div><div class="sh-excl-sol__icon sh-excl-sol__icon--gold"><i class="fa-solid fa-check"></i></div><div><div class="sh-excl-sol__barrier">SOLVES BARRIER 02</div><div class="sh-excl-sol__title">On-Chain Credit Scoring</div><div class="sh-excl-sol__body">The 6-dimension RiskCalculator builds credit scores from on-chain transaction behaviour i.e velocity, account age, loan repayment history, collateral quality. First-time borrowers with no banking history qualify from on-chain economic activity alone.</div></div></div><div class="sh-excl-sol pg-reveal"><div class="sh-excl-sol__accent sh-excl-sol__accent--purple"></div><div class="sh-excl-sol__icon sh-excl-sol__icon--purple"><i class="fa-solid fa-check"></i></div><div><div class="sh-excl-sol__barrier">SOLVES BARRIER 03</div><div class="sh-excl-sol__title">Intermediary-Free Insurance</div><div class="sh-excl-sol__body">Protocol handles applications, premiums, claims adjudication, and payouts directly. No agent, no back-office, no claims administrator. Sub-$1 monthly premium microinsurance viable as all protocol costs negligible at any premium level.</div></div></div></div></div></div></div></section><section class="sh-section" id="cbdc"><div class="sh-container"><div class="pg-sh"><div class="pg-sh__num">03</div><div class="pg-sh__copy"><div class="sh-eyebrow sh-eyebrow--teal">CENTRAL BANK DIGITAL CURRENCY</div><div class="pg-sh__title">CBDC infrastructure ready for deployment</div><p class="pg-sh__sub">Shamwari is the only production-ready blockchain infrastructure that combines CBDC issuance, AML transfer controls, tax withholding, permissioned retail distribution, and quantum-safe cryptography in a single system without any smart contract requirement and associated risk.</p></div></div><div class="sol-case-grid"><div class="sol-case sol-case--cbdc pg-reveal">
+  <div class="sol-case__accent"></div>
+  <div class="sol-case__header">
+    <div class="sol-case__icon">🏦</div>
+    <div class="sol-case__titlewrap">
+      <div class="sol-case__sector">VERTICAL · CBDC</div>
+      <div class="sol-case__title">Sovereign CBDCs</div>
     </div>
   </div>
-</div>
-</section>
-
-<section class="sh-section sh-section--navy">
-<div class="sh-container">
-  <div class="sh-section__header">
-    <div class="sh-eyebrow sh-eyebrow--gold">SIX VERTICAL SOLUTIONS</div>
-    <h2 class="sh-section__title">Built for these markets. Not retrofitted.</h2>
-    <p class="sh-section__sub">Each solution is built from Shamwari protocol primitives &mdash; no custom smart contracts, no off-chain trust dependencies. Deploy in weeks, not months.</p>
+  <div class="sol-case__desc">The Central Bank of an onboarded country can administrate over a designated BetaChain. Local currency can be issued as a CONTROLLABLE + NON_SHUFFLEABLE currency where the Central Bank can veto any individual transfer and structural AML traceability is guaranteed. The SAVINGS account type restricts retail distribution to verified consumer wallets. All rlecant tax rate types can be configured by the national revenue authority via on-chain SET_TAX_RATES transactions. CHAIN_USER permission required post-block 10,000 so that all participants KYC-verified.</div>
+  <div class="sol-case__primitives">
+    <div class="sol-case__primitives-label">Protocol Primitives Used</div>
+    <div class="sol-case__prim-list"><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>CONTROLLABLE currency bitmask allowing Central Bank set limits on all currency transfers</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>NON_SHUFFLEABLE flag for structural anti-mixing enabling full transaction traceability</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>SAVINGS-type recipient restriction where CBDC only reaches verified consumer accounts</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>13 tax rate types including VAT, transaction levy, withholding automatically applied</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>CHAIN_USER permission ensures all participants KYC-verified before first transaction</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>MINTABLE supply allows Central Bank currency circulation controls within protocol rules</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Binder Protocol requires users hold only local currency, never need WEALTH coins</span></div></div>
   </div>
-  <div class="sol-case-grid">
-
-    <div class="sol-case sol-case--cbdc pg-reveal">
-      <div class="sol-case__accent"></div>
-      <div class="sol-case__icon"><i class="fa-solid fa-usd pg-hero__icon"></i></div>
-      <div class="sol-case__title">Central Bank Digital Currency</div>
-      <div class="sol-case__desc">Deploy CBDC with protocol-native monetary authority accounts embedded at chain genesis. CONTROLLABLE currency type enforces Central Bank veto power on every transfer. MINTABLE type manages issuance. 13 tax types handle VAT, withholding, and transaction levies automatically. NON_SHUFFLEABLE flag prevents mixing operations &mdash; structural AML traceability. SAVINGS-type recipient accounts ensure retail distribution reaches verified consumer wallets only. Transfer limits configurable per account type at the consensus layer &mdash; no application middleware required.</div>
-      <div class="sol-case__tags"><span class="sol-case__tag">Central Bank authority</span><span class="sol-case__tag">Transfer limits</span><span class="sol-case__tag">Auto tax withholding</span><span class="sol-case__tag">CONTROLLABLE currency</span><span class="sol-case__tag">AML structural</span><span class="sol-case__tag">NON_SHUFFLEABLE</span></div>
-    </div>
-
-    <div class="sol-case sol-case--agri pg-reveal">
-      <div class="sol-case__accent"></div>
-      <div class="sol-case__icon"><i class="fa-solid fa-tractor pg-hero__icon"></i></div>
-      <div class="sol-case__title">Agricultural Finance</div>
-      <div class="sol-case__desc">Parametric crop insurance products triggered by oracle-verified weather events or satellite yield data. Block-height repayment enforcement for seasonal loan products &mdash; the protocol cancels at harvest height if not repaid, no court required. Supply chain payment automation via the Commerce protocol &mdash; distributor payments released on delivery confirmation. Cooperative savings pools using goal-based AccountCurrencySavings for savings clubs. Smallholder farmers access all products through a single SAVINGS-type mobile wallet account &mdash; no bank account required, no credit history needed beyond on-chain activity.</div>
-      <div class="sol-case__tags"><span class="sol-case__tag">Parametric insurance</span><span class="sol-case__tag">Seasonal loans</span><span class="sol-case__tag">Cooperative savings</span><span class="sol-case__tag">Oracle-triggered</span><span class="sol-case__tag">Mobile-first</span><span class="sol-case__tag">No bank account</span></div>
-    </div>
-
-    <div class="sol-case sol-case--fmcg pg-reveal">
-      <div class="sol-case__accent"></div>
-      <div class="sol-case__icon"><i class="fa-solid fa-handshake pg-hero__icon"></i></div>
-      <div class="sol-case__title">FMCG Supply Chain</div>
-      <div class="sol-case__desc">Tokenise inventory batches as NON_FUNGIBLE or SPLITTABLE Totem assets &mdash; every pallet has an immutable on-chain identity. Automate distributor payments using ShamwariPay currencies upon 3PL delivery confirmation &mdash; Kyber-encrypted delivery proofs protect logistics data. Issue loyalty rewards in currency or Totem tokens to retail participants. Enforce supplier KYC and product compliance via the permission system &mdash; only CHAIN_USER-approved suppliers can receive payments. Consumer subscriptions for regular delivery orders. Insurance products covering supply chain disruption risk.</div>
-      <div class="sol-case__tags"><span class="sol-case__tag">Inventory tokenisation</span><span class="sol-case__tag">Automated payments</span><span class="sol-case__tag">3PL integration</span><span class="sol-case__tag">Loyalty rewards</span><span class="sol-case__tag">Supplier KYC</span><span class="sol-case__tag">Consumer subscriptions</span></div>
-    </div>
-
-    <div class="sol-case sol-case--insurance pg-reveal">
-      <div class="sol-case__accent"></div>
-      <div class="sol-case__icon"><i class="fa-solid fa-users pg-hero__icon"></i></div>
-      <div class="sol-case__title">Community Insurance Pools</div>
-      <div class="sol-case__desc">Cooperative insurance groups pool premiums into on-chain actuarial reserves. RESERVABLE + CLAIMABLE currency type for reserve management. 9-state product lifecycle with Insurance Authority supervision embedded at chain genesis. Automatic payout on regulator-approved claims &mdash; no intermediary processing delay. Sub-$1 monthly premium microinsurance viable: protocol costs are negligible at any scale. 90-day suspension clock and automatic reserve redistribution protect policyholders if the pool manager fails &mdash; without court proceedings or regulatory intervention. Agricultural, health, and funeral cover all supported by the same protocol primitives.</div>
-      <div class="sol-case__tags"><span class="sol-case__tag">Microinsurance</span><span class="sol-case__tag">Actuarial reserves</span><span class="sol-case__tag">Cooperative pools</span><span class="sol-case__tag">Auto protection</span><span class="sol-case__tag">Sub-$1 premiums</span><span class="sol-case__tag">Health &amp; funeral</span></div>
-    </div>
-
-    <div class="sol-case sol-case--remittance pg-reveal">
-      <div class="sol-case__accent"></div>
-      <div class="sol-case__icon"><i class="fa-solid fa-exchange-alt pg-hero__icon"></i></div>
-      <div class="sol-case__title">Cross-Border Remittances</div>
-      <div class="sol-case__desc">ShamwariPay DEX provides atomic FX settlement between jurisdiction chains &mdash; ZWG/ZAR trading pairs execute on the order book with capital gains tax withheld at execution. No correspondent banking intermediary. No multi-day settlement delay. Transaction confirmation: ~12 seconds. Tax withholding: automatic at execution, credited to sending jurisdiction Tax Collector. KYC-gated SAVINGS-type recipient accounts ensure funds reach verified consumers only &mdash; AML structural compliance without operator integrity dependence. Kyber-encrypted transaction metadata protects remittance privacy. Full audit trail for both sending and receiving regulatory authorities.</div>
-      <div class="sol-case__tags"><span class="sol-case__tag">DEX FX settlement</span><span class="sol-case__tag">No correspondent bank</span><span class="sol-case__tag">~60s confirmation</span><span class="sol-case__tag">Auto tax</span><span class="sol-case__tag">KYC recipients</span><span class="sol-case__tag">Encrypted metadata</span></div>
-    </div>
-
-    <div class="sol-case sol-case--ai pg-reveal">
-      <div class="sol-case__accent"></div>
-      <div class="sol-case__icon"><i class="fa-solid fa-robot pg-hero__icon"></i></div>
-      <div class="sol-case__title">Agentic Commerce</div>
-      <div class="sol-case__desc">AI purchasing agents (AccountType.AUTONOMOUS) operate with hard on-chain limits &mdash; transaction type whitelist, per-holding spending caps, rolling window limits, recipient whitelist, and minimum balance floors all enforced at the consensus layer. No monitoring software required. No bypass possible. Agents can execute supply chain purchases, pay subscription services, manage subscription renewals, and settle supplier invoices within governance-approved parameters. Enterprise treasury agents manage recurring obligations &mdash; fully autonomous, fully accountable. The world&rsquo;s first financial protocol purpose-built for autonomous AI agents with structural governance constraints.</div>
-      <div class="sol-case__tags"><span class="sol-case__tag">AccountType.AI</span><span class="sol-case__tag">On-chain limits</span><span class="sol-case__tag">No bypass</span><span class="sol-case__tag">Autonomous treasury</span><span class="sol-case__tag">Supply chain AI</span><span class="sol-case__tag">Governance enforced</span></div>
-    </div>
-
-  </div>
-</div>
-</section>
-
-<section class="sh-section">
-<div class="sh-container">
-  <div class="sh-section__header">
-    <div class="sh-eyebrow sh-eyebrow--teal">MARKET OPPORTUNITY</div>
-    <h2 class="sh-section__title">The numbers behind the opportunity</h2>
-  </div>
-  <div class="sh-excl-mkt">
-    <div class="sh-excl-mkt__stat pg-reveal"><div class="sh-excl-mkt__n sh-text--teal">$949B</div><div class="sh-excl-mkt__l">Global FaaS market by 2030</div></div>
-    <div class="sh-excl-mkt__stat pg-reveal"><div class="sh-excl-mkt__n sh-text--gold">1.7B</div><div class="sh-excl-mkt__l">Unbanked adults globally</div></div>
-    <div class="sh-excl-mkt__stat pg-reveal"><div class="sh-excl-mkt__n sh-text--teal">54</div><div class="sh-excl-mkt__l">African nations in target market</div></div>
-    <div class="sh-excl-mkt__stat pg-reveal"><div class="sh-excl-mkt__n sh-text--gold">$5B+</div><div class="sh-excl-mkt__l">African fintech investment annually</div></div>
-  </div>
-</div>
-</section>
-
-<section class="sh-cta">
-  <div class="sh-cta__glow"></div>
-  <div class="sh-cta__inner">
-    <div class="sh-eyebrow sh-eyebrow--gold">DEPLOY A SOLUTION</div>
-    <h2 class="sh-cta__title">Ready to build?</h2>
-    <p class="sh-cta__sub">Shamwari protocol primitives are available on testnet now. Deploy your first solution in days, not months &mdash; no smart contract development, no compliance middleware, no payment processor integration.</p>
-    <div class="sh-cta__actions">
-      <a href="developers.html" class="sh-btn sh-btn--teal sh-btn--lg">Developer Hub</a>
-      <a href="compliance.html" class="sh-btn sh-btn--ghost sh-btn--lg">Compliance Layer</a>
-      <a href="roadmap.html" class="sh-btn sh-btn--gold sh-btn--lg">View Roadmap</a>
+  <div class="sol-case__tags"><span class="sol-case__tag">Central Bank Account</span><span class="sol-case__tag">CONTROLLABLE</span><span class="sol-case__tag">NON_SHUFFLEABLE</span><span class="sol-case__tag">KYC gated</span><span class="sol-case__tag">Tax Collection</span><span class="sol-case__tag">Permissioned</span><span class="sol-case__tag">Anti-money laundering</span></div>
+</div><div class="sol-case sol-case--cbdc pg-reveal">
+  <div class="sol-case__accent"></div>
+  <div class="sol-case__header">
+    <div class="sol-case__icon">🇿🇦</div>
+    <div class="sol-case__titlewrap">
+      <div class="sol-case__sector">VERTICAL · CBDC (Example)</div>
+      <div class="sol-case__title">ZAR South Africa Digital Rand</div>
     </div>
   </div>
-</section>
-<footer class="sh-footer"><div class="sh-footer__grid"><div><div class="sh-footer__wordmark">SHAMWARI</div><p class="sh-footer__tagline">Quantum-resistant financial infrastructure for 4 billion people.</p><div class="sh-footer__socials"><a href="https://bitbucket.org/thenamelesstree/shamwari" class="sh-footer__social"><i class="fa-brands fa-bitbucket"></i></a><a href="#" class="sh-footer__social"><i class="fa-brands fa-x-twitter"></i></a><a href="#" class="sh-footer__social"><i class="fa-brands fa-linkedin-in"></i></a></div></div><div><div class="sh-footer__col-title">Platform</div><a href="shamwaripay.html" class="sh-footer__link">ShamwariPay</a><a href="digitalassets.html" class="sh-footer__link">Totem Exchange</a><a href="insurance.html" class="sh-footer__link">Insurance</a><a href="store.html" class="sh-footer__link">Commerce</a><a href="subscriptions.html" class="sh-footer__link">Subscriptions</a></div><div><div class="sh-footer__col-title">Technology</div><a href="architecture.html" class="sh-footer__link">Architecture</a><a href="security.html" class="sh-footer__link">Security</a><a href="accounts.html" class="sh-footer__link">Accounts &amp; Identity</a><a href="digitalcertificates.html" class="sh-footer__link">Certificates</a><a href="compliance.html" class="sh-footer__link">Compliance</a></div><div><div class="sh-footer__col-title">Resources</div><a href="solutions.html" class="sh-footer__link">Solutions</a><a href="developers.html" class="sh-footer__link">Developer Hub</a><a href="roadmap.html" class="sh-footer__link">Roadmap</a><a href="https://bitbucket.org/thenamelesstree/shamwari/src/main/docs" class="sh-footer__link">Documentation</a><a href="https://wallet.shamwari.network" class="sh-footer__link">Launch Wallet</a></div></div><div class="sh-footer__bottom"><span>© 2026 TheNamelessTree Networks. All rights reserved.</span>
-    <a href="https://thenamelesstree.co.zw" class="sh-footer__bottom-right">TheNamelessTree Networks</a></div></footer><a href="#" class="sh-back-top" id="back-top" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></a>
-<script>(function(){var nav=document.getElementById("sh-nav");window.addEventListener("scroll",function(){nav.classList.toggle("sh-nav--scrolled",window.scrollY>50);});var tgl=document.getElementById("nav-toggle"),menu=document.getElementById("nav-menu");if(tgl&&menu){tgl.addEventListener("click",function(){tgl.classList.toggle("is-open");menu.classList.toggle("is-open");});}var bt=document.getElementById("back-top");if(bt){window.addEventListener("scroll",function(){bt.classList.toggle("is-visible",window.scrollY>400);});bt.addEventListener("click",function(e){e.preventDefault();window.scrollTo({top:0,behavior:"smooth"});});}var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add("is-visible");ro.unobserve(e.target);}});},{threshold:0.07});document.querySelectorAll(".sh-reveal,.pg-reveal").forEach(function(el){ro.observe(el);});})();</script>
-</body></html> 
+  <div class="sol-case__desc">The SOUTH AFRICA BetaChain mirrors the previous configuration for the South African Reserve Bank. ZAR digital rand with SARB monetary authority, FSB securities regulation, Prudential Authority insurance oversight, and SARS automatic tax withholding. Full CBDC infrastructure for a G20-proximate emerging market with existing strong regulatory frameworks looking for a quantum-safe CBDC deployment.</div>
+  <div class="sol-case__primitives">
+    <div class="sol-case__primitives-label">Protocol Primitives Used</div>
+    <div class="sol-case__prim-list"><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>SARB as Central Bank authority which is hardcoded at genesis</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>FSCA as Securities Regulator for Totem Exchange listings</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Prudential Authority for insurance product approval</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>SARS as Tax Collector with all 13 tax types for South African tax law</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Permissioned at configured block height with full KYC for all participants</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Cross-chain ZWG/ZAR FX corridor via ShamwariPay DEX</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>SWIFT gpi equivalent settlement of ~12 second confirmations vs 2–5 days</span></div></div>
+  </div>
+  <div class="sol-case__tags"><span class="sol-case__tag">SARB authority</span><span class="sol-case__tag">FSCA compliance</span><span class="sol-case__tag">SARS tax</span><span class="sol-case__tag">ZAR/ZWG corridor</span><span class="sol-case__tag">Permissioned</span><span class="sol-case__tag">Prudential</span></div>
+</div></div></div></section><section class="sh-section sh-section--navy" id="agri"><div class="sh-container"><div class="pg-sh"><div class="pg-sh__num">04</div><div class="pg-sh__copy"><div class="sh-eyebrow sh-eyebrow--green">AGRICULTURAL FINANCE</div><div class="pg-sh__title">From smallholder to commodity chain</div><p class="pg-sh__sub">Shamwari's protocol primitives address the complete agricultural finance value chain, from input finance for smallholder farmers through commodity trading, insurance coverage, and cooperative savings without requiring any participant to hold a traditional bank account.</p></div></div><div class="sol-case-grid"><div class="sol-case sol-case--agri pg-reveal">
+  <div class="sol-case__accent"></div>
+  <div class="sol-case__header">
+    <div class="sol-case__icon">🌾</div>
+    <div class="sol-case__titlewrap">
+      <div class="sol-case__sector">VERTICAL · AGRICULTURE</div>
+      <div class="sol-case__title">Smallholder Farmer Finance</div>
+    </div>
+  </div>
+  <div class="sol-case__desc">MFI accounts provide seasonal loan products to smallholder farmers with no banking history. Credit scoring via the 6-dimension RiskCalculator uses on-chain transaction history, prior loan repayments, and cooperative savings participation. Parametric crop insurance triggered by oracle-verified weather events or satellite crop yield data. Cooperative savings pools using AccountCurrencySavings for savings clubs. Block-height repayment enforcement under which the protocol cancels collateral rescue at harvest height if not repaid.</div>
+  <div class="sol-case__primitives">
+    <div class="sol-case__primitives-label">Protocol Primitives Used</div>
+    <div class="sol-case__prim-list"><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>MFI AccountType: loan origination and savings product access</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>RiskCalculator: 6-dimension credit score from on-chain behaviour</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>LOAN_OFFER / LOAN_ACCEPT / LOAN_REPAYMENT: seasonal loan lifecycle</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>SAVINGS_DEPOSIT / SAVINGS_WITHDRAWAL: cooperative savings pools</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Insurance parametric triggers via AFTER_BLOCK_APPLY event hooks</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>COLLATERAL_RESCUE: protocol handles collateral on default automatically</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>No bank account required a SAVINGS-type account is sufficient</span></div></div>
+  </div>
+  <div class="sol-case__tags"><span class="sol-case__tag">MFI accounts</span><span class="sol-case__tag">On-chain credit</span><span class="sol-case__tag">Parametric insurance</span><span class="sol-case__tag">Seasonal loans</span><span class="sol-case__tag">Cooperative savings</span><span class="sol-case__tag">No bank account</span><span class="sol-case__tag">Oracle triggers</span></div>
+</div><div class="sol-case sol-case--agri pg-reveal">
+  <div class="sol-case__accent"></div>
+  <div class="sol-case__header">
+    <div class="sol-case__icon">🌿</div>
+    <div class="sol-case__titlewrap">
+      <div class="sol-case__sector">VERTICAL · AGRI-COMMODITIES</div>
+      <div class="sol-case__title">Supply Chain & Commodity Trade</div>
+    </div>
+  </div>
+  <div class="sol-case__desc">Commodity buyers tokenise inventory batches as NON_FUNGIBLE Totem assets with TotemApproval certification from a commodity regulator. Warehouse receipts issued as digital certificates. Supplier payments via ShamwariPay currencies on 3PL delivery confirmation. AI agent purchasing systems manage order placement within governance limits. Commodity levy and export duty withholding via the SALES_TAX and TRANSACTION tax types.</div>
+  <div class="sol-case__primitives">
+    <div class="sol-case__primitives-label">Protocol Primitives Used</div>
+    <div class="sol-case__prim-list"><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>NON_FUNGIBLE Totem for a unique commodity batch identity</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>TotemApproval for commodity regulator certification workflow</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Digital certificates for warehouse receipts and quality attestations</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>3PL delivery confirmation for payment released on delivery proof</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>AI purchasing agents for automated order placement within limits</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>SALES_TAX + TRANSACTION tax for commodity levy and duty withholding</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>DEX price discovery for transparent commodity pricing on-chain</span></div></div>
+  </div>
+  <div class="sol-case__tags"><span class="sol-case__tag">Commodity NFT</span><span class="sol-case__tag">Warehouse receipts</span><span class="sol-case__tag">3PL payments</span><span class="sol-case__tag">AI procurement</span><span class="sol-case__tag">Levy withholding</span><span class="sol-case__tag">Regulator certification</span></div>
+</div></div></div></section><section class="sh-section" id="fmcg"><div class="sh-container"><div class="pg-sh"><div class="pg-sh__num">05</div><div class="pg-sh__copy"><div class="sh-eyebrow sh-eyebrow--gold">FMCG SUPPLY CHAIN</div><div class="pg-sh__title">From manufacturer to consumer under one protocol</div><p class="pg-sh__sub">The FMCG supply chain involves manufacturer, regional distributor, sub-distributor, retailer, and consumer, each with a separate legal entity with distinct payment, credit, and compliance requirements. Shamwari handles all of them with the same system infrastructure.</p></div></div><div class="sol-case-grid"><div class="sol-case sol-case--fmcg pg-reveal">
+  <div class="sol-case__accent"></div>
+  <div class="sol-case__header">
+    <div class="sol-case__icon">🏭</div>
+    <div class="sol-case__titlewrap">
+      <div class="sol-case__sector">VERTICAL · FMCG</div>
+      <div class="sol-case__title">Manufacturer to Distributor</div>
+    </div>
+  </div>
+  <div class="sol-case__desc">Manufacturers tokenise product batches as Totem assets. Distributors place orders via the commerce protocol where payment is held in escrow until 3PL delivery confirmation. Invoice financing available through ShamwariPay lending and the distributor uses Totem inventory as collateral for working capital. All supplier payments subject to VAT withholding via VALUE_ADDED tax type. AI treasury agents manage approved supplier payments automatically within governance limits.</div>
+  <div class="sol-case__primitives">
+    <div class="sol-case__primitives-label">Protocol Primitives Used</div>
+    <div class="sol-case__prim-list"><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>SPLITTABLE Totem: batch inventory tracking with verifiable provenance</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>PURCHASES + 3PL delivery confirmation: payment on verified delivery only</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>LOAN_OFFER: inventory-backed invoice financing for distributors</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>VALUE_ADDED tax: VAT withheld on all supply chain payments</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>AI purchasing agents: automated reorder within approved supplier list</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Kyber-encrypted purchase payloads: commercial confidentiality on-chain</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>TotemHistory provenance: full supply chain traceability from manufacturer</span></div></div>
+  </div>
+  <div class="sol-case__tags"><span class="sol-case__tag">Inventory tokenisation</span><span class="sol-case__tag">Invoice finance</span><span class="sol-case__tag">3PL payments</span><span class="sol-case__tag">VAT withholding</span><span class="sol-case__tag">AI procurement</span><span class="sol-case__tag">Batch provenance</span></div>
+</div><div class="sol-case sol-case--fmcg pg-reveal">
+  <div class="sol-case__accent"></div>
+  <div class="sol-case__header">
+    <div class="sol-case__icon">🛒</div>
+    <div class="sol-case__titlewrap">
+      <div class="sol-case__sector">VERTICAL · FMCG</div>
+      <div class="sol-case__title">Retailer to Consumer</div>
+    </div>
+  </div>
+  <div class="sol-case__desc">Retailers list products in the Shamwari commerce protocol with loyalty reward configuration. Consumer payments in CBDCs direct to merchant. Loyalty rewards distributed in currency or Totem tokens at point of sale. Consumer subscription products for regular delivery of staples (cooking oil, maize, sugar). Consumer credit via MFI accounts using purchase history as credit signal. Merchant reputation maintained immutably on-chain where no third-party platform controls the score.</div>
+  <div class="sol-case__primitives">
+    <div class="sol-case__primitives-label">Protocol Primitives Used</div>
+    <div class="sol-case__prim-list"><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>LIST_PRODUCT: merchant catalogue with loyalty reward config</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>PURCHASES: consumer payment with automatic reward distribution</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Currency loyalty rewards: directly spendable ZWG or ZAR</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Subscription delivery: automatic recurring order for staple goods</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>MFI consumer credit: purchase history as credit signal</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>MERCHANT AccountType: enforced at transaction submission, every merchant accountable</span></div></div>
+  </div>
+  <div class="sol-case__tags"><span class="sol-case__tag">Consumer commerce</span><span class="sol-case__tag">CBDC payments</span><span class="sol-case__tag">Loyalty rewards</span><span class="sol-case__tag">Subscription delivery</span><span class="sol-case__tag">Consumer credit</span><span class="sol-case__tag">Merchant accountability</span></div>
+</div></div></div></section><section class="sh-section sh-section--navy" id="insurance"><div class="sh-container"><div class="pg-sh"><div class="pg-sh__num">06</div><div class="pg-sh__copy"><div class="sh-eyebrow sh-eyebrow--red">COMMUNITY INSURANCE</div><div class="pg-sh__title">Protocol-enforced consumer protection</div><p class="pg-sh__sub">Traditional insurance intermediary costs make sub-$5 monthly premium products economically unviable. Shamwari's protocol-native insurance marketplace eliminates intermediary costs entirely as the protocol handles applications, premiums, claims, and payouts directly.</p></div></div><div class="sol-case-grid"><div class="sol-case sol-case--insurance pg-reveal">
+  <div class="sol-case__accent"></div>
+  <div class="sol-case__header">
+    <div class="sol-case__icon">🏠</div>
+    <div class="sol-case__titlewrap">
+      <div class="sol-case__sector">VERTICAL · INSURANCE</div>
+      <div class="sol-case__title">Microinsurance Pools</div>
+    </div>
+  </div>
+  <div class="sol-case__desc">Community microinsurance pools operate as SAVINGS-currency reserve pools. Group members pay weekly or monthly premiums via automatic subscription billing. Claims trigger protocol-level adjudication. Payout approved by the Insurance Provider account which is the insurance listing account. Sub-$1 monthly premium products viable: protocol processing cost is negligible. The actuarial reserve requirement (BASIC 1.0× multiplier) provides structural solvency guarantee. If the pool manager fails, automatic reserve redistribution protects all policyholders at the next block.</div>
+  <div class="sol-case__primitives">
+    <div class="sol-case__primitives-label">Protocol Primitives Used</div>
+    <div class="sol-case__prim-list"><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Insurance Marketplace:- full 9-state product lifecycle</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Subscription billing:- automatic weekly/monthly premium collection</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>BASIC actuarial reserve (1.0×):- minimum viable solvency for microinsurance</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>POLICY_APPLICATION / POLICY_APPROVAL:- streamlined on-chain application</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>CLAIM_SUBMISSION / CLAIM_APPROVAL:- digital claims adjudication</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Automatic reserve redistribution:- policyholder protection if pool fails</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Insurance Authority (IPEC) hardcoded at genesis:- regulatory oversight</span></div></div>
+  </div>
+  <div class="sol-case__tags"><span class="sol-case__tag">Sub-$1 premiums</span><span class="sol-case__tag">Community pools</span><span class="sol-case__tag">Auto-billing</span><span class="sol-case__tag">Digital claims</span><span class="sol-case__tag">Auto protection</span><span class="sol-case__tag">IPEC oversight</span><span class="sol-case__tag">Solvency enforced</span></div>
+</div><div class="sol-case sol-case--insurance pg-reveal">
+  <div class="sol-case__accent"></div>
+  <div class="sol-case__header">
+    <div class="sol-case__icon">🌧️</div>
+    <div class="sol-case__titlewrap">
+      <div class="sol-case__sector">VERTICAL · PARAMETRIC</div>
+      <div class="sol-case__title">Agricultural Parametric Insurance</div>
+    </div>
+  </div>
+  <div class="sol-case__desc">Parametric crop insurance products trigger payouts on verifiable external events e.g. drought indices, flood alerts, satellite crop yield data, without requiring individual farm assessments. The insurance product defines the trigger conditions and payout amount in its on-chain configuration. When the oracle submits a trigger event transaction, the AFTER_BLOCK_APPLY handler recommends payment to active claims of policyholders in the affected region at the next block.</div>
+  <div class="sol-case__primitives">
+    <div class="sol-case__primitives-label">Protocol Primitives Used</div>
+    <div class="sol-case__prim-list"><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Parametric trigger conditions defined in insurance product on-chain</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Oracle-submitted trigger transactions verified at consensus</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>AFTER_BLOCK_APPLY  payouts to affected policyholders</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>CLAIM_SUBMISSION plus oracle data triggers automatic payout</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Regional coverage groups where policyholders in affected zones are paid</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Insurance Authority approval required for each parametric product type</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Full premium and payout audit trail permanently on-chain</span></div></div>
+  </div>
+  <div class="sol-case__tags"><span class="sol-case__tag">Parametric triggers</span><span class="sol-case__tag">Oracle data</span><span class="sol-case__tag">Auto-payout</span><span class="sol-case__tag">No claims adjuster</span><span class="sol-case__tag">Regional coverage</span><span class="sol-case__tag">Zero delay</span><span class="sol-case__tag">Audit trail</span></div>
+</div></div></div></section><section class="sh-section" id="remittance"><div class="sh-container"><div class="pg-sh"><div class="pg-sh__num">07</div><div class="pg-sh__copy"><div class="sh-eyebrow sh-eyebrow--purple">CROSS-BORDER REMITTANCES</div><div class="pg-sh__title">From corridor to infrastructure</div><p class="pg-sh__sub">The ZWG/ZAR remittance corridor between Zimbabwe and South Africa is among the highest-volume emerging market corridors in the world. Shamwari provides atomic settlement between the two BetaChains all at a fraction of the cost and time of correspondent banking.</p></div></div><div class="sol-case-grid"><div class="sol-case sol-case--remittance pg-reveal">
+  <div class="sol-case__accent"></div>
+  <div class="sol-case__header">
+    <div class="sol-case__icon">💸</div>
+    <div class="sol-case__titlewrap">
+      <div class="sol-case__sector">VERTICAL · REMITTANCES</div>
+      <div class="sol-case__title">ZWG ↔ ZAR Corridor</div>
+    </div>
+  </div>
+  <div class="sol-case__desc">South African workers send ZAR to family in Zimbabwe via the ShamwariPay. The ZAR can be exchanged for ZWG on the DEX order book at atomic settlement at the current market rate. CGT and transaction levy withheld automatically. The recipient receives ZWG in their SAVINGS-type wallet which is available immediately for commerce, insurance premiums, or further exchange. Total end-to-end: one or two transactions, ~12-second confirmation. No correspondent bank, no SWIFT, no 2–5 day settlement window.</div>
+  <div class="sol-case__primitives">
+    <div class="sol-case__primitives-label">Protocol Primitives Used</div>
+    <div class="sol-case__prim-list"><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>DEX EXCHANGE_BUY / EXCHANGE_SELL: currency exchange settlement at market rate</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>CAPITAL_GAINS_TAX: CGT withheld automatically at FX trade execution</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>CURRENCY_TRANSFER: ZWG sent to SAVINGS recipient in Zimbabwe</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>SAVINGS AccountType: verified consumer wallet, CBDC-eligible</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>CONTROLLABLE currency: both Central Banks can monitor transfers</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Binder Protocol: recipient never needs WEALTH tokens</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Full audit trail through the ability of both regulators query same immutable blockchain</span></div></div>
+  </div>
+  <div class="sol-case__tags"><span class="sol-case__tag">~12s settlement</span><span class="sol-case__tag">No correspondent bank</span><span class="sol-case__tag">Atomic FX</span><span class="sol-case__tag">CGT withheld</span><span class="sol-case__tag">Central Bank visibility</span><span class="sol-case__tag">KYC recipients</span><span class="sol-case__tag">Binder abstraction</span></div>
+</div><div class="sol-case sol-case--remittance pg-reveal">
+  <div class="sol-case__accent"></div>
+  <div class="sol-case__header">
+    <div class="sol-case__icon">🌍</div>
+    <div class="sol-case__titlewrap">
+      <div class="sol-case__sector">VERTICAL · MULTI-CORRIDOR</div>
+      <div class="sol-case__title">SADC Regional Network</div>
+    </div>
+  </div>
+  <div class="sol-case__desc">As additional SADC jurisdiction chains deploy (Zambia ZMW, Botswana BWP, Mozambique MZN), the DEX enables cross-chain FX for any pair with sufficient liquidity. The same protocol handles all corridors without any additional integration work. A Zambian worker in Botswana can remit BWP to Zimbabwe and the recipient can redeem ZMW through a single DEX transaction. Each corridor subject to the tax and AML rules of both sending and receiving jurisdiction chains simultaneously.</div>
+  <div class="sol-case__primitives">
+    <div class="sol-case__primitives-label">Protocol Primitives Used</div>
+    <div class="sol-case__prim-list"><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Multi-chain DEX for any FX pair with on-chain liquidity</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Per-jurisdiction tax withholding for both sending and receiving chain rules apply</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>CONTROLLABLE currency where each Central Bank monitors their jurisdiction</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Shared consensus on all corridor settlements finality-anchored on FxtChain</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>No additional integration for new corridors as the protocol handles all pairs</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Binder network ensures users in any corridor never need to hold WEALTH tokens</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Regulatory reporting were both regulators query same immutable blockchain</span></div></div>
+  </div>
+  <div class="sol-case__tags"><span class="sol-case__tag">Multi-corridor</span><span class="sol-case__tag">No integration</span><span class="sol-case__tag">Shared consensus</span><span class="sol-case__tag">Both jurisdictions</span><span class="sol-case__tag">Automatic liquidity</span><span class="sol-case__tag">Finality anchor</span></div>
+</div></div></div></section><section class="sh-section sh-section--navy" id="ai"><div class="sh-container"><div class="pg-sh"><div class="pg-sh__num">08</div><div class="pg-sh__copy"><div class="sh-eyebrow sh-eyebrow--purple">AGENTIC COMMERCE</div><div class="pg-sh__title">The world's first governed AI commerce protocol</div><p class="pg-sh__sub">AccountType.AUTONOMOUS is purpose-built for autonomous AI agents that need to transact on financial infrastructure. Hard on-chain limits, protocol-enforced governance, and complete auditability; the first financial protocol where AI agent spending is structurally constrained, not just monitored.</p></div></div><div class="sol-case-grid"><div class="sol-case sol-case--ai pg-reveal">
+  <div class="sol-case__accent"></div>
+  <div class="sol-case__header">
+    <div class="sol-case__icon">🤖</div>
+    <div class="sol-case__titlewrap">
+      <div class="sol-case__sector">VERTICAL · AI COMMERCE</div>
+      <div class="sol-case__title">Enterprise AI Treasury Management</div>
+    </div>
+  </div>
+  <div class="sol-case__desc">Enterprise treasury departments deploy AI agents to manage recurring supplier payments, subscription renewals, and inventory reorders within protocol-enforced governance limits. The AI account's AutonomousAccountControl rule set defines: permitted transaction types, maximum single-payment amount, rolling 30-day spend window, approved counterparty list, and minimum balance floor. All enforced at consensus. No monitoring software required. No bypass possible. The agent operates autonomously within hard structural limits.</div>
+  <div class="sol-case__primitives">
+    <div class="sol-case__primitives-label">Protocol Primitives Used</div>
+    <div class="sol-case__prim-list"><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>AccountType.AUTONOMOUS: purpose-built account type for autonomous agents</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>AutonomousAccountControl Parameters: transaction type whitelist, spend caps, rolling windows</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Recipient whitelist: Agent can only pay to governance-approved counterparties</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Minimum balance floor: Agent cannot deplete reserve below configured level</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>SUBSCRIBE / CANCEL_SUBSCRIPTION: Agent manages subscriptions autonomously</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>PURCHASES: Agent executes approved purchase orders within per-transaction cap</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Full transaction audit trail permanently stored on-chain with no off-chain logs</span></div></div>
+  </div>
+  <div class="sol-case__tags"><span class="sol-case__tag">AUTONOMOUS AccountType</span><span class="sol-case__tag">On-chain governance</span><span class="sol-case__tag">Spend caps</span><span class="sol-case__tag">Recipient whitelist</span><span class="sol-case__tag">Balance floors</span><span class="sol-case__tag">Autonomous</span><span class="sol-case__tag">Full audit</span></div>
+</div><div class="sol-case sol-case--ai pg-reveal">
+  <div class="sol-case__accent"></div>
+  <div class="sol-case__header">
+    <div class="sol-case__icon">⚡</div>
+    <div class="sol-case__titlewrap">
+      <div class="sol-case__sector">VERTICAL · AI SERVICES</div>
+      <div class="sol-case__title">Agentic Service Marketplace</div>
+    </div>
+  </div>
+  <div class="sol-case__desc">Developers deploy services on the CAPITAL chain App Store that accept payment from Autonomous agent accounts. The service provider configures accountTypeRestrictions: [AI] to ensure only governed AI accounts can subscribe. Autonomous agents subscribe, consume, and cancel within their governance rules. Machine-to-machine billing at sub-5-minute block periods enables genuine usage-based pricing. The entire marketplace, from listing, billing to cancellation runs on protocol consensus with no platform intermediary.</div>
+  <div class="sol-case__primitives">
+    <div class="sol-case__primitives-label">Protocol Primitives Used</div>
+    <div class="sol-case__prim-list"><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>DEVELOPER AccountType for App Store registration on CAPITAL chain</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>accountTypeRestrictions: [AI] - service accepts only governed AI clients</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Sub-5-minute billing periods for accurate usage-based pricing</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>isAgentAllowed() = true; SUBSCRIBE permitted in AI transaction whitelist</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Automatic lapse on governance limit breach where protocol enforces budget</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>App Store discovery through AI agents querying available services via REST API</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Certificate verification: AI verifies developer certificates before subscribing</span></div></div>
+  </div>
+  <div class="sol-case__tags"><span class="sol-case__tag">App Store</span><span class="sol-case__tag">AI clients only</span><span class="sol-case__tag">Usage billing</span><span class="sol-case__tag">Governed subscriptions</span><span class="sol-case__tag">Developer certs</span><span class="sol-case__tag">No platform</span><span class="sol-case__tag">Machine-to-machine</span></div>
+</div></div></div></section><section class="sh-section" id="health"><div class="sh-container"><div class="pg-sh"><div class="pg-sh__num">09</div><div class="pg-sh__copy"><div class="sh-eyebrow sh-eyebrow--teal">PUBLIC HEALTH PAYMENTS</div><div class="pg-sh__title">Healthcare payment infrastructure</div><p class="pg-sh__sub">Public health systems in emerging markets face two structural payment problems: patients cannot pay in advance (no credit), and providers cannot receive payment reliably (no banking). Shamwari's protocol handles both sides without banking infrastructure on either end.</p></div></div><div class="sol-case-grid"><div class="sol-case sol-case--health pg-reveal">
+  <div class="sol-case__accent"></div>
+  <div class="sol-case__header">
+    <div class="sol-case__icon">🏥</div>
+    <div class="sol-case__titlewrap">
+      <div class="sol-case__sector">VERTICAL · HEALTHCARE</div>
+      <div class="sol-case__title">Patient Payment & Health Cover</div>
+    </div>
+  </div>
+  <div class="sol-case__desc">Community health insurance pools issue health cover certificates as digital certificates on the ZIMBABWE chain. Premium collection via automatic subscription billing with SAVINGS-type wallet contribute weekly or monthly. Claim submission and approval via the Insurance Marketplace 13-status claims pipeline. Healthcare provider payments released on treatment confirmation (DELIVERY_CONFIRMATION equivalent). Premium subsidy from government BANK accounts directly to policyholder insurance subscriptions. All payments in CBDC with no cash handling or transfer delays.</div>
+  <div class="sol-case__primitives">
+    <div class="sol-case__primitives-label">Protocol Primitives Used</div>
+    <div class="sol-case__prim-list"><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Digital health certificates for cover issued and verified on-chain</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Subscription billing with weekly premium payments from SAVINGS wallet</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>POLICY_APPLICATION / CLAIM_SUBMISSION digital claims workflow</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Healthcare provider MERCHANT account which receives payment on treatment confirmation</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Government BANK subsidy with direct CBDC top-up to qualifying accounts</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>INSURANCE_APPROVAL which a regulator certifies health products on-chain</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>SARS / ZIMRA tax collection for premium levies withheld automatically</span></div></div>
+  </div>
+  <div class="sol-case__tags"><span class="sol-case__tag">Digital health cover</span><span class="sol-case__tag">CBDC premiums</span><span class="sol-case__tag">Digital claims</span><span class="sol-case__tag">Provider payment</span><span class="sol-case__tag">Government subsidy</span><span class="sol-case__tag">Regulator approval</span><span class="sol-case__tag">Levy withholding</span></div>
+</div><div class="sol-case sol-case--health pg-reveal">
+  <div class="sol-case__accent"></div>
+  <div class="sol-case__header">
+    <div class="sol-case__icon">💊</div>
+    <div class="sol-case__titlewrap">
+      <div class="sol-case__sector">VERTICAL · PHARMA</div>
+      <div class="sol-case__title">Pharmaceutical Supply Chain</div>
+    </div>
+  </div>
+  <div class="sol-case__desc">Pharmaceutical distributors tokenise medicine batches as NON_FUNGIBLE Totem assets with WHO or national medicines regulatory authority TotemApproval certification. Each unit carries a unique on-chain identity with supply chain provenance from manufacturer to patient. Counterfeit medicines are detectable and if the unit's Totem ID does not exist in the on-chain registry, the product is unverified. Payment in CBDC ensures transparent government procurement spending.</div>
+  <div class="sol-case__primitives">
+    <div class="sol-case__primitives-label">Protocol Primitives Used</div>
+    <div class="sol-case__prim-list"><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>NON_FUNGIBLE Totem: unique medicine batch identity, counterfeit detection</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>TotemApproval: medicines regulatory authority certification on-chain</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>TotemHistory: full provenance from manufacturer to dispensing point</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>PURCHASES + 3PL: payment released on verified delivery to health facility</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>CBDC: transparent government procurement spending</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>Digital certificates: cold chain compliance attestations</span></div><div class="sol-case__prim"><i class="fa-solid fa-circle-dot"></i><span>AI procurement agents: automated reorder within approved supplier list</span></div></div>
+  </div>
+  <div class="sol-case__tags"><span class="sol-case__tag">Counterfeit prevention</span><span class="sol-case__tag">Regulatory certification</span><span class="sol-case__tag">Supply provenance</span><span class="sol-case__tag">CBDC procurement</span><span class="sol-case__tag">Cold chain certs</span><span class="sol-case__tag">AI reorder</span><span class="sol-case__tag">3PL verification</span></div>
+</div></div></div></section><section class="sh-section sh-section--navy" id="market"><div class="sh-container"><div class="pg-sh"><div class="pg-sh__num">10</div><div class="pg-sh__copy"><div class="sh-eyebrow sh-eyebrow--gold">MARKET OPPORTUNITY</div><div class="pg-sh__title">The scale of the addressable market</div><p class="pg-sh__sub">Shamwari targets the intersection of financial exclusion, quantum security requirements, and CBDC deployment interest. All three converge in SADC, MENA, and ASEAN markets simultaneously.</p></div></div><div class="sol-market-grid"><div class="sol-market-card pg-reveal"><div class="sol-market-card__n sh-text--teal">$949B</div><div class="sol-market-card__label">Global FaaS market by 2030</div></div><div class="sol-market-card pg-reveal"><div class="sol-market-card__n sh-text--gold">1.7B</div><div class="sol-market-card__label">Unbanked adults globally (World Bank)</div></div><div class="sol-market-card pg-reveal"><div class="sol-market-card__n sh-text--teal">54</div><div class="sol-market-card__label">African nations in target market</div></div><div class="sol-market-card pg-reveal"><div class="sol-market-card__n sh-text--gold">$5B+</div><div class="sol-market-card__label">African fintech investment annually</div></div><div class="sol-market-card pg-reveal"><div class="sol-market-card__n sh-text--teal">86%</div><div class="sol-market-card__label">Mobile penetration in Sub-Saharan Africa</div></div><div class="sol-market-card pg-reveal"><div class="sol-market-card__n sh-text--gold">2030</div><div class="sol-market-card__label">NIST PQC compliance deadline for financial institutions</div></div><div class="sol-market-card pg-reveal"><div class="sol-market-card__n sh-text--teal">12</div><div class="sol-market-card__label">SADC member states for regional expansion</div></div><div class="sol-market-card pg-reveal"><div class="sol-market-card__n sh-text--gold">4B</div><div class="sol-market-card__label">People in total target emerging market geography</div></div></div><div class="sh-contrast-grid"><div class="sh-contrast-card sh-contrast-card--teal pg-reveal"><div class="sh-contrast-card__header"><i class="fa-solid fa-check-circle"></i>WHY SHAMWARI WINS IN EMERGING MARKETS</div><ul class="sh-contrast-card__list"><li>Protocol-native compliance eliminates the compliance middleware cost that makes traditional fintech unviable in these markets</li><li>Sub-$1 microinsurance is viable as transaction costs are negligible at any premium level</li><li>No payment processor integration required which reduces integration cost and counterparty dependency</li><li>Binder Protocol ensures users only hold local CBDC with no WEALTH coin requirement for adoption</li><li>Quantum-safe from genesis which satisfies the post-quantum requirements central banks are now mandating</li><li>Open-source MIT licence so governments and central banks can audit and customise the protocol</li><li>No gas fees model with fixed, predictable transaction costs suitable for high-frequency low-value operations</li><li>Feature phone viable through REST API which works on 2G/3G connections with minimal data consumption</li></ul></div><div class="sh-contrast-card sh-contrast-card--red pg-reveal"><div class="sh-contrast-card__header"><i class="fa-solid fa-times-circle"></i>WHY GENERAL-PURPOSE CHAINS FAIL HERE</div><ul class="sh-contrast-card__list"><li>Gas fees make sub-$1 transactions economically irrational — a $0.50 gas fee on a $0.30 insurance premium is a 167% overhead</li><li>No native compliance controls and every dApp must rebuild KYC, AML, and tax infrastructure independently</li><li>Smart contract risk as  $3.8B+ has been lost to exploits that are structurally impossible in Shamwari's protocol-native architecture</li><li>No CBDC infrastructure i.e no Central Bank authority accounts, no CONTROLLABLE currency, no NON_SHUFFLEABLE flag</li><li>ECDSA quantum vulnerability as central banks requiring PQC cannot deploy on classical chains</li><li>No account type system which can distinguish a BANK from an individual consumer at the consensus layer</li><li>No tax infrastructure which requires off-chain reporting obligations to the market's revenue authorities which cannot be fully enforced</li><li>Requires secondary token (ETH, SOL) for transaction fees, a significant adoption barrier for unbanked users</li></ul></div></div></div></section><section class="sh-cta"><div class="sh-cta__glow"></div><div class="sh-cta__inner"><div class="sh-eyebrow sh-eyebrow--teal">DEPLOY A SOLUTION</div><h2 class="sh-cta__title">Ready to build for emerging markets?</h2><p class="sh-cta__sub">Every Shamwari solution runs entirely on protocol primitives with no smart contracts, no compliance middleware, no payment processor. Deploy in days, not months.</p><div class="sh-cta__actions"><a href="developers.html" class="sh-btn sh-btn--teal sh-btn--lg"><i class="fa-solid fa-code"></i> Developer Hub</a><a href="compliance.html" class="sh-btn sh-btn--ghost sh-btn--lg">Compliance Layer</a><a href="roadmap.html" class="sh-btn sh-btn--gold sh-btn--lg">View Roadmap</a></div></div></section><footer class="sh-footer"><div class="sh-footer__grid"><div><div class="sh-footer__wordmark">SHAMWARI</div><p class="sh-footer__tagline">Quantum-resistant financial infrastructure for 4 billion people across Africa, LATAM, ASEAN and MENA.</p><div class="sh-footer__socials"><a href="https://bitbucket.org/thenamelesstree" class="sh-footer__social"><i class="fa-brands fa-bitbucket"></i></a><a href="#" class="sh-footer__social"><i class="fa-brands fa-x-twitter"></i></a><a href="#" class="sh-footer__social"><i class="fa-brands fa-linkedin-in"></i></a></div></div><div><div class="sh-footer__col-title">Platform</div><a href="shamwaripay.html" class="sh-footer__link">ShamwariPay</a><a href="digitalassets.html" class="sh-footer__link">Totem Exchange</a><a href="insurance.html" class="sh-footer__link">Insurance</a><a href="store.html" class="sh-footer__link">Commerce</a><a href="subscriptions.html" class="sh-footer__link">Subscriptions</a></div><div><div class="sh-footer__col-title">Technology</div><a href="architecture.html" class="sh-footer__link">Architecture</a><a href="security.html" class="sh-footer__link">Post-Quantum Security</a><a href="accounts.html" class="sh-footer__link">Accounts &amp; Identity</a><a href="digitalcertificates.html" class="sh-footer__link">Certificates</a><a href="compliance.html" class="sh-footer__link">Compliance</a></div><div><div class="sh-footer__col-title">Resources</div><a href="solutions.html" class="sh-footer__link">Solutions</a><a href="developers.html" class="sh-footer__link">Developer Hub</a><a href="roadmap.html" class="sh-footer__link">Roadmap</a><a href="https://bitbucket.org/thenamelesstree/shamwari/wiki" class="sh-footer__link">Documentation</a><a href="https://wallet.shamwari.network" class="sh-footer__link">Launch Wallet</a></div></div><div class="sh-footer__bottom"><span>&copy; 2026 TheNamelessTree Networks. All rights reserved.</span><span class="sh-footer__bottom-right">shamwari.network</span></div></footer><a href="#" class="sh-back-top" id="back-top" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></a>
+<script>(function(){var nav=document.getElementById('sh-nav');window.addEventListener('scroll',function(){nav.classList.toggle('sh-nav--scrolled',window.scrollY>50);});var tgl=document.getElementById('nav-toggle'),menu=document.getElementById('nav-menu');if(tgl&&menu){tgl.addEventListener('click',function(){tgl.classList.toggle('is-open');menu.classList.toggle('is-open');});}var bt=document.getElementById('back-top');if(bt){window.addEventListener('scroll',function(){bt.classList.toggle('is-visible',window.scrollY>400);});bt.addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});});}var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');ro.unobserve(e.target);}});},{threshold:0.07,rootMargin:'0px 0px -30px 0px'});document.querySelectorAll('.sh-reveal,.pg-reveal').forEach(function(el){ro.observe(el);});var tocLinks=document.querySelectorAll('.pg-toc__link');var sections=Array.from(tocLinks).map(function(l){return document.querySelector(l.getAttribute('href'));});window.addEventListener('scroll',function(){var sy=window.scrollY+150,cur=0;sections.forEach(function(s,i){if(s&&s.offsetTop<=sy)cur=i;});tocLinks.forEach(function(l,i){l.classList.toggle('is-active',i===cur);});});})();</script>
+</body></html>
