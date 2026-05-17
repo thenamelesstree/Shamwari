@@ -373,7 +373,7 @@ ul { list-style: none; padding: 0; }
 .sh-hero__bg-image {
   position: absolute;
   inset: 0;
-  background: url('../img/shamwari_inclusion.jpg') center/cover no-repeat;
+  background: url('../img/shamwari_inclusione.jpg') center/cover no-repeat;
   opacity: 0.22;
   z-index: 0;
   pointer-events: none;
