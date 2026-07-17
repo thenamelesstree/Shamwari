@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
-<title>Shamwari: Digital Infrastructure for Emerging Markets</title>
+<title>Shamwari: A Financial OS for Emerging Markets</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Shamwari is the world's first post-quantum financial protocol for emerging markets. Six protocol systems, zero smart contracts, quantum-resistant from genesis.">
 <link href="img/favicon.ico" rel="icon">
@@ -14,32 +14,30 @@
 <link href="css/pages.css" rel="stylesheet">
 <style>
 /* ── Force dark rendering regardless of OS colour scheme ───────────── */
-:root {
-  color-scheme: dark;
-}
+
 html, body {
-  background: #080F1E !important;
-  color: #F0F4FC !important;
+  background: #F8FAFC !important;
+  color: #0F172A !important;
 }
 
 /* ── Fix: sh-section--mid not defined ──────────────────────────────── */
 .sh-section--mid {
   padding: 6rem 0;
-  background: #0B1424;
+  background: #F1F5F9;
   position: relative;
 }
 
 /* ── Fix: sh-section-solutions background ──────────────────────────── */
 .sh-section-solutions {
   padding: 6rem 0;
-  background: #080F1E;
+  background: #F8FAFC;
   position: relative;
 }
 .sh-section-solutions::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 60% 55% at 50% 0%, rgba(200,155,60,0.07) 0%, transparent 70%);
+  background: radial-gradient(ellipse 60% 55% at 50% 0%, rgba(180,83,9,0.05) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -47,11 +45,11 @@ html, body {
 .sh-section { margin-top: 0 !important; margin-bottom: 0 !important; }
 
 /* ── Ensure all text colours are explicit ──────────────────────────── */
-.sh-section__title { color: #F0F4FC !important; }
-.sh-section__sub   { color: #8EA8C4 !important; }
-.sh-hero__headline { color: #F0F4FC !important; }
-.sh-hero__sub      { color: #8EA8C4 !important; }
-.sh-hero__stat-l   { color: #8EA8C4 !important; }
+.sh-section__title { color: #0F172A !important; }
+.sh-section__sub   { color: #334155 !important; }
+.sh-hero__headline { color: #0F172A !important; }
+.sh-hero__sub      { color: #334155 !important; }
+.sh-hero__stat-l   { color: #64748B !important; }
 
 /* ── Platform grid fix ──────────────────────────────────────────────── */
 .sh-platform-grid {
@@ -68,11 +66,12 @@ html, body {
   margin-top: 3rem;
 }
 .idx-stat {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.07);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   border-radius: 12px;
   padding: 1.75rem;
   text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
 }
 .idx-stat__n {
   font-family: "Syne", sans-serif;
@@ -81,10 +80,11 @@ html, body {
   letter-spacing: -.04em;
   line-height: 1;
   margin-bottom: .35rem;
+  color: #0F172A;
 }
 .idx-stat__l {
   font-size: .8rem;
-  color: #8EA8C4;
+  color: #64748B;
   line-height: 1.45;
 }
 
@@ -93,14 +93,14 @@ html, body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0;
-  border: 1px solid rgba(255,255,255,0.07);
+  border: 1px solid #E2E8F0;
   border-radius: 12px;
   overflow: hidden;
-  background: #131f33;
+  background: #FFFFFF;
 }
 .idx-rm-item {
   padding: 1.75rem 1.5rem;
-  border-right: 1px solid rgba(255,255,255,0.07);
+  border-right: 1px solid #E2E8F0;
   text-align: center;
 }
 .idx-rm-item:last-child { border-right: none; }
@@ -108,24 +108,24 @@ html, body {
   width: 10px; height: 10px; border-radius: 50%;
   margin: 0 auto .75rem;
 }
-.idx-rm-item__dot--done   { background: #00A89E; }
-.idx-rm-item__dot--active { background: #C89B3C; animation: pulsegold 2s ease-in-out infinite; }
-.idx-rm-item__dot--future { background: rgba(255,255,255,0.07); border: 1.5px solid #4E6A87; }
+.idx-rm-item__dot--done   { background: #0F766E; }
+.idx-rm-item__dot--active { background: #B45309; animation: pulsegold 2s ease-in-out infinite; }
+.idx-rm-item__dot--future { background: #F1F5F9; border: 1.5px solid #94A3B8; }
 @keyframes pulsegold {
-  0%,100% { box-shadow: 0 0 0 3px rgba(200,155,60,.2); }
-  50%      { box-shadow: 0 0 0 6px rgba(200,155,60,.06); }
+  0%,100% { box-shadow: 0 0 0 3px rgba(180,83,9,.15); }
+  50%      { box-shadow: 0 0 0 6px rgba(180,83,9,.05); }
 }
-.idx-rm-item__q    { font-family:"Syne",sans-serif; font-size:.65rem; font-weight:700; letter-spacing:.1em; margin-bottom:.35rem; color:#4E6A87; }
-.idx-rm-item__dot--done   ~ .idx-rm-item__q { color:#00A89E; }
-.idx-rm-item__dot--active ~ .idx-rm-item__q { color:#C89B3C; }
-.idx-rm-item__label { font-family:"Syne",sans-serif; font-size:.82rem; font-weight:700; color:#F0F4FC; margin-bottom:.3rem; line-height:1.25; }
-.idx-rm-item__desc  { font-size:.74rem; color:#8EA8C4; line-height:1.45; }
+.idx-rm-item__q    { font-family:"Syne",sans-serif; font-size:.65rem; font-weight:700; letter-spacing:.1em; margin-bottom:.35rem; color:#64748B; }
+.idx-rm-item__dot--done   ~ .idx-rm-item__q { color:#0F766E; }
+.idx-rm-item__dot--active ~ .idx-rm-item__q { color:#B45309; }
+.idx-rm-item__label { font-family:"Syne",sans-serif; font-size:.82rem; font-weight:700; color:#0F172A; margin-bottom:.3rem; line-height:1.25; }
+.idx-rm-item__desc  { font-size:.74rem; color:#334155; line-height:1.45; }
 
 /* ── Chain preview diagram ───────────────────────────────────────────  */
 .idx-chain-diagram { margin-top: 2.5rem; }
 .idx-chain-root {
-  background: rgba(0,168,158,0.07);
-  border: 1px solid rgba(0,168,158,0.25);
+  background: rgba(15,118,110,0.06);
+  border: 1px solid rgba(15,118,110,0.2);
   border-radius: 12px;
   padding: 1.25rem 1.5rem;
   display: flex;
@@ -133,50 +133,50 @@ html, body {
   gap: 1.25rem;
   margin-bottom: 1.5rem;
 }
-.idx-chain-root__icon { font-size: 1.5rem; color: #00A89E; flex-shrink: 0; }
-.idx-chain-root__label { font-family:"DM Mono",monospace; font-size:.58rem; letter-spacing:.18em; color:#00A89E; margin-bottom:.2rem; }
-.idx-chain-root__name { font-family:"Syne",sans-serif; font-size:.95rem; font-weight:800; color:#F0F4FC; }
-.idx-chain-root__meta { font-family:"DM Mono",monospace; font-size:.63rem; color:#4E6A87; }
+.idx-chain-root__icon { font-size: 1.5rem; color: #0F766E; flex-shrink: 0; }
+.idx-chain-root__label { font-family:"DM Mono",monospace; font-size:.58rem; letter-spacing:.18em; color:#0F766E; margin-bottom:.2rem; }
+.idx-chain-root__name { font-family:"Syne",sans-serif; font-size:.95rem; font-weight:800; color:#0F172A; }
+.idx-chain-root__meta { font-family:"DM Mono",monospace; font-size:.63rem; color:#64748B; }
 .idx-chain-beta-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: .85rem;
 }
 .idx-chain-beta {
-  background: #131f33;
-  border: 1px solid rgba(255,255,255,.07);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   border-radius: 10px;
   padding: 1.1rem 1.25rem;
-  transition: border-color .2s, transform .2s;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
 }
-.idx-chain-beta:hover { transform: translateY(-2px); }
-.idx-chain-beta--capital { border-color: rgba(0,168,158,.18); }
-.idx-chain-beta--zim     { border-color: rgba(200,155,60,.18); }
-.idx-chain-beta--sa      { border-color: rgba(0,168,158,.15); }
-.idx-chain-beta--capital:hover { border-color: rgba(0,168,158,.4); }
-.idx-chain-beta--zim:hover     { border-color: rgba(200,155,60,.4); }
-.idx-chain-beta--sa:hover      { border-color: rgba(0,168,158,.4); }
+.idx-chain-beta:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+.idx-chain-beta--capital { border-color: rgba(15,118,110,.2); }
+.idx-chain-beta--zim     { border-color: rgba(180,83,9,.2); }
+.idx-chain-beta--sa      { border-color: rgba(15,118,110,.15); }
+.idx-chain-beta--capital:hover { border-color: rgba(15,118,110,.4); }
+.idx-chain-beta--zim:hover     { border-color: rgba(180,83,9,.4); }
+.idx-chain-beta--sa:hover      { border-color: rgba(15,118,110,.4); }
 .idx-chain-beta__flag { font-size:1.2rem; margin-bottom:.4rem; }
 .idx-chain-beta__name { font-family:"Syne",sans-serif; font-size:.85rem; font-weight:800; margin-bottom:.2rem; }
-.idx-chain-beta--capital .idx-chain-beta__name { color:#00A89E; }
-.idx-chain-beta--zim     .idx-chain-beta__name { color:#C89B3C; }
-.idx-chain-beta--sa      .idx-chain-beta__name { color:#00D4C8; }
-.idx-chain-beta__currency { font-family:"DM Mono",monospace; font-size:.58rem; letter-spacing:.1em; color:#4E6A87; margin-bottom:.65rem; }
+.idx-chain-beta--capital .idx-chain-beta__name { color:#0F766E; }
+.idx-chain-beta--zim     .idx-chain-beta__name { color:#B45309; }
+.idx-chain-beta--sa      .idx-chain-beta__name { color:#14B8A6; }
+.idx-chain-beta__currency { font-family:"DM Mono",monospace; font-size:.58rem; letter-spacing:.1em; color:#64748B; margin-bottom:.65rem; }
 .idx-chain-beta__items { display:flex; flex-direction:column; gap:.22rem; }
-.idx-chain-beta__item { font-size:.72rem; color:#8EA8C4; display:flex; align-items:flex-start; gap:.35rem; line-height:1.35; }
-.idx-chain-beta__item::before { content:"→"; font-size:.6rem; flex-shrink:0; color:#4E6A87; margin-top:.05em; }
+.idx-chain-beta__item { font-size:.72rem; color:#334155; display:flex; align-items:flex-start; gap:.35rem; line-height:1.35; }
+.idx-chain-beta__item::before { content:"→"; font-size:.6rem; flex-shrink:0; color:#94A3B8; margin-top:.05em; }
 
 /* ── AI permission matrix ────────────────────────────────────────────  */
 .sh-perm-matrix__title {
   font-family:"DM Mono",monospace;
   font-size:.6rem; letter-spacing:.14em;
-  color:#4E6A87; margin-bottom:.75rem;
+  color:#64748B; margin-bottom:.75rem;
 }
 
 /* ── Why section ─────────────────────────────────────────────────────  */
-.sh-barrier__num--red   { background:rgba(224,82,82,.12);  color:var(--red); }
-.sh-barrier__num--gold  { background:rgba(200,155,60,.12); color:var(--gold); }
-.sh-barrier__num--slate { background:rgba(255,255,255,.06); border:1.5px solid #4E6A87; color:#8EA8C4; }
+.sh-barrier__num--red   { background:rgba(185,28,28,.08);  color:var(--red); }
+.sh-barrier__num--gold  { background:rgba(180,83,9,.08); color:var(--gold); }
+.sh-barrier__num--slate { background:rgba(0,0,0,.03); border:1.5px solid #CBD5E1; color:#334155; }
 
 /* ── CTA multi-device image ──────────────────────────────────────────  */
 .sh-cta .sh-cta__inner img {
@@ -184,7 +184,7 @@ html, body {
   width: auto;
   margin: 1.5rem auto .5rem;
   display: block;
-  filter: drop-shadow(0 8px 32px rgba(0,168,158,.18));
+  filter: drop-shadow(0 8px 32px rgba(15,118,110,.12));
 }
 
 /* ── Responsive ──────────────────────────────────────────────────────  */
@@ -194,14 +194,14 @@ html, body {
   .idx-stat-grid { grid-template-columns: repeat(3, 1fr); }
   .idx-roadmap-strip { grid-template-columns: 1fr 1fr; }
   .idx-rm-item:nth-child(2) { border-right: none; }
-  .idx-rm-item:nth-child(3) { border-top: 1px solid rgba(255,255,255,0.07); }
+  .idx-rm-item:nth-child(3) { border-top: 1px solid #E2E8F0; }
 }
 @media (max-width: 768px) {
   .sh-platform-grid   { grid-template-columns: 1fr; }
   .idx-chain-beta-grid{ grid-template-columns: 1fr; }
   .idx-stat-grid      { grid-template-columns: 1fr 1fr; }
   .idx-roadmap-strip  { grid-template-columns: 1fr; }
-  .idx-rm-item        { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .idx-rm-item        { border-right: none; border-bottom: 1px solid #E2E8F0; }
   .idx-rm-item:last-child { border-bottom: none; }
   .sh-excl-layout     { grid-template-columns: 1fr; }
   .sh-ai__layout      { grid-template-columns: 1fr; }
@@ -225,12 +225,12 @@ html, body {
   </a>
   <button class="sh-nav__toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
   <div class="sh-nav__menu" id="nav-menu">
-    <a href="stablecoins.html"  class="sh-nav__link">Stablecoins</a>
-    <a href="digitalassets.html"  class="sh-nav__link">Digital Assets</a>
-    <a href="digitalcertificates.html"    class="sh-nav__link">Digital Certificates</a>
-    <a href="insurance.html"      class="sh-nav__link">Insurance</a>
-    <a href="architecture.html"  class="sh-nav__link">Architecture</a>
+    <a href="index.html#platform"  class="sh-nav__link">Platform</a>
+    <a href="architecture.html"    class="sh-nav__link">Architecture</a>
+    <a href="compliance.html"      class="sh-nav__link">Compliance</a>
     <a href="security.html"        class="sh-nav__link">Security</a>
+    <a href="solutions.html"       class="sh-nav__link">Solutions</a>
+    <a href="developers.html"      class="sh-nav__link">Developers</a>
     <a href="#contact"      class="sh-nav__link">Contact</a>
   </div>
   <div class="sh-nav__actions">
@@ -241,8 +241,8 @@ html, body {
 </nav> 
  
 <!-- HERO -->
-<section class="sh-hero" id="home">
-  <div class="sh-hero__bg-image"></div>
+<section class="sh-hero" id="home" >
+	<div class="sh-hero__bg-image"></div>
   <div class="sh-hero__inner">
     <div class="sh-hero__content">
       <div class="sh-hero__eyebrow">
@@ -250,8 +250,8 @@ html, body {
         <span class="sh-badge sh-badge--gold">NIST FIPS 203/204</span>
         <span class="sh-badge sh-badge--teal">TESTNET LIVE</span>
       </div>
-      <h1 class="sh-hero__headline">Digital<br><span class="sh-text--teal">Infrastructure</span><br>for Emerging Markets</h1>
-      <p class="sh-hero__sub">Quantum-resistant digital ecosystem for 4&nbsp;billion people across Africa, LATAM, ASEAN &amp; MENA. Financial primitives from payments, insurance, lending, commerce, subscriptions, AI autonomous agent accounts all built into one blockchain protocol.</p>
+      <h1 class="sh-hero__headline">The Financial<br><span class="sh-text--teal">Operating System</span><br>for Emerging Markets</h1>
+      <p class="sh-hero__sub">Every financial primitive from money transfers, payments to lending and digital assets and certificates all under one quantum-resistant protocol.</p>
       <div class="sh-hero__ctas">
         <a href="#platform" class="sh-btn sh-btn--teal sh-btn--lg"><i class="fa-solid fa-layer-group"></i> Explore Platform</a>
         <a href="https://bitbucket.org/thenamelesstree/shamwari/downloads" class="sh-btn sh-btn--ghost sh-btn--lg"><i class="fa-solid fa-download"></i> Download Client</a>
@@ -289,7 +289,7 @@ html, body {
     <div class="sh-section__header">
       <div class="sh-eyebrow sh-eyebrow--red">THREE SIMULTANEOUS FAILURES</div>
       <h2 class="sh-section__title">One infrastructure gap.<br>Four billion people waiting.</h2>
-      <p class="sh-section__sub">Emerging markets across Africa, LATAM, ASEAN and MENA share the same three structural failures: financial exclusion at scale, dangerous legacy blockchain infrastructure, and an approaching quantum threat that most protocols are not prepared for.</p>
+      <p class="sh-section__sub">Emerging markets across Africa, LATAM, ASEAN and MENA share the same three structural failures: financial exclusion at scale, dangerous legacy blockchain infrastructure, and an approaching quantum threat that most protocols are not prepared for. Shamwari is built from the ground up to solve all three — without smart contracts, which have cost the industry over $3.8B in exploits and put no-code compliance within reach of any attacker with a direct API call.</p>
     </div>
     <div class="sh-problem-grid">
       <div class="sh-problem-card sh-problem-card--teal sh-reveal">
@@ -313,7 +313,7 @@ html, body {
         <ul class="sh-problem-card__list">
           <li>General-purpose chains adapted for finance they weren't built for</li>
           <li>Compliance is application-layer and bypassable with a direct API call</li>
-          <li>No protocol-native KYC, taxation, identity, or insurance systems</li>
+          <li>No protocol-native KYC, taxation, identity systems</li>
           <li>Gas model makes sub-$1 transactions economically irrational</li>
           <li>ECDSA wallet complexity creates adoption barriers at feature-phone scale</li>
         </ul>
@@ -376,72 +376,27 @@ html, body {
         <a href="digitalassets.html" class="sh-sys-card__link sh-text--gold">Explore Totem Exchange <i class="fa-solid fa-arrow-right"></i></a>
       </div>
 
-      <div class="sh-sys-card sh-reveal sh-reveal--delay-2">
-        <div class="sh-sys-card__top">
-          <div class="sh-sys-card__icon"><i class="fa-solid fa-shield-halved"></i></div>
-          <div>
-            <div class="sh-sys-card__name">Insurance Marketplace</div>
-            <div class="sh-sys-card__layer sh-text--teal">RISK LAYER</div>
-          </div>
-        </div>
-        <div class="sh-sys-card__lines">
-          <div class="sh-sys-card__line sh-sys-card__line--bright">19 transaction types • 9-state lifecycle • Actuarial reserves</div>
-          <div class="sh-sys-card__line">Live loss-ratio reserve engine. Automatic policyholder protection on insurer failure with redistribution at next block.</div>
-        </div>
-        <a href="insurance.html" class="sh-sys-card__link sh-text--teal">Explore Insurance <i class="fa-solid fa-arrow-right"></i></a>
-      </div>
-
-      <div class="sh-sys-card sh-reveal">
-        <div class="sh-sys-card__top">
-          <div class="sh-sys-card__icon sh-sys-card__icon--gold"><i class="fa-solid fa-bag-shopping"></i></div>
-          <div>
-            <div class="sh-sys-card__name">E-Commerce Store</div>
-            <div class="sh-sys-card__layer sh-text--gold">COMMERCE LAYER</div>
-          </div>
-        </div>
-        <div class="sh-sys-card__lines">
-          <div class="sh-sys-card__line sh-sys-card__line--bright">5 fulfilment modes &middot; Kyber ML-KEM encrypted &middot; Auto escrow</div>
-          <div class="sh-sys-card__line">Protocol escrow, automatic deadline-triggered refunds, merchant type enforced at consensus, multi-asset loyalty rewards distributed at delivery confirmation.</div>
-        </div>
-        <a href="store.html" class="sh-sys-card__link sh-text--gold">Explore Commerce <i class="fa-solid fa-arrow-right"></i></a>
-      </div>
-
       <div class="sh-sys-card sh-reveal sh-reveal--delay-1">
         <div class="sh-sys-card__top">
-          <div class="sh-sys-card__icon"><i class="fa-solid fa-rotate"></i></div>
+          <div class="sh-sys-card__icon"><i class="fa-solid fa-certificate"></i></div>
           <div>
-            <div class="sh-sys-card__name">Subscriptions</div>
-            <div class="sh-sys-card__layer sh-text--teal">BILLING LAYER</div>
+            <div class="sh-sys-card__name">Digital Certificates</div>
+            <div class="sh-sys-card__layer sh-text--teal">CERTIFICATION LAYER</div>
           </div>
         </div>
         <div class="sh-sys-card__lines">
-          <div class="sh-sys-card__line sh-sys-card__line--bright">Block-height billing • Any asset type • No payment processor</div>
-          <div class="sh-sys-card__line">Consensus-enforced recurring billing. AFTER_BLOCK_APPLY renews or lapses. No webhooks or failed-charge handling issues.</div>
+          <div class="sh-sys-card__line sh-sys-card__line--bright">Height-based Expirations • Post-Quantum Signatures• No central authority or server</div>
+          <div class="sh-sys-card__line">Consensus-enforced certificate validity. Issuance and revocation with instant verifiable proof-of-validity. No propagation waiting periods.</div>
         </div>
-        <a href="subscriptions.html" class="sh-sys-card__link sh-text--teal">Explore Subscriptions <i class="fa-solid fa-arrow-right"></i></a>
-      </div>
-
-      <div class="sh-sys-card sh-sys-card--ai sh-reveal sh-reveal--delay-2">
-        <div class="sh-sys-card__ai-badge">WORLD FIRST</div>
-        <div class="sh-sys-card__top">
-          <div class="sh-sys-card__icon sh-sys-card__icon--purple"><i class="fa-solid fa-robot"></i></div>
-          <div>
-            <div class="sh-sys-card__name">AI Agent Accounts</div>
-            <div class="sh-sys-card__layer sh-text--purple">AGENTIC LAYER</div>
-          </div>
-        </div>
-        <div class="sh-sys-card__lines">
-          <div class="sh-sys-card__line sh-sys-card__line--bright">AccountType.AI • Spend caps • Recipient whitelist</div>
-          <div class="sh-sys-card__line">Hard on-chain governance limits for autonomous agents: transaction type whitelist, per-holding caps, rolling windows, balance floors which are enforced at transaction submission.</div>
-        </div>
-        <a href="accounts.html" class="sh-sys-card__link sh-text--purple">Explore AI Accounts <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="digitalcertificates.html" class="sh-sys-card__link sh-text--teal">Explore Certificates <i class="fa-solid fa-arrow-right"></i></a>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- SOLUTIONS PREVIEW -->
+
+<!-- SOLUTIONS PREVIEW (moved: give visitors the "so what" before the deep-dive) -->
 <section class="sh-section-solutions" id="solutions" >
   <div class="sh-container">
     <div class="sh-section__header">
@@ -455,11 +410,7 @@ html, body {
         <div class="sh-sol-card__title">Central Bank Digital Currency</div>
         <div class="sh-sol-card__body">CONTROLLABLE + NON_SHUFFLEABLE currency types for structural AML. Central Bank authority account at genesis. 13 tax types. SAVINGS-type retail distribution. KYC-gated CHAIN_USER access. Quantum-safe CBDC ready for deployment.</div>
       </div>
-      <div class="sh-sol-card sh-reveal sh-reveal--delay-1">
-        <div class="sh-sys-card__icon"><i class="fa-solid fa-tractor"></i></div>
-        <div class="sh-sol-card__title">Agricultural Finance</div>
-        <div class="sh-sol-card__body">Parametric crop insurance, supply chain payments on 3PL delivery confirmation, seasonal loans with block-height repayment, cooperative savings pools accessible to smallholder farmers with no banking history.</div>
-      </div>
+      
       <div class="sh-sol-card sh-reveal sh-reveal--delay-2">
         <div class="sh-sys-card__icon"><i class="fa-solid fa-boxes-stacked"></i></div>
         <div class="sh-sol-card__title">FMCG Supply Chain</div>
@@ -470,24 +421,13 @@ html, body {
         <div class="sh-sol-card__title">Cross-Border Remittances</div>
         <div class="sh-sol-card__body">Atomic DEX FX settlement between jurisdiction BetaChains. ~60-second confirmation. No correspondent bank. Tax withholding at execution. KYC-gated SAVINGS recipient accounts. Structural AML through CONTROLLABLE currency.</div>
       </div>
-      <div class="sh-sol-card sh-reveal sh-reveal--delay-1">
-        <div class="sh-sys-card__icon"><i class="fa-solid fa-people-group"></i></div>
-        <div class="sh-sol-card__title">Community Insurance Pools</div>
-        <div class="sh-sol-card__body">Sub-$1 monthly premium microinsurance viable at protocol layer. Cooperative pools with on-chain actuarial reserves. Insurance Authority (IPEC) oversight embedded at genesis. Automatic policyholder protection on insurer failure.</div>
-      </div>
-      <div class="sh-sol-card sh-reveal sh-reveal--delay-2">
-        <div class="sh-sys-card__icon"><i class="fa-solid fa-robot"></i></div>
-        <div class="sh-sol-card__title">Agentic Commerce</div>
-        <div class="sh-sol-card__body">AccountType.AUTONOMOUS with AutonomousAccountControl: transaction type whitelist, spending caps, rolling windows, recipient whitelist, balance floors. The world's first governed AI commerce protocol.</div>
-      </div>
+      
     </div>
     <div style="text-align:center;margin-top:3rem">
       <a href="solutions.html" class="sh-btn sh-btn--ghost">All Solutions <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </div>
 </section>
-
-
 
 
 <!-- TECHNOLOGY + ARCHITECTURE -->
@@ -546,23 +486,23 @@ html, body {
             <div class="sh-arch-card__bar"></div>
             <div class="sh-arch-card__body">
               <div class="sh-arch-card__flag">&#127758;</div>
-              <div class="sh-arch-card__name">COUNTRY A</div>
-              <div class="sh-arch-card__reg">DEPOSIT TOKENS & RWA</div>
+              <div class="sh-arch-card__name">CAPITAL</div>
+              <div class="sh-arch-card__reg">GLOBAL ASSET CHAIN</div>
               <div class="sh-arch-card__items">
                 <div class="sh-arch-card__item">Open permission policy</div>
-                <div class="sh-arch-card__item">ShamwariPay + Totem Exchange</div>
-                <div class="sh-arch-card__item">SEC Account & Digital Assets DEX</div>
+                <div class="sh-arch-card__item">Totem Exchange + Certificates</div>
+                <div class="sh-arch-card__item">App Store &amp; Developer Registry</div>
               </div>
             </div>
-          </div>
+          </div> 
           <div class="sh-arch-card sh-arch-card--gold">
             <div class="sh-arch-card__bar"></div>
             <div class="sh-arch-card__body">
               <div class="sh-arch-card__flag">&#127482;</div>
-              <div class="sh-arch-card__name">COUNTRY B</div>
+              <div class="sh-arch-card__name">JURISDICTION A</div>
               <div class="sh-arch-card__reg">CBDC &middot; CENTRAL BANK &middot; TAX AUTHORITY</div>
               <div class="sh-arch-card__items">
-                <div class="sh-arch-card__item">Full ShamwariPay + Insurance</div>
+                <div class="sh-arch-card__item">Full ShamwariPay + Digital Asset Exchange</div>
                 <div class="sh-arch-card__item">Permissioned KYC participants</div>
                 <div class="sh-arch-card__item">Automatic tax withholding</div>
               </div>
@@ -572,12 +512,12 @@ html, body {
             <div class="sh-arch-card__bar"></div>
             <div class="sh-arch-card__body">
               <div class="sh-arch-card__flag">&#127988;</div>
-              <div class="sh-arch-card__name">COUNTRY C</div>
-              <div class="sh-arch-card__reg">DIGITAL CURRENCY &middot; TAX AUTHORITY &middot; SEC</div>
+              <div class="sh-arch-card__name">JURISDICTION B</div>
+              <div class="sh-arch-card__reg">DIGITAL CURRENCY &middot; SARB &middot; FSCA</div>
               <div class="sh-arch-card__items">
                 <div class="sh-arch-card__item">Regulated asset exchange</div>
                 <div class="sh-arch-card__item">Cross-border FX corridor</div>
-                <div class="sh-arch-card__item">Tax withholding</div>
+                <div class="sh-arch-card__item">SARS tax withholding</div>
               </div>
             </div>
           </div>
@@ -633,13 +573,6 @@ html, body {
         </div>
       </div>
       <div>
-        <div class="sh-usecase sh-reveal">
-          <div class="sh-usecase__icon sh-usecase__icon--purple"><i class="fa-solid fa-cloud-sun-rain"></i></div>
-          <div>
-            <div class="sh-usecase__title">Parametric Insurance Triggers</div>
-            <div class="sh-usecase__body">Agent submits insurance claims when on-chain oracle data crosses a threshold e.g. drought index, temperature event, flight cancellation. Fully automated and immutably auditable claims.</div>
-          </div>
-        </div>
         <div class="sh-usecase sh-reveal sh-reveal--delay-1">
           <div class="sh-usecase__icon sh-usecase__icon--teal"><i class="fa-solid fa-file-invoice-dollar"></i></div>
           <div>
@@ -686,7 +619,7 @@ html, body {
             <div class="sh-barrier__num sh-barrier__num--red">1</div>
             <div>
               <div class="sh-barrier__title">No protocol-native identity</div>
-              <div class="sh-barrier__body">Banks require government-issued ID and a fixed address. <strong>1.1 billion people globally have no legal identity.</strong> Without identity there is no account. Without an account there is no access to savings, credit, insurance, or remittances.</div>
+              <div class="sh-barrier__body">Banks require government-issued ID and a fixed address. <strong>1.1 billion people globally have no legal identity.</strong> Without identity there is no account. Without an account there is no access to savings, credit or remittances.</div>
             </div>
           </div>
           <div class="sh-barrier pg-reveal">
@@ -699,19 +632,12 @@ html, body {
           <div class="sh-barrier pg-reveal">
             <div class="sh-barrier__num sh-barrier__num--gold">3</div>
             <div>
-              <div class="sh-barrier__title">Insurance is inaccessible or unaffordable</div>
-              <div class="sh-barrier__body">Smallholder farmers and informal traders are locked out of insurance markets designed for salaried employees with bank accounts. <strong>A single crop failure or medical emergency eliminates years of savings</strong> with no recourse.</div>
-            </div>
-          </div>
-          <div class="sh-barrier pg-reveal">
-            <div class="sh-barrier__num sh-barrier__num--gold">4</div>
-            <div>
               <div class="sh-barrier__title">Credit is unavailable without credit history</div>
               <div class="sh-barrier__body">MFIs rely on informal credit assessment and high operational costs. <strong>No on-chain credit record, no automated underwriting, no collateral mechanism</strong> that works without a bank account. Informal lenders charge 40&ndash;200% APR.</div>
             </div>
           </div>
           <div class="sh-barrier pg-reveal">
-            <div class="sh-barrier__num sh-barrier__num--slate">5</div>
+            <div class="sh-barrier__num sh-barrier__num--slate">4</div>
             <div>
               <div class="sh-barrier__title">Smart-contract chains don't solve it</div>
               <div class="sh-barrier__body">Ethereum's gas model, ECDSA complexity, and application-layer compliance make it unsuitable for regulated, mass-market financial inclusion. <strong>A DeFi app is not a bank replacement</strong> for someone earning $3/day on a feature phone.</div>
@@ -743,18 +669,9 @@ html, body {
           </div>
           <div class="sh-excl-sol pg-reveal">
             <div class="sh-excl-sol__accent sh-excl-sol__accent--gold"></div>
-            <div class="sh-excl-sol__icon sh-excl-sol__icon--gold"><i class="fa-solid fa-shield-halved"></i></div>
-            <div>
-              <div class="sh-excl-sol__barrier">BARRIER 3: INSURANCE</div>
-              <div class="sh-excl-sol__title">Protocol-native insurance marketplace</div>
-              <div class="sh-excl-sol__body">Insurers list products directly on-chain. Premiums collected via subscription billing. Claims adjudicated via 13-status pipeline. Reserves computed every block. Sub-$1 premiums viable as protocol costs are negligible at any scale.</div>
-            </div>
-          </div>
-          <div class="sh-excl-sol pg-reveal">
-            <div class="sh-excl-sol__accent sh-excl-sol__accent--gold"></div>
             <div class="sh-excl-sol__icon sh-excl-sol__icon--gold"><i class="fa-solid fa-hand-holding-dollar"></i></div>
             <div>
-              <div class="sh-excl-sol__barrier">BARRIER 4: CREDIT</div>
+              <div class="sh-excl-sol__barrier">BARRIER 3: CREDIT</div>
               <div class="sh-excl-sol__title">On-chain credit history and P2P lending</div>
               <div class="sh-excl-sol__body">Every repayment, default, and collateral event is an immutable on-chain record creating the first verifiable credit history for people outside banking. 6-dimension RiskCalculator. MFI accounts access the full loan lifecycle with automatic collateral enforcement.</div>
             </div>
@@ -770,9 +687,7 @@ html, body {
         <div class="sh-excl-compare__rows">
           <div class="sh-excl-compare__item"><i class="fa-solid fa-xmark"></i>Branch visit required. Average 9.4km to nearest bank branch in rural Sub-Saharan Africa.</div>
           <div class="sh-excl-compare__item"><i class="fa-solid fa-xmark"></i>Remittance fees of 8 - 12%. $200 sent home costs $16 - a$24 in fees.</div>
-          <div class="sh-excl-compare__item"><i class="fa-solid fa-xmark"></i>Insurance requires bank account, formal employment, and credit record. Smallholder farmers deemed uninsurable.</div>
           <div class="sh-excl-compare__item"><i class="fa-solid fa-xmark"></i>No credit history means no loan access. Informal lenders charge 40 - 200% APR with no borrower protection.</div>
-          <div class="sh-excl-compare__item"><i class="fa-solid fa-xmark"></i>Crop failure or medical emergency without insurance eliminates years of savings with no recovery mechanism.</div>
         </div>
       </div>
       <div class="sh-excl-compare__divider">
@@ -783,14 +698,13 @@ html, body {
         <div class="sh-excl-compare__rows">
           <div class="sh-excl-compare__item"><i class="fa-solid fa-check"></i>Account creation and management from any internet-enabled device. PQC keypair generated locally. Digital certificates replace document KYC.</div>
           <div class="sh-excl-compare__item"><i class="fa-solid fa-check"></i>Cross-border settlement in ~12 seconds. Built-in DEX with tax withheld at execution. Zero corridor fee.</div>
-          <div class="sh-excl-compare__item"><i class="fa-solid fa-check"></i>Sub-$1 microinsurance premiums viable. Claims, premiums, and reserves all on-chain. Automatic policyholder protection.</div>
           <div class="sh-excl-compare__item"><i class="fa-solid fa-check"></i>Every transaction builds an immutable credit record. MFI lenders access full on-chain loan lifecycle with collateral enforcement.</div>
-          <div class="sh-excl-compare__item"><i class="fa-solid fa-check"></i>Insurance payouts executed as protocol transactions with no office workflows or processing delays.</div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 
 <!-- ROADMAP TEASER -->
 <section class="sh-section">
@@ -805,23 +719,23 @@ html, body {
         <div class="idx-rm-item__dot idx-rm-item__dot--done"></div>
         <div class="idx-rm-item__q" style="color:#00A89E">COMPLETED</div>
         <div class="idx-rm-item__label">Core Protocol</div>
-        <div class="idx-rm-item__desc">70+ transaction types. All 6 systems. PQC from genesis. MIT open source.</div>
+        <div class="idx-rm-item__desc">30+ transaction types. PQC from genesis. Open source.</div>
       </div>
       <div class="idx-rm-item">
         <div class="idx-rm-item__dot idx-rm-item__dot--active"></div>
-        <div class="idx-rm-item__q" style="color:#C89B3C">Q2 2026: ACTIVE</div>
+        <div class="idx-rm-item__q" style="color:#C89B3C">Q4 2026: ACTIVE</div>
         <div class="idx-rm-item__label">Testnet Hardening</div>
         <div class="idx-rm-item__desc">Public testnet. Wallet UI. Security audit. Load testing. Developer faucet.</div>
       </div>
       <div class="idx-rm-item">
         <div class="idx-rm-item__dot idx-rm-item__dot--future"></div>
-        <div class="idx-rm-item__q">Q4 2026</div>
+        <div class="idx-rm-item__q">Q2 2027</div>
         <div class="idx-rm-item__label">Mainnet Genesis</div>
         <div class="idx-rm-item__desc">3 BetaChains live. Binder network. First CBDC issuance. Forging rewards begin.</div>
       </div>
       <div class="idx-rm-item">
         <div class="idx-rm-item__dot idx-rm-item__dot--future"></div>
-        <div class="idx-rm-item__q">2027+</div>
+        <div class="idx-rm-item__q">Q3 2027 +</div>
         <div class="idx-rm-item__label">SADC Expansion</div>
         <div class="idx-rm-item__desc">3+ new jurisdiction chains. Remittance corridors. MENA pipeline. 500M+ users target.</div>
       </div>
@@ -847,6 +761,7 @@ html, body {
   </div>
   <img src="img/shamwari_multidevice_transparent_upright.png" />
 </section>
+
 <section id="contact" class="sh-section">
   <div class="sh-container">
     <div class="sh-section__header">
@@ -854,12 +769,11 @@ html, body {
       	<h2 class="sh-cta__title">Have A Question? Get In Touch.</h2>
       	<div class="sh-cta__actions">
       		<a href="mailto:contact@shamwari.network" class="sh-btn sh-btn--teal sh-btn--lg"><i class="fa-solid fa-envelope"></i> General Inquiries</a>
-      		<a href="mailto:invest@shamwari.network" class="sh-btn sh-btn--gold sh-btn--lg"><i class="fa-solid fa-users"></i> Investor Relations</a>
+      		<a href="mailto:partnerships@shamwari.network" class="sh-btn sh-btn--gold sh-btn--lg"><i class="fa-solid fa-users"></i> Partnerships</a>
       	</div>	
       </div>
     </div>
-</section>  
-
+</section>
 
 <!-- FOOTER -->
 <footer class="sh-footer">
@@ -872,15 +786,16 @@ html, body {
       <div class="sh-footer__socials">
         <a href="https://bitbucket.org/thenamelesstree/shamwari" class="sh-footer__social"><i class="fa-brands fa-bitbucket"></i></a>
         <a href="https://x.com/shamwarinetwork" class="sh-footer__social"><i class="fa-brands fa-x-twitter"></i></a>
-        <a href="#" class="sh-footer__social"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://www.linkedin.com/showcase/shamwarinetwork" class="sh-footer__social"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:contact@shamwari.network" class="sh-footer__social"><i class="fa fa-envelope"></i></a>
+        
       </div>
     </div>
     <div>
       <div class="sh-footer__col-title">Platform</div>
       <a href="shamwaripay.html"         class="sh-footer__link">ShamwariPay</a>
       <a href="digitalassets.html"       class="sh-footer__link">Totem Exchange</a>
-      <a href="insurance.html"           class="sh-footer__link">Insurance</a>
-      <a href="store.html"               class="sh-footer__link">Commerce</a>
+      <a href="digitalcertificates.html" class="sh-footer__link">Certificates</a>
       <a href="subscriptions.html"       class="sh-footer__link">Subscriptions</a>
     </div>
     <div>
@@ -888,21 +803,19 @@ html, body {
       <a href="architecture.html"        class="sh-footer__link">Architecture</a>
       <a href="security.html"            class="sh-footer__link">Post-Quantum Security</a>
       <a href="accounts.html"            class="sh-footer__link">Accounts &amp; Identity</a>
-      <a href="digitalcertificates.html" class="sh-footer__link">Certificates</a>
       <a href="compliance.html"          class="sh-footer__link">Compliance</a>
     </div>
     <div>
       <div class="sh-footer__col-title">Resources</div>
       <a href="solutions.html"    class="sh-footer__link">Solutions</a>
       <a href="developers.html"   class="sh-footer__link">Developer Hub</a>
-      <a href="roadmap.html"      class="sh-footer__link">Roadmap</a>
       <a href="https://docs.shamwari.network" class="sh-footer__link">Documentation</a>
       <a href="https://wallet.shamwari.network" class="sh-footer__link">Launch Wallet</a>
     </div>
   </div>
   <div class="sh-footer__bottom">
     <span>&copy; 2026 TheNamelessTree Networks. All rights reserved.</span>
-    <span class="sh-footer__bottom-right">thenamelesstree.co.zw</span>
+    <span class="sh-footer__bottom-right"><a href="https://thenamelesstree.co.zw" target="blank">thenamelesstree.co.zw</a></span>
   </div>
 </footer>
 
@@ -928,5 +841,6 @@ html, body {
   document.querySelectorAll('.sh-reveal, .pg-reveal').forEach(function(el){ ro.observe(el); });
 })();
 </script>
+<script src="main.js"></script>
 </body>
 </html>

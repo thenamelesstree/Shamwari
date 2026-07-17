@@ -242,10 +242,9 @@
     <a href="#authorities"   class="comp-toc__link">02 &mdash; Regulatory Authorities</a>
     <a href="#kyc-aml"       class="comp-toc__link">03 &mdash; KYC &amp; AML</a>
     <a href="#taxation"      class="comp-toc__link">04 &mdash; Taxation</a>
-    <a href="#insurance"     class="comp-toc__link">05 &mdash; Insurance Compliance</a>
-    <a href="#jurisdictions" class="comp-toc__link">06 &mdash; Jurisdictions</a>
-    <a href="#audit"         class="comp-toc__link">07 &mdash; Audit Trail</a>
-    <a href="#comparison"    class="comp-toc__link">08 &mdash; Comparison</a>
+    <a href="#jurisdictions" class="comp-toc__link">05 &mdash; Jurisdictions</a>
+    <a href="#audit"         class="comp-toc__link">06 &mdash; Audit Trail</a>
+    <a href="#comparison"    class="comp-toc__link">07 &mdash; Comparison</a>
   </div>
 </nav>
 
@@ -350,17 +349,6 @@
       <div class="comp-auth-card__body">Controls the entire TotemApproval lifecycle for every digital asset on the chain. Only the Securities Regulator account can approve, suspend, or permanently reject a Totem asset. All 6 state transitions require a transaction signed by this account &mdash; protocol-enforced, no bypass possible.</div>
       <div class="comp-auth-card__caps">
         <span class="comp-auth-card__cap">TOTEM_APPROVAL</span><span class="comp-auth-card__cap">SUSPENSION</span><span class="comp-auth-card__cap">COMPLIANCE_HOLD</span><span class="comp-auth-card__cap">PERMANENT REJECTION</span><span class="comp-auth-card__cap">EXPIRY CONTROL</span>
-      </div>
-    </div>
-
-    <div class="comp-auth-card comp-auth-card--purple pg-reveal">
-      <div class="comp-auth-card__bar"></div><div class="comp-auth-card__immutable">IMMUTABLE AT GENESIS</div>
-      <div class="comp-auth-card__icon"><i class="fa-solid fa-shield-heart"></i></div>
-      <div class="comp-auth-card__label">PRUDENTIAL AUTHORITY</div>
-      <div class="comp-auth-card__title">Insurance Regulator</div>
-      <div class="comp-auth-card__body">Approves insurance products before they can accept applications. Initiates suspension and delisting of products that fail solvency requirements. When an insurer is delisted, this account's action triggers automatic reserve redistribution to policyholders &mdash; without court proceedings.</div>
-      <div class="comp-auth-card__caps">
-        <span class="comp-auth-card__cap">INSURANCE_APPROVAL</span><span class="comp-auth-card__cap">SUSPENSION</span><span class="comp-auth-card__cap">DELISTING</span><span class="comp-auth-card__cap">REDISTRIBUTION TRIGGER</span><span class="comp-auth-card__cap">SOLVENCY ENFORCEMENT</span>
       </div>
     </div>
 
@@ -481,16 +469,13 @@
     <div class="comp-tax-card"><div class="comp-tax-card__name">TRANSACTION</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">General levy on all transfers</div></div>
     <div class="comp-tax-card"><div class="comp-tax-card__name">VALUE ADDED</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">Goods &amp; services transactions</div></div>
     <div class="comp-tax-card"><div class="comp-tax-card__name">CAPITAL GAINS</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">Asset sales on the DEX</div></div>
-    <div class="comp-tax-card"><div class="comp-tax-card__name">SALES TAX</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">Store purchase transactions</div></div>
-    <div class="comp-tax-card"><div class="comp-tax-card__name">INSURANCE LEVY</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">Policy application events</div></div>
     <div class="comp-tax-card"><div class="comp-tax-card__name">CURRENCY TRANSFER</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">Payments &amp; lending flows</div></div>
     <div class="comp-tax-card"><div class="comp-tax-card__name">LOAN INTEREST</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">Withholding at loan repayment</div></div>
     <div class="comp-tax-card"><div class="comp-tax-card__name">SUBSCRIPTION</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">Recurring billing cycles</div></div>
     <div class="comp-tax-card"><div class="comp-tax-card__name">EXCHANGE / FX</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">Foreign exchange operations</div></div>
     <div class="comp-tax-card"><div class="comp-tax-card__name">TOTEM ISSUANCE</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">Digital asset stamp duty</div></div>
+    <div class="comp-tax-card"><div class="comp-tax-card__name">TOTEM SHARE INCREASE</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">Totem split tax</div></div>
     <div class="comp-tax-card"><div class="comp-tax-card__name">DIVIDEND</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">Dividend withholding tax</div></div>
-    <div class="comp-tax-card"><div class="comp-tax-card__name">STORE REFUND</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">Refund transaction levy</div></div>
-    <div class="comp-tax-card"><div class="comp-tax-card__name">INSURANCE PREMIUM</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">Premium payment levy</div></div>
   </div>
 
   <div class="pg-two-col">
@@ -532,53 +517,12 @@
 </section>
 
 
-<!-- 05 INSURANCE -->
-<section class="sh-section" id="insurance">
-<div class="sh-container">
-  <div class="comp-head">
-    <div class="comp-head__num">05</div>
-    <div class="comp-head__copy">
-      <div class="sh-eyebrow sh-eyebrow--teal">INSURANCE REGULATION</div>
-      <div class="comp-head__title">Protocol-enforced solvency and consumer protection</div>
-      <p class="comp-head__sub">Shamwari's insurance compliance system implements actuarial solvency requirements and policyholder protection at the consensus layer. When an insurer fails, policyholders are protected automatically &mdash; without court proceedings, liquidators, or regulatory intervention delays.</p>
-    </div>
-  </div>
-
-  <div class="pg-two-col">
-    <div>
-      <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1.25rem">9-STATE COMPLIANCE LIFECYCLE</div>
-      <div class="comp-ins-lifecycle pg-reveal">
-        <div class="comp-ins-state comp-ins-state--grey"><div class="comp-ins-state__label">PENDING APPROVAL</div><div class="comp-ins-state__desc">Registered on-chain. Awaits Insurance Authority approval.</div></div>
-        <div class="comp-ins-state comp-ins-state--gold"><div class="comp-ins-state__label">WAITING</div><div class="comp-ins-state__desc">Approved but before effectiveHeight. Not yet active.</div></div>
-        <div class="comp-ins-state comp-ins-state--teal"><div class="comp-ins-state__label">ACTIVE</div><div class="comp-ins-state__desc">Fully operational. Applications, premiums, and claims permitted.</div></div>
-        <div class="comp-ins-state comp-ins-state--red"><div class="comp-ins-state__label">UNDER REVIEW</div><div class="comp-ins-state__desc">Supervisory watch. New applications suspended.</div></div>
-        <div class="comp-ins-state comp-ins-state--red"><div class="comp-ins-state__label">SUSPENDED</div><div class="comp-ins-state__desc">Operations halted. 90-day redistribution clock starts.</div></div>
-        <div class="comp-ins-state comp-ins-state--darkred"><div class="comp-ins-state__label">DELISTED</div><div class="comp-ins-state__desc">Immediate cessation. Reserve redistribution at next block.</div></div>
-        <div class="comp-ins-state comp-ins-state--grey"><div class="comp-ins-state__label">LAPSED</div><div class="comp-ins-state__desc">Expired without renewal. No new transactions.</div></div>
-        <div class="comp-ins-state comp-ins-state--grey"><div class="comp-ins-state__label">CANCELLED</div><div class="comp-ins-state__desc">Protocol-set after redistribution completes.</div></div>
-        <div class="comp-ins-state comp-ins-state--grey"><div class="comp-ins-state__label">EXPIRED</div><div class="comp-ins-state__desc">Natural end of policy term reached.</div></div>
-      </div>
-      <p class="sh-lifecycle__banner" style="margin-top:1rem"><i class="fa-solid fa-shield-halved"></i>&nbsp; At DELISTED status, or after 90 days of SUSPENDED status, the AFTER_BLOCK_APPLY handler automatically distributes the actuarial reserve pool to active policyholders &mdash; proportional to coverage amount, at the next block. No court order required.</p>
-    </div>
-    <div>
-      <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1.25rem">ACTUARIAL RESERVE REQUIREMENTS</div>
-      <div class="pg-features">
-        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Live Loss Ratio Engine</div><div class="pg-feature__body">Required reserve computed from actual on-chain payout data every block: <span class="sh-code">reserve = lossRatio &times; safetyMultiplier &times; totalCoverage</span>. No static actuarial tables &mdash; the reserve requirement reflects real claims experience in real time.</div></div></div>
-        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">Three Reserve Plan Types</div><div class="pg-feature__body">STANDARD (1.2&times;), PREMIUM (1.5&times;), and BASIC (1.0&times;) safety multipliers determine required reserve levels. The protocol automatically blocks new policy issuance when the insurer's actual reserve falls below the required level.</div></div></div>
-        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Automatic Policyholder Protection</div><div class="pg-feature__body">On DELISTED status: the AFTER_BLOCK_APPLY handler immediately distributes the insurer's reserve pool to all active policyholders at the next block. On 90 days of SUSPENDED: the same redistribution triggers automatically. Policyholders are paid first.</div></div></div>
-        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">Insurance Authority as Regulator</div><div class="pg-feature__body">Only the Insurance Authority account (hardcoded at genesis) can approve products, initiate suspensions, and trigger delisting. This authority also controls redistribution parameters and can override the 90-day clock for emergency consumer protection.</div></div></div>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
-
 
 <!-- 06 JURISDICTIONS -->
 <section class="sh-section sh-section--navy" id="jurisdictions">
 <div class="sh-container">
   <div class="comp-head">
-    <div class="comp-head__num">06</div>
+    <div class="comp-head__num">05</div>
     <div class="comp-head__copy">
       <div class="sh-eyebrow sh-eyebrow--gold">JURISDICTION-SPECIFIC COMPLIANCE</div>
       <div class="comp-head__title">Three distinct regulatory regimes. One network.</div>
@@ -592,17 +536,16 @@
       <div class="comp-jx-card__body">
         <div class="comp-jx-card__flag">&#127464;&#127484;</div>
         <div class="comp-jx-card__chain">ZIMBABWE</div>
-        <div class="comp-jx-card__currency">ZWG &middot; RESERVE BANK OF ZIMBABWE &middot; IPEC</div>
+        <div class="comp-jx-card__currency">ZWG &middot; RESERVE BANK OF ZIMBABWE</div>
         <div class="comp-jx-card__authorities">
           <div class="comp-jx-card__auth"><i class="fa-solid fa-building-columns"></i>Reserve Bank of Zimbabwe &mdash; CBDC issuance authority</div>
           <div class="comp-jx-card__auth"><i class="fa-solid fa-scale-balanced"></i>Securities &amp; Exchange Commission &mdash; TotemApproval</div>
-          <div class="comp-jx-card__auth"><i class="fa-solid fa-shield-halved"></i>IPEC (Insurance &amp; Pensions Commission)</div>
           <div class="comp-jx-card__auth"><i class="fa-solid fa-receipt"></i>ZIMRA (Zimbabwe Revenue Authority) &mdash; Tax Collector</div>
         </div>
         <div class="comp-jx-card__controls">
           <div class="comp-jx-card__controls-label">Compliance Features Active</div>
           <div class="comp-jx-card__control-list">
-            <span class="comp-jx-card__control">ZWG CBDC</span><span class="comp-jx-card__control">CONTROLLABLE</span><span class="comp-jx-card__control">NON_SHUFFLEABLE</span><span class="comp-jx-card__control">Permissioned</span><span class="comp-jx-card__control">13 tax rates</span><span class="comp-jx-card__control">Full insurance</span><span class="comp-jx-card__control">AML transfer veto</span>
+            <span class="comp-jx-card__control">ZWG CBDC</span><span class="comp-jx-card__control">CONTROLLABLE</span><span class="comp-jx-card__control">NON_SHUFFLEABLE</span><span class="comp-jx-card__control">Permissioned</span><span class="comp-jx-card__control">13 tax rates</span><span class="comp-jx-card__control">AML transfer veto</span>
           </div>
         </div>
       </div>
@@ -617,13 +560,13 @@
         <div class="comp-jx-card__authorities">
           <div class="comp-jx-card__auth"><i class="fa-solid fa-building-columns"></i>SARB (SA Reserve Bank) &mdash; Monetary authority</div>
           <div class="comp-jx-card__auth"><i class="fa-solid fa-scale-balanced"></i>FSCA (Financial Sector Conduct Authority)</div>
-          <div class="comp-jx-card__auth"><i class="fa-solid fa-shield-halved"></i>Prudential Authority &mdash; Insurance regulation</div>
+          <div class="comp-jx-card__auth"><i class="fa-solid fa-shield-halved"></i>Prudential Authority</div>
           <div class="comp-jx-card__auth"><i class="fa-solid fa-receipt"></i>SARS (SA Revenue Service) &mdash; Tax withholding</div>
         </div>
         <div class="comp-jx-card__controls">
           <div class="comp-jx-card__controls-label">Compliance Features Active</div>
           <div class="comp-jx-card__control-list">
-            <span class="comp-jx-card__control">ZAR digital currency</span><span class="comp-jx-card__control">CONTROLLABLE</span><span class="comp-jx-card__control">NON_SHUFFLEABLE</span><span class="comp-jx-card__control">Permissioned</span><span class="comp-jx-card__control">SARS tax rates</span><span class="comp-jx-card__control">Totem Exchange</span><span class="comp-jx-card__control">Insurance marketplace</span>
+            <span class="comp-jx-card__control">ZAR digital currency</span><span class="comp-jx-card__control">CONTROLLABLE</span><span class="comp-jx-card__control">NON_SHUFFLEABLE</span><span class="comp-jx-card__control">Permissioned</span><span class="comp-jx-card__control">SARS tax rates</span><span class="comp-jx-card__control">Totem Exchange</span>
           </div>
         </div>
       </div>
@@ -659,7 +602,6 @@
         <li>Its own permission policy &mdash; open, permissioned, or custom threshold</li>
         <li>Its own 13 tax rates &mdash; set by its own Tax Collector authority account</li>
         <li>Its own TotemApproval workflow &mdash; different assets approved per chain</li>
-        <li>Its own insurance marketplace &mdash; independent actuarial reserve requirements</li>
         <li>Its own KYC/AML onboarding &mdash; CHAIN_ADMIN operators per jurisdiction</li>
       </ul>
     </div>
@@ -679,15 +621,15 @@
 </section>
 
 
-<!-- 07 AUDIT TRAIL -->
+<!-- 06 AUDIT TRAIL -->
 <section class="sh-section" id="audit">
 <div class="sh-container">
   <div class="comp-head">
-    <div class="comp-head__num">07</div>
+    <div class="comp-head__num">06</div>
     <div class="comp-head__copy">
       <div class="sh-eyebrow sh-eyebrow--teal">IMMUTABLE AUDIT TRAIL</div>
       <div class="comp-head__title">The blockchain is the compliance record</div>
-      <p class="comp-head__sub">Every regulatory action, tax collection, permission grant, asset approval, insurance state change, and claim event creates a permanent, Dilithium-signed entry in blockchain state. No separate compliance database. No audit trail that depends on operator integrity. The blockchain is the evidence.</p>
+      <p class="comp-head__sub">Every regulatory action, tax collection, permission grant and asset approval creates a permanent, Dilithium-signed entry in blockchain state. No separate compliance database. No audit trail that depends on operator integrity. The blockchain is the evidence.</p>
     </div>
   </div>
 
@@ -699,10 +641,6 @@
         <tr><td>Tax withholding event</td><td>Protocol (automatic)</td><td>CurrencyTaxRecord per transaction</td><td class="comp-audit-good">&#10003; Any node</td><td class="comp-audit-bad">&#10007; Never</td></tr>
         <tr><td>Permission grant</td><td>CHAIN_ADMIN</td><td>BetaChainPermission + EncryptedData</td><td class="comp-audit-good">&#10003; Any node</td><td class="comp-audit-bad">&#10007; Never</td></tr>
         <tr><td>Permission revocation</td><td>CHAIN_ADMIN</td><td>Versioned revocation at blockHeight</td><td class="comp-audit-good">&#10003; Any node</td><td class="comp-audit-bad">&#10007; Never</td></tr>
-        <tr><td>Insurance product approval</td><td>Insurance Authority</td><td>InsuranceApproval record + timestamp</td><td class="comp-audit-good">&#10003; Any node</td><td class="comp-audit-bad">&#10007; Never</td></tr>
-        <tr><td>Insurance suspension</td><td>Insurance Authority</td><td>Status change + suspensionHeight</td><td class="comp-audit-good">&#10003; Any node</td><td class="comp-audit-bad">&#10007; Never</td></tr>
-        <tr><td>Reserve redistribution</td><td>Protocol (automatic)</td><td>Redistribution event + per-policyholder credits</td><td class="comp-audit-good">&#10003; Any node</td><td class="comp-audit-bad">&#10007; Never</td></tr>
-        <tr><td>Insurance claim filing</td><td>Policyholder</td><td>InsuranceClaim with 13-state lifecycle</td><td class="comp-audit-good">&#10003; Any node</td><td class="comp-audit-bad">&#10007; Never</td></tr>
         <tr><td>CURRENCY_ISSUANCE</td><td>Central Bank</td><td>Currency entity + issuance parameters</td><td class="comp-audit-good">&#10003; Any node</td><td class="comp-audit-bad">&#10007; Never</td></tr>
         <tr><td>Tax rate configuration</td><td>Tax Collector</td><td>TaxPolicy snapshot + effective blockHeight</td><td class="comp-audit-good">&#10003; Any node</td><td class="comp-audit-bad">&#10007; Never</td></tr>
       </tbody>
@@ -727,7 +665,6 @@
           <li>Query current and historical approval status of any listed asset</li>
           <li>Verify tax collection amounts and rates against legislated levels</li>
           <li>Review complete permission grant and revocation history per institution</li>
-          <li>Audit insurance reserve levels and redistribution events in real time</li>
           <li>Run an independent node &mdash; no access request to the operator required</li>
         </ul>
       </div>
@@ -739,7 +676,6 @@
           <li>Full dividend distribution record with per-holder allocations</li>
           <li>Immutable KYC onboarding timestamps and permission grant records</li>
           <li>Tax collection receipts via CurrencyTaxRecord per transaction</li>
-          <li>Insurance policy history &mdash; applications, claims, payments, and lifecycle events</li>
         </ul>
       </div>
     </div>
@@ -748,11 +684,11 @@
 </section>
 
 
-<!-- 08 COMPARISON -->
+<!-- 07 COMPARISON -->
 <section class="sh-section sh-section--navy" id="comparison">
 <div class="sh-container">
   <div class="comp-head">
-    <div class="comp-head__num">08</div>
+    <div class="comp-head__num">07</div>
     <div class="comp-head__copy">
       <div class="sh-eyebrow sh-eyebrow--gold">COMPLIANCE COMPARISON</div>
       <div class="comp-head__title">Protocol compliance vs application compliance</div>
@@ -770,7 +706,6 @@
         <div class="sh-excl-compare__item"><i class="fa-solid fa-times"></i>Regulatory approvals in separate system &mdash; not linked to live blockchain state</div>
         <div class="sh-excl-compare__item"><i class="fa-solid fa-times"></i>Audit trail requires operator cooperation to reconstruct</div>
         <div class="sh-excl-compare__item"><i class="fa-solid fa-times"></i>Smart contract upgrades can silently change compliance rules</div>
-        <div class="sh-excl-compare__item"><i class="fa-solid fa-times"></i>Insurance solvency monitored off-chain &mdash; reactive, not proactive</div>
       </div>
     </div>
     <div class="sh-excl-compare__divider"><div class="sh-excl-compare__divider-badge">VS</div></div>
@@ -783,7 +718,6 @@
         <div class="sh-excl-compare__item"><i class="fa-solid fa-check"></i>Regulatory state is blockchain state &mdash; consistent, real-time, always accurate</div>
         <div class="sh-excl-compare__item"><i class="fa-solid fa-check"></i>Audit trail is the blockchain &mdash; independently verifiable by any node operator</div>
         <div class="sh-excl-compare__item"><i class="fa-solid fa-check"></i>Protocol compliance logic requires full network upgrade to change &mdash; transparent</div>
-        <div class="sh-excl-compare__item"><i class="fa-solid fa-check"></i>Insurance reserves computed every block &mdash; proactive, automatic enforcement</div>
       </div>
     </div>
   </div>
@@ -797,7 +731,6 @@
         <tr><td>KYC data storage</td><td>Encrypted on-chain, permanent</td><td>Off-chain / none</td><td>Off-chain MSP</td><td>Operator database</td></tr>
         <tr><td>Asset regulatory approval</td><td>6-state TotemApproval at consensus</td><td>None native</td><td>Admin function</td><td>External registry</td></tr>
         <tr><td>AML transfer blocking</td><td>CONTROLLABLE currency type</td><td>None native</td><td>Chaincode rule</td><td>SWIFT / correspondent bank</td></tr>
-        <tr><td>Insurance solvency</td><td>Live reserve computation, auto-redistribution</td><td>Smart contract only</td><td>None</td><td>Regulator inspection</td></tr>
         <tr><td>Regulatory authority</td><td>Hardcoded at genesis, immutable</td><td>None native</td><td>Admin key</td><td>External regulator</td></tr>
         <tr><td>Audit trail</td><td>Blockchain state &mdash; immutable, quantum-resistant</td><td>Event logs (limited)</td><td>Ledger (operator-controlled)</td><td>Database (modifiable)</td></tr>
         <tr><td>Post-quantum readiness</td><td>ML-DSA + ML-KEM from genesis</td><td>ECDSA &mdash; migration pending</td><td>RSA/ECDSA &mdash; not PQC</td><td>PKI &mdash; migration underway</td></tr>
@@ -823,47 +756,50 @@
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer class="sh-footer">
   <div class="sh-footer__grid">
     <div>
-      <div class="sh-footer__wordmark">SHAMWARI</div>
+      <div class="sh-footer__wordmark">
+        <img src="img/icon.png" height="72" width="72" />
+      </div>
       <p class="sh-footer__tagline">Quantum-resistant financial infrastructure for 4 billion people across Africa, LATAM, ASEAN and MENA.</p>
       <div class="sh-footer__socials">
         <a href="https://bitbucket.org/thenamelesstree/shamwari" class="sh-footer__social"><i class="fa-brands fa-bitbucket"></i></a>
-        <a href="#" class="sh-footer__social"><i class="fa-brands fa-x-twitter"></i></a>
-        <a href="#" class="sh-footer__social"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://x.com/shamwarinetwork" class="sh-footer__social"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://www.linkedin.com/showcase/shamwarinetwork" class="sh-footer__social"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:contact@shamwari.network" class="sh-footer__social"><i class="fa fa-envelope"></i></a>
+        
       </div>
     </div>
     <div>
       <div class="sh-footer__col-title">Platform</div>
-      <a href="shamwaripay.html" class="sh-footer__link">ShamwariPay</a>
-      <a href="digitalassets.html" class="sh-footer__link">Totem Exchange</a>
-      <a href="insurance.html" class="sh-footer__link">Insurance</a>
-      <a href="store.html" class="sh-footer__link">Commerce</a>
-      <a href="subscriptions.html" class="sh-footer__link">Subscriptions</a>
+      <a href="shamwaripay.html"         class="sh-footer__link">ShamwariPay</a>
+      <a href="digitalassets.html"       class="sh-footer__link">Totem Exchange</a>
+      <a href="digitalcertificates.html" class="sh-footer__link">Certificates</a>
+      <a href="subscriptions.html"       class="sh-footer__link">Subscriptions</a>
     </div>
     <div>
       <div class="sh-footer__col-title">Technology</div>
-      <a href="architecture.html" class="sh-footer__link">Architecture</a>
-      <a href="security.html" class="sh-footer__link">Post-Quantum Security</a>
-      <a href="accounts.html" class="sh-footer__link">Accounts &amp; Identity</a>
-      <a href="digitalcertificates.html" class="sh-footer__link">Certificates</a>
-      <a href="compliance.html" class="sh-footer__link">Compliance</a>
+      <a href="architecture.html"        class="sh-footer__link">Architecture</a>
+      <a href="security.html"            class="sh-footer__link">Post-Quantum Security</a>
+      <a href="accounts.html"            class="sh-footer__link">Accounts &amp; Identity</a>
+      <a href="compliance.html"          class="sh-footer__link">Compliance</a>
     </div>
     <div>
       <div class="sh-footer__col-title">Resources</div>
-      <a href="solutions.html" class="sh-footer__link">Solutions</a>
-      <a href="developers.html" class="sh-footer__link">Developer Hub</a>
-      <a href="roadmap.html" class="sh-footer__link">Roadmap</a>
-      <a href="https://bitbucket.org/thenamelesstree/shamwari/src/main/docs/" class="sh-footer__link">Documentation</a>
+      <a href="solutions.html"    class="sh-footer__link">Solutions</a>
+      <a href="developers.html"   class="sh-footer__link">Developer Hub</a>
+      <a href="https://docs.shamwari.network" class="sh-footer__link">Documentation</a>
       <a href="https://wallet.shamwari.network" class="sh-footer__link">Launch Wallet</a>
     </div>
   </div>
   <div class="sh-footer__bottom">
-    <span>© 2026 TheNamelessTree Networks. All rights reserved.</span>
-    <a href="https://thenamelesstree.co.zw" class="sh-footer__bottom-right">TheNamelessTree Networks</a>
+    <span>&copy; 2026 TheNamelessTree Networks. All rights reserved.</span>
+    <span class="sh-footer__bottom-right"><a href="https://thenamelesstree.co.zw" target="blank">thenamelesstree.co.zw</a></span>
   </div>
 </footer>
+
 <a href="#" class="sh-back-top" id="back-top" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></a>
 <script>
 (function(){

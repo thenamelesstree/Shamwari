@@ -110,7 +110,7 @@
     <div class="pg-hero__content">
       <div class="sh-eyebrow sh-eyebrow--teal">SYSTEM ARCHITECTURE · FULL REFERENCE</div>
       <h1 class="pg-hero__title">Two-tier ledger.<br>Five financial systems.<br>One root chain.</h1>
-      <p class="pg-hero__sub">A parent chain anchors sovereign child chains. Each chain is an isolated financial environment with its own schema, currency, permission policy, and embedded regulatory authorities. Every financial primitive from payments, lending, insurance, commerce and identity reside within the consensus layer, not in smart contracts.</p>
+      <p class="pg-hero__sub">A parent chain anchors sovereign child chains. Each chain is an isolated financial environment with its own schema, currency, permission policy, and embedded regulatory authorities. Every financial primitive from payments, lending and identity reside within the consensus layer, not in smart contracts.</p>
       <div class="pg-hero__badges">
         <span class="sh-badge sh-badge--teal">FXTCHAIN + BETACHAINS</span>
         <span class="sh-badge sh-badge--gold">70+ TRANSACTION TYPES</span>
@@ -209,7 +209,7 @@
             <div class="arch-beta-card__items">
               <div class="arch-beta-card__item">Schema: ZIMBABWE</div>
               <div class="arch-beta-card__item">ZWG stablecoin · CBDC</div>
-              <div class="arch-beta-card__item">Full ShamwariPay + Insurance</div>
+              <div class="arch-beta-card__item">Full ShamwariPay</div>
               <div class="arch-beta-card__item">CENTRAL BANK authority account</div>
               <div class="arch-beta-card__item">Policy → BETA at block 10K</div>
             </div>
@@ -223,7 +223,7 @@
             <div class="arch-beta-card__items">
               <div class="arch-beta-card__item">Schema: SOUTHAFRICA</div>
               <div class="arch-beta-card__item">ZAR digital currency</div>
-              <div class="arch-beta-card__item">Totem + Insurance</div>
+              <div class="arch-beta-card__item">Totem</div>
               <div class="arch-beta-card__item">SARB + FSB authority accounts</div>
               <div class="arch-beta-card__item">SARS tax withholding</div>
             </div>
@@ -276,7 +276,7 @@
     <div class="arch-section-head__copy">
       <div class="sh-eyebrow sh-eyebrow--gold">SCHEMA ISOLATION</div>
       <div class="arch-section-head__title">Every BetaChain is a fully isolated database</div>
-      <p class="arch-section-head__sub">Each chain writes exclusively to its own named schema in the database. Account balances, totem ownership, insurance policies, and all financial state are schema-scoped and one chain cannot read or write another's tables. This is not application-level isolation; it is enforced at the database layer.</p>
+      <p class="arch-section-head__sub">Each chain writes exclusively to its own named schema in the database. Account balances, totem ownership and all financial state are schema-scoped and one chain cannot read or write another's tables. This is not application-level isolation; it is enforced at the database layer.</p>
     </div>
   </div>
   <div class="pg-two-col">
@@ -312,7 +312,7 @@ BetaChain.newBuilder()
       <div class="pg-features pg-reveal">
         <div class="pg-feature"><div class="pg-feature__accent pg-feature__accent--teal"></div><div class="pg-feature__icon sh-text--teal"><i class="fa-solid fa-building-columns"></i></div><div><div class="pg-feature__title">Central Bank</div><div class="pg-feature__body">Controls currency issuance, reserve requirements, and monetary policy transactions. The only account type permitted to execute <span class="sh-code">CURRENCY_ISSUANCE</span> and set currency control parameters. Embedded at betaChain genesis and cannot be changed post-deployment.</div></div></div>
         <div class="pg-feature"><div class="pg-feature__accent pg-feature__accent--gold"></div><div class="pg-feature__icon sh-text--gold"><i class="fa-solid fa-scale-balanced"></i></div><div><div class="pg-feature__title">Securities Regulator</div><div class="pg-feature__body">Controls TotemApproval lifecycle: approving, suspending, and delisting tokenised securities. The 6-state machine requires securities regulator signature on all state transitions. No application code can bypass this.</div></div></div>
-        <div class="pg-feature"><div class="pg-feature__accent pg-feature__accent--purple"></div><div class="pg-feature__icon" style="color:var(--purple)"><i class="fa-solid fa-shield-heart"></i></div><div><div class="pg-feature__title">Insurance Authority</div><div class="pg-feature__body">Approves and suspends insurance products. Only the insurance authority account can execute <span class="sh-code">INSURANCE_APPROVAL</span> and <span class="sh-code">INSURANCE_SUSPENSION</span>. Authority account ID validated at consensus, not by application logic.</div></div></div>
+        <div class="pg-feature"><div class="pg-feature__accent pg-feature__accent--purple"></div><div class="pg-feature__icon" style="color:var(--purple)"><i class="fa-solid fa-shield-heart"></i></div></div>
         <div class="pg-feature"><div class="pg-feature__accent pg-feature__accent--teal"></div><div class="pg-feature__icon sh-text--teal"><i class="fa-solid fa-lock"></i></div><div><div class="pg-feature__title">Immutability Guarantee</div><div class="pg-feature__body">All three authority account IDs are written into the chain genesis block. There is no admin transaction that changes them post-deploy. A nation's central bank cannot be replaced by any participant including Shamwari network operators.</div></div></div>
       </div>
     </div>
@@ -339,7 +339,7 @@ BetaChain.newBuilder()
         <div class="arch-perm-rung arch-perm-rung--1 pg-reveal"><div class="arch-perm-rung__code">MASTER_ADMIN</div><div class="arch-perm-rung__desc">Root authority. Grants CHAIN_BINDER and CHAIN_ADMIN permissions. Cannot be revoked by any other account. Equivalent to system root.</div></div>
         <div class="arch-perm-rung arch-perm-rung--2 pg-reveal"><div class="arch-perm-rung__code">CHAIN_BINDER</div><div class="arch-perm-rung__desc">Transaction processor permission allowing granted accounts to preprocess chain transactions. Granted by MASTER_ADMIN only.</div></div>
         <div class="arch-perm-rung arch-perm-rung--3 pg-reveal"><div class="arch-perm-rung__code">CHAIN_ADMIN</div><div class="arch-perm-rung__desc">Approves account CHAIN_USER permissions after KYC/AML checks. Banks and financial services providers operate with this permission.</div></div>
-        <div class="arch-perm-rung arch-perm-rung--4 pg-reveal"><div class="arch-perm-rung__code">CHAIN_USER</div><div class="arch-perm-rung__desc">Standard participant. Required on BETA_CHAIN policy chains. All transactional operations from payments, trading to insurance and commerce require this level.</div></div>
+        <div class="arch-perm-rung arch-perm-rung--4 pg-reveal"><div class="arch-perm-rung__code">CHAIN_USER</div><div class="arch-perm-rung__desc">Standard participant. Required on BETA_CHAIN policy chains. All transactional operations from payments to asset management require this level.</div></div>
         <div class="arch-perm-rung arch-perm-rung--5 pg-reveal"><div class="arch-perm-rung__code">BLOCKED_CHAIN_USER</div><div class="arch-perm-rung__desc">Positive denial mechanism hard-blocks a CHAIN_USER even if CHAIN_USER is also set. Preserves full audit history of both permission grants and blocks.</div></div>
       </div>
     </div>
@@ -358,10 +358,8 @@ BetaChain.newBuilder()
           <tbody>
             <tr><td>CURRENCY_PAYMENT (P2P)</td><td class="arch-gate-ok">✓ Yes</td><td class="arch-gate-fn">isAIAllowed() → true</td></tr>
             <tr><td>SUBSCRIBE / UNSUBSCRIBE</td><td class="arch-gate-ok">✓ Yes</td><td class="arch-gate-fn">isAIAllowed() → true</td></tr>
-            <tr><td>PURCHASES</td><td class="arch-gate-ok">✓ Yes</td><td class="arch-gate-fn">isAIAllowed() → true</td></tr>
             <tr><td>EXCHANGE_BUY / SELL</td><td class="arch-gate-ok">✓ Yes</td><td class="arch-gate-fn">isAIAllowed() → true</td></tr>
             <tr><td>ISSUE_CERTIFICATE</td><td class="arch-gate-no">✗ Blocked</td><td class="arch-gate-fn">default → false</td></tr>
-            <tr><td>INSURANCE_APPROVAL</td><td class="arch-gate-no">✗ Blocked</td><td class="arch-gate-fn">default → false</td></tr>
             <tr><td>GRANT_PERMISSION</td><td class="arch-gate-no">✗ Blocked</td><td class="arch-gate-fn">default → false</td></tr>
             <tr><td>TOTEM_APPROVAL</td><td class="arch-gate-no">✗ Blocked</td><td class="arch-gate-fn">default → false</td></tr>
           </tbody>
@@ -389,9 +387,9 @@ BetaChain.newBuilder()
     <div class="arch-pipe-step pg-reveal"><div class="arch-pipe-num arch-pipe-num--teal">2</div><div class="arch-pipe-content"><div class="arch-pipe-label">Chain Routing: isAllowed(TransactionType)</div><div class="arch-pipe-desc">Chain.isAllowed(type) determines whether this transaction type is permitted on the target chain. FxtChain rejects all BetaChain transaction types. BetaChains reject all negative-byte infrastructure types. Chains with disabled transaction types enforce rejection on submission.</div><code class="arch-pipe-code">Chain.isAllowed(tx.getType()) → boolean</code><div class="arch-pipe-tags"><span class="arch-pipe-tag">Type byte routing</span><span class="arch-pipe-tag">disabledAPITags enforcement</span></div></div></div>
     <div class="arch-pipe-step pg-reveal"><div class="arch-pipe-num arch-pipe-num--teal">3</div><div class="arch-pipe-content"><div class="arch-pipe-label">Permission Policy Check</div><div class="arch-pipe-desc">On BETA_CHAIN policy chains, the sender's permission level is verified. Transactions requiring administrator status are rejected from CHAIN_USER accounts. MASTER_ADMIN limited to granting CHAIN_ADMIN and CHAIN_BINDER permissions.</div><code class="arch-pipe-code">PermissionPolicy.check(sender, txType) → PASS | REJECT</code><div class="arch-pipe-tags"><span class="arch-pipe-tag">5-level hierarchy</span><span class="arch-pipe-tag">Admin-type enforcement</span></div></div></div>
     <div class="arch-pipe-step pg-reveal"><div class="arch-pipe-num arch-pipe-num--slate">4</div><div class="arch-pipe-content"><div class="arch-pipe-label">Account Type Gate</div><div class="arch-pipe-desc">AccountType.isAllowed(tx, account) enforces protocol-level role restrictions. Only a BANK account can issue currency. Only a MERCHANT account can receive STORE_PURCHASE transactions. AI accounts can only submit transactions where isAIAllowed()=true. Verified at consensus.</div><code class="arch-pipe-code">AccountType.isAllowed(Transaction tx, Account sender)</code><div class="arch-pipe-tags"><span class="arch-pipe-tag">10 account types</span><span class="arch-pipe-tag">AI gate enforced</span><span class="arch-pipe-tag">Role-based tx routing</span></div></div></div>
-    <div class="arch-pipe-step pg-reveal"><div class="arch-pipe-num arch-pipe-num--slate">5</div><div class="arch-pipe-content"><div class="arch-pipe-label">Attachment Validation</div><div class="arch-pipe-desc">Each transaction type implements its own validateAttachment() as the business logic gate. Insurance validates reserve sufficiency and product state. Totem validates TotemApproval lifecycle. Store validates merchant account type, escrow availability, and delivery deadline. Loan validates collateral value.</div><code class="arch-pipe-code">TransactionType.validateAttachment(Transaction tx)</code><div class="arch-pipe-tags"><span class="arch-pipe-tag">Business logic gate</span><span class="arch-pipe-tag">State machine validation</span><span class="arch-pipe-tag">Reserve checks</span></div></div></div>
+    <div class="arch-pipe-step pg-reveal"><div class="arch-pipe-num arch-pipe-num--slate">5</div><div class="arch-pipe-content"><div class="arch-pipe-label">Attachment Validation</div><div class="arch-pipe-desc">Each transaction type implements its own validateAttachment() as the business logic gate. Totem validates TotemApproval lifecycle. Loan validates collateral value.</div><code class="arch-pipe-code">TransactionType.validateAttachment(Transaction tx)</code><div class="arch-pipe-tags"><span class="arch-pipe-tag">Business logic gate</span><span class="arch-pipe-tag">State machine validation</span><span class="arch-pipe-tag">Reserve checks</span></div></div></div>
     <div class="arch-pipe-step pg-reveal"><div class="arch-pipe-num arch-pipe-num--slate">6</div><div class="arch-pipe-content"><div class="arch-pipe-label">Balance &amp; Overflow Check</div><div class="arch-pipe-desc">All arithmetic uses Java long with explicit overflow-safe guards. Insufficient balance → rejection. The ledger can never enter a state with negative balances or integer overflow through checks before any ledger write occurs. Escrow amounts are locked and validated in the same gate.</div><code class="arch-pipe-code">BalanceHome.addToBalance(accountId, -amount) → overflow-safe</code><div class="arch-pipe-tags"><span class="arch-pipe-tag">Overflow-safe arithmetic</span><span class="arch-pipe-tag">No negative balances</span></div></div></div>
-    <div class="arch-pipe-step pg-reveal"><div class="arch-pipe-num arch-pipe-num--gold">7</div><div class="arch-pipe-content"><div class="arch-pipe-label">Block Apply &amp; Atomic Ledger Commit</div><div class="arch-pipe-desc">All validated transactions in a block are applied atomically in a single database transaction. Balance debits and credits, totem transfers, insurance state changes, loan updates, and certificate issuances all commit or all roll back together. There is no partial-block state on Shamwari.</div><code class="arch-pipe-code">BlockchainProcessorImpl.apply(block) → atomic DB transaction</code><div class="arch-pipe-tags"><span class="arch-pipe-tag">Atomic block commit</span><span class="arch-pipe-tag">No partial-state risk</span><span class="arch-pipe-tag">Cross-system atomicity</span></div></div></div>
+    <div class="arch-pipe-step pg-reveal"><div class="arch-pipe-num arch-pipe-num--gold">7</div><div class="arch-pipe-content"><div class="arch-pipe-label">Block Apply &amp; Atomic Ledger Commit</div><div class="arch-pipe-desc">All validated transactions in a block are applied atomically in a single database transaction. Balance debits and credits, totem transfers, loan updates, and certificate issuances all commit or all roll back together. There is no partial-block state on Shamwari.</div><code class="arch-pipe-code">BlockchainProcessorImpl.apply(block) → atomic DB transaction</code><div class="arch-pipe-tags"><span class="arch-pipe-tag">Atomic block commit</span><span class="arch-pipe-tag">No partial-state risk</span><span class="arch-pipe-tag">Cross-system atomicity</span></div></div></div>
   </div>
 </div>
 </section>
@@ -405,16 +403,14 @@ BetaChain.newBuilder()
     <div class="arch-section-head__copy">
       <div class="sh-eyebrow sh-eyebrow--gold">PROTOCOL AUTOMATION</div>
       <div class="arch-section-head__title">The blockchain bills itself and pays itself out</div>
-      <p class="arch-section-head__sub">After every successfully applied block, the <span class="sh-code">AFTER_BLOCK_APPLY</span> event fires. Multiple systems register listeners that execute automatic protocol operations without any user transaction subscriptions unsubscribe themselves after lapses, insurance products cancel on expiry, expired purchases refund buyers, and Totem freeze heights activate without any human trigger.</p>
+      <p class="arch-section-head__sub">After every successfully applied block, the <span class="sh-code">AFTER_BLOCK_APPLY</span> event fires. Multiple systems register listeners that execute automatic protocol operations without any user transaction subscriptions unsubscribe themselves after lapses and Totem freeze heights activate without any human trigger.</p>
     </div>
   </div>
   <div class="arch-auto-grid">
     <div class="arch-auto-card arch-auto-card--teal pg-reveal"><div class="arch-auto-card__bar"></div><div class="arch-auto-card__trigger">TRIGGER: AFTER_BLOCK_APPLY</div><div class="arch-auto-card__name">Subscriptions</div><div class="arch-auto-card__body">When <span class="sh-code">currentHeight == nextBillingHeight</span>, without another premium payment, the subscription listener unsubscribes the account to the service and updates the subscription statusin the same block. For payments, the nextBillingHeight is set to currentHeight + billingPeriod. Works for human accounts and AI accounts alike.</div></div>
-    <div class="arch-auto-card arch-auto-card--gold pg-reveal"><div class="arch-auto-card__bar"></div><div class="arch-auto-card__trigger">TRIGGER: AFTER_BLOCK_APPLY</div><div class="arch-auto-card__name">Insurance Reserve Redistribution</div><div class="arch-auto-card__body">When an insurance product reaches DELISTED status or has been SUSPENDED for 90 days, the redistribution listener proportionally distributes the remaining actuarial reserve to all active policyholders. No claim required. No intermediary. Executed at block height.</div></div>
-    <div class="arch-auto-card arch-auto-card--teal pg-reveal"><div class="arch-auto-card__bar"></div><div class="arch-auto-card__trigger">TRIGGER: AFTER_BLOCK_APPLY</div><div class="arch-auto-card__name">Purchase Expiry Refund</div><div class="arch-auto-card__body">If a merchant has not confirmed delivery by <span class="sh-code">deliveryDeadlineHeight</span>, the escrowed purchase amount is automatically refunded to the buyer at that block. No dispute required. The seller's rating is penalised in the same operation.</div></div>
+    
     <div class="arch-auto-card arch-auto-card--purple pg-reveal"><div class="arch-auto-card__bar"></div><div class="arch-auto-card__trigger">TRIGGER: AFTER_BLOCK_APPLY</div><div class="arch-auto-card__name">Totem Freeze Monitor</div><div class="arch-auto-card__body">At the block height set in <span class="sh-code">TOTEM_FREEZE_HEIGHT_PROPERTY</span>, the freeze listener marks the Totem as illiquid. All subsequent transfer transactions are rejected at attachment validation. No separate freeze transaction is required from the issuer.</div></div>
     <div class="arch-auto-card arch-auto-card--purple pg-reveal"><div class="arch-auto-card__bar"></div><div class="arch-auto-card__trigger">TRIGGER: AFTER_BLOCK_APPLY</div><div class="arch-auto-card__name">Totem Migration Activation</div><div class="arch-auto-card__body">At <span class="sh-code">TOTEM_MIGRATE_HEIGHT_PROPERTY</span>, the migration listener activates the TotemSnapshot capturing the holder distribution at that block. Used for token migration events across chains without requiring holder action.</div></div>
-    <div class="arch-auto-card arch-auto-card--gold pg-reveal"><div class="arch-auto-card__bar"></div><div class="arch-auto-card__trigger">TRIGGER: AFTER_BLOCK_APPLY</div><div class="arch-auto-card__name">Insurance Policy Lapse</div><div class="arch-auto-card__body">When a policy's <span class="sh-code">expirationHeight</span> is reached and no renewal transaction has been received, the lapse listener transitions the policy to LAPSED status. Actuarial reserves are updated accordingly without issuer intervention.</div></div>
   </div>
 </div>
 </section>
@@ -435,9 +431,6 @@ BetaChain.newBuilder()
     <div>
       <div class="arch-tx-cluster"><div class="arch-tx-cluster__head arch-tx-cluster__head--teal"><div class="arch-tx-cluster__title">SHAMWARI PAY</div><div class="arch-tx-cluster__count sh-text--teal">17</div></div><div class="arch-tx-cluster__list"><div class="arch-tx-cluster__item">CURRENCY_ISSUANCE · CURRENCY_PAYMENT</div><div class="arch-tx-cluster__item">RESERVE_INCREASE · RESERVE_CLAIM</div><div class="arch-tx-cluster__item">PUBLISH_EXCHANGE_OFFER</div><div class="arch-tx-cluster__item">EXCHANGE_BUY · EXCHANGE_SELL</div><div class="arch-tx-cluster__item">LOAN_OFFER · LOAN_ACCEPT · LOAN_REPAYMENT</div><div class="arch-tx-cluster__item">COLLATERAL_RESCUE</div><div class="arch-tx-cluster__item">SAVINGS_DEPOSIT · SAVINGS_WITHDRAWAL</div><div class="arch-tx-cluster__item">ORDER_PLACEMENT · ORDER_CANCELLATION</div><div class="arch-tx-cluster__item">CANCEL_ALL_ORDERS · TRANSFER_CURRENCY</div></div></div>
       <div class="arch-tx-cluster"><div class="arch-tx-cluster__head arch-tx-cluster__head--gold"><div class="arch-tx-cluster__title">TOTEM EXCHANGE</div><div class="arch-tx-cluster__count sh-text--gold">11</div></div><div class="arch-tx-cluster__list"><div class="arch-tx-cluster__item">TOTEM_ISSUANCE · TOTEM_TRANSFER</div><div class="arch-tx-cluster__item">TOTEM_APPROVAL (6-state lifecycle)</div><div class="arch-tx-cluster__item">TOTEM_SUPPLY_INCREASE · TOTEM_DELETION</div><div class="arch-tx-cluster__item">TOTEM_SET_PROPERTY · DIVIDEND_PAYMENT</div><div class="arch-tx-cluster__item">PLACE_ASK_ORDER · PLACE_BID_ORDER</div><div class="arch-tx-cluster__item">CANCEL_ASK_ORDER · CANCEL_BID_ORDER</div></div></div>
-      <div class="arch-tx-cluster"><div class="arch-tx-cluster__head arch-tx-cluster__head--teal"><div class="arch-tx-cluster__title">INSURANCE</div><div class="arch-tx-cluster__count sh-text--teal">19</div></div><div class="arch-tx-cluster__list"><div class="arch-tx-cluster__item">INSURANCE_CREATION · INSURANCE_APPROVAL</div><div class="arch-tx-cluster__item">INSURANCE_SUSPENSION · INSURANCE_DELISTING</div><div class="arch-tx-cluster__item">INSURANCE_RENEWAL · POLICY_APPLICATION</div><div class="arch-tx-cluster__item">POLICY_APPROVAL · POLICY_REJECTION</div><div class="arch-tx-cluster__item">POLICY_CANCELLATION · PREMIUM_PAYMENT</div><div class="arch-tx-cluster__item">CLAIM_SUBMISSION · CLAIM_APPROVAL</div><div class="arch-tx-cluster__item">CLAIM_REJECTION · CLAIM_APPEAL</div><div class="arch-tx-cluster__item">APPEAL_ADJUDICATION · FRAUD_INVESTIGATION</div><div class="arch-tx-cluster__item">RESERVE_DEPOSIT · RESERVE_WITHDRAWAL</div></div></div>
-    </div>
-    <div>
       <div class="arch-tx-cluster"><div class="arch-tx-cluster__head arch-tx-cluster__head--gold"><div class="arch-tx-cluster__title">E-COMMERCE</div><div class="arch-tx-cluster__count sh-text--gold">4</div></div><div class="arch-tx-cluster__list"><div class="arch-tx-cluster__item">PURCHASES</div><div class="arch-tx-cluster__item">DELIVERIES</div><div class="arch-tx-cluster__item">REFUNDS</div><div class="arch-tx-cluster__item">REWARDS</div></div></div>
       <div class="arch-tx-cluster"><div class="arch-tx-cluster__head arch-tx-cluster__head--teal"><div class="arch-tx-cluster__title">IDENTITY &amp; CERTIFICATES</div><div class="arch-tx-cluster__count sh-text--teal">4</div></div><div class="arch-tx-cluster__list"><div class="arch-tx-cluster__item">ISSUE_CERTIFICATE · RENEW_CERTIFICATE</div><div class="arch-tx-cluster__item">REVOKE_CERTIFICATE · SET_ACCOUNT_INFO</div></div></div>
       <div class="arch-tx-cluster"><div class="arch-tx-cluster__head arch-tx-cluster__head--slate"><div class="arch-tx-cluster__title">CHAIN CONTROL (FxtChain)</div><div class="arch-tx-cluster__count" style="color:var(--txt-secondary)">5</div></div><div class="arch-tx-cluster__list"><div class="arch-tx-cluster__item">GRANT_PERMISSION · REVOKE_PERMISSION</div><div class="arch-tx-cluster__item">FORGING_ASSIGNMENT · CHAIN_CONFIG</div><div class="arch-tx-cluster__item">BLOCK VALIDATION</div></div></div>
@@ -482,7 +475,7 @@ BetaChain.newBuilder()
   </div>
   <div class="pg-cards2">
     <div class="pg-card2 pg-reveal"><div class="pg-card2__accent pg-card2__accent--teal"></div><h3 class="pg-card2__title">Fixed, auditable security surface</h3><p class="pg-card2__body">On existing platforms, every new dApp deployment is a new attack surface. Shamwari's financial logic is audited once in the protocol codebase and deployed everywhere. $3.8B+ in DeFi has been lost to smart contract exploits that are structurally impossible here.</p><ul class="pg-card2__list"><li>No re-entrancy and no external contract calls from financial logic</li><li>No integer overflow or explicit overflow-safe arithmetic throughout</li><li>No upgrade proxy vulnerabilities as the protocol is the final arbiter</li><li>No frontrunning on type routing with consensus determining order</li></ul></div>
-    <div class="pg-card2 pg-reveal"><div class="pg-card2__accent pg-card2__accent--gold"></div><h3 class="pg-card2__title">Compliance is enforced, not requested</h3><p class="pg-card2__body">Regulatory controls like TotemApproval, account type restrictions, and insurance authority actions are enforced by the consensus engine. No application-layer code can override them such that a suspended Totem stays suspended regardless of what any front-end tells users.</p><ul class="pg-card2__list"><li>TotemApproval state blocks transfers at attachment validation</li><li>MERCHANT type required for purchase receipt and is enforced at consensus level</li><li>Insurance reserve gate blocks over-issuance automatically</li><li>AI isAIAllowed() checked before mempool entry, not after</li></ul></div>
+    <div class="pg-card2 pg-reveal"><div class="pg-card2__accent pg-card2__accent--gold"></div><h3 class="pg-card2__title">Compliance is enforced, not requested</h3><p class="pg-card2__body">Regulatory controls like TotemApproval, account type restrictions are enforced by the consensus engine. No application-layer code can override them such that a suspended Totem stays suspended regardless of what any front-end tells users.</p><ul class="pg-card2__list"><li>TotemApproval state blocks transfers at attachment validation</li><li>MERCHANT type required for purchase receipt and is enforced at consensus level</li><li>AI isAIAllowed() checked before mempool entry, not after</li></ul></div>
     <div class="pg-card2 pg-reveal"><div class="pg-card2__accent pg-card2__accent--teal"></div><h3 class="pg-card2__title">Cross-system atomicity without bridges</h3><p class="pg-card2__body">All five financial systems share the same protocol, so cross-system operations are atomic by construction. A purchase that triggers a loyalty reward, a loan repayment that releases collateral can all execute in one block, one database transaction. No bridge risk. No cross-contract call failure.</p><ul class="pg-card2__list"><li>No bridge risk as there is no cross-contract calls between systems</li><li>Single DB transaction per block based on all-or-nothing semantics</li><li>AFTER_BLOCK_APPLY listeners maintain consistent post-state</li><li>No oracle dependency for internal financial logic</li></ul></div>
     <div class="pg-card2 pg-reveal"><div class="pg-card2__accent pg-card2__accent--gold"></div><h3 class="pg-card2__title">Predictable fees for mass-market access</h3><p class="pg-card2__body">Gas models create unpredictable transaction costs, making them unusable for high-frequency, low-value operations like subscription billing, insurance premium collection, and microfinance repayments. Shamwari's transaction fee model is fixed and predictable per transaction type.</p><ul class="pg-card2__list"><li>Fixed, predictable fees per transaction type</li><li>No fee spikes during network congestion events</li><li>Subscription payment viable at zero marginal cost per cycle</li><li>Viable on feature phones with low-bandwidth connections</li></ul></div>
   </div>
@@ -579,7 +572,6 @@ BetaChain.newBuilder()
       <div class="sp-tax-rate"><div class="sp-tax-rate__name">VALUE ADDED</div><div class="sp-tax-rate__bps">0–3500 bps</div><div class="sp-tax-rate__range">Goods &amp; services</div></div>
       <div class="sp-tax-rate"><div class="sp-tax-rate__name">CAPITAL GAINS</div><div class="sp-tax-rate__bps">0–3500 bps</div><div class="sp-tax-rate__range">Asset sales</div></div>
       <div class="sp-tax-rate"><div class="sp-tax-rate__name">SALES</div><div class="sp-tax-rate__bps">0–3500 bps</div><div class="sp-tax-rate__range">Store purchases</div></div>
-      <div class="sp-tax-rate"><div class="sp-tax-rate__name">INSURANCE LEVY</div><div class="sp-tax-rate__bps">0–3500 bps</div><div class="sp-tax-rate__range">Policy applications</div></div>
       <div class="sp-tax-rate"><div class="sp-tax-rate__name">CURRENCY TRANSFER</div><div class="sp-tax-rate__bps">0–3500 bps</div><div class="sp-tax-rate__range">Payments &amp; lending</div></div>
       <div class="sp-tax-rate"><div class="sp-tax-rate__name">LOAN INTEREST</div><div class="sp-tax-rate__bps">0–3500 bps</div><div class="sp-tax-rate__range">Withholding at source</div></div>
       <div class="sp-tax-rate"><div class="sp-tax-rate__name">SUBSCRIPTION</div><div class="sp-tax-rate__bps">0–3500 bps</div><div class="sp-tax-rate__range">Recurring services</div></div>
@@ -587,7 +579,6 @@ BetaChain.newBuilder()
       <div class="sp-tax-rate"><div class="sp-tax-rate__name">TOTEM ISSUANCE</div><div class="sp-tax-rate__bps">0–3500 bps</div><div class="sp-tax-rate__range">Stamp duty</div></div>
       <div class="sp-tax-rate"><div class="sp-tax-rate__name">DIVIDEND</div><div class="sp-tax-rate__bps">0–3500 bps</div><div class="sp-tax-rate__range">Withholding tax</div></div>
       <div class="sp-tax-rate"><div class="sp-tax-rate__name">STORE REFUND</div><div class="sp-tax-rate__bps">0–3500 bps</div><div class="sp-tax-rate__range">Refund transactions</div></div>
-      <div class="sp-tax-rate"><div class="sp-tax-rate__name">INSURANCE PREMIUM</div><div class="sp-tax-rate__bps">0–3500 bps</div><div class="sp-tax-rate__range">Premium payments</div></div>
     </div>
   </div>
   <div class="pg-two-col">
@@ -740,7 +731,7 @@ BetaChain.newBuilder()
   <div class="pg-cards3">
     <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--teal"><i class="fa-solid fa-building-columns"></i></div><div class="pg-card__title">Central Bank Authority</div><div class="pg-card__body">Controls currency issuance, reserve requirements, and monetary policy. The only account permitted to execute CURRENCY_ISSUANCE and set currency control parameters. Hardcoded at genesis and cannot be changed.</div></div>
     <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--gold"><i class="fa-solid fa-scale-balanced"></i></div><div class="pg-card__title">Securities Regulator</div><div class="pg-card__body">Controls TotemApproval lifecycle responsible for approving, suspending, and delisting tokenised securities. The 6-state approval workflow requires regulator signature on all transitions. No bypass possible.</div></div>
-    <div class="pg-card pg-reveal"><div class="pg-card__icon" style="background:rgba(139,92,246,.1);color:var(--purple)"><i class="fa-solid fa-shield-heart"></i></div><div class="pg-card__title">Insurance Authority</div><div class="pg-card__body">Approves and suspends insurance products. Only this account can execute INSURANCE_APPROVAL and INSURANCE_SUSPENSION. Authority ID hardcoded at genesis and validated at consensus.</div></div>
+    
     <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--red"><i class="fa-solid fa-file-invoice-dollar"></i></div><div class="pg-card__title">Tax Collector</div><div class="pg-card__body">Receives all tax withholding from taxable transactions. Immutable designation at chain genesis. Tax Collector account balance reflects total tax revenues collected in real time.</div></div>
     <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--teal"><i class="fa-solid fa-lock"></i></div><div class="pg-card__title">Immutability Guarantee</div><div class="pg-card__body">All regulatory authority account IDs are written into the chain genesis block. No admin transaction can change them post-deployment. A nation's central bank cannot be replaced by any participant.</div></div>
     <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--gold"><i class="fa-solid fa-network-wired"></i></div><div class="pg-card__title">Shared Consensus</div><div class="pg-card__body">All chains share the same proof-of-stake consensus and block ordering. Inter-chain settlement is provably tied to specific block heights. Compliance teams query each chain's state independently.</div></div>
@@ -796,46 +787,47 @@ BetaChain.newBuilder()
   </div>
 </section>
 
-
+<!-- FOOTER -->
 <footer class="sh-footer">
   <div class="sh-footer__grid">
     <div>
-      <div class="sh-footer__wordmark">SHAMWARI</div>
+      <div class="sh-footer__wordmark">
+        <img src="img/icon.png" height="72" width="72" />
+      </div>
       <p class="sh-footer__tagline">Quantum-resistant financial infrastructure for 4 billion people across Africa, LATAM, ASEAN and MENA.</p>
       <div class="sh-footer__socials">
         <a href="https://bitbucket.org/thenamelesstree/shamwari" class="sh-footer__social"><i class="fa-brands fa-bitbucket"></i></a>
-        <a href="#" class="sh-footer__social"><i class="fa-brands fa-x-twitter"></i></a>
-        <a href="#" class="sh-footer__social"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://x.com/shamwarinetwork" class="sh-footer__social"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://www.linkedin.com/showcase/shamwarinetwork" class="sh-footer__social"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:contact@shamwari.network" class="sh-footer__social"><i class="fa fa-envelope"></i></a>
+        
       </div>
     </div>
     <div>
       <div class="sh-footer__col-title">Platform</div>
-      <a href="shamwaripay.html" class="sh-footer__link">ShamwariPay</a>
-      <a href="digitalassets.html" class="sh-footer__link">Totem Exchange</a>
-      <a href="insurance.html" class="sh-footer__link">Insurance</a>
-      <a href="store.html" class="sh-footer__link">Commerce</a>
-      <a href="subscriptions.html" class="sh-footer__link">Subscriptions</a>
+      <a href="shamwaripay.html"         class="sh-footer__link">ShamwariPay</a>
+      <a href="digitalassets.html"       class="sh-footer__link">Totem Exchange</a>
+      <a href="digitalcertificates.html" class="sh-footer__link">Certificates</a>
+      <a href="subscriptions.html"       class="sh-footer__link">Subscriptions</a>
     </div>
     <div>
-      <div class="sh-footer__col-title">Architecture</div>
-      <a href="#chain-hierarchy" class="sh-footer__link">Chain Hierarchy</a>
-      <a href="#permission-system" class="sh-footer__link">Permission System</a>
-      <a href="#consensus" class="sh-footer__link">Consensus Pipeline</a>
-      <a href="#binder-protocol" class="sh-footer__link">Binder Protocol</a>
-      <a href="#taxation" class="sh-footer__link">Taxation</a>
+      <div class="sh-footer__col-title">Technology</div>
+      <a href="architecture.html"        class="sh-footer__link">Architecture</a>
+      <a href="security.html"            class="sh-footer__link">Post-Quantum Security</a>
+      <a href="accounts.html"            class="sh-footer__link">Accounts &amp; Identity</a>
+      <a href="compliance.html"          class="sh-footer__link">Compliance</a>
     </div>
     <div>
       <div class="sh-footer__col-title">Resources</div>
-      <a href="solutions.html" class="sh-footer__link">Solutions</a>
-      <a href="developers.html" class="sh-footer__link">Developer Hub</a>
-      <a href="roadmap.html" class="sh-footer__link">Roadmap</a>
-      <a href="https://bitbucket.org/thenamelesstree/shamwari/src/main/docs/" class="sh-footer__link">Documentation</a>
+      <a href="solutions.html"    class="sh-footer__link">Solutions</a>
+      <a href="developers.html"   class="sh-footer__link">Developer Hub</a>
+      <a href="https://docs.shamwari.network" class="sh-footer__link">Documentation</a>
       <a href="https://wallet.shamwari.network" class="sh-footer__link">Launch Wallet</a>
     </div>
   </div>
   <div class="sh-footer__bottom">
-    <span>© 2026 TheNamelessTree Networks. All rights reserved.</span>
-    <a href="https://thenamelesstree.co.zw" class="sh-footer__bottom-right">TheNamelessTree Networks</a>
+    <span>&copy; 2026 TheNamelessTree Networks. All rights reserved.</span>
+    <span class="sh-footer__bottom-right"><a href="https://thenamelesstree.co.zw" target="blank">thenamelesstree.co.zw</a></span>
   </div>
 </footer>
 
