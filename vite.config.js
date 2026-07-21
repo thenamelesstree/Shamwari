@@ -3,7 +3,7 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path'
 
 export default defineConfig({
-  base: '/', // project root (default)
+  root: '.', // Use '.' instead of '/'
   server: {
     port: 3000,
     open: true,
