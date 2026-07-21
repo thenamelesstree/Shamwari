@@ -1,26 +1,8 @@
 {
   "rewrites": [
-    { "source": "architecture", "destination": "/architecture.html" },
-    { "source": "compliance", "destination": "/compliance.html" },
-    { "source": "security", "destination": "/security.html" },
-    { "source": "/developers", "destination": "/developers.html" },
-    { "source": "/shamwaripay", "destination": "/shamwaripay.html" },
-    { "source": "/digitalassets", "destination": "/digitalassets.html" },
-    { "source": "/digitalcertificates", "destination": "/digitalcertificates.html" },
-    { "source": "/currencies", "destination": "/currencies.html" },
-    { "source": "/subscriptions", "destination": "/subscriptions.html" },
-    { "source": "/solutions", "destination": "/solutions.html" },
-    { "source": "/accounts", "destination": "/accounts.html" },
-    { "source": "/personal", "destination": "/personal.html" },
-    { "source": "/banks", "destination": "/banks.html" },
-    { "source": "/government", "destination": "/government.html" },
-    { "source": "/fspmfi", "destination": "/fspmfi.html" },
-    { "source": "/merchants", "destination": "/merchants.html" },
-    { "source": "/roadmap", "destination": "/roadmap.html" },
-    { "source": "/pricing", "destination": "/pricing.html" },
-    { "source": "/privacy", "destination": "/privacy.html" },
-    { "source": "/cookies", "destination": "/cookies.html" },
-    { "source": "/termsandconditions", "destination": "/termsandconditions.html" },
-    { "source": "/", "destination": "/index.html" }
+    {
+      "source": "/:path+",
+      "destination": "/:path+.html"
+    }
   ]
 }
