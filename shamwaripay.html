@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ShamwariPay - A Complete Monetary System - Shamwari</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Protocol-native monetary system: 5 currency types, CBDC, lending, savings, vaults, and programmable taxation at consensus.">
+<link href="/favicon.ico" rel="icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body><nav class="sh-nav" id="sh-nav">
+<div class="sh-nav__inner">
+  <a href="home" class="sh-nav__brand">
+    <div>
+    		<img src="/img/banner.png" alt="Shamwari Logo" height="40">
+    </div>
+  </a>
+  <button class="sh-nav__toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="sh-nav__menu" id="nav-menu">	
+    <a href="architecture" class="sh-nav__link">Architecture</a>
+    <a href="compliance" class="sh-nav__link">Compliance</a>
+    <a href="security" class="sh-nav__link">Security</a>
+    <a href="solutions" class="sh-nav__link">Solutions</a>
+    <a href="developers" class="sh-nav__link">Developers</a>
+  </div>
+</div>
+</nav>
+
+<section class="pg-hero" style="background: url('/img/virtual_account_floating.jpg')">
+  <div class="pg-hero__glow"></div>
+  <div class="sh-container pg-hero__inner">
+    <div class="pg-hero__content">
+      <div class="sh-eyebrow sh-eyebrow--teal">MONETARY SYSTEM · VOL I</div>
+      <h1 class="pg-hero__title">The Complete<br>Monetary System</h1>
+      <p class="pg-hero__sub">Five currency types, programmable taxation, credit markets, savings, and time-locked vaults, all enforced by blockchain consensus, not application code.</p>
+      <div class="pg-hero__badges"><span class="sh-badge sh-badge--teal">5 CURRENCY TYPES</span><span class="sh-badge sh-badge--gold">CBDC-READY</span><span class="sh-badge sh-badge--teal">PROGRAMMABLE TAX</span><span class="sh-badge sh-badge--gold">LENDING MARKETS</span></div>
+    </div>
+    <div class="pg-hero__icon-wrap"><div class="pg-hero__icon-bg"></div><i class="fa-solid fa-coins pg-hero__icon"></i></div>
+  </div>
+</section>
+<div class="pg-stats"><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--teal">14</div><div class="pg-stats__l">Monetary transaction types</div></div><div class="pg-stats__div"></div><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--gold">5</div><div class="pg-stats__l">Currency property types</div></div><div class="pg-stats__div"></div><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--teal">8</div><div class="pg-stats__l">Credit risk tiers</div></div><div class="pg-stats__div"></div><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--gold">13</div><div class="pg-stats__l">Tax rate configurations</div></div></div>
+
+<div class="sp-toc" id="sp-toc">
+  <div class="sp-toc__inner">
+    <a href="#sp-currencies" class="sp-toc__link">Currency Types</a>
+    <a href="#sp-exchange" class="sp-toc__link">Exchange</a>
+    <a href="#sp-lending" class="sp-toc__link">Lending</a>
+    <a href="#sp-savings" class="sp-toc__link">Savings &amp; Vaults</a>
+    <a href="#sp-tax" class="sp-toc__link">Taxation</a>
+    <a href="#sp-tx" class="sp-toc__link">Transactions</a>
+  </div>
+</div>
+
+<section class="sh-section" id="sp-currencies">
+  <div class="sh-container">
+    <div class="sp-head"><div class="sp-head__num">01</div><div class="sp-head__copy"><div class="sh-eyebrow sh-eyebrow--teal">CURRENCY ARCHITECTURE</div><h2 class="sp-head__title">Five currency types at consensus</h2><p class="sp-head__sub">The CurrencyType bitmask encodes all monetary properties in a single field. The protocol enforces restrictions automatically without the need for smart contracts, or  application code.</p></div></div>
+    <div class="sp-ctype-grid">
+      <div class="sp-ctype-card pg-reveal"><div class="sp-ctype-card__hex">0x01</div><div class="sp-ctype-card__name">EXCHANGEABLE</div><div class="sp-ctype-card__desc">Can be traded on the Totem DEX for other currencies. The standard liquid currency for CBDC and retail payment use cases.</div><div class="sp-ctype-card__rule">✓ Order book trading · ✓ DEX pairs · ✓ FX settlement</div></div>
+      <div class="sp-ctype-card pg-reveal"><div class="sp-ctype-card__hex">0x02</div><div class="sp-ctype-card__name">CONTROLLABLE</div><div class="sp-ctype-card__desc">Issuer retains veto power over transfers. Required for regulatory compliance, a Central Bank can freeze or block any transfer.</div><div class="sp-ctype-card__rule">✓ Issuer transfer veto · ✓ AML enforcement · ✓ Regulatory freeze</div></div>
+      <div class="sp-ctype-card pg-reveal"><div class="sp-ctype-card__hex">0x04</div><div class="sp-ctype-card__name">RESERVABLE</div><div class="sp-ctype-card__desc">Supports reserve allocation model. Required for insurance products and lending pools that need segregated reserve accounts.</div><div class="sp-ctype-card__rule">✓ Reserve segregation · ✓ Insurance reserves · ✓ Loan pools</div></div>
+      <div class="sp-ctype-card pg-reveal"><div class="sp-ctype-card__hex">0x08</div><div class="sp-ctype-card__name">CLAIMABLE</div><div class="sp-ctype-card__desc">Holders can claim units from the reserve allocation. Used for dividend-like distributions and insurance payouts.</div><div class="sp-ctype-card__rule">✓ Reserve claims · ✓ Payout distribution · ✓ Insurance payouts</div></div>
+      <div class="sp-ctype-card pg-reveal"><div class="sp-ctype-card__hex">0x10</div><div class="sp-ctype-card__name">MINTABLE</div><div class="sp-ctype-card__desc">Issuer can create new units up to the maximum supply. Used for Central Bank CBDC issuance and credit-backed currencies.</div><div class="sp-ctype-card__rule">✓ CBDC issuance · ✓ Credit expansion · ✓ Supply management</div></div>
+      <div class="sp-ctype-card pg-reveal"><div class="sp-ctype-card__hex">0x20</div><div class="sp-ctype-card__name">NON_SHUFFLEABLE</div><div class="sp-ctype-card__desc">Cannot be used in shuffling (mixing) operations. Mandatory for CBDC and AML-regulated currencies on permissioned chains.</div><div class="sp-ctype-card__rule">✓ AML compliance · ✓ CBDC traceability · ✓ Regulatory audit</div></div>
+    </div>
+    <div style="text-align:center;margin-top:3rem">
+      <a href="currencies" class="sh-btn sh-btn--ghost">Real World Usage<i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<section class="sh-section sh-section--navy" id="sp-exchange">
+  <div class="sh-container">
+    <div class="sp-head"><div class="sp-head__num">02</div><div class="sp-head__copy"><div class="sh-eyebrow sh-eyebrow--gold">DECENTRALISED EXCHANGE</div><h2 class="sp-head__title">Price-time priority order book</h2><p class="sp-head__sub">The Shamwari DEX is a full price-time priority order book operating at the consensus layer. Orders cannot be front-run since they are atomic with the block that includes them.</p></div></div>
+    <div class="sp-dex-wrap">
+      <div>
+        <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1rem;">LIVE ORDER BOOK (EXAMPLE)</div>
+        <div class="sp-orderbook">
+          <div class="sp-orderbook__head"><span>PRICE (ZWG)</span><span>SIZE</span><span>TOTAL</span></div>
+          <div class="sp-orderbook__row"><span class="sp-orderbook__ask">42.850</span><span>12,500</span><span>535,625</span></div>
+          <div class="sp-orderbook__row"><span class="sp-orderbook__ask">42.800</span><span>8,200</span><span>351,160</span></div>
+          <div class="sp-orderbook__row"><span class="sp-orderbook__ask">42.750</span><span>5,000</span><span>213,750</span></div>
+          <div class="sp-orderbook__mid"><span>42.700</span> - Mid Price</div>
+          <div class="sp-orderbook__row"><span class="sp-orderbook__bid">42.650</span><span>6,800</span><span>290,020</span></div>
+          <div class="sp-orderbook__row"><span class="sp-orderbook__bid">42.600</span><span>15,000</span><span>639,000</span></div>
+          <div class="sp-orderbook__row"><span class="sp-orderbook__bid">42.550</span><span>9,300</span><span>395,715</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="pg-features">
+          <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Price-Time Priority</div><div class="pg-feature__body">Orders matched by best price first, then submission time. Front-running is structurally impossible where order inclusion in a block is atomic and non-modifiable.</div></div></div>
+          <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">Capital Gains Tax at Execution</div><div class="pg-feature__body">The protocol calculates and withholds capital gains tax at the moment of trade execution with zero off-chain reporting required for compliant exchanges.</div></div></div>
+          <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Any Currency Pair</div><div class="pg-feature__body">Any two EXCHANGEABLE currencies on the same chain can form a trading pair. The protocol handles FX settlement atomically within the same block.</div></div></div>
+          <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">No Slippage Guarantees</div><div class="pg-feature__body">Limit orders execute at exact specified prices. Market order handling uses the existing order book depth with no AMM slippage, no MEV extraction.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sh-section" id="sp-lending">
+  <div class="sh-container">
+    <div class="sp-head"><div class="sp-head__num">03</div><div class="sp-head__copy"><div class="sh-eyebrow sh-eyebrow--teal">CREDIT MARKETS</div><h2 class="sp-head__title">Crowd-funded lending with on-chain risk scoring</h2><p class="sp-head__sub">The Shamwari lending system combines a 6-factor RiskCalculator with crowd-funded loan pools and an automatic rescue mechanism executed and enforced at the consensus level.</p></div></div>
+    <div class="pg-two-col">
+      <div class="sp-loan-flow pg-reveal">
+        <div class="sp-loan-step"><div class="sp-loan-dot sp-loan-dot--teal">1</div><div><div class="sp-loan-label">Loan Application</div><div class="sp-loan-desc">Borrower submits LENDING transaction specifying amount, term, and collateral. Protocol validates account type (SAVINGS required) and creditworthiness.</div><div class="sp-loan-code">LENDING transaction type</div></div></div>
+        <div class="sp-loan-step"><div class="sp-loan-dot sp-loan-dot--gold">2</div><div><div class="sp-loan-label">Risk Assessment</div><div class="sp-loan-desc">RiskCalculator scores the application across 6 dimensions: credit history, debt-to-income ratio, collateral quality, account age, transaction velocity, and repayment history.</div><div class="sp-loan-code">RiskCalculator.score(accountId)</div></div></div>
+        <div class="sp-loan-step"><div class="sp-loan-dot sp-loan-dot--purple">3</div><div><div class="sp-loan-label">Lender Participation</div><div class="sp-loan-desc">Lenders contribute to the loan pool up to the requested amount. Multiple lenders can fund a single loan, with proportional repayment distribution.</div><div class="sp-loan-code">LOAN_PARTICIPATION</div></div></div>
+        <div class="sp-loan-step"><div class="sp-loan-dot sp-loan-dot--teal">4</div><div><div class="sp-loan-label">Disbursement</div><div class="sp-loan-desc">Once fully funded, loan is disbursed to borrower. RepaymentHeight is set i.e the block at which full repayment is due. Loan balance tracked on-chain.</div></div></div>
+        <div class="sp-loan-step"><div class="sp-loan-dot sp-loan-dot--gold">5</div><div><div class="sp-loan-label">Repayment or Rescue</div><div class="sp-loan-desc">Borrower submits LOAN_REPAYMENT transactions. If balance is at risk, any party can submit LOAN_RESCUE with additional collateral to prevent default.</div><div class="sp-loan-code">LOAN_REPAYMENT · LOAN_RESCUE</div></div></div>
+        <div class="sp-loan-step"><div class="sp-loan-dot sp-loan-dot--red">6</div><div><div class="sp-loan-label">Maturity / Expiry</div><div class="sp-loan-desc">At RepaymentHeight, LOAN_EXPIRED event fires automatically. Remaining balance distributed to lenders from collateral via protocol-enforced liquidation.</div><div class="sp-loan-code">AFTER_BLOCK_APPLY → LOAN_EXPIRED</div></div></div>
+      </div>
+      <div>
+        <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1.25rem;">RISK CALCULATOR: 6 DIMENSIONS</div>
+        <div class="sp-risk-grid pg-reveal">
+          <div class="sp-risk-card"><div style="font-family:var(--font-mono);font-size:.62rem;color:var(--teal);margin-bottom:.35rem;">DIMENSION 01</div><div style="font-family:var(--font-display);font-size:.9rem;font-weight:700;color:var(--txt-primary);margin-bottom:.3rem;">Credit History</div><div style="font-size:.82rem;color:var(--txt-secondary);">Prior loan repayment record, defaults, and late payments weighted by recency.</div></div>
+          <div class="sp-risk-card"><div style="font-family:var(--font-mono);font-size:.62rem;color:var(--teal);margin-bottom:.35rem;">DIMENSION 02</div><div style="font-family:var(--font-display);font-size:.9rem;font-weight:700;color:var(--txt-primary);margin-bottom:.3rem;">Debt-to-Income</div><div style="font-size:.82rem;color:var(--txt-secondary);">Outstanding loan balance relative to incoming payment flows over the trailing window.</div></div>
+          <div class="sp-risk-card"><div style="font-family:var(--font-mono);font-size:.62rem;color:var(--gold);margin-bottom:.35rem;">DIMENSION 03</div><div style="font-family:var(--font-display);font-size:.9rem;font-weight:700;color:var(--txt-primary);margin-bottom:.3rem;">Collateral Quality</div><div style="font-size:.82rem;color:var(--txt-secondary);">Type, liquidity, and current market value of pledged assets relative to loan principal.</div></div>
+          <div class="sp-risk-card"><div style="font-family:var(--font-mono);font-size:.62rem;color:var(--gold);margin-bottom:.35rem;">DIMENSION 04</div><div style="font-family:var(--font-display);font-size:.9rem;font-weight:700;color:var(--txt-primary);margin-bottom:.3rem;">Account Age</div><div style="font-size:.82rem;color:var(--txt-secondary);">Blocks since account activation. Longer history reduces perceived default risk.</div></div>
+          <div class="sp-risk-card"><div style="font-family:var(--font-mono);font-size:.62rem;color:var(--teal);margin-bottom:.35rem;">DIMENSION 05</div><div style="font-family:var(--font-display);font-size:.9rem;font-weight:700;color:var(--txt-primary);margin-bottom:.3rem;">Transaction Velocity</div><div style="font-size:.82rem;color:var(--txt-secondary);">Activity level and consistency of blockchain usage as a proxy for economic stability.</div></div>
+          <div class="sp-risk-card"><div style="font-family:var(--font-mono);font-size:.62rem;color:var(--teal);margin-bottom:.35rem;">DIMENSION 06</div><div style="font-family:var(--font-display);font-size:.9rem;font-weight:700;color:var(--txt-primary);margin-bottom:.3rem;">Insurance Status</div><div style="font-size:.82rem;color:var(--txt-secondary);">Active coverage on the chain reduces lender risk and insured borrowers receive better rates.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sh-section sh-section--navy" id="sp-savings">
+  <div class="sh-container">
+    <div class="sp-head"><div class="sp-head__num">04</div><div class="sp-head__copy"><div class="sh-eyebrow sh-eyebrow--teal">SAVINGS &amp; VAULTS</div><h2 class="sp-head__title">Goal-based savings and time-locked vaults</h2><p class="sp-head__sub">Two distinct on-chain balance dimensions for structured savings with goal-based accumulation and time-locked storage. Both enforced at block level with zero trust in application code.</p></div></div>
+    <div class="sp-vault-compare pg-reveal">
+      <div class="sp-vault-card sp-vault-card--savings"><div class="sp-vault-card__label">CURRENCY SAVINGS</div><div class="sp-vault-card__title">Goal-Based Savings</div><div class="sp-vault-card__desc">Deposits accumulate towards a user-defined target amount. Funds are locked until the target is reached and then automatically released to the unconfirmed balance. Ideal for savings clubs, target savings, and microsavings products.</div><div class="sp-vault-card__props"><div class="sp-vault-prop"><span class="sp-vault-prop__k">targetUnits</span><span class="sp-vault-prop__v">User-defined goal</span></div><div class="sp-vault-prop"><span class="sp-vault-prop__k">currentUnits</span><span class="sp-vault-prop__v">Accumulated so far</span></div><div class="sp-vault-prop"><span class="sp-vault-prop__k">Release condition</span><span class="sp-vault-prop__v">units ≥ targetUnits</span></div><div class="sp-vault-prop"><span class="sp-vault-prop__k">Release mechanism</span><span class="sp-vault-prop__v">Automatic, block-level</span></div></div></div>
+      <div class="sp-vault-card sp-vault-card--vault"><div class="sp-vault-card__label">CURRENCY VAULT</div><div class="sp-vault-card__title">Time-Locked Vault</div><div class="sp-vault-card__desc">Deposits are locked until a specific block height (releaseHeight). Released automatically by the AFTER_BLOCK_APPLY handler with no transaction required to unlock. Ideal for CBDC lock-up periods, fixed-term deposits, and escrow products.</div><div class="sp-vault-card__props"><div class="sp-vault-prop"><span class="sp-vault-prop__k">lockHeight</span><span class="sp-vault-prop__v">Block when deposited</span></div><div class="sp-vault-prop"><span class="sp-vault-prop__k">releaseHeight</span><span class="sp-vault-prop__v">Block when released</span></div><div class="sp-vault-prop"><span class="sp-vault-prop__k">Release condition</span><span class="sp-vault-prop__v">currentHeight ≥ releaseHeight</span></div><div class="sp-vault-prop"><span class="sp-vault-prop__k">Release mechanism</span><span class="sp-vault-prop__v">AFTER_BLOCK_APPLY automatic</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sh-section" id="sp-tax">
+  <div class="sh-container">
+    <div class="sp-head"><div class="sp-head__num">05</div><div class="sp-head__copy"><div class="sh-eyebrow sh-eyebrow--gold">PROGRAMMABLE TAXATION</div><h2 class="sp-head__title">13 tax rate types. Zero evasion.</h2><p class="sp-head__sub">Tax rates are configured by a single SET_TAX_RATES transaction from the designated Tax Collector authority account. The protocol withholds at source eliminating self-reporting, no manual collection.</p></div></div>
+    <div class="sp-tax-rates pg-reveal">
+      <div class="sp-tax-rate"><div class="sp-tax-rate__name">TRANSFER</div><div class="sp-tax-rate__bps">25 bps</div><div class="sp-tax-rate__range">0–max per tx</div></div>
+      <div class="sp-tax-rate"><div class="sp-tax-rate__name">EXCHANGE</div><div class="sp-tax-rate__bps">15 bps</div><div class="sp-tax-rate__range">0–max per trade</div></div>
+      <div class="sp-tax-rate"><div class="sp-tax-rate__name">CAP GAINS</div><div class="sp-tax-rate__bps">200 bps</div><div class="sp-tax-rate__range">On profit portion</div></div>
+      <div class="sp-tax-rate"><div class="sp-tax-rate__name">DIVIDEND</div><div class="sp-tax-rate__bps">150 bps</div><div class="sp-tax-rate__range">Per distribution</div></div>
+      <div class="sp-tax-rate"><div class="sp-tax-rate__name">ISSUANCE</div><div class="sp-tax-rate__bps">50 bps</div><div class="sp-tax-rate__range">On new currency units</div></div>
+    </div>
+    <div class="sh-contrast-grid">
+      <div class="sh-contrast-card sh-contrast-card--teal pg-reveal"><div class="sh-contrast-card__header"><i class="fa-solid fa-check-circle"></i>SHAMWARI: PROTOCOL TAXATION</div><ul class="sh-contrast-card__list"><li>Tax withheld at point of transaction execution</li><li>13 distinct rate types with basis-point precision</li><li>Rates set by on-chain Tax Collector authority account</li><li>Atomic with the transaction which cannot be separated</li><li>Immutable CurrencyTaxRecord per collection event</li><li>Zero off-chain reporting infrastructure needed</li></ul></div>
+      <div class="sh-contrast-card sh-contrast-card--red pg-reveal"><div class="sh-contrast-card__header"><i class="fa-solid fa-times-circle"></i>TRADITIONAL APPROACH VS APPLICATION TAXATION</div><ul class="sh-contrast-card__list"><li>Tax calculated after the fact, often manually</li><li>Requires separate reporting and remittance workflows</li><li>Exchange operator collects and remits making evasion possible</li><li>Inconsistent application across platforms</li><li>No immutable audit trail at the ledger level</li><li>Compliance depends entirely on operator integrity</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="sh-section sh-section--navy" id="sp-tx">
+  <div class="sh-container">
+    <div class="sp-head"><div class="sp-head__num">06</div><div class="sp-head__copy"><div class="sh-eyebrow sh-eyebrow--teal">TRANSACTION TYPES</div><h2 class="sp-head__title">14 monetary protocol transactions</h2><p class="sp-head__sub">Each financial operation is a distinct protocol transaction type which is rejected by the network if invalid, logged immutably if valid.</p></div></div>
+    <div class="sp-tx-grid">
+      <div class="sp-tx-card sp-tx-card--teal pg-reveal"><div class="sp-tx-card__bar"></div><div class="sp-tx-card__body"><div class="sp-tx-card__subtype">SUBTYPE 0</div><div class="sp-tx-card__name">CURRENCY_ISSUANCE</div><div class="sp-tx-card__desc">Create a new ShamwariPay currency with defined type bits, supply, and monetary policy parameters.</div><div class="sp-tx-card__meta"><span class="sp-tx-card__pill">Issuer only</span><span class="sp-tx-card__pill">Type bitmask</span></div></div></div>
+      <div class="sp-tx-card sp-tx-card--teal pg-reveal"><div class="sp-tx-card__bar"></div><div class="sp-tx-card__body"><div class="sp-tx-card__subtype">SUBTYPE 1</div><div class="sp-tx-card__name">CURRENCY_TRANSFER</div><div class="sp-tx-card__desc">Transfer units between accounts. CONTROLLABLE currencies require issuer approval. Tax withheld automatically.</div><div class="sp-tx-card__meta"><span class="sp-tx-card__pill">Instant settlement</span><span class="sp-tx-card__pill">Auto tax</span></div></div></div>
+      <div class="sp-tx-card sp-tx-card--gold pg-reveal"><div class="sp-tx-card__bar"></div><div class="sp-tx-card__body"><div class="sp-tx-card__subtype">SUBTYPE 2</div><div class="sp-tx-card__name">PUBLISH_EXCHANGE_OFFER</div><div class="sp-tx-card__desc">Place a limit order on the DEX to buy/sell currency at a specified rate. Price-time priority matching.</div><div class="sp-tx-card__meta"><span class="sp-tx-card__pill">Order book</span><span class="sp-tx-card__pill">Limit only</span></div></div></div>
+      <div class="sp-tx-card sp-tx-card--gold pg-reveal"><div class="sp-tx-card__bar"></div><div class="sp-tx-card__body"><div class="sp-tx-card__subtype">SUBTYPE 3</div><div class="sp-tx-card__name">EXCHANGE_BUY</div><div class="sp-tx-card__desc">Immediately fill available sell orders up to a specified amount. Capital gains tax withheld at execution.</div><div class="sp-tx-card__meta"><span class="sp-tx-card__pill">Market fill</span><span class="sp-tx-card__pill">CGT auto</span></div></div></div>
+      <div class="sp-tx-card sp-tx-card--teal pg-reveal"><div class="sp-tx-card__bar"></div><div class="sp-tx-card__body"><div class="sp-tx-card__subtype">SUBTYPE 5</div><div class="sp-tx-card__name">CURRENCY_PAYMENT</div><div class="sp-tx-card__desc">Payment to a SAVINGS-type recipient. Required for retail CBDC distribution and regulated payment flows.</div><div class="sp-tx-card__meta"><span class="sp-tx-card__pill">SAVINGS recipients</span><span class="sp-tx-card__pill">Regulated</span></div></div></div>
+      <div class="sp-tx-card sp-tx-card--purple pg-reveal"><div class="sp-tx-card__bar"></div><div class="sp-tx-card__body"><div class="sp-tx-card__subtype">SUBTYPE 9</div><div class="sp-tx-card__name">LENDING</div><div class="sp-tx-card__desc">Apply for or fund a loan. Specifies principal, term, risk parameters, and collateral. Crowd-funding support built in.</div><div class="sp-tx-card__meta"><span class="sp-tx-card__pill">8 risk tiers</span><span class="sp-tx-card__pill">Crowd-funded</span><span class="sp-ai-badge">AI</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="sh-cta">
+  <div class="sh-cta__glow"></div>
+  <div class="sh-cta__inner">
+    <div class="sh-eyebrow sh-eyebrow--teal">EXPLORE FURTHER</div>
+    <h2 class="sh-cta__title">The complete monetary infrastructure.</h2>
+    <p class="sh-cta__sub">Full API documentation, transaction type reference, and testnet access available.</p>
+    <div class="sh-cta__actions"><a href="developers" class="sh-btn sh-btn--teal sh-btn--lg">API Reference</a><a href="compliance" class="sh-btn sh-btn--ghost sh-btn--lg">Compliance Layer</a></div>
+  </div>
+</section>
+<!-- FOOTER -->
+<footer class="sh-footer">
+  <div class="sh-footer__grid">
+    <div>
+      <div class="sh-footer__wordmark">
+        <img src="/img/icon.png" height="72" width="72" />
+      </div>
+      <p class="sh-footer__tagline">Quantum-resistant financial infrastructure for 4 billion people across Africa, LATAM, ASEAN and MENA.</p>
+      <div class="sh-footer__socials">
+        <a href="https://bitbucket.org/thenamelesstree/shamwari" class="sh-footer__social"><i class="fa-brands fa-bitbucket"></i></a>
+        <a href="https://x.com/shamwarinetwork" class="sh-footer__social"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://www.linkedin.com/showcase/shamwarinetwork" class="sh-footer__social"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:contact@shamwari.network" class="sh-footer__social"><i class="fa fa-envelope"></i></a>
+        
+      </div>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Platform</div>
+      <a href="shamwaripay"         class="sh-footer__link">ShamwariPay</a>
+      <a href="digitalassets"       class="sh-footer__link">Totem Exchange</a>
+      <a href="digitalcertificates" class="sh-footer__link">Certificates</a>
+      <a href="subscriptions"       class="sh-footer__link">Subscriptions</a>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Technology</div>
+      <a href="architecture"        class="sh-footer__link">Architecture</a>
+      <a href="security"            class="sh-footer__link">Post-Quantum Security</a>
+      <a href="accounts"            class="sh-footer__link">Accounts &amp; Identity</a>
+      <a href="compliance"          class="sh-footer__link">Compliance</a>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Resources</div>
+      <a href="solutions"    class="sh-footer__link">Solutions</a>
+      <a href="developers"   class="sh-footer__link">Developer Hub</a>
+      <a href="https://docs.shamwari.network" class="sh-footer__link">Documentation</a>
+      <a href="https://wallet.shamwari.network" class="sh-footer__link">Launch Wallet</a>
+    </div>
+  </div>
+  <div class="sh-footer__bottom">
+    <span>&copy; 2026 TheNamelessTree Networks. All rights reserved.</span>
+    <span class="sh-footer__bottom-right"><a href="https://thenamelesstree.co.zw" target="blank">thenamelesstree.co.zw</a></span>
+  </div>
+</footer>
+<a href="#" class="sh-back-top" id="back-top" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></a><script>
+(function(){
+  var nav=document.getElementById('sh-nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('sh-nav--scrolled',window.scrollY>50);});
+  var tgl=document.getElementById('nav-toggle'),menu=document.getElementById('nav-menu');
+  if(tgl&&menu){tgl.addEventListener('click',function(){tgl.classList.toggle('is-open');menu.classList.toggle('is-open');});}
+  var bt=document.getElementById('back-top');
+  if(bt){window.addEventListener('scroll',function(){bt.classList.toggle('is-visible',window.scrollY>400);});bt.addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});});}
+  var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');ro.unobserve(e.target);}});},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.sh-reveal,.pg-reveal').forEach(function(el){ro.observe(el);});
+  var tocLinks=document.querySelectorAll('.arch-toc__link,.sp-toc__link');
+  if(tocLinks.length){
+    var secs=[].slice.call(tocLinks).map(function(l){return document.querySelector(l.getAttribute('href'));}).filter(Boolean);
+    var io2=new IntersectionObserver(function(entries){entries.forEach(function(e){var l=document.querySelector('[href="#'+e.target.id+'"]');if(l)l.classList.toggle('is-active',e.isIntersecting);});},{rootMargin:'-20% 0px -75% 0px'});
+    secs.forEach(function(s){io2.observe(s);});
+  }
+})();
+</script>
+<script type="module" src="/src/main.js"></script>
+</body></html>

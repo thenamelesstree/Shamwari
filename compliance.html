@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Compliance &amp; Regulation &mdash; Shamwari</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Shamwari protocol-native compliance: TotemApproval, 13-type programmable taxation, KYC/AML at consensus, immutable audit trails, and jurisdiction-specific regulatory authority accounts embedded at genesis.">
+<link href="/favicon.ico" rel="icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+/* ── Compliance page styles ─────────────────────────────────────────── */
+.comp-toc{position:sticky;top:72px;background:rgba(8,15,30,.95);border-bottom:1px solid var(--border-dk);z-index:100;padding:0 2rem;backdrop-filter:blur(12px)}
+.comp-toc__inner{max-width:1240px;margin:0 auto;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.comp-toc__inner::-webkit-scrollbar{display:none}
+.comp-toc__link{font-family:var(--font-display);font-size:.7rem;font-weight:600;letter-spacing:.06em;color:var(--txt-muted);padding:.82rem 1rem;border-bottom:2px solid transparent;white-space:nowrap;transition:color .2s,border-color .2s;text-decoration:none}
+.comp-toc__link:hover,.comp-toc__link.is-active{color:var(--gold);border-bottom-color:var(--gold)}
+
+.comp-head{display:flex;align-items:flex-start;gap:1.5rem;margin-bottom:3rem}
+.comp-head__num{font-family:var(--font-display);font-size:4rem;font-weight:800;color:rgba(255,255,255,.06);line-height:1;letter-spacing:-.05em;flex-shrink:0;user-select:none}
+.comp-head__copy{flex:1}
+.comp-head__title{font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:var(--txt-primary);line-height:1.2;letter-spacing:-.02em;margin-bottom:.75rem}
+.comp-head__sub{font-size:.975rem;color:var(--txt-secondary);line-height:1.72;max-width:720px}
+
+/* Authority cards */
+.comp-auth-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.comp-auth-card{background:var(--bg-card-dk);border:1px solid var(--border-dk);border-radius:var(--radius);padding:2rem;position:relative;overflow:hidden;transition:border-color .25s,transform .25s,box-shadow .25s}
+.comp-auth-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.comp-auth-card__bar{position:absolute;top:0;left:0;right:0;height:2px}
+.comp-auth-card--gold{border-color:rgba(200,155,60,.2)}.comp-auth-card--gold:hover{border-color:rgba(200,155,60,.5)}.comp-auth-card--gold .comp-auth-card__bar{background:var(--gold)}
+.comp-auth-card--teal{border-color:rgba(0,168,158,.2)}.comp-auth-card--teal:hover{border-color:rgba(0,168,158,.5)}.comp-auth-card--teal .comp-auth-card__bar{background:var(--teal)}
+.comp-auth-card--purple{border-color:rgba(139,92,246,.2)}.comp-auth-card--purple:hover{border-color:rgba(139,92,246,.5)}.comp-auth-card--purple .comp-auth-card__bar{background:var(--purple)}
+.comp-auth-card__immutable{position:absolute;top:1rem;right:1rem;font-family:var(--font-mono);font-size:.52rem;letter-spacing:.08em;background:rgba(255,255,255,.04);border:1px solid var(--border-dk);color:var(--txt-muted);padding:.15rem .5rem;border-radius:40px}
+.comp-auth-card__icon{width:46px;height:46px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:1.25rem}
+.comp-auth-card--gold .comp-auth-card__icon{background:var(--gold-ghost);color:var(--gold)}
+.comp-auth-card--teal .comp-auth-card__icon{background:var(--teal-ghost);color:var(--teal)}
+.comp-auth-card--purple .comp-auth-card__icon{background:rgba(139,92,246,.1);color:var(--purple)}
+.comp-auth-card__label{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.15em;margin-bottom:.4rem}
+.comp-auth-card--gold .comp-auth-card__label{color:var(--gold)}
+.comp-auth-card--teal .comp-auth-card__label{color:var(--teal)}
+.comp-auth-card--purple .comp-auth-card__label{color:var(--purple)}
+.comp-auth-card__title{font-family:var(--font-display);font-size:1.05rem;font-weight:800;color:var(--txt-primary);margin-bottom:.75rem;line-height:1.25}
+.comp-auth-card__body{font-size:.875rem;color:var(--txt-secondary);line-height:1.68;margin-bottom:1.1rem}
+.comp-auth-card__caps{display:flex;flex-wrap:wrap;gap:.35rem;padding-top:1rem;border-top:1px solid var(--border-dk)}
+.comp-auth-card__cap{font-family:var(--font-display);font-size:.62rem;font-weight:600;letter-spacing:.04em;padding:.15rem .6rem;border-radius:40px;white-space:nowrap;border:1px solid}
+.comp-auth-card--gold .comp-auth-card__cap{color:var(--gold);border-color:rgba(200,155,60,.3);background:rgba(200,155,60,.06)}
+.comp-auth-card--teal .comp-auth-card__cap{color:var(--teal);border-color:rgba(0,168,158,.3);background:rgba(0,168,158,.06)}
+.comp-auth-card--purple .comp-auth-card__cap{color:var(--purple);border-color:rgba(139,92,246,.3);background:rgba(139,92,246,.06)}
+
+/* Tax grid */
+.comp-tax-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.85rem;margin-bottom:2.5rem}
+.comp-tax-card{background:var(--bg-card-dk);border:1px solid var(--border-dk);border-radius:var(--radius-xs);padding:1.2rem 1rem;text-align:center;transition:border-color .2s,transform .2s}
+.comp-tax-card:hover{border-color:rgba(200,155,60,.4);transform:translateY(-2px)}
+.comp-tax-card__name{font-family:var(--font-display);font-size:.6rem;font-weight:700;letter-spacing:.12em;color:var(--gold);margin-bottom:.4rem}
+.comp-tax-card__bps{font-family:var(--font-mono);font-size:.95rem;color:var(--txt-primary);font-weight:500;margin-bottom:.2rem}
+.comp-tax-card__desc{font-size:.66rem;color:var(--txt-muted);font-family:var(--font-mono);line-height:1.35}
+
+/* KYC flow */
+.comp-kyc-flow{display:flex;flex-direction:column;gap:0}
+.comp-kyc-step{display:flex;gap:1.5rem;align-items:flex-start;padding:1.4rem 0;border-left:2px solid var(--border-dk);padding-left:2rem;margin-left:1rem;position:relative}
+.comp-kyc-step:last-child{border-color:transparent}
+.comp-kyc-dot{position:absolute;left:-.95rem;top:1.55rem;width:1.85rem;height:1.85rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:.7rem;font-weight:800;flex-shrink:0}
+.comp-kyc-dot--gold{background:var(--gold);color:#fff}
+.comp-kyc-dot--teal{background:var(--teal);color:#fff}
+.comp-kyc-dot--purple{background:var(--purple);color:#fff}
+.comp-kyc-dot--slate{background:rgba(255,255,255,.07);border:1.5px solid var(--txt-muted);color:var(--txt-secondary)}
+.comp-kyc-label{font-family:var(--font-display);font-size:.9rem;font-weight:700;color:var(--txt-primary);margin-bottom:.3rem}
+.comp-kyc-desc{font-size:.875rem;color:var(--txt-secondary);line-height:1.65}
+.comp-kyc-code{display:inline-block;font-family:var(--font-mono);font-size:.7rem;color:var(--teal);background:var(--teal-ghost);padding:.15rem .55rem;border-radius:4px;margin-top:.35rem}
+
+/* Insurance lifecycle compact */
+.comp-ins-lifecycle{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1.75rem}
+.comp-ins-state{background:var(--bg-card-dk);border:1.5px solid;border-radius:var(--radius-xs);padding:.9rem 1rem}
+.comp-ins-state--grey{border-color:var(--border-dk)}
+.comp-ins-state--green{border-color:rgba(34,197,94,.3)}
+.comp-ins-state--teal{border-color:rgba(0,168,158,.35)}
+.comp-ins-state--gold{border-color:rgba(200,155,60,.35)}
+.comp-ins-state--red{border-color:rgba(224,82,82,.35)}
+.comp-ins-state--darkred{border-color:rgba(176,53,53,.4)}
+.comp-ins-state__label{font-family:var(--font-display);font-size:.7rem;font-weight:700;letter-spacing:.06em;margin-bottom:.25rem}
+.comp-ins-state--grey .comp-ins-state__label{color:var(--txt-muted)}
+.comp-ins-state--green .comp-ins-state__label{color:var(--green)}
+.comp-ins-state--teal .comp-ins-state__label{color:var(--teal)}
+.comp-ins-state--gold .comp-ins-state__label{color:var(--gold)}
+.comp-ins-state--red .comp-ins-state__label{color:var(--red)}
+.comp-ins-state--darkred .comp-ins-state__label{color:#ff6b6b}
+.comp-ins-state__desc{font-size:.72rem;color:var(--txt-muted);line-height:1.45}
+
+/* Jurisdiction cards */
+.comp-jx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.comp-jx-card{background:var(--bg-card-dk);border:1px solid var(--border-dk);border-radius:var(--radius);overflow:hidden;transition:border-color .25s,transform .25s}
+.comp-jx-card:hover{transform:translateY(-3px)}
+.comp-jx-card--zim{border-color:rgba(200,155,60,.2)}.comp-jx-card--zim:hover{border-color:rgba(200,155,60,.5)}
+.comp-jx-card--sa{border-color:rgba(0,168,158,.2)}.comp-jx-card--sa:hover{border-color:rgba(0,168,158,.5)}
+.comp-jx-card--cap{border-color:rgba(139,92,246,.2)}.comp-jx-card--cap:hover{border-color:rgba(139,92,246,.5)}
+.comp-jx-card__bar{height:2px}
+.comp-jx-card--zim .comp-jx-card__bar{background:var(--gold)}
+.comp-jx-card--sa  .comp-jx-card__bar{background:var(--teal)}
+.comp-jx-card--cap .comp-jx-card__bar{background:var(--purple)}
+.comp-jx-card__body{padding:1.75rem}
+.comp-jx-card__flag{font-size:1.6rem;margin-bottom:.6rem}
+.comp-jx-card__chain{font-family:var(--font-display);font-size:1.05rem;font-weight:800;margin-bottom:.2rem}
+.comp-jx-card--zim .comp-jx-card__chain{color:var(--gold)}
+.comp-jx-card--sa  .comp-jx-card__chain{color:var(--teal)}
+.comp-jx-card--cap .comp-jx-card__chain{color:var(--purple)}
+.comp-jx-card__currency{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.12em;color:var(--txt-muted);margin-bottom:1.1rem}
+.comp-jx-card__authorities{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.25rem}
+.comp-jx-card__auth{display:flex;align-items:center;gap:.6rem;font-size:.82rem;color:var(--txt-secondary)}
+.comp-jx-card__auth i{font-size:.75rem;flex-shrink:0}
+.comp-jx-card--zim .comp-jx-card__auth i{color:var(--gold)}
+.comp-jx-card--sa  .comp-jx-card__auth i{color:var(--teal)}
+.comp-jx-card--cap .comp-jx-card__auth i{color:var(--purple)}
+.comp-jx-card__controls{padding-top:1rem;border-top:1px solid var(--border-dk)}
+.comp-jx-card__controls-label{font-family:var(--font-display);font-size:.6rem;font-weight:700;letter-spacing:.12em;color:var(--txt-muted);margin-bottom:.6rem;text-transform:uppercase}
+.comp-jx-card__control-list{display:flex;flex-wrap:wrap;gap:.35rem}
+.comp-jx-card__control{font-size:.66rem;color:var(--txt-muted);background:rgba(255,255,255,.04);border:1px solid var(--border-dk);border-radius:40px;padding:.15rem .6rem;font-family:var(--font-display);font-weight:600;letter-spacing:.03em}
+
+/* Audit table */
+.comp-audit-table{width:100%;border-collapse:collapse;font-size:.875rem;border:1px solid var(--border-dk);border-radius:var(--radius);overflow:hidden}
+.comp-audit-table thead tr{background:rgba(255,255,255,.03)}
+.comp-audit-table th{font-family:var(--font-display);font-size:.63rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.9rem 1.25rem;text-align:left;border-bottom:1px solid var(--border-dk);color:var(--txt-muted)}
+.comp-audit-table th:first-child{color:var(--gold)}
+.comp-audit-table tbody tr{border-bottom:1px solid var(--border-dk);background:var(--bg-card-dk);transition:background .15s}
+.comp-audit-table tbody tr:nth-child(even){background:rgba(255,255,255,.02)}
+.comp-audit-table tbody tr:last-child{border-bottom:none}
+.comp-audit-table tbody tr:hover{background:rgba(200,155,60,.04)}
+.comp-audit-table td{padding:.85rem 1.25rem;vertical-align:top;line-height:1.5;color:var(--txt-secondary)}
+.comp-audit-table td:first-child{font-family:var(--font-mono);font-size:.75rem;color:var(--txt-primary);font-weight:500;white-space:nowrap}
+.comp-audit-table td:nth-child(2){color:var(--gold);font-size:.84rem}
+.comp-audit-good{color:var(--teal)!important;font-weight:500}
+.comp-audit-bad{color:var(--red)!important}
+
+/* AML strip */
+.comp-aml-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border-dk);border-radius:var(--radius);overflow:hidden;background:var(--bg-card-dk);margin-bottom:3rem}
+.comp-aml-item{padding:1.75rem 1.5rem;border-right:1px solid var(--border-dk);text-align:center}
+.comp-aml-item:last-child{border-right:none}
+.comp-aml-item__icon{font-size:1.5rem;margin-bottom:.75rem;color:var(--gold)}
+.comp-aml-item__title{font-family:var(--font-display);font-size:.85rem;font-weight:700;color:var(--txt-primary);margin-bottom:.5rem}
+.comp-aml-item__body{font-size:.8rem;color:var(--txt-secondary);line-height:1.55}
+
+/* Comparison table */
+.comp-cmp-table{width:100%;border-collapse:collapse;font-size:.84rem;border:1px solid var(--border-dk);border-radius:var(--radius);overflow:hidden;min-width:780px}
+.comp-cmp-table thead tr{background:rgba(255,255,255,.03)}
+.comp-cmp-table th{font-family:var(--font-display);font-size:.63rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.9rem 1.1rem;text-align:left;border-bottom:1px solid var(--border-dk);color:var(--txt-muted)}
+.comp-cmp-table th:nth-child(2){color:var(--gold)}
+.comp-cmp-table tbody tr{border-bottom:1px solid var(--border-dk);background:var(--bg-card-dk);transition:background .15s}
+.comp-cmp-table tbody tr:nth-child(even){background:rgba(255,255,255,.02)}
+.comp-cmp-table tbody tr:last-child{border-bottom:none}
+.comp-cmp-table tbody tr:hover{background:rgba(200,155,60,.04)}
+.comp-cmp-table td{padding:.82rem 1.1rem;vertical-align:top;line-height:1.45;color:var(--txt-secondary);font-size:.82rem}
+.comp-cmp-table td:first-child{font-family:var(--font-mono);font-size:.75rem;color:var(--txt-primary);font-weight:500;white-space:nowrap;width:20%}
+.comp-cmp-table td:nth-child(2){color:var(--teal)}
+
+@media(max-width:1100px){
+  .comp-auth-grid{grid-template-columns:1fr 1fr}
+  .comp-tax-grid{grid-template-columns:repeat(3,1fr)}
+  .comp-jx-grid{grid-template-columns:1fr}
+  .comp-aml-strip{grid-template-columns:1fr 1fr}
+  .comp-ins-lifecycle{grid-template-columns:repeat(3,1fr)}
+  .comp-aml-item:nth-child(2){border-right:none}
+  .comp-aml-item:nth-child(3){border-top:1px solid var(--border-dk)}
+  .comp-aml-item:nth-child(4){border-top:1px solid var(--border-dk)}
+}
+@media(max-width:768px){
+  .comp-toc{display:none}
+  .comp-auth-grid{grid-template-columns:1fr}
+  .comp-tax-grid{grid-template-columns:1fr 1fr}
+  .comp-ins-lifecycle{grid-template-columns:1fr 1fr}
+  .comp-head{flex-direction:column;gap:.5rem}
+  .comp-head__num{font-size:2.5rem}
+  .comp-aml-strip{grid-template-columns:1fr}
+  .comp-aml-item{border-right:none;border-bottom:1px solid var(--border-dk)}
+  .comp-aml-item:last-child{border-bottom:none}
+  .pg-two-col{grid-template-columns:1fr}
+}
+@media(max-width:480px){.comp-tax-grid{grid-template-columns:1fr 1fr}.comp-ins-lifecycle{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="sh-nav" id="sh-nav">
+<div class="sh-nav__inner">
+  <a href="home" class="sh-nav__brand">
+    <div>
+    		<img src="/img/banner.png" alt="Shamwari Logo" height="40">
+    </div>
+  </a>
+  <button class="sh-nav__toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="sh-nav__menu" id="nav-menu">
+    <a href="architecture"   class="sh-nav__link">Architecture</a>
+    <a href="compliance"     class="sh-nav__link sh-nav__link--active">Compliance</a>
+    <a href="security"       class="sh-nav__link">Security</a>
+    <a href="solutions"      class="sh-nav__link">Solutions</a>
+    <a href="developers"     class="sh-nav__link">Developers</a>
+  </div>
+</div>
+</nav>
+
+<!-- HERO -->
+<section class="pg-hero" style="background: url('/img/digital_varied_blue.jpg')">
+  <div class="pg-hero__glow pg-hero__glow--gold"></div>
+  <div class="sh-container pg-hero__inner">
+    <div class="pg-hero__content">
+      <div class="sh-eyebrow sh-eyebrow--gold">REGULATORY PRIMITIVES</div>
+      <h1 class="pg-hero__title">Compliance<br>by Design</h1>
+      <p class="pg-hero__sub">On general-purpose chains, compliance is a front-end filter that application code can bypass. On Shamwari, regulatory status is a consensus primitive — enforced by every node, every block, for every transaction. There is no configuration, no middleware, and no operator that can circumvent it.</p>
+      <div class="pg-hero__badges">
+        <span class="sh-badge sh-badge--gold">TOTEMAPPROVAL</span>
+        <span class="sh-badge sh-badge--teal">13 TAX TYPES</span>
+        <span class="sh-badge sh-badge--gold">KYC AT CONSENSUS</span>
+        <span class="sh-badge sh-badge--teal">JURISDICTION CHAINS</span>
+        <span class="sh-badge sh-badge--gold">IMMUTABLE AUDIT</span>
+        <span class="sh-badge sh-badge--teal">AML CONTROLS</span>
+      </div>
+    </div>
+    <div class="pg-hero__icon-wrap"><div class="pg-hero__icon-bg"></div><i class="fa-solid fa-scale-balanced pg-hero__icon"></i></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="pg-stats">
+  <div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--gold">6</div><div class="pg-stats__l">TotemApproval regulatory states</div></div>
+  <div class="pg-stats__div"></div>
+  <div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--teal">5</div><div class="pg-stats__l">Embedded authority types per jurisdiction chain</div></div>
+  <div class="pg-stats__div"></div>
+  <div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--gold">13</div><div class="pg-stats__l">Programmable tax rate types</div></div>
+  <div class="pg-stats__div"></div>
+  <div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--teal">0</div><div class="pg-stats__l">Smart contracts &mdash; all compliance at protocol layer</div></div>
+</div>
+
+<!-- TOC -->
+<nav class="comp-toc" id="comp-toc">
+  <div class="comp-toc__inner">
+    <a href="#totemapproval"  class="comp-toc__link">01 &mdash; TotemApproval</a>
+    <a href="#authorities"   class="comp-toc__link">02 &mdash; Regulatory Authorities</a>
+    <a href="#kyc-aml"       class="comp-toc__link">03 &mdash; KYC &amp; AML</a>
+    <a href="#taxation"      class="comp-toc__link">04 &mdash; Taxation</a>
+    <a href="#jurisdictions" class="comp-toc__link">05 &mdash; Jurisdictions</a>
+    <a href="#audit"         class="comp-toc__link">06 &mdash; Audit Trail</a>
+    <a href="#comparison"    class="comp-toc__link">07 &mdash; Comparison</a>
+  </div>
+</nav>
+
+
+<!-- 01 TOTEMAPPROVAL -->
+<section class="sh-section" id="totemapproval">
+<div class="sh-container">
+  <div class="comp-head">
+    <div class="comp-head__num">01</div>
+    <div class="comp-head__copy">
+      <div class="sh-eyebrow sh-eyebrow--gold">ASSET COMPLIANCE</div>
+      <div class="comp-head__title">TotemApproval &mdash; the regulatory primitive</div>
+      <p class="comp-head__sub">The TotemApproval system implements a full securities-regulator workflow as first-class protocol primitives. Regulators interact directly with the blockchain through signed transactions. Every state transition is atomic, immutable, and independently verifiable by any counterparty in real time.</p>
+    </div>
+  </div>
+
+  <div class="sh-lifecycle" style="margin-bottom:1.5rem">
+    <div class="sh-lifecycle__state sh-lifecycle__state--grey pg-reveal"><div class="sh-lifecycle__label">PENDING</div><div class="sh-lifecycle__desc">Issuer submits TOTEM_ISSUANCE. On-chain but not tradeable. Awaits regulator action.</div></div>
+    <div class="sh-lifecycle__arrow"><i class="fa-solid fa-chevron-right"></i></div>
+    <div class="sh-lifecycle__state sh-lifecycle__state--green pg-reveal"><div class="sh-lifecycle__label">UNDER_REVIEW</div><div class="sh-lifecycle__desc">Regulator actively reviewing issuer documentation and legal structure.</div></div>
+    <div class="sh-lifecycle__arrow"><i class="fa-solid fa-chevron-right"></i></div>
+    <div class="sh-lifecycle__state sh-lifecycle__state--teal pg-reveal"><div class="sh-lifecycle__label">APPROVED</div><div class="sh-lifecycle__desc">Asset listed and tradeable. Transfers enabled. May carry an expirationHeight requiring re-approval.</div></div>
+    <div class="sh-lifecycle__arrow"><i class="fa-solid fa-chevron-right"></i></div>
+    <div class="sh-lifecycle__state sh-lifecycle__state--gold pg-reveal"><div class="sh-lifecycle__label">SUSPENDED</div><div class="sh-lifecycle__desc">All transfers rejected at protocol level. Reversible &mdash; regulator can reinstate.</div></div>
+    <div class="sh-lifecycle__arrow"><i class="fa-solid fa-chevron-right"></i></div>
+    <div class="sh-lifecycle__state sh-lifecycle__state--red pg-reveal"><div class="sh-lifecycle__label">COMPLIANCE_HOLD</div><div class="sh-lifecycle__desc">Investigation mode. Asset frozen without permanent revocation. Preserves issuer recourse.</div></div>
+    <div class="sh-lifecycle__arrow"><i class="fa-solid fa-chevron-right"></i></div>
+    <div class="sh-lifecycle__state sh-lifecycle__state--darkred pg-reveal"><div class="sh-lifecycle__label">REJECTED</div><div class="sh-lifecycle__desc">Permanent denial. Asset cannot be listed on this chain. Permanently recorded on-chain.</div></div>
+  </div>
+  <p class="sh-lifecycle__banner"><i class="fa-regular fa-clock"></i>&nbsp; Each state transition requires a signed consensus transaction from the designated Securities Regulator authority account. The chain of transitions constitutes a court-admissible, tamper-proof regulatory audit record.</p>
+
+  <div class="pg-two-col" style="margin-top:3.5rem">
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1.25rem">HOW IT WORKS</div>
+      <div class="pg-features">
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">Regulator is the gatekeeper</div><div class="pg-feature__body">The Securities Regulator account is hardcoded at chain genesis. Only this account can execute TotemApproval state transitions. No application operator &mdash; and no other chain participant &mdash; can change the approval status of any asset, regardless of what front-end software they run.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Transfer validation at every node</div><div class="pg-feature__body">When a TOTEM_TRANSFER is submitted, every validating node independently checks the asset's current approval status. A SUSPENDED or REJECTED totem transfer is rejected at the attachment validation gate &mdash; before it ever enters the mempool. There is no way to transfer a suspended asset.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">Expiring approvals</div><div class="pg-feature__body">Approvals can carry an <span class="sh-code">expirationHeight</span>. When the chain reaches that block, the AFTER_BLOCK_APPLY handler automatically transitions the asset to PENDING &mdash; requiring the issuer to seek re-approval. This enforces periodic regulatory review without manual regulator intervention.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">TotemHistory &mdash; full provenance</div><div class="pg-feature__body">Every supply change, transfer, dividend, and approval event is recorded in the immutable TotemHistory table. A complete provenance record for every unit of every asset exists from issuance to present holder &mdash; queryable at any past block height without replaying transactions.</div></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1.25rem">TRANSACTION TYPE DETAIL</div>
+      <div class="pg-card2 pg-reveal" style="margin-bottom:1rem">
+        <div class="pg-card2__accent pg-card2__accent--gold"></div>
+        <h3 class="pg-card2__title">TOTEM_APPROVAL Transaction</h3>
+        <p class="pg-card2__body">A single transaction type handles all approval state transitions. The attachment encodes the target state and an optional expiration height. Only transactions signed by the designated Securities Regulator account ID are accepted &mdash; validated at consensus before processing.</p>
+        <ul class="pg-card2__list">
+          <li>Sender must be Securities Regulator account (validated at consensus)</li>
+          <li>Target state: UNDER_REVIEW, APPROVED, SUSPENDED, COMPLIANCE_HOLD, or REJECTED</li>
+          <li>APPROVED state may include expirationHeight for periodic re-approval</li>
+          <li>All transitions create immutable TotemApproval record in blockchain state</li>
+        </ul>
+      </div>
+      <div class="pg-card2 pg-reveal">
+        <div class="pg-card2__accent pg-card2__accent--teal"></div>
+        <h3 class="pg-card2__title">Capital Gains Tax at Execution</h3>
+        <p class="pg-card2__body">When an APPROVED totem is traded and the transaction executes, capital gains tax is automatically calculated and withheld in the same atomic operation. The tax is credited to the Tax Collector account before net proceeds reach the seller.</p>
+        <ul class="pg-card2__list">
+          <li>CGT rate: 0&ndash;3500 basis points, set by Tax Collector authority</li>
+          <li>Formula: <span class="sh-code">(saleAmount &times; rateBps) / 10,000</span></li>
+          <li>Withheld atomically at trade execution &mdash; cannot be separated</li>
+          <li>Permanent CurrencyTaxRecord created per collection event</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- 02 AUTHORITIES -->
+<section class="sh-section sh-section--navy" id="authorities">
+<div class="sh-container">
+  <div class="comp-head">
+    <div class="comp-head__num">02</div>
+    <div class="comp-head__copy">
+      <div class="sh-eyebrow sh-eyebrow--teal">EMBEDDED AUTHORITIES</div>
+      <div class="comp-head__title">Five regulatory authorities embedded at genesis. Immutable.</div>
+      <p class="comp-head__sub">Every jurisdiction BetaChain is created with five designated regulatory authority accounts embedded in the genesis block. Their account IDs are hardcoded into the chain configuration and validated at the consensus layer. No transaction, no admin, and no upgrade can change them after genesis.</p>
+    </div>
+  </div>
+
+  <div class="comp-auth-grid">
+
+    <div class="comp-auth-card comp-auth-card--gold pg-reveal">
+      <div class="comp-auth-card__bar"></div><div class="comp-auth-card__immutable">IMMUTABLE AT GENESIS</div>
+      <div class="comp-auth-card__icon"><i class="fa-solid fa-building-columns"></i></div>
+      <div class="comp-auth-card__label">MONETARY AUTHORITY</div>
+      <div class="comp-auth-card__title">Central Bank</div>
+      <div class="comp-auth-card__body">The Central Bank authority account is the sole issuer of CBDC on the jurisdiction chain. It controls currency issuance parameters, reserve requirements, and monetary policy settings. The only account that can exercise the CONTROLLABLE currency type veto &mdash; blocking any individual transfer that violates monetary policy.</div>
+      <div class="comp-auth-card__caps">
+        <span class="comp-auth-card__cap">CURRENCY_ISSUANCE</span><span class="comp-auth-card__cap">TRANSFER VETO</span><span class="comp-auth-card__cap">SUPPLY MANAGEMENT</span><span class="comp-auth-card__cap">RESERVE CONTROL</span><span class="comp-auth-card__cap">MINTABLE CURRENCY</span>
+      </div>
+    </div>
+
+    <div class="comp-auth-card comp-auth-card--teal pg-reveal">
+      <div class="comp-auth-card__bar"></div><div class="comp-auth-card__immutable">IMMUTABLE AT GENESIS</div>
+      <div class="comp-auth-card__icon"><i class="fa-solid fa-scale-balanced"></i></div>
+      <div class="comp-auth-card__label">SECURITIES AUTHORITY</div>
+      <div class="comp-auth-card__title">Securities Regulator</div>
+      <div class="comp-auth-card__body">Controls the entire TotemApproval lifecycle for every digital asset on the chain. Only the Securities Regulator account can approve, suspend, or permanently reject a Totem asset. All 6 state transitions require a transaction signed by this account &mdash; protocol-enforced, no bypass possible.</div>
+      <div class="comp-auth-card__caps">
+        <span class="comp-auth-card__cap">TOTEM_APPROVAL</span><span class="comp-auth-card__cap">SUSPENSION</span><span class="comp-auth-card__cap">COMPLIANCE_HOLD</span><span class="comp-auth-card__cap">PERMANENT REJECTION</span><span class="comp-auth-card__cap">EXPIRY CONTROL</span>
+      </div>
+    </div>
+
+    <div class="comp-auth-card comp-auth-card--gold pg-reveal">
+      <div class="comp-auth-card__bar"></div><div class="comp-auth-card__immutable">IMMUTABLE AT GENESIS</div>
+      <div class="comp-auth-card__icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+      <div class="comp-auth-card__label">REVENUE AUTHORITY</div>
+      <div class="comp-auth-card__title">Tax Collector</div>
+      <div class="comp-auth-card__body">The designated Tax Collector account receives automatic tax withholding from every taxable transaction on the chain. Up to 13 tax rate types configured via a single SET_TAX_RATES transaction. The protocol withholds tax at source &mdash; atomically with the transaction &mdash; before any net proceeds flow.</div>
+      <div class="comp-auth-card__caps">
+        <span class="comp-auth-card__cap">SET_TAX_RATES</span><span class="comp-auth-card__cap">13 RATE TYPES</span><span class="comp-auth-card__cap">WITHHOLDING AT SOURCE</span><span class="comp-auth-card__cap">REAL-TIME COLLECTION</span><span class="comp-auth-card__cap">AUDIT RECORDS</span>
+      </div>
+    </div>
+
+    <div class="comp-auth-card comp-auth-card--teal pg-reveal">
+      <div class="comp-auth-card__bar"></div><div class="comp-auth-card__immutable">IMMUTABLE AT GENESIS</div>
+      <div class="comp-auth-card__icon"><i class="fa-solid fa-users-gear"></i></div>
+      <div class="comp-auth-card__label">ACCESS AUTHORITY</div>
+      <div class="comp-auth-card__title">Permission Master Admin</div>
+      <div class="comp-auth-card__body">Controls the entire 6-level permission hierarchy. Grants and revokes CHAIN_ADMIN status, which manages CHAIN_USER (KYC-approved) participant accounts. Cascading revocation ensures revoking a CHAIN_ADMIN automatically invalidates every permission they granted &mdash; no orphaned access possible.</div>
+      <div class="comp-auth-card__caps">
+        <span class="comp-auth-card__cap">GRANT_PERMISSION</span><span class="comp-auth-card__cap">REVOKE_PERMISSION</span><span class="comp-auth-card__cap">CHAIN_ADMIN MGMT</span><span class="comp-auth-card__cap">CASCADING REVOCATION</span><span class="comp-auth-card__cap">BLOCKED_USER</span>
+      </div>
+    </div>
+
+    <div class="comp-auth-card comp-auth-card--gold pg-reveal">
+      <div class="comp-auth-card__bar"></div><div class="comp-auth-card__immutable">PROTOCOL PROPERTY</div>
+      <div class="comp-auth-card__icon"><i class="fa-solid fa-scroll"></i></div>
+      <div class="comp-auth-card__label">INTEGRITY GUARANTEE</div>
+      <div class="comp-auth-card__title">Immutable Audit Trail</div>
+      <div class="comp-auth-card__body">Every regulatory action creates a permanent, timestamped, cryptographically-signed record in the blockchain state. Approval decisions, suspension orders, tax collections, and permission grants are all part of the chain's immutable history &mdash; independently verifiable by any node operator without requiring operator cooperation.</div>
+      <div class="comp-auth-card__caps">
+        <span class="comp-auth-card__cap">BLOCKCHAIN NATIVE</span><span class="comp-auth-card__cap">DILITHIUM-SIGNED</span><span class="comp-auth-card__cap">COURT-ADMISSIBLE</span><span class="comp-auth-card__cap">INDEPENDENTLY VERIFIABLE</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sh-threat-banner pg-reveal" style="margin-top:3rem">
+    <div class="sh-threat-banner__icon"><i class="fa-solid fa-lock"></i></div>
+    <div>
+      <div class="sh-threat-banner__label">THE IMMUTABILITY GUARANTEE</div>
+      <div class="sh-threat-banner__text">All five authority account IDs are written into the chain's genesis block as immutable configuration parameters. There is <strong>no administrative transaction</strong> that can change them after deployment. The Shamwari network operator cannot replace a nation's Central Bank, reassign the Securities Regulator, or redirect tax collection to a different account. This is not policy &mdash; it is structural.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- 03 KYC & AML -->
+<section class="sh-section" id="kyc-aml">
+<div class="sh-container">
+  <div class="comp-head">
+    <div class="comp-head__num">03</div>
+    <div class="comp-head__copy">
+      <div class="sh-eyebrow sh-eyebrow--gold">KNOW YOUR CUSTOMER &amp; ANTI-MONEY LAUNDERING</div>
+      <div class="comp-head__title">KYC and AML enforced at the consensus layer</div>
+      <p class="comp-head__sub">Shamwari embeds KYC and AML controls directly into the transaction validation pipeline. No application-layer middleware, no operator-dependent enforcement. Permission status is blockchain state &mdash; consistent, permanent, and independently verifiable by any node.</p>
+    </div>
+  </div>
+
+  <div class="comp-aml-strip pg-reveal">
+    <div class="comp-aml-item"><div class="comp-aml-item__icon"><i class="fa-solid fa-id-card"></i></div><div class="comp-aml-item__title">KYC-Gated Access</div><div class="comp-aml-item__body">Permissioned chains require CHAIN_USER status for all transactions. Only CHAIN_ADMIN-approved accounts can transact after the policy switch height. Enforced at gate 3 of the 7-gate consensus pipeline.</div></div>
+    <div class="comp-aml-item"><div class="comp-aml-item__icon"><i class="fa-solid fa-ban"></i></div><div class="comp-aml-item__title">CONTROLLABLE Currency</div><div class="comp-aml-item__body">CBDC and AML-regulated currencies can have individual transfers vetoed by the Central Bank authority account before confirmation &mdash; structural transfer-blocking without chain-wide impact.</div></div>
+    <div class="comp-aml-item"><div class="comp-aml-item__icon"><i class="fa-solid fa-magnifying-glass"></i></div><div class="comp-aml-item__title">Encrypted KYC On-Chain</div><div class="comp-aml-item__body">KYC documentation references are Kyber-encrypted and stored permanently in each BetaChainPermission record. Ciphertext on-chain, readable only by the granting institution's custody system.</div></div>
+    <div class="comp-aml-item"><div class="comp-aml-item__icon"><i class="fa-solid fa-shield-halved"></i></div><div class="comp-aml-item__title">NON_SHUFFLEABLE Currency</div><div class="comp-aml-item__body">CBDC currencies can be marked NON_SHUFFLEABLE &mdash; preventing use in mixing operations at attachment validation. Traceability structurally guaranteed by the currency type bitmask.</div></div>
+  </div>
+
+  <div class="pg-two-col">
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1.25rem">KYC ONBOARDING FLOW</div>
+      <div class="comp-kyc-flow pg-reveal">
+        <div class="comp-kyc-step"><div class="comp-kyc-dot comp-kyc-dot--gold">1</div><div><div class="comp-kyc-label">Off-chain KYC Verification</div><div class="comp-kyc-desc">CHAIN_ADMIN conducts KYC/AML checks through their standard processes &mdash; identity documents, PEP screening, sanctions checks. Off-chain procedures, on-chain record.</div></div></div>
+        <div class="comp-kyc-step"><div class="comp-kyc-dot comp-kyc-dot--gold">2</div><div><div class="comp-kyc-label">Encrypted Permission Record</div><div class="comp-kyc-desc">CHAIN_ADMIN submits GRANT_PERMISSION with an EncryptedData payload &mdash; Kyber-encrypted blob referencing KYC documentation identifiers and compliance attestation hashes.</div><code class="comp-kyc-code">GRANT_PERMISSION tx + EncryptedData payload</code></div></div>
+        <div class="comp-kyc-step"><div class="comp-kyc-dot comp-kyc-dot--teal">3</div><div><div class="comp-kyc-label">CHAIN_USER Permission Active</div><div class="comp-kyc-desc">From the next block onwards, the account holds CHAIN_USER status. Every transaction validation checks this in real-time. No caching, no eventual consistency &mdash; permission state is blockchain state.</div><code class="comp-kyc-code">PermissionPolicy.check(sender) &rarr; CHAIN_USER &check;</code></div></div>
+        <div class="comp-kyc-step"><div class="comp-kyc-dot comp-kyc-dot--purple">4</div><div><div class="comp-kyc-label">Ongoing Monitoring</div><div class="comp-kyc-desc">CHAIN_ADMIN can apply BLOCKED_CHAIN_USER at any time &mdash; effective at the next block. The original CHAIN_USER grant record is preserved in the versioned permission table for regulatory audit.</div><code class="comp-kyc-code">BLOCKED_CHAIN_USER &rarr; instant freeze</code></div></div>
+        <div class="comp-kyc-step"><div class="comp-kyc-dot comp-kyc-dot--slate">5</div><div><div class="comp-kyc-label">Cascading Revocation</div><div class="comp-kyc-desc">If a CHAIN_ADMIN is removed, every permission they granted is automatically revoked from the specified height. No manual cleanup &mdash; the protocol enforces referential integrity across the entire hierarchy.</div><code class="comp-kyc-code">REVOKE_PERMISSION &rarr; cascades to all granted users</code></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1.25rem">AML CURRENCY CONTROLS</div>
+      <div class="pg-features">
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">CONTROLLABLE Currency Type</div><div class="pg-feature__body">Any currency issued with the CONTROLLABLE bitmask flag enables transfer-veto by the issuer. The Central Bank can block any specific transfer before it is confirmed. This enables AML freeze orders, sanctions compliance, and targeted asset restraint without chain-wide impact.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">NON_SHUFFLEABLE Flag</div><div class="pg-feature__body">Setting this bit on a CBDC currency structurally prevents its use in mixing operations. The protocol rejects SHUFFLING_CREATION transactions that reference NON_SHUFFLEABLE currencies at attachment validation &mdash; before the transaction reaches the mempool.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">Account Type Restrictions</div><div class="pg-feature__body">CURRENCY_PAYMENT transactions &mdash; the primary CBDC payment mechanism &mdash; are restricted to SAVINGS-type recipients by default. This ensures retail CBDC flows only to verified consumer accounts without additional middleware.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">BLOCKED_CHAIN_USER for Sanctions</div><div class="pg-feature__body">The BLOCKED_CHAIN_USER permission type is a positive denial &mdash; it hard-blocks a CHAIN_USER even if the CHAIN_USER grant is also present. Targeted sanctions enforcement with immediate effect, while preserving the full historical permission record for compliance.</div></div></div>
+      </div>
+
+      <div style="margin-top:1.5rem">
+        <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1rem">PERMISSION HIERARCHY</div>
+        <div class="arch-perm-ladder pg-reveal">
+          <div class="arch-perm-rung arch-perm-rung--1"><div class="arch-perm-rung__code">MASTER_ADMIN</div><div class="arch-perm-rung__desc">Root authority. Hardcoded at genesis. Cannot be changed.</div></div>
+          <div class="arch-perm-rung arch-perm-rung--2"><div class="arch-perm-rung__code">CHAIN_BINDER</div><div class="arch-perm-rung__desc">Transaction processor. Granted by MASTER_ADMIN only.</div></div>
+          <div class="arch-perm-rung arch-perm-rung--3"><div class="arch-perm-rung__code">CHAIN_ADMIN</div><div class="arch-perm-rung__desc">KYC operator. Grants CHAIN_USER after verification.</div></div>
+          <div class="arch-perm-rung arch-perm-rung--4"><div class="arch-perm-rung__code">CHAIN_USER</div><div class="arch-perm-rung__desc">KYC-approved participant. Required post-policy switch.</div></div>
+          <div class="arch-perm-rung arch-perm-rung--5"><div class="arch-perm-rung__code">BLOCKED_CHAIN_USER</div><div class="arch-perm-rung__desc">Positive sanction. Overrides CHAIN_USER. Full audit history preserved.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- 04 TAXATION -->
+<section class="sh-section sh-section--navy" id="taxation">
+<div class="sh-container">
+  <div class="comp-head">
+    <div class="comp-head__num">04</div>
+    <div class="comp-head__copy">
+      <div class="sh-eyebrow sh-eyebrow--gold">PROGRAMMABLE TAXATION</div>
+      <div class="comp-head__title">13 tax rate types. Zero evasion. Atomic withholding.</div>
+      <p class="comp-head__sub">Shamwari's on-chain taxation is the most comprehensive protocol-native tax system deployed on any blockchain. Tax is withheld at source, atomically with the triggering transaction, credited to the designated Tax Collector account &mdash; without off-chain reporting, operator cooperation, or periodic reconciliation.</p>
+    </div>
+  </div>
+
+  <div class="comp-tax-grid pg-reveal">
+    <div class="comp-tax-card"><div class="comp-tax-card__name">TRANSACTION</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">General levy on all transfers</div></div>
+    <div class="comp-tax-card"><div class="comp-tax-card__name">VALUE ADDED</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">Goods &amp; services transactions</div></div>
+    <div class="comp-tax-card"><div class="comp-tax-card__name">CAPITAL GAINS</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">Asset sales on the DEX</div></div>
+    <div class="comp-tax-card"><div class="comp-tax-card__name">CURRENCY TRANSFER</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">Payments &amp; lending flows</div></div>
+    <div class="comp-tax-card"><div class="comp-tax-card__name">LOAN INTEREST</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">Withholding at loan repayment</div></div>
+    <div class="comp-tax-card"><div class="comp-tax-card__name">SUBSCRIPTION</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">Recurring billing cycles</div></div>
+    <div class="comp-tax-card"><div class="comp-tax-card__name">EXCHANGE / FX</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">Foreign exchange operations</div></div>
+    <div class="comp-tax-card"><div class="comp-tax-card__name">TOTEM ISSUANCE</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">Digital asset stamp duty</div></div>
+    <div class="comp-tax-card"><div class="comp-tax-card__name">TOTEM SHARE INCREASE</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">Totem split tax</div></div>
+    <div class="comp-tax-card"><div class="comp-tax-card__name">DIVIDEND</div><div class="comp-tax-card__bps">0&ndash;3500 bps</div><div class="comp-tax-card__desc">Dividend withholding tax</div></div>
+  </div>
+
+  <div class="pg-two-col">
+    <div>
+      <div class="pg-card2 pg-reveal" style="margin-bottom:1rem">
+        <div class="pg-card2__accent pg-card2__accent--gold"></div>
+        <h3 class="pg-card2__title">Basis-Point Precision with Threshold Control</h3>
+        <p class="pg-card2__body">Every tax rate is configured in basis points (1 bps = 0.01%). Formula: <span class="sh-code">taxAmount = (amount &times; rateBps) / 10,000</span> using integer arithmetic &mdash; no floating-point rounding errors. Each rate type supports independent minimum and maximum taxable thresholds.</p>
+        <ul class="pg-card2__list">
+          <li>Zero-rate disables a tax type without removing the configuration record</li>
+          <li>Multi-tax transactions: each applicable type calculated independently &mdash; no compounding</li>
+          <li>Up to 13 rate entries updated in a single atomic SET_TAX_RATES transaction</li>
+          <li>Per-collection audit receipt via <span class="sh-code">computeTaxBreakdown()</span></li>
+        </ul>
+      </div>
+      <div class="pg-card2 pg-reveal">
+        <div class="pg-card2__accent pg-card2__accent--teal"></div>
+        <h3 class="pg-card2__title">Withholding-at-Source</h3>
+        <p class="pg-card2__body"><span class="sh-code">LOAN_INTEREST_TAX</span> and <span class="sh-code">DIVIDEND_WITHHOLDING_TAX</span> implement structural tax evasion prevention. Tax is deducted before income reaches the recipient &mdash; at the same moment the underlying transaction executes.</p>
+        <ul class="pg-card2__list">
+          <li>Loan interest tax withheld at each LOAN_REPAYMENT transaction</li>
+          <li>Dividend withholding applied at DIVIDEND_PAYMENT execution</li>
+          <li>Capital gains withheld atomically at DEX trade execution</li>
+          <li>All withholding events create immutable CurrencyTaxRecord</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1.25rem">TAX COLLECTOR SYSTEM</div>
+      <div class="pg-features">
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">Embedded Tax Collector Account</div><div class="pg-feature__body">Each jurisdiction chain has a dedicated Tax Collector account set at genesis. Every taxable transaction credits withheld tax directly in real time. The Tax Collector balance is the live, auditable record of all tax revenues &mdash; no reconciliation with external systems required.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Immutable CurrencyTaxRecord</div><div class="pg-feature__body">Every tax collection event writes a permanent CurrencyTaxRecord: originating transaction hash, taxpayer account, Tax Collector account, currency, and amount withheld. Part of the immutable blockchain state &mdash; admissible as a primary tax collection record by revenue authorities.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">Real-Time Regulatory Reporting</div><div class="pg-feature__body"><span class="sh-code">TaxPolicy.toJSON()</span> returns a machine-readable snapshot of all 13 configured rates with effective block heights. Regulators query independently at any time to verify rates &mdash; no operator cooperation required.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Structural Tax Evasion Prevention</div><div class="pg-feature__body">Tax collection is enforced at gate 5 (attachment validation) of the 7-gate consensus pipeline &mdash; before balance changes occur. A transaction resulting in underpayment is rejected by every node. No race condition, no replay attack, no bypass through direct API submission.</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+
+<!-- 06 JURISDICTIONS -->
+<section class="sh-section sh-section--navy" id="jurisdictions">
+<div class="sh-container">
+  <div class="comp-head">
+    <div class="comp-head__num">05</div>
+    <div class="comp-head__copy">
+      <div class="sh-eyebrow sh-eyebrow--gold">JURISDICTION-SPECIFIC COMPLIANCE</div>
+      <div class="comp-head__title">Three distinct regulatory regimes. One network.</div>
+      <p class="comp-head__sub">Each Shamwari BetaChain is a completely isolated regulatory environment with its own compliance configuration, authority accounts, tax rates, and permission policy. A single node serves all three jurisdictions simultaneously &mdash; each operating under its own legal framework, enforced independently at the consensus layer.</p>
+    </div>
+  </div>
+
+  <div class="comp-jx-grid">
+    <div class="comp-jx-card comp-jx-card--zim pg-reveal">
+      <div class="comp-jx-card__bar"></div>
+      <div class="comp-jx-card__body">
+        <div class="comp-jx-card__flag">&#127464;&#127484;</div>
+        <div class="comp-jx-card__chain">ZIMBABWE</div>
+        <div class="comp-jx-card__currency">ZWG &middot; RESERVE BANK OF ZIMBABWE</div>
+        <div class="comp-jx-card__authorities">
+          <div class="comp-jx-card__auth"><i class="fa-solid fa-building-columns"></i>Reserve Bank of Zimbabwe &mdash; CBDC issuance authority</div>
+          <div class="comp-jx-card__auth"><i class="fa-solid fa-scale-balanced"></i>Securities &amp; Exchange Commission &mdash; TotemApproval</div>
+          <div class="comp-jx-card__auth"><i class="fa-solid fa-receipt"></i>ZIMRA (Zimbabwe Revenue Authority) &mdash; Tax Collector</div>
+        </div>
+        <div class="comp-jx-card__controls">
+          <div class="comp-jx-card__controls-label">Compliance Features Active</div>
+          <div class="comp-jx-card__control-list">
+            <span class="comp-jx-card__control">ZWG CBDC</span><span class="comp-jx-card__control">CONTROLLABLE</span><span class="comp-jx-card__control">NON_SHUFFLEABLE</span><span class="comp-jx-card__control">Permissioned</span><span class="comp-jx-card__control">13 tax rates</span><span class="comp-jx-card__control">AML transfer veto</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="comp-jx-card comp-jx-card--sa pg-reveal">
+      <div class="comp-jx-card__bar"></div>
+      <div class="comp-jx-card__body">
+        <div class="comp-jx-card__flag">&#127487;&#127462;</div>
+        <div class="comp-jx-card__chain">SOUTH AFRICA</div>
+        <div class="comp-jx-card__currency">ZAR &middot; SARB &middot; FSCA &middot; SARS</div>
+        <div class="comp-jx-card__authorities">
+          <div class="comp-jx-card__auth"><i class="fa-solid fa-building-columns"></i>SARB (SA Reserve Bank) &mdash; Monetary authority</div>
+          <div class="comp-jx-card__auth"><i class="fa-solid fa-scale-balanced"></i>FSCA (Financial Sector Conduct Authority)</div>
+          <div class="comp-jx-card__auth"><i class="fa-solid fa-shield-halved"></i>Prudential Authority</div>
+          <div class="comp-jx-card__auth"><i class="fa-solid fa-receipt"></i>SARS (SA Revenue Service) &mdash; Tax withholding</div>
+        </div>
+        <div class="comp-jx-card__controls">
+          <div class="comp-jx-card__controls-label">Compliance Features Active</div>
+          <div class="comp-jx-card__control-list">
+            <span class="comp-jx-card__control">ZAR digital currency</span><span class="comp-jx-card__control">CONTROLLABLE</span><span class="comp-jx-card__control">NON_SHUFFLEABLE</span><span class="comp-jx-card__control">Permissioned</span><span class="comp-jx-card__control">SARS tax rates</span><span class="comp-jx-card__control">Totem Exchange</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="comp-jx-card comp-jx-card--cap pg-reveal">
+      <div class="comp-jx-card__bar"></div>
+      <div class="comp-jx-card__body">
+        <div class="comp-jx-card__flag">&#127758;</div>
+        <div class="comp-jx-card__chain">CAPITAL</div>
+        <div class="comp-jx-card__currency">CAPITAL &middot; GLOBAL ASSET CHAIN</div>
+        <div class="comp-jx-card__authorities">
+          <div class="comp-jx-card__auth"><i class="fa-solid fa-scale-balanced"></i>Global Securities Regulator &mdash; Totem listing approval</div>
+          <div class="comp-jx-card__auth"><i class="fa-solid fa-receipt"></i>Capital Tax Collector &mdash; Exchange &amp; issuance taxes</div>
+          <div class="comp-jx-card__auth"><i class="fa-solid fa-users-gear"></i>Permission Admin &mdash; Developer &amp; institutional access</div>
+          <div class="comp-jx-card__auth"><i class="fa-solid fa-certificate"></i>Certificate Authority &mdash; Digital certificate issuance</div>
+        </div>
+        <div class="comp-jx-card__controls">
+          <div class="comp-jx-card__controls-label">Compliance Features Active</div>
+          <div class="comp-jx-card__control-list">
+            <span class="comp-jx-card__control">Open permission policy</span><span class="comp-jx-card__control">TotemApproval</span><span class="comp-jx-card__control">Digital certificates</span><span class="comp-jx-card__control">App Store</span><span class="comp-jx-card__control">Exchange taxes</span><span class="comp-jx-card__control">Developer registry</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sh-contrast-grid" style="margin-top:3rem">
+    <div class="sh-contrast-card sh-contrast-card--teal pg-reveal">
+      <div class="sh-contrast-card__header"><i class="fa-solid fa-check-circle"></i>WHAT EACH JURISDICTION CONTROLS INDEPENDENTLY</div>
+      <ul class="sh-contrast-card__list">
+        <li>Its own currency (ZWG, ZAR, or CAPITAL) with independent monetary policy</li>
+        <li>Its own permission policy &mdash; open, permissioned, or custom threshold</li>
+        <li>Its own 13 tax rates &mdash; set by its own Tax Collector authority account</li>
+        <li>Its own TotemApproval workflow &mdash; different assets approved per chain</li>
+        <li>Its own KYC/AML onboarding &mdash; CHAIN_ADMIN operators per jurisdiction</li>
+      </ul>
+    </div>
+    <div class="sh-contrast-card sh-contrast-card--teal pg-reveal">
+      <div class="sh-contrast-card__header"><i class="fa-solid fa-share-nodes"></i>WHAT ALL JURISDICTIONS SHARE</div>
+      <ul class="sh-contrast-card__list">
+        <li>The same proof-of-stake consensus &mdash; all blocks confirmed together</li>
+        <li>The same post-quantum cryptography &mdash; ML-DSA + ML-KEM across all chains</li>
+        <li>The same 7-gate validation pipeline &mdash; identical security guarantees</li>
+        <li>The same Binder Protocol &mdash; unified fee abstraction for all users</li>
+        <li>FxtChain settlement layer &mdash; cross-jurisdiction finality anchor</li>
+        <li>The same MIT-licensed open-source codebase &mdash; auditable by any party</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- 06 AUDIT TRAIL -->
+<section class="sh-section" id="audit">
+<div class="sh-container">
+  <div class="comp-head">
+    <div class="comp-head__num">06</div>
+    <div class="comp-head__copy">
+      <div class="sh-eyebrow sh-eyebrow--teal">IMMUTABLE AUDIT TRAIL</div>
+      <div class="comp-head__title">The blockchain is the compliance record</div>
+      <p class="comp-head__sub">Every regulatory action, tax collection, permission grant and asset approval creates a permanent, Dilithium-signed entry in blockchain state. No separate compliance database. No audit trail that depends on operator integrity. The blockchain is the evidence.</p>
+    </div>
+  </div>
+
+  <div class="pg-table-wrap pg-reveal" style="margin-bottom:3rem">
+    <table class="comp-audit-table">
+      <thead><tr><th>Event Type</th><th>Authority Account</th><th>Record Created</th><th>Independently Verifiable</th><th>Modifiable</th></tr></thead>
+      <tbody>
+        <tr><td>TotemApproval state change</td><td>Securities Regulator</td><td>TotemApproval entity at blockHeight</td><td class="comp-audit-good">&#10003; Any node</td><td class="comp-audit-bad">&#10007; Never</td></tr>
+        <tr><td>Tax withholding event</td><td>Protocol (automatic)</td><td>CurrencyTaxRecord per transaction</td><td class="comp-audit-good">&#10003; Any node</td><td class="comp-audit-bad">&#10007; Never</td></tr>
+        <tr><td>Permission grant</td><td>CHAIN_ADMIN</td><td>BetaChainPermission + EncryptedData</td><td class="comp-audit-good">&#10003; Any node</td><td class="comp-audit-bad">&#10007; Never</td></tr>
+        <tr><td>Permission revocation</td><td>CHAIN_ADMIN</td><td>Versioned revocation at blockHeight</td><td class="comp-audit-good">&#10003; Any node</td><td class="comp-audit-bad">&#10007; Never</td></tr>
+        <tr><td>CURRENCY_ISSUANCE</td><td>Central Bank</td><td>Currency entity + issuance parameters</td><td class="comp-audit-good">&#10003; Any node</td><td class="comp-audit-bad">&#10007; Never</td></tr>
+        <tr><td>Tax rate configuration</td><td>Tax Collector</td><td>TaxPolicy snapshot + effective blockHeight</td><td class="comp-audit-good">&#10003; Any node</td><td class="comp-audit-bad">&#10007; Never</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pg-two-col">
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1.25rem">VERSIONED STATE ARCHITECTURE</div>
+      <div class="pg-features">
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Point-in-Time Queries</div><div class="pg-feature__body">All compliance state is stored in versioned entity tables keyed by <span class="sh-code">(id, height)</span>. Auditors query the approval status of any asset at any specific block height &mdash; without replaying transactions. Historical compliance snapshots always available.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">Cryptographic Finality</div><div class="pg-feature__body">Every block is signed with ML-DSA-2 (Dilithium, NIST FIPS 204). Once confirmed, contents are cryptographically sealed. No block can be modified without invalidating the signature of every subsequent block. The audit trail is not just immutable &mdash; it is quantum-resistant.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Independent Verification</div><div class="pg-feature__body">Any party &mdash; regulator, auditor, counterparty, court &mdash; can independently verify any compliance event by running their own node. No need to subpoena the operator or trust any intermediary. The proof is the blockchain itself.</div></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1.25rem">AUDIT CAPABILITIES BY STAKEHOLDER</div>
+      <div class="pg-card2 pg-reveal" style="margin-bottom:1rem">
+        <div class="pg-card2__accent pg-card2__accent--gold"></div>
+        <h3 class="pg-card2__title">For Regulators</h3>
+        <ul class="pg-card2__list">
+          <li>Query current and historical approval status of any listed asset</li>
+          <li>Verify tax collection amounts and rates against legislated levels</li>
+          <li>Review complete permission grant and revocation history per institution</li>
+          <li>Run an independent node &mdash; no access request to the operator required</li>
+        </ul>
+      </div>
+      <div class="pg-card2 pg-reveal">
+        <div class="pg-card2__accent pg-card2__accent--teal"></div>
+        <h3 class="pg-card2__title">For Issuers &amp; Institutions</h3>
+        <ul class="pg-card2__list">
+          <li>Complete TotemHistory provenance for every unit of every issued asset</li>
+          <li>Full dividend distribution record with per-holder allocations</li>
+          <li>Immutable KYC onboarding timestamps and permission grant records</li>
+          <li>Tax collection receipts via CurrencyTaxRecord per transaction</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- 07 COMPARISON -->
+<section class="sh-section sh-section--navy" id="comparison">
+<div class="sh-container">
+  <div class="comp-head">
+    <div class="comp-head__num">07</div>
+    <div class="comp-head__copy">
+      <div class="sh-eyebrow sh-eyebrow--gold">COMPLIANCE COMPARISON</div>
+      <div class="comp-head__title">Protocol compliance vs application compliance</div>
+      <p class="comp-head__sub">On Shamwari, compliance is a property of the consensus engine. On general-purpose chains and traditional systems, compliance is a property of the application &mdash; subject to bugs, operator decisions, and the risk of bypass.</p>
+    </div>
+  </div>
+
+  <div class="sh-excl-compare pg-reveal" style="margin-bottom:3rem">
+    <div class="sh-excl-compare__col sh-excl-compare__col--before">
+      <div class="sh-excl-compare__heading">TRADITIONAL &amp; SMART CONTRACT APPROACH</div>
+      <div class="sh-excl-compare__rows">
+        <div class="sh-excl-compare__item"><i class="fa-solid fa-times"></i>Compliance rules in application layer &mdash; bypassable with direct API calls</div>
+        <div class="sh-excl-compare__item"><i class="fa-solid fa-times"></i>Tax collection by exchange operator &mdash; evasion possible without consequences</div>
+        <div class="sh-excl-compare__item"><i class="fa-solid fa-times"></i>KYC data in operator database &mdash; not cryptographically verifiable</div>
+        <div class="sh-excl-compare__item"><i class="fa-solid fa-times"></i>Regulatory approvals in separate system &mdash; not linked to live blockchain state</div>
+        <div class="sh-excl-compare__item"><i class="fa-solid fa-times"></i>Audit trail requires operator cooperation to reconstruct</div>
+        <div class="sh-excl-compare__item"><i class="fa-solid fa-times"></i>Smart contract upgrades can silently change compliance rules</div>
+      </div>
+    </div>
+    <div class="sh-excl-compare__divider"><div class="sh-excl-compare__divider-badge">VS</div></div>
+    <div class="sh-excl-compare__col sh-excl-compare__col--after">
+      <div class="sh-excl-compare__heading">SHAMWARI PROTOCOL APPROACH</div>
+      <div class="sh-excl-compare__rows">
+        <div class="sh-excl-compare__item"><i class="fa-solid fa-check"></i>Compliance at consensus &mdash; rejected by every node, no bypass structurally possible</div>
+        <div class="sh-excl-compare__item"><i class="fa-solid fa-check"></i>Tax withheld atomically at execution &mdash; non-separable from the payment</div>
+        <div class="sh-excl-compare__item"><i class="fa-solid fa-check"></i>KYC data Kyber-encrypted on-chain &mdash; cryptographically anchored to permission record</div>
+        <div class="sh-excl-compare__item"><i class="fa-solid fa-check"></i>Regulatory state is blockchain state &mdash; consistent, real-time, always accurate</div>
+        <div class="sh-excl-compare__item"><i class="fa-solid fa-check"></i>Audit trail is the blockchain &mdash; independently verifiable by any node operator</div>
+        <div class="sh-excl-compare__item"><i class="fa-solid fa-check"></i>Protocol compliance logic requires full network upgrade to change &mdash; transparent</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg-table-wrap pg-reveal">
+    <table class="comp-cmp-table">
+      <thead><tr><th>Compliance Property</th><th>Shamwari</th><th>Ethereum + DeFi</th><th>Permissioned Blockchain</th><th>Traditional Finance</th></tr></thead>
+      <tbody>
+        <tr><td>Compliance enforcement</td><td>Protocol consensus layer</td><td>Smart contract (bypassable)</td><td>Chaincode / middleware</td><td>Application layer</td></tr>
+        <tr><td>Tax withholding</td><td>Automatic, atomic, 13 types</td><td>None</td><td>None</td><td>Manual / periodic</td></tr>
+        <tr><td>KYC data storage</td><td>Encrypted on-chain, permanent</td><td>Off-chain / none</td><td>Off-chain MSP</td><td>Operator database</td></tr>
+        <tr><td>Asset regulatory approval</td><td>6-state TotemApproval at consensus</td><td>None native</td><td>Admin function</td><td>External registry</td></tr>
+        <tr><td>AML transfer blocking</td><td>CONTROLLABLE currency type</td><td>None native</td><td>Chaincode rule</td><td>SWIFT / correspondent bank</td></tr>
+        <tr><td>Regulatory authority</td><td>Hardcoded at genesis, immutable</td><td>None native</td><td>Admin key</td><td>External regulator</td></tr>
+        <tr><td>Audit trail</td><td>Blockchain state &mdash; immutable, quantum-resistant</td><td>Event logs (limited)</td><td>Ledger (operator-controlled)</td><td>Database (modifiable)</td></tr>
+        <tr><td>Post-quantum readiness</td><td>ML-DSA + ML-KEM from genesis</td><td>ECDSA &mdash; migration pending</td><td>RSA/ECDSA &mdash; not PQC</td><td>PKI &mdash; migration underway</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+
+<!-- CTA -->
+<section class="sh-cta">
+  <div class="sh-cta__glow"></div>
+  <div class="sh-cta__inner">
+    <div class="sh-eyebrow sh-eyebrow--gold">BUILD COMPLIANT APPLICATIONS</div>
+    <h2 class="sh-cta__title">Regulatory compliance is a protocol property.</h2>
+    <p class="sh-cta__sub">Build financial applications that are compliant by construction &mdash; not by policy. Every transaction, every asset, every payment governed by the same consensus rules that secure the entire chain.</p>
+    <div class="sh-cta__actions">
+      <a href="architecture" class="sh-btn sh-btn--gold sh-btn--lg"><i class="fa-solid fa-network-wired"></i> Architecture Deep-Dive</a>
+      <a href="solutions" class="sh-btn sh-btn--teal sh-btn--lg">View Solutions</a>
+      <a href="developers" class="sh-btn sh-btn--ghost sh-btn--lg">Developer Hub</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="sh-footer">
+  <div class="sh-footer__grid">
+    <div>
+      <div class="sh-footer__wordmark">
+        <img src="/img/icon.png" height="72" width="72" />
+      </div>
+      <p class="sh-footer__tagline">Quantum-resistant financial infrastructure for 4 billion people across Africa, LATAM, ASEAN and MENA.</p>
+      <div class="sh-footer__socials">
+        <a href="https://bitbucket.org/thenamelesstree/shamwari" class="sh-footer__social"><i class="fa-brands fa-bitbucket"></i></a>
+        <a href="https://x.com/shamwarinetwork" class="sh-footer__social"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://www.linkedin.com/showcase/shamwarinetwork" class="sh-footer__social"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:contact@shamwari.network" class="sh-footer__social"><i class="fa fa-envelope"></i></a>
+        
+      </div>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Platform</div>
+      <a href="shamwaripay"         class="sh-footer__link">ShamwariPay</a>
+      <a href="digitalassets"       class="sh-footer__link">Totem Exchange</a>
+      <a href="digitalcertificates" class="sh-footer__link">Certificates</a>
+      <a href="subscriptions"       class="sh-footer__link">Subscriptions</a>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Technology</div>
+      <a href="architecture"        class="sh-footer__link">Architecture</a>
+      <a href="security"            class="sh-footer__link">Post-Quantum Security</a>
+      <a href="accounts"            class="sh-footer__link">Accounts &amp; Identity</a>
+      <a href="compliance"          class="sh-footer__link">Compliance</a>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Resources</div>
+      <a href="solutions"    class="sh-footer__link">Solutions</a>
+      <a href="developers"   class="sh-footer__link">Developer Hub</a>
+      <a href="https://docs.shamwari.network" class="sh-footer__link">Documentation</a>
+      <a href="https://wallet.shamwari.network" class="sh-footer__link">Launch Wallet</a>
+    </div>
+  </div>
+  <div class="sh-footer__bottom">
+    <span>&copy; 2026 TheNamelessTree Networks. All rights reserved.</span>
+    <span class="sh-footer__bottom-right"><a href="https://thenamelesstree.co.zw" target="blank">thenamelesstree.co.zw</a></span>
+  </div>
+</footer>
+
+<a href="#" class="sh-back-top" id="back-top" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></a>
+<script type="module" src="/src/main.js"></script>
+<script>
+(function(){
+  var nav=document.getElementById('sh-nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('sh-nav--scrolled',window.scrollY>50);});
+  var tgl=document.getElementById('nav-toggle'),menu=document.getElementById('nav-menu');
+  if(tgl&&menu){tgl.addEventListener('click',function(){tgl.classList.toggle('is-open');menu.classList.toggle('is-open');});}
+  var bt=document.getElementById('back-top');
+  if(bt){window.addEventListener('scroll',function(){bt.classList.toggle('is-visible',window.scrollY>400);});bt.addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});});}
+  var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');ro.unobserve(e.target);}});},{threshold:0.07,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.sh-reveal,.pg-reveal').forEach(function(el){ro.observe(el);});
+  var tocLinks=document.querySelectorAll('.comp-toc__link');
+  var sections=Array.from(tocLinks).map(function(l){return document.querySelector(l.getAttribute('href'));});
+  window.addEventListener('scroll',function(){
+    var sy=window.scrollY+150,cur=0;
+    sections.forEach(function(s,i){if(s&&s.offsetTop<=sy)cur=i;});
+    tocLinks.forEach(function(l,i){l.classList.toggle('is-active',i===cur);});
+  });
+})();
+</script>
+</body></html>

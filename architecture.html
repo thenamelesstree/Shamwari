@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Shamwari Blockchain Architecture</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The full Shamwari multi-chain architecture: two-tier ledger design, FxtChain and BetaChain hierarchy, permission policy lifecycle, consensus pipeline, Binder Protocol, taxation, and protocol-native financial primitive layer.">
+<link href="img/favicon.ico" rel="icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/pages.css" rel="stylesheet">
+<style>
+/* ── Page-specific additions ─────────────────────────────────────── */
+.pg-code {
+  background: rgba(0,168,158,0.06);
+  border: 1px solid var(--border-dk);
+  border-left: 3px solid var(--teal);
+  border-radius: var(--radius-xs);
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  margin-top: .75rem;
+}
+.pg-code code {
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  color: var(--teal-lt);
+  line-height: 1.7;
+  white-space: pre;
+}
+.pg-table-wrap { overflow-x: auto; }
+.pg-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .875rem;
+  border: 1px solid var(--border-dk);
+  border-radius: var(--radius);
+  overflow: hidden;
+  min-width: 680px;
+}
+.pg-table thead tr { background: rgba(255,255,255,.03); }
+.pg-table th {
+  font-family: var(--font-display);
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: .9rem 1.25rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-dk);
+  color: var(--txt-muted);
+}
+.pg-table th:first-child { color: var(--txt-secondary); }
+.pg-table th:nth-child(2) { color: var(--teal); }
+.pg-table tbody tr { border-bottom: 1px solid var(--border-dk); background: var(--bg-card-dk); transition: background .15s; }
+.pg-table tbody tr:nth-child(even) { background: rgba(255,255,255,.02); }
+.pg-table tbody tr:last-child { border-bottom: none; }
+.pg-table tbody tr:hover { background: rgba(0,168,158,.04); }
+.pg-td-field {
+  font-family: var(--font-mono);
+  font-size: .76rem;
+  color: var(--txt-primary);
+  font-weight: 500;
+  padding: .85rem 1.25rem;
+  white-space: nowrap;
+  width: 22%;
+}
+.pg-td-val { padding: .85rem 1.25rem; color: var(--txt-secondary); vertical-align: top; line-height: 1.5; }
+.arch-section-head { display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 3rem; }
+.arch-section-head__num { font-family: var(--font-display); font-size: 4rem; font-weight: 800; color: rgba(255,255,255,.06); line-height: 1; letter-spacing: -.05em; flex-shrink: 0; user-select: none; }
+.arch-section-head__copy { flex: 1; }
+.arch-section-head__title { font-family: var(--font-display); font-size: clamp(1.6rem,3vw,2.2rem); font-weight: 800; color: var(--txt-primary); line-height: 1.2; letter-spacing: -.02em; margin-bottom: .75rem; }
+.arch-section-head__sub { font-size: .975rem; color: var(--txt-secondary); line-height: 1.7; max-width: 680px; }
+@media (max-width:768px) {
+  .arch-section-head { flex-direction: column; gap: .5rem; }
+  .arch-section-head__num { font-size: 2.5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="sh-nav" id="sh-nav">
+<div class="sh-nav__inner">
+  <a href="home" class="sh-nav__brand">
+    <div>
+    		<img src="img/banner.png" alt="Shamwari Logo" height="40">
+    </div>
+  </a>
+  <button class="sh-nav__toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="sh-nav__menu" id="nav-menu">
+    <a href="architecture"     class="sh-nav__link sh-nav__link--active">Architecture</a>
+    <a href="compliance"       class="sh-nav__link">Compliance</a>
+    <a href="security"         class="sh-nav__link">Security</a>
+    <a href="solutions"        class="sh-nav__link">Solutions</a>
+    <a href="developers"       class="sh-nav__link">Developers</a>
+  </div>
+</div>
+</nav>
+
+<!-- HERO -->
+<section class="pg-hero" style="background: url('img/circuit_blue.jpg') center/cover no-repeat;">
+  <div class="pg-hero__glow"></div>
+  <div class="sh-container pg-hero__inner">
+    <div class="pg-hero__content">
+      <div class="sh-eyebrow sh-eyebrow--teal">SYSTEM ARCHITECTURE · FULL REFERENCE</div>
+      <h1 class="pg-hero__title">Two-tier ledger.<br>Five financial systems.<br>One root chain.</h1>
+      <p class="pg-hero__sub">A parent chain anchors sovereign child chains. Each chain is an isolated financial environment with its own schema, currency, permission policy, and embedded regulatory authorities. Every financial primitive from payments, lending and identity reside within the consensus layer, not in smart contracts.</p>
+      <div class="pg-hero__badges">
+        <span class="sh-badge sh-badge--teal">FXTCHAIN + BETACHAINS</span>
+        <span class="sh-badge sh-badge--gold">70+ TRANSACTION TYPES</span>
+        <span class="sh-badge sh-badge--teal">6-LEVEL PERMISSIONS</span>
+        <span class="sh-badge sh-badge--gold">13 TAX RATE TYPES</span>
+        <span class="sh-badge sh-badge--teal">BINDER PROTOCOL</span>
+        <span class="sh-badge sh-badge--gold">POST-QUANTUM CONSENSUS</span>
+      </div>
+    </div>
+    <div class="pg-hero__icon-wrap"><div class="pg-hero__icon-bg"></div><i class="fa-solid fa-network-wired pg-hero__icon"></i></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="pg-stats">
+  <div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--teal">2</div><div class="pg-stats__l">Chain tiers:<br>FxtChain + BetaChains</div></div>
+  <div class="pg-stats__div"></div>
+  <div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--gold">6</div><div class="pg-stats__l">Permission types:<br>Active + Blocker hierarchy</div></div>
+  <div class="pg-stats__div"></div>
+  <div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--teal">70+</div><div class="pg-stats__l">Protocol-native<br>transaction types</div></div>
+  <div class="pg-stats__div"></div>
+  <div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--gold">13</div><div class="pg-stats__l">Tax rate types:<br>Basis-point precision</div></div>
+</div>
+
+<!-- STICKY TOC -->
+<nav class="arch-toc" id="arch-toc">
+  <div class="arch-toc__inner">
+    <a href="#chain-hierarchy"       class="arch-toc__link">01. Chain Hierarchy</a>
+    <a href="#betachain-schema"      class="arch-toc__link">02. BetaChain Schema</a>
+    <a href="#permission-system"     class="arch-toc__link">03. Permission System</a>
+    <a href="#consensus"             class="arch-toc__link">04. Consensus Pipeline</a>
+    <a href="#automation"            class="arch-toc__link">05. Automation</a>
+    <a href="#tx-anatomy"            class="arch-toc__link">06. Transaction Types</a>
+    <a href="#protocol-vs-contract"  class="arch-toc__link">07. Protocol vs Contract</a>
+    <a href="#chain-control"         class="arch-toc__link">08. Chain Control</a>
+    <a href="#taxation"              class="arch-toc__link">09. Taxation</a>
+    <a href="#binder-protocol"       class="arch-toc__link">10. Binder Protocol</a>
+    <a href="#block-consensus"       class="arch-toc__link">11. Block &amp; Consensus</a>
+    <a href="#genesis-state"         class="arch-toc__link">12. Genesis &amp; State</a>
+    <a href="#multi-jurisdiction"    class="arch-toc__link">13. Multi-Jurisdiction</a>
+    <a href="#competitive-position"  class="arch-toc__link">14. Comparison</a>
+  </div>
+</nav>
+
+
+<!-- ═══ 01 CHAIN HIERARCHY ═══ -->
+<section class="sh-section sh-section--navy" id="chain-hierarchy">
+<div class="sh-container">
+  <div class="arch-section-head">
+    <div class="arch-section-head__num">01</div>
+    <div class="arch-section-head__copy">
+      <div class="sh-eyebrow sh-eyebrow--teal">CHAIN HIERARCHY</div>
+      <div class="arch-section-head__title">FxtChain anchors every BetaChain</div>
+      <p class="arch-section-head__sub">The two-tier model separates infrastructure from application. FxtChain handles global settlement finality and houses the infrastructure-only transaction set. BetaChains are sovereign financial environments where each has its own schema, currency, permission policy, and embedded regulatory authority accounts.</p>
+    </div>
+  </div>
+
+  <div class="arch-diagram pg-reveal" style="margin-bottom:3rem">
+    <div class="arch-root">
+      <div class="arch-root__node">
+        <div class="arch-root__icon"><i class="fa-solid fa-cubes"></i></div>
+        <div>
+          <div class="arch-root__label">PARENT CHAIN · LAYER 0 · INFRASTRUCTURE</div>
+          <div class="arch-root__name">FxtChain: SHAMWARI (WEALTH)</div>
+          <div class="arch-root__meta">id=1 &nbsp;·&nbsp; schema: PUBLIC &nbsp;·&nbsp; supply: 1,000,000,000,000 QNT &nbsp;·&nbsp; decimals: 3</div>
+        </div>
+        <div class="arch-root__badges">
+          <span class="sh-badge sh-badge--teal">POST-QUANTUM ROOT</span>
+          <span class="sh-badge sh-badge--gold">INFRASTRUCTURE ONLY</span>
+        </div>
+      </div>
+    </div>
+    <div class="arch-connector"></div>
+    <div class="arch-children-wrap">
+      <div class="arch-children-label"><span>BETACHAINS: SOVEREIGN JURISDICTION LAYER</span></div>
+      <div class="arch-beta-grid">
+        <div class="arch-beta-card arch-beta-card--teal pg-reveal">
+          <div class="arch-beta-card__body">
+            <div class="arch-beta-card__flag">🏦</div>
+            <div class="arch-beta-card__name">CAPITAL</div>
+            <div class="arch-beta-card__reg">CAPITAL MARKETS CHAIN</div>
+            <div class="arch-beta-card__items">
+              <div class="arch-beta-card__item">Schema: CAPITAL</div>
+              <div class="arch-beta-card__item">Totem Exchange</div>
+              <div class="arch-beta-card__item">Digital Certificates</div>
+              <div class="arch-beta-card__item">Developer App Store</div>
+              <div class="arch-beta-card__item">Open permission policy</div>
+            </div>
+          </div>
+        </div>
+        <div class="arch-beta-card arch-beta-card--gold pg-reveal">
+          <div class="arch-beta-card__body">
+            <div class="arch-beta-card__flag">🇿🇼</div>
+            <div class="arch-beta-card__name">ZIMBABWE</div>
+            <div class="arch-beta-card__reg">ZWG · RESERVE BANK OF ZIM</div>
+            <div class="arch-beta-card__items">
+              <div class="arch-beta-card__item">Schema: ZIMBABWE</div>
+              <div class="arch-beta-card__item">ZWG stablecoin · CBDC</div>
+              <div class="arch-beta-card__item">Full ShamwariPay</div>
+              <div class="arch-beta-card__item">CENTRAL BANK authority account</div>
+              <div class="arch-beta-card__item">Policy → BETA at block 10K</div>
+            </div>
+          </div>
+        </div>
+        <div class="arch-beta-card arch-beta-card--gold pg-reveal">
+          <div class="arch-beta-card__body">
+            <div class="arch-beta-card__flag">🇿🇦</div>
+            <div class="arch-beta-card__name">SOUTH AFRICA</div>
+            <div class="arch-beta-card__reg">ZAR · SARB · FSB · SARS</div>
+            <div class="arch-beta-card__items">
+              <div class="arch-beta-card__item">Schema: SOUTHAFRICA</div>
+              <div class="arch-beta-card__item">ZAR digital currency</div>
+              <div class="arch-beta-card__item">Totem</div>
+              <div class="arch-beta-card__item">SARB + FSB authority accounts</div>
+              <div class="arch-beta-card__item">SARS tax withholding</div>
+            </div>
+          </div>
+        </div>
+        <div class="arch-beta-card arch-beta-card--future pg-reveal">
+          <div class="arch-beta-card__body">
+            <div class="arch-beta-card__flag">＋</div>
+            <div class="arch-beta-card__name">YOUR CHAIN</div>
+            <div class="arch-beta-card__reg">CONFIGURABLE AT GENESIS</div>
+            <div class="arch-beta-card__items">
+              <div class="arch-beta-card__item">Schema: &lt;JURISDICTION&gt;</div>
+              <div class="arch-beta-card__item">Custom stablecoin</div>
+              <div class="arch-beta-card__item">White-label config</div>
+              <div class="arch-beta-card__item">3 authority accounts</div>
+              <div class="arch-beta-card__item">LATAM · ASEAN · MENA · EU</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg-table-wrap pg-reveal">
+  <table class="arch-prop-table">
+    <thead><tr><th>Property</th><th>FxtChain (Parent)</th><th>BetaChain (Child)</th></tr></thead>
+    <tbody>
+      <tr><td class="pg-td-field">Chain id</td><td>1 (fixed singleton)</td><td>2, 3, 4… sequential at creation</td></tr>
+      <tr><td class="pg-td-field">Database schema</td><td>PUBLIC</td><td>Chain name e.g. ZIMBABWE, CAPITAL</td></tr>
+      <tr><td class="pg-td-field">Native currency</td><td>WEALTH (SHAMWARI)</td><td>Per-chain ZWG, ZAR, CAPITAL…</td></tr>
+      <tr><td class="pg-td-field">Total supply</td><td>1,000,000,000,000 QNT</td><td>Immutable configuration at genesis</td></tr>
+      <tr><td class="pg-td-field">Transaction scope</td><td>Core type infrastructure-wide transactions only</td><td>Full financial primitive set (application types)</td></tr>
+      <tr><td class="pg-td-field">Permission policy</td><td>N/A for root authority</td><td>NONE → BETA_CHAIN at a pre-committed block height</td></tr>
+      <tr><td class="pg-td-field">Regulatory authorities</td><td>N/A</td><td>3 hardcoded at genesis: CB + SEC + INS</td></tr>
+      <tr><td class="pg-td-field">Disabled API tags</td><td>Chain-control subset</td><td>Configurable per chain via disabledAPITags</td></tr>
+      <tr><td class="pg-td-field">Instantiation pattern</td><td>Static singleton (JVM init)</td><td>Builder pattern which is immutable after build()</td></tr>
+      <tr><td class="pg-td-field">Cross-chain settlement</td><td>Provides finality anchor</td><td>References FxtChain for global settlement events</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+</section>
+
+
+<!-- ═══ 02  BETACHAIN SCHEMA ISOLATION ═══ -->
+<section class="sh-section" id="betachain-schema">
+<div class="sh-container">
+  <div class="arch-section-head">
+    <div class="arch-section-head__num">02</div>
+    <div class="arch-section-head__copy">
+      <div class="sh-eyebrow sh-eyebrow--gold">SCHEMA ISOLATION</div>
+      <div class="arch-section-head__title">Every BetaChain is a fully isolated database</div>
+      <p class="arch-section-head__sub">Each chain writes exclusively to its own named schema in the database. Account balances, totem ownership and all financial state are schema-scoped and one chain cannot read or write another's tables. This is not application-level isolation; it is enforced at the database layer.</p>
+    </div>
+  </div>
+  <div class="pg-two-col">
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1.5rem">SCHEMA ISOLATION MODEL</div>
+      <div class="arch-schema-wrap pg-reveal">
+        <div class="arch-schema-row"><div class="arch-schema-label">PUBLIC</div><div class="arch-schema-bar-wrap"><div class="arch-schema-bar arch-schema-bar--public">FxtChain (SHAMWARI)</div></div><div class="arch-schema-size">Infrastructure</div></div>
+        <div class="arch-schema-row"><div class="arch-schema-label">ZIMBABWE</div><div class="arch-schema-bar-wrap"><div class="arch-schema-bar arch-schema-bar--zim">ZIMBABWE BetaChain</div></div><div class="arch-schema-size">Full suite</div></div>
+        <div class="arch-schema-row"><div class="arch-schema-label">SOUTHAFRICA</div><div class="arch-schema-bar-wrap"><div class="arch-schema-bar arch-schema-bar--sa">SOUTH AFRICA BetaChain</div></div><div class="arch-schema-size">Regulated</div></div>
+        <div class="arch-schema-row"><div class="arch-schema-label">CAPITAL</div><div class="arch-schema-bar-wrap"><div class="arch-schema-bar arch-schema-bar--capital">CAPITAL BetaChain</div></div><div class="arch-schema-size">Markets only</div></div>
+      </div>
+      <div style="margin-top:1.75rem" class="pg-reveal">
+        <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1rem">GENESIS CONFIGURATION and immutable after init</div>
+        <div class="pg-code"><code>// BetaChainBuilder for key genesis params
+BetaChain.newBuilder()
+  .id(2)
+  .schema("ZIMBABWE")
+  .currency("ZWG")
+  .name("Zimbabwe Gold Chain")
+  .description("Central Bank regulated chain")
+  .totalAmount(100_000_000_000L * Constants.ONE_COIN)
+  .permissionPolicyType(PermissionPolicyType.NONE)
+  .permissionSwitchHeight(10_000L)  // NONE → BETA_CHAIN at block 10K
+  .centralBankAccountId(RESERVE_BANK_ACCOUNT_ID)   // hardcoded at genesis
+  .securitiesRegulatorId(SEC_ACCOUNT_ID)
+  .insuranceAuthorityId(IPEC_ACCOUNT_ID)
+  .disabledAPITags()                // no restrictions
+  .build();</code></div>
+      </div>
+    </div>
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1.5rem">THREE EMBEDDED REGULATORY AUTHORITIES</div>
+      <div class="pg-features pg-reveal">
+        <div class="pg-feature"><div class="pg-feature__accent pg-feature__accent--teal"></div><div class="pg-feature__icon sh-text--teal"><i class="fa-solid fa-building-columns"></i></div><div><div class="pg-feature__title">Central Bank</div><div class="pg-feature__body">Controls currency issuance, reserve requirements, and monetary policy transactions. The only account type permitted to execute <span class="sh-code">CURRENCY_ISSUANCE</span> and set currency control parameters. Embedded at betaChain genesis and cannot be changed post-deployment.</div></div></div>
+        <div class="pg-feature"><div class="pg-feature__accent pg-feature__accent--gold"></div><div class="pg-feature__icon sh-text--gold"><i class="fa-solid fa-scale-balanced"></i></div><div><div class="pg-feature__title">Securities Regulator</div><div class="pg-feature__body">Controls TotemApproval lifecycle: approving, suspending, and delisting tokenised securities. The 6-state machine requires securities regulator signature on all state transitions. No application code can bypass this.</div></div></div>
+        <div class="pg-feature"><div class="pg-feature__accent pg-feature__accent--purple"></div><div class="pg-feature__icon" style="color:var(--purple)"><i class="fa-solid fa-shield-heart"></i></div></div>
+        <div class="pg-feature"><div class="pg-feature__accent pg-feature__accent--teal"></div><div class="pg-feature__icon sh-text--teal"><i class="fa-solid fa-lock"></i></div><div><div class="pg-feature__title">Immutability Guarantee</div><div class="pg-feature__body">All three authority account IDs are written into the chain genesis block. There is no admin transaction that changes them post-deploy. A nation's central bank cannot be replaced by any participant including Shamwari network operators.</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ═══ 03  PERMISSION SYSTEM ═══ -->
+<section class="sh-section sh-section--navy" id="permission-system">
+<div class="sh-container">
+  <div class="arch-section-head">
+    <div class="arch-section-head__num">03</div>
+    <div class="arch-section-head__copy">
+      <div class="sh-eyebrow sh-eyebrow--gold">PERMISSION FRAMEWORK</div>
+      <div class="arch-section-head__title">Five levels. One temporal gate. No hard fork.</div>
+      <p class="arch-section-head__sub">BetaChains launch with the NONE permission policy with permissionless bootstrapping for community adoption. At a pre-committed block height set at genesis, the policy transitions automatically to BETA_CHAIN: all future transactions require CHAIN_USER permission or above. The transition is protocol-enforced and requires no chain upgrade.</p>
+    </div>
+  </div>
+  <div class="arch-perm-wrap">
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1.25rem">PERMISSION HIERARCHY</div>
+      <div class="arch-perm-ladder">
+        <div class="arch-perm-rung arch-perm-rung--1 pg-reveal"><div class="arch-perm-rung__code">MASTER_ADMIN</div><div class="arch-perm-rung__desc">Root authority. Grants CHAIN_BINDER and CHAIN_ADMIN permissions. Cannot be revoked by any other account. Equivalent to system root.</div></div>
+        <div class="arch-perm-rung arch-perm-rung--2 pg-reveal"><div class="arch-perm-rung__code">CHAIN_BINDER</div><div class="arch-perm-rung__desc">Transaction processor permission allowing granted accounts to preprocess chain transactions. Granted by MASTER_ADMIN only.</div></div>
+        <div class="arch-perm-rung arch-perm-rung--3 pg-reveal"><div class="arch-perm-rung__code">CHAIN_ADMIN</div><div class="arch-perm-rung__desc">Approves account CHAIN_USER permissions after KYC/AML checks. Banks and financial services providers operate with this permission.</div></div>
+        <div class="arch-perm-rung arch-perm-rung--4 pg-reveal"><div class="arch-perm-rung__code">CHAIN_USER</div><div class="arch-perm-rung__desc">Standard participant. Required on BETA_CHAIN policy chains. All transactional operations from payments to asset management require this level.</div></div>
+        <div class="arch-perm-rung arch-perm-rung--5 pg-reveal"><div class="arch-perm-rung__code">BLOCKED_CHAIN_USER</div><div class="arch-perm-rung__desc">Positive denial mechanism hard-blocks a CHAIN_USER even if CHAIN_USER is also set. Preserves full audit history of both permission grants and blocks.</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1.25rem">POLICY LIFECYCLE</div>
+      <div class="arch-policy-flow">
+        <div class="arch-policy-step pg-reveal"><div class="arch-policy-dot arch-policy-dot--grey"></div><div><div class="arch-policy-step__label">Genesis: NONE policy deployed</div><div class="arch-policy-step__desc">The chain launches with PermissionPolicyType.NONE. Any account may participate. MASTER_ADMIN and authority accounts are embedded. permissionSwitchHeight is set and immutable.</div><code class="arch-policy-step__code">permissionPolicyType = NONE</code></div></div>
+        <div class="arch-policy-step pg-reveal"><div class="arch-policy-dot arch-policy-dot--teal"></div><div><div class="arch-policy-step__label">Bootstrap phase for open adoption</div><div class="arch-policy-step__desc">Community participants, merchants, MFIs, and developers onboard freely. CHAIN_ADMIN begins KYC onboarding ahead of the transition.</div><code class="arch-policy-step__code">blocks 0 → permissionSwitchHeight</code></div></div>
+        <div class="arch-policy-step pg-reveal"><div class="arch-policy-dot arch-policy-dot--gold"></div><div><div class="arch-policy-step__label">Automatic transition requiring no hard fork</div><div class="arch-policy-step__desc">At block N (set at genesis), the consensus engine switches policy from NONE to BETA_CHAIN. Every node transitions simultaneously. No governance vote. No node upgrade. Active participants with CHAIN_USER are unaffected.</div><code class="arch-policy-step__code">block == permissionSwitchHeight → BETA_CHAIN</code></div></div>
+        <div class="arch-policy-step pg-reveal"><div class="arch-policy-dot arch-policy-dot--gold"></div><div><div class="arch-policy-step__label">Regulated operation: BETA_CHAIN policy</div><div class="arch-policy-step__desc">All new transactions require CHAIN_USER or above. Administrative types require CHAIN_ADMIN. Existing accounts without permission retain balances but cannot initiate transactions.</div><code class="arch-policy-step__code">permissionPolicyType = BETA_CHAIN</code></div></div>
+      </div>
+      <div style="margin-top:1.75rem">
+        <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1rem">AI ACCOUNT PERMISSION MATRIX</div>
+        <table class="arch-gate-table pg-reveal">
+          <thead><tr><th>Transaction</th><th>AI Allowed</th><th>Method</th></tr></thead>
+          <tbody>
+            <tr><td>CURRENCY_PAYMENT (P2P)</td><td class="arch-gate-ok">✓ Yes</td><td class="arch-gate-fn">isAIAllowed() → true</td></tr>
+            <tr><td>SUBSCRIBE / UNSUBSCRIBE</td><td class="arch-gate-ok">✓ Yes</td><td class="arch-gate-fn">isAIAllowed() → true</td></tr>
+            <tr><td>EXCHANGE_BUY / SELL</td><td class="arch-gate-ok">✓ Yes</td><td class="arch-gate-fn">isAIAllowed() → true</td></tr>
+            <tr><td>ISSUE_CERTIFICATE</td><td class="arch-gate-no">✗ Blocked</td><td class="arch-gate-fn">default → false</td></tr>
+            <tr><td>GRANT_PERMISSION</td><td class="arch-gate-no">✗ Blocked</td><td class="arch-gate-fn">default → false</td></tr>
+            <tr><td>TOTEM_APPROVAL</td><td class="arch-gate-no">✗ Blocked</td><td class="arch-gate-fn">default → false</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ═══ 04  CONSENSUS PIPELINE ═══ -->
+<section class="sh-section" id="consensus">
+<div class="sh-container">
+  <div class="arch-section-head">
+    <div class="arch-section-head__num">04</div>
+    <div class="arch-section-head__copy">
+      <div class="sh-eyebrow sh-eyebrow--teal">CONSENSUS PIPELINE</div>
+      <div class="arch-section-head__title">Seven deterministic gates before ledger commit</div>
+      <p class="arch-section-head__sub">Every transaction passes through the same ordered validation pipeline on every node. Each gate is deterministic and identical input always produces identical output. This is what produces consensus: not a voting mechanism, but a shared computation over the same validation logic.</p>
+    </div>
+  </div>
+  <div class="arch-pipeline">
+    <div class="arch-pipe-step pg-reveal"><div class="arch-pipe-num arch-pipe-num--teal">1</div><div class="arch-pipe-content"><div class="arch-pipe-label">Dilithium Signature Verification</div><div class="arch-pipe-desc">Every transaction carries a Dilithium (ML-DSA FIPS 204) signature over the serialised transaction body. The signature is verified against the sender's registered public key before the transaction touches any other validation logic. Invalid signature → immediate rejection.</div><code class="arch-pipe-code">TransactionImpl.verify() → Crypto.verify(signature, txBytes, publicKey)</code><div class="arch-pipe-tags"><span class="arch-pipe-tag">ML-DSA Dilithium</span><span class="arch-pipe-tag">FIPS 204</span><span class="arch-pipe-tag">No ECDSA anywhere</span></div></div></div>
+    <div class="arch-pipe-step pg-reveal"><div class="arch-pipe-num arch-pipe-num--teal">2</div><div class="arch-pipe-content"><div class="arch-pipe-label">Chain Routing: isAllowed(TransactionType)</div><div class="arch-pipe-desc">Chain.isAllowed(type) determines whether this transaction type is permitted on the target chain. FxtChain rejects all BetaChain transaction types. BetaChains reject all negative-byte infrastructure types. Chains with disabled transaction types enforce rejection on submission.</div><code class="arch-pipe-code">Chain.isAllowed(tx.getType()) → boolean</code><div class="arch-pipe-tags"><span class="arch-pipe-tag">Type byte routing</span><span class="arch-pipe-tag">disabledAPITags enforcement</span></div></div></div>
+    <div class="arch-pipe-step pg-reveal"><div class="arch-pipe-num arch-pipe-num--teal">3</div><div class="arch-pipe-content"><div class="arch-pipe-label">Permission Policy Check</div><div class="arch-pipe-desc">On BETA_CHAIN policy chains, the sender's permission level is verified. Transactions requiring administrator status are rejected from CHAIN_USER accounts. MASTER_ADMIN limited to granting CHAIN_ADMIN and CHAIN_BINDER permissions.</div><code class="arch-pipe-code">PermissionPolicy.check(sender, txType) → PASS | REJECT</code><div class="arch-pipe-tags"><span class="arch-pipe-tag">5-level hierarchy</span><span class="arch-pipe-tag">Admin-type enforcement</span></div></div></div>
+    <div class="arch-pipe-step pg-reveal"><div class="arch-pipe-num arch-pipe-num--slate">4</div><div class="arch-pipe-content"><div class="arch-pipe-label">Account Type Gate</div><div class="arch-pipe-desc">AccountType.isAllowed(tx, account) enforces protocol-level role restrictions. Only a BANK account can issue currency. Only a MERCHANT account can receive STORE_PURCHASE transactions. AI accounts can only submit transactions where isAIAllowed()=true. Verified at consensus.</div><code class="arch-pipe-code">AccountType.isAllowed(Transaction tx, Account sender)</code><div class="arch-pipe-tags"><span class="arch-pipe-tag">10 account types</span><span class="arch-pipe-tag">AI gate enforced</span><span class="arch-pipe-tag">Role-based tx routing</span></div></div></div>
+    <div class="arch-pipe-step pg-reveal"><div class="arch-pipe-num arch-pipe-num--slate">5</div><div class="arch-pipe-content"><div class="arch-pipe-label">Attachment Validation</div><div class="arch-pipe-desc">Each transaction type implements its own validateAttachment() as the business logic gate. Totem validates TotemApproval lifecycle. Loan validates collateral value.</div><code class="arch-pipe-code">TransactionType.validateAttachment(Transaction tx)</code><div class="arch-pipe-tags"><span class="arch-pipe-tag">Business logic gate</span><span class="arch-pipe-tag">State machine validation</span><span class="arch-pipe-tag">Reserve checks</span></div></div></div>
+    <div class="arch-pipe-step pg-reveal"><div class="arch-pipe-num arch-pipe-num--slate">6</div><div class="arch-pipe-content"><div class="arch-pipe-label">Balance &amp; Overflow Check</div><div class="arch-pipe-desc">All arithmetic uses Java long with explicit overflow-safe guards. Insufficient balance → rejection. The ledger can never enter a state with negative balances or integer overflow through checks before any ledger write occurs. Escrow amounts are locked and validated in the same gate.</div><code class="arch-pipe-code">BalanceHome.addToBalance(accountId, -amount) → overflow-safe</code><div class="arch-pipe-tags"><span class="arch-pipe-tag">Overflow-safe arithmetic</span><span class="arch-pipe-tag">No negative balances</span></div></div></div>
+    <div class="arch-pipe-step pg-reveal"><div class="arch-pipe-num arch-pipe-num--gold">7</div><div class="arch-pipe-content"><div class="arch-pipe-label">Block Apply &amp; Atomic Ledger Commit</div><div class="arch-pipe-desc">All validated transactions in a block are applied atomically in a single database transaction. Balance debits and credits, totem transfers, loan updates, and certificate issuances all commit or all roll back together. There is no partial-block state on Shamwari.</div><code class="arch-pipe-code">BlockchainProcessorImpl.apply(block) → atomic DB transaction</code><div class="arch-pipe-tags"><span class="arch-pipe-tag">Atomic block commit</span><span class="arch-pipe-tag">No partial-state risk</span><span class="arch-pipe-tag">Cross-system atomicity</span></div></div></div>
+  </div>
+</div>
+</section>
+
+
+<!-- ═══ 05  AUTOMATION ═══ -->
+<section class="sh-section sh-section--navy" id="automation">
+<div class="sh-container">
+  <div class="arch-section-head">
+    <div class="arch-section-head__num">05</div>
+    <div class="arch-section-head__copy">
+      <div class="sh-eyebrow sh-eyebrow--gold">PROTOCOL AUTOMATION</div>
+      <div class="arch-section-head__title">The blockchain bills itself and pays itself out</div>
+      <p class="arch-section-head__sub">After every successfully applied block, the <span class="sh-code">AFTER_BLOCK_APPLY</span> event fires. Multiple systems register listeners that execute automatic protocol operations without any user transaction subscriptions unsubscribe themselves after lapses and Totem freeze heights activate without any human trigger.</p>
+    </div>
+  </div>
+  <div class="arch-auto-grid">
+    <div class="arch-auto-card arch-auto-card--teal pg-reveal"><div class="arch-auto-card__bar"></div><div class="arch-auto-card__trigger">TRIGGER: AFTER_BLOCK_APPLY</div><div class="arch-auto-card__name">Subscriptions</div><div class="arch-auto-card__body">When <span class="sh-code">currentHeight == nextBillingHeight</span>, without another premium payment, the subscription listener unsubscribes the account to the service and updates the subscription statusin the same block. For payments, the nextBillingHeight is set to currentHeight + billingPeriod. Works for human accounts and AI accounts alike.</div></div>
+    
+    <div class="arch-auto-card arch-auto-card--purple pg-reveal"><div class="arch-auto-card__bar"></div><div class="arch-auto-card__trigger">TRIGGER: AFTER_BLOCK_APPLY</div><div class="arch-auto-card__name">Totem Freeze Monitor</div><div class="arch-auto-card__body">At the block height set in <span class="sh-code">TOTEM_FREEZE_HEIGHT_PROPERTY</span>, the freeze listener marks the Totem as illiquid. All subsequent transfer transactions are rejected at attachment validation. No separate freeze transaction is required from the issuer.</div></div>
+    <div class="arch-auto-card arch-auto-card--purple pg-reveal"><div class="arch-auto-card__bar"></div><div class="arch-auto-card__trigger">TRIGGER: AFTER_BLOCK_APPLY</div><div class="arch-auto-card__name">Totem Migration Activation</div><div class="arch-auto-card__body">At <span class="sh-code">TOTEM_MIGRATE_HEIGHT_PROPERTY</span>, the migration listener activates the TotemSnapshot capturing the holder distribution at that block. Used for token migration events across chains without requiring holder action.</div></div>
+  </div>
+</div>
+</section>
+
+
+<!-- ═══ 06  TRANSACTION TYPES ═══ -->
+<section class="sh-section" id="tx-anatomy">
+<div class="sh-container">
+  <div class="arch-section-head">
+    <div class="arch-section-head__num">06</div>
+    <div class="arch-section-head__copy">
+      <div class="sh-eyebrow sh-eyebrow--teal">TRANSACTION TAXONOMY</div>
+      <div class="arch-section-head__title">70+ consensus-layer transaction types</div>
+      <p class="arch-section-head__sub">Every financial operation is a typed, protocol-enforced transaction and not a smart contract call. The type byte determines chain routing, permission requirements, account type eligibility, and the validation logic applied.</p>
+    </div>
+  </div>
+  <div class="arch-tx-anatomy">
+    <div>
+      <div class="arch-tx-cluster"><div class="arch-tx-cluster__head arch-tx-cluster__head--teal"><div class="arch-tx-cluster__title">SHAMWARI PAY</div><div class="arch-tx-cluster__count sh-text--teal">17</div></div><div class="arch-tx-cluster__list"><div class="arch-tx-cluster__item">CURRENCY_ISSUANCE · CURRENCY_PAYMENT</div><div class="arch-tx-cluster__item">RESERVE_INCREASE · RESERVE_CLAIM</div><div class="arch-tx-cluster__item">PUBLISH_EXCHANGE_OFFER</div><div class="arch-tx-cluster__item">EXCHANGE_BUY · EXCHANGE_SELL</div><div class="arch-tx-cluster__item">LOAN_OFFER · LOAN_ACCEPT · LOAN_REPAYMENT</div><div class="arch-tx-cluster__item">COLLATERAL_RESCUE</div><div class="arch-tx-cluster__item">SAVINGS_DEPOSIT · SAVINGS_WITHDRAWAL</div><div class="arch-tx-cluster__item">ORDER_PLACEMENT · ORDER_CANCELLATION</div><div class="arch-tx-cluster__item">CANCEL_ALL_ORDERS · TRANSFER_CURRENCY</div></div></div>
+      <div class="arch-tx-cluster"><div class="arch-tx-cluster__head arch-tx-cluster__head--gold"><div class="arch-tx-cluster__title">TOTEM EXCHANGE</div><div class="arch-tx-cluster__count sh-text--gold">11</div></div><div class="arch-tx-cluster__list"><div class="arch-tx-cluster__item">TOTEM_ISSUANCE · TOTEM_TRANSFER</div><div class="arch-tx-cluster__item">TOTEM_APPROVAL (6-state lifecycle)</div><div class="arch-tx-cluster__item">TOTEM_SUPPLY_INCREASE · TOTEM_DELETION</div><div class="arch-tx-cluster__item">TOTEM_SET_PROPERTY · DIVIDEND_PAYMENT</div><div class="arch-tx-cluster__item">PLACE_ASK_ORDER · PLACE_BID_ORDER</div><div class="arch-tx-cluster__item">CANCEL_ASK_ORDER · CANCEL_BID_ORDER</div></div></div>
+      <div class="arch-tx-cluster"><div class="arch-tx-cluster__head arch-tx-cluster__head--teal"><div class="arch-tx-cluster__title">IDENTITY &amp; CERTIFICATES</div><div class="arch-tx-cluster__count sh-text--teal">4</div></div><div class="arch-tx-cluster__list"><div class="arch-tx-cluster__item">ISSUE_CERTIFICATE · RENEW_CERTIFICATE</div><div class="arch-tx-cluster__item">REVOKE_CERTIFICATE · SET_ACCOUNT_INFO</div></div></div>
+      <div class="arch-tx-cluster"><div class="arch-tx-cluster__head arch-tx-cluster__head--slate"><div class="arch-tx-cluster__title">CHAIN CONTROL (FxtChain)</div><div class="arch-tx-cluster__count" style="color:var(--txt-secondary)">5</div></div><div class="arch-tx-cluster__list"><div class="arch-tx-cluster__item">GRANT_PERMISSION · REVOKE_PERMISSION</div><div class="arch-tx-cluster__item">FORGING_ASSIGNMENT · CHAIN_CONFIG</div><div class="arch-tx-cluster__item">BLOCK VALIDATION</div></div></div></div> 
+      <div style="margin-top:1.25rem" class="pg-reveal">
+        <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1rem">GATING INTERFACE where every type implements</div>
+        <div class="pg-code"><code>interface TransactionType {
+
+  // Chain routing: does this type run here?
+  boolean isAllowed(TransactionType type);
+
+  // AI gate: secure by default
+  default boolean isAIAllowed() {
+    return false; // override to permit AI agents
+  }
+
+  // Business logic: type-specific rules
+  void validateAttachment(Transaction tx)
+      throws ValidationException;
+
+  // Admin gate: does this need CHAIN_ADMIN?
+  default boolean isAdministrative() {
+    return false;
+  }
+}</code></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ═══ 07  PROTOCOL VS CONTRACT ═══ -->
+<section class="sh-section sh-section--navy" id="protocol-vs-contract">
+<div class="sh-container">
+  <div class="arch-section-head">
+    <div class="arch-section-head__num">07</div>
+    <div class="arch-section-head__copy">
+      <div class="sh-eyebrow sh-eyebrow--gold">DESIGN PHILOSOPHY</div>
+      <div class="arch-section-head__title">Why protocol-native beats smart contracts for financial infrastructure</div>
+      <p class="arch-section-head__sub">The decision to implement every financial primitive at the consensus layer rather than as smart contract overlays is not a limitation but a core architectural thesis. Every security property, compliance guarantee, and operational cost advantage flows directly from this design choice.</p>
+    </div>
+  </div>
+  <div class="pg-cards2">
+    <div class="pg-card2 pg-reveal"><div class="pg-card2__accent pg-card2__accent--teal"></div><h3 class="pg-card2__title">Fixed, auditable security surface</h3><p class="pg-card2__body">On existing platforms, every new dApp deployment is a new attack surface. Shamwari's financial logic is audited once in the protocol codebase and deployed everywhere. $3.8B+ in DeFi has been lost to smart contract exploits that are structurally impossible here.</p><ul class="pg-card2__list"><li>No re-entrancy and no external contract calls from financial logic</li><li>No integer overflow or explicit overflow-safe arithmetic throughout</li><li>No upgrade proxy vulnerabilities as the protocol is the final arbiter</li><li>No frontrunning on type routing with consensus determining order</li></ul></div>
+    <div class="pg-card2 pg-reveal"><div class="pg-card2__accent pg-card2__accent--gold"></div><h3 class="pg-card2__title">Compliance is enforced, not requested</h3><p class="pg-card2__body">Regulatory controls like TotemApproval, account type restrictions are enforced by the consensus engine. No application-layer code can override them such that a suspended Totem stays suspended regardless of what any front-end tells users.</p><ul class="pg-card2__list"><li>TotemApproval state blocks transfers at attachment validation</li><li>MERCHANT type required for purchase receipt and is enforced at consensus level</li><li>AI isAIAllowed() checked before mempool entry, not after</li></ul></div>
+    <div class="pg-card2 pg-reveal"><div class="pg-card2__accent pg-card2__accent--teal"></div><h3 class="pg-card2__title">Cross-system atomicity without bridges</h3><p class="pg-card2__body">All five financial systems share the same protocol, so cross-system operations are atomic by construction. A purchase that triggers a loyalty reward, a loan repayment that releases collateral can all execute in one block, one database transaction. No bridge risk. No cross-contract call failure.</p><ul class="pg-card2__list"><li>No bridge risk as there is no cross-contract calls between systems</li><li>Single DB transaction per block based on all-or-nothing semantics</li><li>AFTER_BLOCK_APPLY listeners maintain consistent post-state</li><li>No oracle dependency for internal financial logic</li></ul></div>
+    <div class="pg-card2 pg-reveal"><div class="pg-card2__accent pg-card2__accent--gold"></div><h3 class="pg-card2__title">Predictable fees for mass-market access</h3><p class="pg-card2__body">Gas models create unpredictable transaction costs, making them unusable for high-frequency, low-value operations like subscription billing, insurance premium collection, and microfinance repayments. Shamwari's transaction fee model is fixed and predictable per transaction type.</p><ul class="pg-card2__list"><li>Fixed, predictable fees per transaction type</li><li>No fee spikes during network congestion events</li><li>Subscription payment viable at zero marginal cost per cycle</li><li>Viable on feature phones with low-bandwidth connections</li></ul></div>
+  </div>
+  <div style="margin-top:3rem" class="pg-reveal">
+    <div class="pg-table-wrap">
+    <table class="pg-table">
+      <thead><tr><th>Property</th><th>Shamwari (Protocol-native)</th><th>Ethereum (Smart contract)</th><th>Solana (Programme-based)</th></tr></thead>
+      <tbody>
+        <tr><td class="pg-td-field">Financial logic location</td><td class="pg-td-val sh-text--teal">Consensus layer</td><td class="pg-td-val">Smart contract (EVM bytecode)</td><td class="pg-td-val">On-chain programme (SBF)</td></tr>
+        <tr><td class="pg-td-field">Compliance enforcement</td><td class="pg-td-val sh-text--teal">Protocol-enforced, ungovernable by apps</td><td class="pg-td-val">Application-layer only, bypassable</td><td class="pg-td-val">Application-layer only, bypassable</td></tr>
+        <tr><td class="pg-td-field">Transaction cost model</td><td class="pg-td-val sh-text--teal">Fixed per-type fee</td><td class="pg-td-val">Variable gas fees spike unpredictably</td><td class="pg-td-val">Low but not zero and SOL denominated</td></tr>
+        <tr><td class="pg-td-field">Security audit surface</td><td class="pg-td-val sh-text--teal">One codebase, one audit</td><td class="pg-td-val">Every contract is a new surface</td><td class="pg-td-val">Every programme is a new surface</td></tr>
+        <tr><td class="pg-td-field">Re-entrancy risk</td><td class="pg-td-val sh-text--teal">None with no external calls</td><td class="pg-td-val">Structural risk (DAO hack, $60M)</td><td class="pg-td-val">Structural risk exists</td></tr>
+        <tr><td class="pg-td-field">Post-quantum signatures</td><td class="pg-td-val sh-text--teal">ML-DSA Dilithium from genesis</td><td class="pg-td-val">ECDSA migration TBD</td><td class="pg-td-val">Ed25519 is quantum vulnerable</td></tr>
+        <tr><td class="pg-td-field">Regulatory authority</td><td class="pg-td-val sh-text--teal">Hardcoded at genesis, immutable</td><td class="pg-td-val">No native concept</td><td class="pg-td-val">No native concept</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ═══ 08  CHAIN CONTROL & KYC ═══ -->
+<section class="sh-section" id="chain-control">
+<div class="sh-container">
+  <div class="arch-section-head">
+    <div class="arch-section-head__num">08</div>
+    <div class="arch-section-head__copy">
+      <div class="sh-eyebrow sh-eyebrow--teal">CHAIN CONTROL &amp; KYC</div>
+      <div class="arch-section-head__title">Protocol-native permission governance</div>
+      <p class="arch-section-head__sub">Shamwari transforms each BetaChain from an open blockchain into a regulated financial network where participation is a privilege that must be explicitly granted, can be revoked, and is permanently recorded. This is not application-layer access control but enforced logic at the transaction validation layer.</p>
+    </div>
+  </div>
+  <div class="pg-two-col">
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1.25rem">SIX PERMISSION TYPES</div>
+      <div class="arch-perm-ladder" style="margin-bottom:2rem">
+        <div class="arch-perm-rung arch-perm-rung--1 pg-reveal"><div class="arch-perm-rung__code">MASTER_ADMIN</div><div class="arch-perm-rung__desc">Set exclusively at chain construction. Grants CHAIN_ADMIN, BLOCKED_CHAIN_ADMIN, and CHAIN_BINDER. Immutable for the chain's lifetime.</div></div>
+        <div class="arch-perm-rung arch-perm-rung--2 pg-reveal"><div class="arch-perm-rung__code">CHAIN_ADMIN</div><div class="arch-perm-rung__desc">Granted by MASTER_ADMIN. Manages day-to-day KYC onboarding through granting and revoking CHAIN_USER and BLOCKED_CHAIN_USER permissions.</div></div>
+        <div class="arch-perm-rung arch-perm-rung--3 pg-reveal"><div class="arch-perm-rung__code">CHAIN_BINDER</div><div class="arch-perm-rung__desc">Infrastructure permission. Authorised to submit BetaBlock transactions anchoring BetaChain activity onto FxtChain. Granted by MASTER_ADMIN only.</div></div>
+        <div class="arch-perm-rung arch-perm-rung--4 pg-reveal"><div class="arch-perm-rung__code">CHAIN_USER</div><div class="arch-perm-rung__desc">Standard transactional participant. Submit transactions, receive transfers and payments. Granted by CHAIN_ADMIN after KYC verification.</div></div>
+        <div class="arch-perm-rung arch-perm-rung--5 pg-reveal"><div class="arch-perm-rung__code">BLOCKED_CHAIN_ADMIN</div><div class="arch-perm-rung__desc">Blocker type. Hard-blocks a CHAIN_ADMIN where their effective permissions are nullified without removing the original grant record.</div></div>
+        <div class="arch-perm-rung arch-perm-rung--5 pg-reveal"><div class="arch-perm-rung__code">BLOCKED_CHAIN_USER</div><div class="arch-perm-rung__desc">Blocker type. Hard-blocks a CHAIN_USER and ensures they cannot transact even if CHAIN_USER is also set. Preserves full audit history.</div></div>
+      </div>
+      <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1rem">CASCADING REVOCATION</div>
+      <div class="pg-card2 pg-reveal"><div class="pg-card2__accent pg-card2__accent--red"></div><p class="pg-card2__body">When a CHAIN_ADMIN is removed, the system automatically revokes every CHAIN_USER and BLOCKED_CHAIN_USER permission they granted from the specified height onwards. No orphaned permissions persist after an admin is compromised or removed.</p></div>
+    </div>
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1.25rem">ENCRYPTED KYC ON-CHAIN</div>
+      <div class="pg-features">
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Kyber-Encrypted Permission Data</div><div class="pg-feature__body">Each BetaChainPermission record carries an EncryptedData payload as a Kyber-encrypted blob holding KYC documentation references and compliance attestation identifiers. Readable only by the granting institution's custody system; the blockchain stores ciphertext permanently.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">Dynamic Policy Transition</div><div class="pg-feature__body">Chains transition from NONE (open access) to BETA_CHAIN (permissioned) at a configured block height. The switch is block-exact and evaluated dynamically by a Supplier lambda on every height check. No hard fork required.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--purple"></div><div><div class="pg-feature__title">Transaction Validation Enforcement</div><div class="pg-feature__body">BetaChainPermissionChecker validates every transaction: sender must hold CHAIN_USER, recipient must hold CHAIN_USER (with exceptions for currency transfers). BetaBlocks require CHAIN_BINDER. SHUFFLING_CREATION and DIVIDEND_PAYMENT are categorically forbidden on permissioned chains.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Reversible Account Freezing</div><div class="pg-feature__body">BLOCKED_CHAIN_USER provides targeted, reversible suspension. The original CHAIN_USER grant remains in the versioned table; removing the blocker instantly restores access. Full history of both grant and block preserved for regulatory audit.</div></div></div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:3rem">
+    <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1rem;text-align:center">CHAIN CONTROL COMPARISON</div>
+    <div class="pg-table-wrap pg-reveal">
+    <table class="arch-prop-table">
+      <thead><tr><th>Capability</th><th>Shamwari Chain Control</th><th>Traditional KYC System</th><th>Smart Contract Access Control</th></tr></thead>
+      <tbody>
+        <tr><td class="pg-td-field">Permission enforcement</td><td style="color:var(--teal)">Protocol layer is robust and structurally impossible to bypass</td><td>Application layers can be circumvented</td><td>Application layer depends on smart contract logic</td></tr>
+        <tr><td class="pg-td-field">Cascading revocation</td><td style="color:var(--teal)">Automatic on admin removal</td><td>Manual multi-system update</td><td>Not available</td></tr>
+        <tr><td class="pg-td-field">Blocker mechanism</td><td style="color:var(--teal)">Positive denial with full history</td><td>Delete-only and loses audit trail</td><td>Not available</td></tr>
+        <tr><td class="pg-td-field">KYC data attachment</td><td style="color:var(--teal)">Encrypted on-chain per grant</td><td>Separate database</td><td>Not available</td></tr>
+        <tr><td class="pg-td-field">Policy upgrade</td><td style="color:var(--teal)">In-protocol at configured block height</td><td>Requires redeployment</td><td>Requires contract upgrade</td></tr>
+        <tr><td class="pg-td-field">Audit trail</td><td style="color:var(--teal)">Versioned blockchain table that is immutable</td><td>External database which is modifiable</td><td>Event logs only</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ═══ 09  TAXATION ═══ -->
+<section class="sh-section sh-section--navy" id="taxation">
+<div class="sh-container">
+  <div class="arch-section-head">
+    <div class="arch-section-head__num">09</div>
+    <div class="arch-section-head__copy">
+      <div class="sh-eyebrow sh-eyebrow--gold">PROTOCOL-NATIVE TAXATION</div>
+      <div class="arch-section-head__title">Automatic tax withholding at the consensus layer</div>
+      <p class="arch-section-head__sub">Shamwari's Taxation System is the most comprehensive on-chain tax infrastructure deployed on any blockchain. Every taxable transaction automatically computes applicable taxes, withholds them from relevant parties, and credits the chain's designated Tax Collector account all atomically within the same block.</p>
+    </div>
+  </div>
+  <div style="margin-bottom:3rem">
+    <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1.5rem;text-align:center">13 TAX RATE TYPES with BASIS-POINT PRECISION</div>
+    <div class="sp-tax-rates pg-reveal">
+      <div class="sp-tax-rate"><div class="sp-tax-rate__name">TRANSACTION</div><div class="sp-tax-rate__bps">0–3500 bps</div><div class="sp-tax-rate__range">General levy</div></div>
+      <div class="sp-tax-rate"><div class="sp-tax-rate__name">VALUE ADDED</div><div class="sp-tax-rate__bps">0–3500 bps</div><div class="sp-tax-rate__range">Goods &amp; services</div></div>
+      <div class="sp-tax-rate"><div class="sp-tax-rate__name">CAPITAL GAINS</div><div class="sp-tax-rate__bps">0–3500 bps</div><div class="sp-tax-rate__range">Asset sales</div></div>
+      <div class="sp-tax-rate"><div class="sp-tax-rate__name">SALES</div><div class="sp-tax-rate__bps">0–3500 bps</div><div class="sp-tax-rate__range">Store purchases</div></div>
+      <div class="sp-tax-rate"><div class="sp-tax-rate__name">CURRENCY TRANSFER</div><div class="sp-tax-rate__bps">0–3500 bps</div><div class="sp-tax-rate__range">Payments &amp; lending</div></div>
+      <div class="sp-tax-rate"><div class="sp-tax-rate__name">LOAN INTEREST</div><div class="sp-tax-rate__bps">0–3500 bps</div><div class="sp-tax-rate__range">Withholding at source</div></div>
+      <div class="sp-tax-rate"><div class="sp-tax-rate__name">SUBSCRIPTION</div><div class="sp-tax-rate__bps">0–3500 bps</div><div class="sp-tax-rate__range">Recurring services</div></div>
+      <div class="sp-tax-rate"><div class="sp-tax-rate__name">EXCHANGE / FX</div><div class="sp-tax-rate__bps">0–3500 bps</div><div class="sp-tax-rate__range">Foreign exchange</div></div>
+      <div class="sp-tax-rate"><div class="sp-tax-rate__name">TOTEM ISSUANCE</div><div class="sp-tax-rate__bps">0–3500 bps</div><div class="sp-tax-rate__range">Stamp duty</div></div>
+      <div class="sp-tax-rate"><div class="sp-tax-rate__name">DIVIDEND</div><div class="sp-tax-rate__bps">0–3500 bps</div><div class="sp-tax-rate__range">Withholding tax</div></div>
+    </div>
+  </div>
+  <div class="pg-two-col">
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1.25rem">TAX CALCULATION</div>
+      <div class="pg-card2 pg-reveal" style="margin-bottom:1rem"><div class="pg-card2__accent pg-card2__accent--gold"></div><h3 class="pg-card2__title">Basis-Point Precision with Thresholds</h3><p class="pg-card2__body">Tax calculation: <span class="sh-code">taxAmount = (transactionAmount × rateBps) / 10,000</span>. Each type supports independent min/max taxable thresholds. Amounts below minimum are untaxed; amounts above maximum are capped.</p><ul class="pg-card2__list"><li>Zero-rate disables tax without deleting history</li><li>Integer arithmetic with no rounding errors</li><li>Multi-tax transactions: independent calculation, no compounding</li><li>Per-type audit receipt via computeTaxBreakdown()</li></ul></div>
+      <div class="pg-card2 pg-reveal"><div class="pg-card2__accent pg-card2__accent--teal"></div><h3 class="pg-card2__title">Atomic Multi-Rate Updates</h3><p class="pg-card2__body">The SetTaxRatesAttachment allows up to 13 rate entries in a single transaction. All entries apply at the same block height via atomic database transaction ensuring partial updates are structurally impossible.</p></div>
+    </div>
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1.25rem">TAX COLLECTOR &amp; RECORDS</div>
+      <div class="pg-features">
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">Embedded Tax Collector Account</div><div class="pg-feature__body">Each chain's Tax Collector account is set at genesis (ZIMBABWE_TAX_COLLECTOR_ID, SOUTH_AFRICA_TAX_COLLECTOR_ID). Every taxable transaction credits withheld tax to this account via CurrencyTaxRecord.creditTaxAccount().</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Immutable CurrencyTaxRecord</div><div class="pg-feature__body">Every tax collection event writes a permanent CurrencyTaxRecord linking the originating transaction hash, paying account, Tax Collector account, currency, and amount. The blockchain is the authoritative tax collection record and no reconciliation required.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--purple"></div><div><div class="pg-feature__title">Real-Time Regulatory Reporting</div><div class="pg-feature__body">TaxPolicy.toJSON() returns a machine-readable snapshot of all configured rates including effective block heights. Regulators query this endpoint at any time to verify the chain is operating with correct rates.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">Withholding-at-Source</div><div class="pg-feature__body">LOAN_INTEREST_TAX and DIVIDEND_WITHHOLDING_TAX implement structural tax evasion prevention. Tax is deducted before income reaches the recipient making it impossible to bypass, with immediate credit to the Tax Collector.</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ═══ 10  BINDER PROTOCOL ═══ -->
+<section class="sh-section" id="binder-protocol">
+<div class="sh-container">
+  <div class="arch-section-head">
+    <div class="arch-section-head__num">10</div>
+    <div class="arch-section-head__copy">
+      <div class="sh-eyebrow sh-eyebrow--teal">BINDER PROTOCOL</div>
+      <div class="arch-section-head__title">Fee abstraction for institutional use</div>
+      <p class="arch-section-head__sub">The Binder Protocol removes the requirement for end users to hold native blockchain tokens to pay transaction fees. A Binder holds WEALTH (FXT) tokens and pays FxtChain fees on behalf of BetaChain users, who pay BetaChain fees in their local currency. Users only ever need ZWG, ZAR, or CAPITAL to transact.</p>
+    </div>
+  </div>
+  <div class="pg-two-col">
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1.25rem">HOW BINDING WORKS</div>
+      <div class="arch-policy-flow">
+        <div class="arch-policy-step pg-reveal"><div class="arch-policy-dot arch-policy-dot--teal"></div><div><div class="arch-policy-step__label">Binder Registration</div><div class="arch-policy-step__desc">A binder calls addOrChangeBinder with a BetaChain, their ShamwariQKP, a total fee limit, and a list of binding Rules. Banks, MFIs, or PSPs can act as binders for their customers.</div></div></div>
+        <div class="arch-policy-step pg-reveal"><div class="arch-policy-dot arch-policy-dot--teal"></div><div><div class="arch-policy-step__label">Transaction Filtering</div><div class="arch-policy-step__desc">The binder's runBinding() scans unconfirmed transactions against each Rule's filters based on transaction type, account group andfee range. Only matching transactions qualify for acceptance.</div></div></div>
+        <div class="arch-policy-step pg-reveal"><div class="arch-policy-dot arch-policy-dot--gold"></div><div><div class="arch-policy-step__label">Fee Calculation</div><div class="arch-policy-step__desc">For each qualifying transaction, the binder calculates the FXT fee using the Rule's feeCalculator (MIN_FEE, PROPORTIONAL_FEE, or custom). The binder's profit margin is the overpay factor.</div></div></div>
+        <div class="arch-policy-step pg-reveal"><div class="arch-policy-dot arch-policy-dot--gold"></div><div><div class="arch-policy-step__label">BetaBlock Bundling</div><div class="arch-policy-step__desc">Qualifying transactions are bundled into a BetaBlockFxtTransaction i.e a single FxtChain transaction carrying up to MAX_NUMBER_OF_BETA_TRANSACTIONS BetaTransactions. The binder pays one FXT fee.</div></div></div>
+        <div class="arch-policy-step pg-reveal"><div class="arch-policy-dot" style="background:var(--purple);color:#fff"></div><div><div class="arch-policy-step__label">Confirmation &amp; Recovery</div><div class="arch-policy-step__desc">When confirmed, all bundled BetaTransactions execute. The binder's FXT cost is recovered from BetaChain fees collected from users. The binder sets a totalFeesLimitFQT for exposure management.</div></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1.25rem">BINDING RULES</div>
+      <div class="pg-card2 pg-reveal" style="margin-bottom:1rem"><div class="pg-card2__accent pg-card2__accent--teal"></div><h3 class="pg-card2__title">Rule Structure</h3><p class="pg-card2__body">Each Rule combines three elements: minimum rate (minRateMTAPerFXT), overpay factor (overpayFQTPerFXT), and an ordered list of Filters. Filters determine which transactions the Rule applies to.</p><ul class="pg-card2__list"><li>Transaction type filters</li><li>Account group filters</li><li>Fee range filters</li><li>Chain-specific filters</li></ul></div>
+      <div class="pg-card2 pg-reveal" style="margin-bottom:1rem"><div class="pg-card2__accent pg-card2__accent--gold"></div><h3 class="pg-card2__title">Fee Calculators</h3><p class="pg-card2__body">MIN_FEE charges exactly the required FXT fee. PROPORTIONAL_FEE scales with the BetaChain fee paid by the user. Custom calculators can be loaded via nxt.customBindingFeeCalculators for institutional-specific structures.</p></div>
+    </div>
+  </div>
+  <div class="sh-threat-banner pg-reveal" style="margin-top:3rem"><div class="sh-threat-banner__icon"><i class="fa-solid fa-globe"></i></div><div><div class="sh-threat-banner__label">FINANCIAL INCLUSION IMPACT</div><div class="sh-threat-banner__text">In emerging markets, requiring users to hold a universal token to use financial applications is a significant adoption barrier. The Binder Protocol removes this entirely. A bank, MFI, or payment provider acts as binder for their customers where the end customer deposits tokens denominated in their national currency and transacts immediately, never interacting with the main chain tokens.</div></div></div>
+</div>
+</section>
+
+
+<!-- ═══ 11 — BLOCK STRUCTURE & CONSENSUS ═══ -->
+<section class="sh-section sh-section--navy" id="block-consensus">
+<div class="sh-container">
+  <div class="arch-section-head">
+    <div class="arch-section-head__num">11</div>
+    <div class="arch-section-head__copy">
+      <div class="sh-eyebrow sh-eyebrow--gold">BLOCKS &amp; CONSENSUS</div>
+      <div class="arch-section-head__title">Post-quantum proof-of-stake</div>
+      <p class="arch-section-head__sub">Every Shamwari block is signed with ML-DSA-2 (Dilithium Level 2, NIST FIPS 204). The balance-weighted forging algorithm determines block generation rights without energy expenditure. Dynamic base target adjustment maintains ~60-second block times.</p>
+    </div>
+  </div>
+  <div class="pg-two-col" style="margin-bottom:3rem">
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1.25rem">BLOCK HEADER</div>
+      <div class="arch-tx-cluster pg-reveal"><div class="arch-tx-cluster__head arch-tx-cluster__head--teal"><div class="arch-tx-cluster__title">FIELDS</div><div class="arch-tx-cluster__count sh-text--teal">10</div></div><div class="arch-tx-cluster__list"><div class="arch-tx-cluster__item">version : 4 bytes</div><div class="arch-tx-cluster__item">timestamp: 4 bytes (epoch seconds)</div><div class="arch-tx-cluster__item">previousBlockId: 8 bytes</div><div class="arch-tx-cluster__item">transactionCount: 4 bytes</div><div class="arch-tx-cluster__item">totalFeeFQT: 8 bytes</div><div class="arch-tx-cluster__item">payloadHash: 32 bytes (SHA-256)</div><div class="arch-tx-cluster__item">generatorPublicKey: 2112 bytes (Kyber 800 + Dilithium 1312)</div><div class="arch-tx-cluster__item">generationSignature: 32 bytes</div><div class="arch-tx-cluster__item">previousBlockHash: 32 bytes</div><div class="arch-tx-cluster__item">blockSignature: 2420 bytes (ML-DSA-2)</div></div></div>
+      <div style="margin-top:1rem" class="pg-reveal">
+        <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:.5rem">BLOCK LIMITS</div>
+        <ul class="sh-list"><li>Hard size limit: 10 MB raw bytes</li><li>Max BetaBlock payload: configurable per chain</li><li>Max BetaTransactions per BetaBlock: configurable</li><li>Target block time: ~12 seconds</li></ul>
+      </div>
+    </div>
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1.25rem">FORGING ALGORITHM</div>
+      <div class="pg-card2 pg-reveal" style="margin-bottom:1rem"><div class="pg-card2__accent pg-card2__accent--teal"></div><h3 class="pg-card2__title">Hit &amp; Target Calculation</h3><p class="pg-card2__body">For each candidate forger, a hit value is computed from SHA-256(previousBlock.generationSignature || forgerPublicKey.combinedPublicKey). The forger with the earliest hitTime generates the next block.</p><ul class="pg-card2__list"><li>Balance-weighted with no energy consumption</li><li>Deterministic verification by all nodes</li><li>Up to 100 forgers per node</li></ul></div>
+      <div class="pg-card2 pg-reveal" style="margin-bottom:1rem"><div class="pg-card2__accent pg-card2__accent--gold"></div><h3 class="pg-card2__title">Dynamic Base Target</h3><p class="pg-card2__body">Adjusts every 2 blocks to maintain target time. If average block time exceeds target, baseTarget increases (easier forging). If below, it decreases. Bounded by MIN/MAX_BLOCKTIME_DELTA to prevent sudden swings.</p></div>
+      <div class="pg-card2 pg-reveal"><div class="pg-card2__accent pg-card2__accent--purple"></div><h3 class="pg-card2__title">Resource-Aware Forging</h3><p class="pg-card2__body">The Generator module prevents block generation when CPU or RAM is insufficient for current transaction volume. Required resources scale linearly with mempool size to prevent node crashes under extreme load.</p></div>
+    </div>
+  </div>
+  <div class="sh-qsec-stats pg-reveal">
+    <div class="sh-qsec-stat"><div class="sh-qsec-stat__n sh-text--teal">~12s</div><div class="sh-qsec-stat__l">Target block time</div></div>
+    <div class="sh-qsec-stat"><div class="sh-qsec-stat__n sh-text--gold">10 MB</div><div class="sh-qsec-stat__l">Block size hard limit</div></div>
+    <div class="sh-qsec-stat"><div class="sh-qsec-stat__n sh-text--teal">2,420</div><div class="sh-qsec-stat__l">Bytes per Dilithium block signature</div></div>
+    <div class="sh-qsec-stat"><div class="sh-qsec-stat__n sh-text--gold">100</div><div class="sh-qsec-stat__l">Max forgers per node</div></div>
+  </div>
+</div>
+</section>
+
+
+<!-- ═══ 12 GENESIS & STATE MANAGEMENT ═══ -->
+<section class="sh-section" id="genesis-state">
+<div class="sh-container">
+  <div class="arch-section-head">
+    <div class="arch-section-head__num">12</div>
+    <div class="arch-section-head__copy">
+      <div class="sh-eyebrow sh-eyebrow--gold">GENESIS &amp; STATE</div>
+      <div class="arch-section-head__title">Deterministic bootstrapping and versioned state</div>
+      <p class="arch-section-head__sub">The genesis block establishes the entire initial network state from JSON data files. All mutable state is stored in versioned entity tables and every state change at every block height is preserved, enabling point-in-time queries without transaction replay.</p>
+    </div>
+  </div>
+  <div class="pg-two-col">
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1.25rem">GENESIS IMPORT SEQUENCE</div>
+      <div class="arch-tx-cluster pg-reveal"><div class="arch-tx-cluster__head arch-tx-cluster__head--teal"><div class="arch-tx-cluster__title">IMPORT ORDER</div><div class="arch-tx-cluster__count sh-text--teal">8</div></div><div class="arch-tx-cluster__list"><div class="arch-tx-cluster__item">1. PUBLIC_KEY.json: Initial account public keys</div><div class="arch-tx-cluster__item">2. SHAMWARI.json: FxtChain initial balances</div><div class="arch-tx-cluster__item">3. CAPITAL.json: CAPITAL chain balances</div><div class="arch-tx-cluster__item">4. ZIMBABWE.json: ZIMBABWE chain balances</div><div class="arch-tx-cluster__item">5. SOUTH_AFRICA.json: SOUTH AFRICA balances</div><div class="arch-tx-cluster__item">6. TOTEMS.json: Pre-existing digital assets</div><div class="arch-tx-cluster__item">7. SHAMWARI_CURRENCIES.json : Pre-registered currencies</div><div class="arch-tx-cluster__item">8. ACCOUNT_INFO.json: Metadata and encrypted data</div></div></div>
+      <div style="margin-top:1.5rem" class="pg-reveal">
+        <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:.5rem">SPECIAL GENESIS PROPERTIES</div>
+        <ul class="sh-list"><li>Version -1, timestamp 0, previousBlockId 0</li><li>All-zero payloadHash and ShamwariPublicKey</li><li>Hardcoded generationSignature as a cryptographic seed for all PoS randomness</li><li>Deterministic: same input files = same genesis payload hash</li></ul>
+      </div>
+    </div>
+    <div>
+      <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1.25rem">STATE MANAGEMENT</div>
+      <div class="pg-features">
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Versioned Entity Tables</div><div class="pg-feature__body">All mutable state is keyed by (id, height). Query any entity at any past block height without replaying transactions. Foundation for snapshots, dividend distributions, and historical balance queries.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div><div><div class="pg-feature__title">Read-Write-Update Lock</div><div class="pg-feature__body">Three-tier locking: multiple read locks for queries, single update lock for lightweight modifications, exclusive write lock for block application and pop-off. Maximises read concurrency while serialising mutations.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--purple"></div><div><div class="pg-feature__title">Prunable Data</div><div class="pg-feature__body">Encrypted message payloads can be removed after configurable lifetime while the hash remains as a permanent cryptographic commitment. Reduces storage footprint without breaking verifiability.</div></div></div>
+        <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div><div><div class="pg-feature__title">Unconfirmed Transaction Pool</div><div class="pg-feature__body">512 MB maximum mempool size with per-account rate limit of 100 concurrent transactions. Prevents flooding attacks while accommodating institutional transaction volumes. Forging thread polls every 500ms.</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ═══ 13 — MULTI-JURISDICTION ═══ -->
+<section class="sh-section sh-section--navy" id="multi-jurisdiction">
+<div class="sh-container">
+  <div class="arch-section-head">
+    <div class="arch-section-head__num">13</div>
+    <div class="arch-section-head__copy">
+      <div class="sh-eyebrow sh-eyebrow--teal">MULTI-JURISDICTION</div>
+      <div class="arch-section-head__title">One network, many regulatory regimes</div>
+      <p class="arch-section-head__sub">A single Shamwari node simultaneously serves a fully open global asset market (CAPITAL chain), a regulated ZWG monetary system with Central Bank oversight (ZIMBABWE chain), and a South African rand-denominated financial platform (SOUTH AFRICA chain) all isolated, each under its own regulatory framework, sharing the same proof-of-stake consensus.</p>
+    </div>
+  </div>
+  <div class="pg-table-wrap pg-reveal" style="margin-bottom:3rem">
+    <table class="arch-prop-table">
+      <thead><tr><th>Chain</th><th>Currency</th><th>Code</th><th>Decimals</th><th>Total Supply</th><th>Key Restriction</th></tr></thead>
+      <tbody>
+        <tr><td>FxtChain</td><td>SHAMWARI</td><td>WEALTH</td><td>3</td><td>1,000,000,000,000</td><td>Settlement only</td></tr>
+        <tr><td>CAPITAL</td><td>CAPITAL</td><td>CAPITAL</td><td>4</td><td>1,000,000,000,000</td><td>Open permission policy</td></tr>
+        <tr><td>ZIMBABWE</td><td>Zimbabwe Gold</td><td>ZWG</td><td>1</td><td>100,000,000,000</td><td>Permissioned from configured height</td></tr>
+        <tr><td>SOUTH AFRICA</td><td>South African Rand</td><td>ZAR</td><td>1</td><td>100,000,000,000</td><td>Permissioned from configured height</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pg-cards3">
+    <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--teal"><i class="fa-solid fa-building-columns"></i></div><div class="pg-card__title">Central Bank Authority</div><div class="pg-card__body">Controls currency issuance, reserve requirements, and monetary policy. The only account permitted to execute CURRENCY_ISSUANCE and set currency control parameters. Hardcoded at genesis and cannot be changed.</div></div>
+    <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--gold"><i class="fa-solid fa-scale-balanced"></i></div><div class="pg-card__title">Securities Regulator</div><div class="pg-card__body">Controls TotemApproval lifecycle responsible for approving, suspending, and delisting tokenised securities. The 6-state approval workflow requires regulator signature on all transitions. No bypass possible.</div></div>
+    
+    <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--red"><i class="fa-solid fa-file-invoice-dollar"></i></div><div class="pg-card__title">Tax Collector</div><div class="pg-card__body">Receives all tax withholding from taxable transactions. Immutable designation at chain genesis. Tax Collector account balance reflects total tax revenues collected in real time.</div></div>
+    <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--teal"><i class="fa-solid fa-lock"></i></div><div class="pg-card__title">Immutability Guarantee</div><div class="pg-card__body">All regulatory authority account IDs are written into the chain genesis block. No admin transaction can change them post-deployment. A nation's central bank cannot be replaced by any participant.</div></div>
+    <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--gold"><i class="fa-solid fa-network-wired"></i></div><div class="pg-card__title">Shared Consensus</div><div class="pg-card__body">All chains share the same proof-of-stake consensus and block ordering. Inter-chain settlement is provably tied to specific block heights. Compliance teams query each chain's state independently.</div></div>
+  </div>
+</div>
+</section>
+
+
+<!-- ═══ 14 — COMPETITIVE POSITION ═══ -->
+<section class="sh-section" id="competitive-position">
+<div class="sh-container">
+  <div class="arch-section-head">
+    <div class="arch-section-head__num">14</div>
+    <div class="arch-section-head__copy">
+      <div class="sh-eyebrow sh-eyebrow--gold">COMPETITIVE POSITION</div>
+      <div class="arch-section-head__title">Architecture comparison</div>
+      <p class="arch-section-head__sub">Shamwari's architectural decisions from a dual-chain design to protocol-native financial primitives, post-quantum security, and embedded regulatory governance create structural advantages that application-layer solutions cannot replicate.</p>
+    </div>
+  </div>
+  <div class="pg-table-wrap pg-reveal">
+    <table class="arch-prop-table">
+      <thead><tr><th>Architectural Property</th><th>Shamwari</th><th>Ethereum</th><th>Hyperledger Fabric</th></tr></thead>
+      <tbody>
+        <tr><td class="pg-td-field">Block signatures</td><td style="color:var(--teal)">Post-quantum Dilithium (FIPS 204)</td><td>ECDSA (quantum-vulnerable)</td><td>RSA/ECDSA (quantum-vulnerable)</td></tr>
+        <tr><td class="pg-td-field">Account keys</td><td style="color:var(--teal)">ML-KEM-512 + ML-DSA-2 hybrid</td><td>ECDSA secp256k1</td><td>RSA/ECDSA</td></tr>
+        <tr><td class="pg-td-field">Consensus</td><td style="color:var(--teal)">Balance-weighted PoS (no energy waste)</td><td>PoS (ETH 2.0)</td><td>PBFT / Raft (permissioned)</td></tr>
+        <tr><td class="pg-td-field">Multi-jurisdiction</td><td style="color:var(--teal)">Native BetaChain model</td><td>Manual sharding</td><td>Channels (limited)</td></tr>
+        <tr><td class="pg-td-field">Regulatory accounts</td><td style="color:var(--teal)">Protocol-embedded authority accounts</td><td>Application layer only</td><td>Application layer only</td></tr>
+        <tr><td class="pg-td-field">Fee abstraction</td><td style="color:var(--teal)">Native Binder Protocol</td><td>ERC-4337 (complex)</td><td>Orderer pays (limited)</td></tr>
+        <tr><td class="pg-td-field">Financial product depth</td><td style="color:var(--teal)">70+ native transaction types</td><td>ERC standards + contracts</td><td>Custom chaincode</td></tr>
+        <tr><td class="pg-td-field">KYC/permission</td><td style="color:var(--teal)">Protocol-native PermissionPolicy</td><td>Application layer only</td><td>MSP (member services)</td></tr>
+        <tr><td class="pg-td-field">Tax integration</td><td style="color:var(--teal)">Automatic on-chain withholding</td><td>None</td><td>None</td></tr>
+        <tr><td class="pg-td-field">Permission upgrade</td><td style="color:var(--teal)">Block-height-triggered in-protocol</td><td>Governance contracts</td><td>MSP configuration</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+
+<!-- CTA -->
+<section class="sh-cta">
+  <div class="sh-cta__glow"></div>
+  <div class="sh-cta__inner">
+    <div class="sh-eyebrow sh-eyebrow--teal">FIVE TECHNICAL VOLUMES WITH FULL SPECIFICATION</div>
+    <h2 class="sh-cta__title">Read the complete architecture documentation</h2>
+    <p class="sh-cta__sub">All five volumes of the Shamwari Technical Papers are available in the documentation covering every system, every transaction type, every cryptographic decision, and the full database schema.</p>
+    <div class="sh-cta__actions">
+      <a href="https://bitbucket.org/thenamelesstree/shamwari/src/main/docs/" class="sh-btn sh-btn--teal sh-btn--lg">Read the Documentation</a>
+      <a href="security" class="sh-btn sh-btn--ghost sh-btn--lg">PQC Security</a>
+      <a href="developers" class="sh-btn sh-btn--gold sh-btn--lg">Developer Hub</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="sh-footer">
+  <div class="sh-footer__grid">
+    <div>
+      <div class="sh-footer__wordmark">
+        <img src="img/icon.png" height="72" width="72" />
+      </div>
+      <p class="sh-footer__tagline">Quantum-resistant financial infrastructure for 4 billion people across Africa, LATAM, ASEAN and MENA.</p>
+      <div class="sh-footer__socials">
+        <a href="https://bitbucket.org/thenamelesstree/shamwari" class="sh-footer__social"><i class="fa-brands fa-bitbucket"></i></a>
+        <a href="https://x.com/shamwarinetwork" class="sh-footer__social"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://www.linkedin.com/showcase/shamwarinetwork" class="sh-footer__social"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:contact@shamwari.network" class="sh-footer__social"><i class="fa fa-envelope"></i></a>
+        
+      </div>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Platform</div>
+      <a href="shamwaripay"         class="sh-footer__link">ShamwariPay</a>
+      <a href="digitalassets"       class="sh-footer__link">Totem Exchange</a>
+      <a href="digitalcertificates" class="sh-footer__link">Certificates</a>
+      <a href="subscriptions"       class="sh-footer__link">Subscriptions</a>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Technology</div>
+      <a href="architecture"        class="sh-footer__link">Architecture</a>
+      <a href="security"            class="sh-footer__link">Post-Quantum Security</a>
+      <a href="accounts"            class="sh-footer__link">Accounts &amp; Identity</a>
+      <a href="compliance"          class="sh-footer__link">Compliance</a>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Resources</div>
+      <a href="solutions"    class="sh-footer__link">Solutions</a>
+      <a href="developers"   class="sh-footer__link">Developer Hub</a>
+      <a href="https://docs.shamwari.network" class="sh-footer__link">Documentation</a>
+      <a href="https://wallet.shamwari.network" class="sh-footer__link">Launch Wallet</a>
+    </div>
+  </div>
+  <div class="sh-footer__bottom">
+    <span>&copy; 2026 TheNamelessTree Networks. All rights reserved.</span>
+    <span class="sh-footer__bottom-right"><a href="https://thenamelesstree.co.zw" target="blank">thenamelesstree.co.zw</a></span>
+  </div>
+</footer>
+
+<a href="#" class="sh-back-top" id="back-top" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></a>
+
+<script>
+(function(){
+  var nav = document.getElementById('sh-nav');
+  window.addEventListener('scroll', function(){ nav.classList.toggle('sh-nav--scrolled', window.scrollY > 50); });
+
+  var tgl = document.getElementById('nav-toggle'), menu = document.getElementById('nav-menu');
+  if(tgl && menu){ tgl.addEventListener('click', function(){ tgl.classList.toggle('is-open'); menu.classList.toggle('is-open'); }); }
+
+  var bt = document.getElementById('back-top');
+  if(bt){
+    window.addEventListener('scroll', function(){ bt.classList.toggle('is-visible', window.scrollY > 400); });
+    bt.addEventListener('click', function(e){ e.preventDefault(); window.scrollTo({top:0,behavior:'smooth'}); });
+  }
+
+  /* Scroll-reveal */
+  var ro = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-visible'); ro.unobserve(e.target); } });
+  }, {threshold: 0.08, rootMargin: '0px 0px -30px 0px'});
+  document.querySelectorAll('.pg-reveal, .sh-reveal').forEach(function(el){ ro.observe(el); });
+
+  /* TOC active state */
+  var tocLinks = document.querySelectorAll('.arch-toc__link');
+  var sections = Array.from(tocLinks).map(function(l){ return document.querySelector(l.getAttribute('href')); });
+  window.addEventListener('scroll', function(){
+    var scrollY = window.scrollY + 140;
+    var current = 0;
+    sections.forEach(function(s, i){ if(s && s.offsetTop <= scrollY) current = i; });
+    tocLinks.forEach(function(l, i){ l.classList.toggle('is-active', i === current); });
+  });
+
+  /* Schema bar animation */
+  var schemaObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.querySelectorAll('.arch-schema-bar').forEach(function(b){
+          var w = getComputedStyle(b).width;
+          b.style.width = '0';
+          b.style.transition = 'width 0.9s cubic-bezier(0.22,1,0.36,1)';
+          setTimeout(function(){ b.style.width = w; }, 120);
+        });
+        schemaObs.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.3});
+  document.querySelectorAll('.arch-schema-wrap').forEach(function(el){ schemaObs.observe(el); });
+})();
+</script>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>

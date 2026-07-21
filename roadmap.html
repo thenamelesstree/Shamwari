@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Roadmap &mdash; Shamwari</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Shamwari development roadmap &mdash; testnet hardening, mainnet launch, institutional onboarding, and SADC regional expansion.">
+<link href="/favicon.ico" rel="icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/pages.css" rel="stylesheet">
+<style>
+.rdml{display:flex;flex-direction:column;gap:0}
+.rdmi{display:flex;gap:2rem;align-items:flex-start;padding:2rem 0;border-left:2px solid var(--border-dk);padding-left:2.5rem;margin-left:1.25rem;position:relative}
+.rdmi:last-child{border-color:transparent}
+.rdmi__dot{position:absolute;left:-1rem;top:2.1rem;width:1.9rem;height:1.9rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.55rem;flex-shrink:0}
+.rdmi__dot--done{background:var(--teal);color:#fff}
+.rdmi__dot--active{background:var(--gold);color:#fff;box-shadow:0 0 0 4px rgba(200,155,60,.2);animation:pulsegold 2s ease-in-out infinite}
+.rdmi__dot--upcoming{background:rgba(255,255,255,.06);border:2px solid var(--txt-muted)}
+@keyframes pulsegold{0%,100%{box-shadow:0 0 0 4px rgba(200,155,60,.2)}50%{box-shadow:0 0 0 8px rgba(200,155,60,.08)}}
+.rdmi__q{font-family:var(--font-display);font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:.25rem .8rem;border-radius:40px;flex-shrink:0;white-space:nowrap;margin-top:.1rem}
+.rdmi--done   .rdmi__q{background:var(--teal-ghost);color:var(--teal);border:1px solid rgba(0,168,158,.2)}
+.rdmi--active .rdmi__q{background:var(--gold-ghost);color:var(--gold);border:1px solid rgba(200,155,60,.2)}
+.rdmi--upcoming .rdmi__q{background:rgba(255,255,255,.04);color:var(--txt-muted);border:1px solid var(--border-dk)}
+.rdmi__content{flex:1}
+.rdmi__title{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--txt-primary);margin-bottom:.5rem}
+.rdmi__desc{font-size:.9rem;color:var(--txt-secondary);line-height:1.68;margin-bottom:1rem}
+.rdmi__tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.rdmi__tag{font-size:.68rem;color:var(--txt-muted);background:rgba(255,255,255,.04);border:1px solid var(--border-dk);border-radius:40px;padding:.15rem .6rem;font-family:var(--font-display);font-weight:600;letter-spacing:.03em}
+.rdmi--done   .rdmi__tag{border-color:rgba(0,168,158,.2);color:var(--teal);background:rgba(0,168,158,.05)}
+.rdmi--active .rdmi__tag{border-color:rgba(200,155,60,.2);color:var(--gold);background:rgba(200,155,60,.05)}
+.status-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--border-dk);border-radius:var(--radius);overflow:hidden;background:var(--bg-card-dk);margin-bottom:4rem}
+.status-item{padding:1.75rem;border-right:1px solid var(--border-dk);text-align:center}
+.status-item:last-child{border-right:none}
+.status-item__dot{width:10px;height:10px;border-radius:50%;margin:0 auto .75rem}
+.status-item__dot--done{background:var(--teal)}
+.status-item__dot--active{background:var(--gold);animation:pulsegold 2s ease-in-out infinite}
+.status-item__dot--upcoming{background:var(--border-dk);border:2px solid var(--txt-muted)}
+.status-item__title{font-family:var(--font-display);font-size:.85rem;font-weight:700;color:var(--txt-primary);margin-bottom:.4rem}
+.status-item__desc{font-size:.8rem;color:var(--txt-secondary);line-height:1.5}
+@media(max-width:768px){.rdmi{flex-direction:column;gap:1rem}.status-strip{grid-template-columns:1fr}.status-item{border-right:none;border-bottom:1px solid var(--border-dk)}.status-item:last-child{border-bottom:none}}
+</style>
+</head>
+<body>
+<nav class="sh-nav" id="sh-nav"><div class="sh-nav__inner">
+	<a href="home" class="sh-nav__brand">
+    <div>
+    		<img src="/img/banner.png" alt="Shamwari Logo" height="40">
+    </div>
+  </a>
+	<button class="sh-nav__toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button><div class="sh-nav__menu" id="nav-menu"><a href="architecture" class="sh-nav__link">Architecture</a><a href="compliance" class="sh-nav__link">Compliance</a><a href="security" class="sh-nav__link">Security</a><a href="solutions" class="sh-nav__link">Solutions</a><a href="developers" class="sh-nav__link">Developers</a></div></div></nav>
+
+<section class="pg-hero">
+  <div class="pg-hero__glow"></div>
+  <div class="sh-container pg-hero__inner">
+    <div class="pg-hero__content">
+      <div class="sh-eyebrow sh-eyebrow--teal">DEVELOPMENT ROADMAP</div>
+      <h1 class="pg-hero__title">Platform Complete.<br>Now Scaling.</h1>
+      <p class="pg-hero__sub">The core protocol is feature-complete. Three BetaChains are live on testnet. 70+ transaction types implemented. Post-quantum cryptography deployed from genesis. The roadmap now focuses on testnet hardening, institutional partnerships, mainnet genesis, and regional expansion across SADC and beyond.</p>
+      <div class="pg-hero__badges">
+        <span class="sh-badge sh-badge--teal">TESTNET LIVE</span>
+        <span class="sh-badge sh-badge--gold">MAINNET Q4 2026</span>
+        <span class="sh-badge sh-badge--teal">INSTITUTIONAL ONBOARDING</span>
+        <span class="sh-badge sh-badge--gold">SADC EXPANSION</span>
+        <span class="sh-badge sh-badge--teal">MIT OPEN SOURCE</span>
+      </div>
+    </div>
+    <div class="pg-hero__icon-wrap"><div class="pg-hero__icon-bg"></div><i class="fa-solid fa-rocket pg-hero__icon"></i></div>
+  </div>
+</section>
+
+<div class="pg-stats">
+  <div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--teal">3</div><div class="pg-stats__l">Live BetaChains: CAPITAL &middot; ZIMBABWE &middot; SOUTH AFRICA</div></div>
+  <div class="pg-stats__div"></div>
+  <div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--gold">70+</div><div class="pg-stats__l">Protocol transaction types implemented</div></div>
+  <div class="pg-stats__div"></div>
+  <div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--teal">Full PQC</div><div class="pg-stats__l">NIST FIPS 203 + 204 deployed from genesis</div></div>
+  <div class="pg-stats__div"></div>
+  <div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--gold">MIT</div><div class="pg-stats__l">Open source &mdash; available today</div></div>
+</div>
+
+<section class="sh-section">
+<div class="sh-container">
+  <div class="sh-section__header">
+    <div class="sh-eyebrow sh-eyebrow--teal">CURRENT STATUS</div>
+    <h2 class="sh-section__title">Where we are today</h2>
+    <p class="sh-section__sub">The Shamwari protocol is fully implemented and running on testnet. All six protocol systems are operational. The focus has shifted from development to hardening, partnerships, and deployment.</p>
+  </div>
+
+  <div class="status-strip pg-reveal">
+    <div class="status-item">
+      <div class="status-item__dot status-item__dot--done"></div>
+      <div class="status-item__title">Protocol Complete</div>
+      <div class="status-item__desc">All six systems implemented: ShamwariPay, Totem Exchange, Insurance, Commerce, Subscriptions, AI Accounts. 70+ transaction types. Full PQC stack deployed.</div>
+    </div>
+    <div class="status-item">
+      <div class="status-item__dot status-item__dot--active"></div>
+      <div class="status-item__title">Testnet Active &mdash; Q2 2026</div>
+      <div class="status-item__desc">Three BetaChains live. Wallet UI in testing. Security audits in progress. Developer documentation complete. Open for developer access now.</div>
+    </div>
+    <div class="status-item">
+      <div class="status-item__dot status-item__dot--upcoming"></div>
+      <div class="status-item__title">Mainnet Genesis &mdash; Q4 2026</div>
+      <div class="status-item__desc">Mainnet launch pending audit completion and institutional partnership agreements. Binder network recruitment underway.</div>
+    </div>
+  </div>
+
+  <div class="rdml">
+
+    <div class="rdmi rdmi--done pg-reveal">
+      <div class="rdmi__dot rdmi__dot--done"><i class="fa-solid fa-check" style="font-size:.55rem"></i></div>
+      <div class="rdmi__q">Completed</div>
+      <div class="rdmi__content">
+        <div class="rdmi__title">Core Protocol Development</div>
+        <div class="rdmi__desc">Complete implementation of all six protocol systems: ShamwariPay monetary system (14 transaction types, 5 currency types, DEX, lending, savings, vaults, taxation), Totem Exchange (11 transaction types, TotemApproval, dividends), Insurance Marketplace (19 transaction types, actuarial reserves, 9-state lifecycle), E-Commerce Store (5 fulfilment modes, Kyber encryption, escrow), Subscriptions (consensus billing, any asset type), and Account Identity (10 account types, AI agent type, on-chain domains). Post-quantum cryptography deployed across all operations &mdash; ML-DSA Dilithium and ML-KEM Kyber from genesis block zero. Three BetaChains configured and running: CAPITAL, ZIMBABWE, and SOUTH AFRICA.</div>
+        <div class="rdmi__tags">
+          <span class="rdmi__tag">70+ transaction types</span>
+          <span class="rdmi__tag">ML-DSA + ML-KEM</span>
+          <span class="rdmi__tag">3 BetaChains</span>
+          <span class="rdmi__tag">6 protocol systems</span>
+          <span class="rdmi__tag">MIT open source</span>
+          <span class="rdmi__tag">Java / JVM</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rdmi rdmi--done pg-reveal">
+      <div class="rdmi__dot rdmi__dot--done"><i class="fa-solid fa-check" style="font-size:.55rem"></i></div>
+      <div class="rdmi__q">Completed</div>
+      <div class="rdmi__content">
+        <div class="rdmi__title">Technical Documentation &mdash; Five Volumes</div>
+        <div class="rdmi__desc">Five comprehensive technical volumes published covering the complete Shamwari protocol: Blockchain Architecture, Monetary System, Digital Assets &amp; Insurance, Commerce &amp; Identity, and Post-Quantum Cryptography. Full REST API reference documentation. Bitbucket src/main/docs with all transaction type specifications and parameter references.</div>
+        <div class="rdmi__tags">
+          <span class="rdmi__tag">5 technical volumes</span>
+          <span class="rdmi__tag">REST API reference</span>
+          <span class="rdmi__tag">Transaction type specs</span>
+          <span class="rdmi__tag">Published Feb 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rdmi rdmi--active pg-reveal">
+      <div class="rdmi__dot rdmi__dot--active"></div>
+      <div class="rdmi__q">Q2 2026 &mdash; Active</div>
+      <div class="rdmi__content">
+        <div class="rdmi__title">Testnet Hardening &amp; Wallet Launch</div>
+        <div class="rdmi__desc">Public testnet running with all three BetaChains. Full wallet UI development for account management, ShamwariPay operations, Totem Exchange trading, and Insurance marketplace. Performance testing under sustained load &mdash; targeting 500+ transactions per block. Third-party security audit of the cryptographic layer (ML-DSA, ML-KEM implementation) and consensus pipeline. Developer onboarding documentation and SDK examples. Faucet infrastructure for testnet token distribution.</div>
+        <div class="rdmi__tags">
+          <span class="rdmi__tag">Public testnet</span>
+          <span class="rdmi__tag">Wallet UI</span>
+          <span class="rdmi__tag">Security audit</span>
+          <span class="rdmi__tag">Load testing</span>
+          <span class="rdmi__tag">Developer faucet</span>
+          <span class="rdmi__tag">SDK examples</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rdmi rdmi--upcoming pg-reveal">
+      <div class="rdmi__dot rdmi__dot--upcoming"></div>
+      <div class="rdmi__q">Q3 2026</div>
+      <div class="rdmi__content">
+        <div class="rdmi__title">Regulatory Pilots &amp; Institutional Partnerships</div>
+        <div class="rdmi__desc">CBDC infrastructure pilot with two central bank partners in the SADC region. KYC integration with three licensed identity verification providers &mdash; connecting on-chain BetaChainPermission records to real-world AML compliance workflows. Insurance regulatory approval workflow pilot with two insurance authorities (IPEC Zimbabwe, Prudential Authority South Africa). Real-world transaction volume testing with 10+ institutional participants on permissioned testnet chains. Binder node operator agreements with two licensed FSP partners.</div>
+        <div class="rdmi__tags">
+          <span class="rdmi__tag">Central bank pilots</span>
+          <span class="rdmi__tag">KYC integration</span>
+          <span class="rdmi__tag">Insurance pilots</span>
+          <span class="rdmi__tag">Binder operators</span>
+          <span class="rdmi__tag">Institutional testing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rdmi rdmi--upcoming pg-reveal">
+      <div class="rdmi__dot rdmi__dot--upcoming"></div>
+      <div class="rdmi__q">Q4 2026</div>
+      <div class="rdmi__content">
+        <div class="rdmi__title">Mainnet Genesis</div>
+        <div class="rdmi__desc">Mainnet genesis with CAPITAL, ZIMBABWE, and SOUTH AFRICA chains. CAPITAL chain immediately open for developer App Store registrations and certificate issuance. ZIMBABWE and SOUTH AFRICA chains transition to BETA_CHAIN policy at configured block heights following institutional onboarding. Binder network goes live with initial FSP and bank node operators. First institutional CHAIN_ADMIN accounts activated for KYC onboarding. WEALTH token forging rewards begin. Real ZWG and ZAR CBDC issuance from designated Central Bank authority accounts.</div>
+        <div class="rdmi__tags">
+          <span class="rdmi__tag">Mainnet genesis</span>
+          <span class="rdmi__tag">App store open</span>
+          <span class="rdmi__tag">Binder network live</span>
+          <span class="rdmi__tag">CBDC issuance</span>
+          <span class="rdmi__tag">Forging rewards</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rdmi rdmi--upcoming pg-reveal">
+      <div class="rdmi__dot rdmi__dot--upcoming"></div>
+      <div class="rdmi__q">Q1 2027</div>
+      <div class="rdmi__content">
+        <div class="rdmi__title">Institutional Onboarding &amp; Product Launch</div>
+        <div class="rdmi__desc">First licensed BANK nodes operational &mdash; commercial banks running full Shamwari nodes and participating in CBDC issuance and distribution. Insurance marketplace open for insurer registrations on ZIMBABWE and SOUTH AFRICA chains. Agricultural finance pilots with MFI partners &mdash; parametric crop insurance, seasonal loan products, cooperative savings. MERCHANT accounts activated for FMCG supply chain participants. AI treasury agent deployments by first institutional clients.</div>
+        <div class="rdmi__tags">
+          <span class="rdmi__tag">Bank nodes</span>
+          <span class="rdmi__tag">Insurance marketplace</span>
+          <span class="rdmi__tag">MFI partners</span>
+          <span class="rdmi__tag">Agri-finance pilots</span>
+          <span class="rdmi__tag">AI agent deployments</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rdmi rdmi--upcoming pg-reveal">
+      <div class="rdmi__dot rdmi__dot--upcoming"></div>
+      <div class="rdmi__q">Q2 2027</div>
+      <div class="rdmi__content">
+        <div class="rdmi__title">Retail CBDC &amp; Consumer Products</div>
+        <div class="rdmi__desc">Retail ZWG CBDC distribution to SAVINGS-type consumer accounts. Mobile wallet optimisation for feature phones and low-bandwidth connections. Community insurance pool products targeting sub-$1 premium microinsurance. FMCG supply chain integration with three major distributors. Cross-chain atomic swap functionality for ZWG/ZAR FX corridor &mdash; enabling seamless cross-border remittance between Zimbabwe and South Africa chains.</div>
+        <div class="rdmi__tags">
+          <span class="rdmi__tag">Retail CBDC</span>
+          <span class="rdmi__tag">Mobile wallet</span>
+          <span class="rdmi__tag">Microinsurance</span>
+          <span class="rdmi__tag">FMCG integration</span>
+          <span class="rdmi__tag">ZWG/ZAR corridor</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rdmi rdmi--upcoming pg-reveal">
+      <div class="rdmi__dot rdmi__dot--upcoming"></div>
+      <div class="rdmi__q">Q3 2027</div>
+      <div class="rdmi__content">
+        <div class="rdmi__title">SADC Regional Expansion</div>
+        <div class="rdmi__desc">Three additional SADC jurisdiction chains. Candidate markets: Zambia (ZMW), Botswana (BWP), and Mozambique (MZN). Each chain deployed with its own Central Bank, Securities Regulator, Insurance Authority, and Tax Collector authority accounts embedded at genesis. Cross-chain remittance corridors operational across all SADC chains. MENA region chain development begins in parallel. Cumulative network now operates six BetaChains across two regions.</div>
+        <div class="rdmi__tags">
+          <span class="rdmi__tag">3 new SADC chains</span>
+          <span class="rdmi__tag">ZMW / BWP / MZN</span>
+          <span class="rdmi__tag">Remittance corridors</span>
+          <span class="rdmi__tag">MENA pipeline</span>
+          <span class="rdmi__tag">6 total BetaChains</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rdmi rdmi--upcoming pg-reveal">
+      <div class="rdmi__dot rdmi__dot--upcoming"></div>
+      <div class="rdmi__q">2028 &amp; Beyond</div>
+      <div class="rdmi__content">
+        <div class="rdmi__title">Full Emerging Market Coverage</div>
+        <div class="rdmi__desc">MENA region chains (Egypt EGP, Nigeria NGN, Kenya KES). ASEAN expansion beginning with Indonesia (IDR) and Philippines (PHP). LATAM corridor chain for USD-pegged stablecoin cross-border settlement. Target: 15+ jurisdiction chains, 10 SADC remittance corridors, and 500M+ CHAIN_USER accounts across all chains. Full AI agent ecosystem operational with inter-chain agentic commerce and treasury management. Contribution to NIST post-quantum standards body based on production deployment experience.</div>
+        <div class="rdmi__tags">
+          <span class="rdmi__tag">MENA chains</span>
+          <span class="rdmi__tag">ASEAN expansion</span>
+          <span class="rdmi__tag">LATAM corridor</span>
+          <span class="rdmi__tag">15+ jurisdiction chains</span>
+          <span class="rdmi__tag">500M+ users target</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<section class="sh-section sh-section--navy">
+<div class="sh-container">
+  <div class="sh-section__header">
+    <div class="sh-eyebrow sh-eyebrow--gold">ENGAGE WITH THE ROADMAP</div>
+    <h2 class="sh-section__title">Four ways to participate</h2>
+    <p class="sh-section__sub">The roadmap accelerates with partnerships, node operators, and developer adoption. Each participation pathway has a direct impact on the timeline and scope of regional expansion.</p>
+  </div>
+  <div class="pg-cards2">
+    <div class="pg-card2 pg-reveal"><div class="pg-card2__accent pg-card2__accent--teal"></div><h3 class="pg-card2__title">Developer &mdash; Build Now</h3><p class="pg-card2__body">Testnet is live. Full REST API, MIT source code, and five technical volumes are all available now. Start building on Shamwari today &mdash; wallets, DeFi interfaces, insurance platforms, FMCG supply chain systems, or any other application that needs quantum-safe financial infrastructure.</p><ul class="pg-card2__list"><li>Download client binaries and connect to testnet immediately</li><li>Submit your first transaction via REST API</li><li>Register on the CAPITAL chain App Store for application visibility</li><li>Contribute to the MIT-licensed codebase on Bitbucket</li></ul></div>
+    <div class="pg-card2 pg-reveal"><div class="pg-card2__accent pg-card2__accent--gold"></div><h3 class="pg-card2__title">Institution &mdash; Pilot Partnership</h3><p class="pg-card2__body">Central banks, commercial banks, MFIs, insurance companies, and FSPs can participate in the Q3 2026 pilot programme. Receive dedicated CHAIN_ADMIN access, direct technical support, and input into the mainnet configuration for your jurisdiction chain.</p><ul class="pg-card2__list"><li>Central banks: CBDC issuance authority pilot</li><li>Banks and FSPs: Binder node operator programme</li><li>Insurers: Insurance marketplace early listing</li><li>MFIs: Agricultural finance and microinsurance pilot</li></ul></div>
+    <div class="pg-card2 pg-reveal"><div class="pg-card2__accent pg-card2__accent--teal"></div><h3 class="pg-card2__title">Node Operator &mdash; Run Infrastructure</h3><p class="pg-card2__body">Run a Shamwari node on testnet now to familiarise your team with node operations before mainnet. Forging-eligible nodes earn WEALTH token rewards from genesis. Binder nodes earn fee revenue from day one of mainnet operation.</p><ul class="pg-card2__list"><li>Minimum: 4-core CPU, 16GB RAM, 500GB SSD</li><li>Recommended: 8-core CPU, 32GB RAM, 1TB NVMe SSD</li><li>Binder nodes: licensed FSP or bank required</li><li>Forging nodes: open participation, stake-weighted</li></ul></div>
+    <div class="pg-card2 pg-reveal"><div class="pg-card2__accent pg-card2__accent--gold"></div><h3 class="pg-card2__title">Investor &mdash; Back the Infrastructure</h3><p class="pg-card2__body">Shamwari is raising to accelerate the institutional partnership programme, expand the Binder node operator network, and fund the SADC regional chain deployment. Contact the team for the full investor deck and technical due diligence materials.</p><ul class="pg-card2__list"><li>Five-volume technical documentation available for due diligence</li><li>Testnet accessible for independent technical validation</li><li>MIT source code fully auditable by investor technical teams</li><li>Contact: invest@thenamelesstree.africa</li></ul></div>
+  </div>
+</div>
+</section>
+
+<section class="sh-cta">
+  <div class="sh-cta__glow"></div>
+  <div class="sh-cta__inner">
+    <div class="sh-eyebrow sh-eyebrow--teal">JOIN THE ROADMAP</div>
+    <h2 class="sh-cta__title">The infrastructure is ready.<br>The markets are waiting.</h2>
+    <p class="sh-cta__sub">Whether you&rsquo;re a developer, institution, node operator, or investor &mdash; there is a participation path that starts today. Testnet is live. Source code is open. The clock toward mainnet is running.</p>
+    <div class="sh-cta__actions">
+      <a href="developers" class="sh-btn sh-btn--teal sh-btn--lg"><i class="fa-solid fa-code"></i> Developer Hub</a>
+      <a href="solutions" class="sh-btn sh-btn--gold sh-btn--lg">View Solutions</a>
+      <a href="mailto:invest@thenamelesstree.africa" class="sh-btn sh-btn--ghost sh-btn--lg">Contact Us</a>
+    </div>
+  </div>
+</section>
+<!-- FOOTER -->
+<footer class="sh-footer">
+  <div class="sh-footer__grid">
+    <div>
+      <div class="sh-footer__wordmark">
+        <img src="/img/icon.png" height="72" width="72" />
+      </div>
+      <p class="sh-footer__tagline">Quantum-resistant financial infrastructure for 4 billion people across Africa, LATAM, ASEAN and MENA.</p>
+      <div class="sh-footer__socials">
+        <a href="https://bitbucket.org/thenamelesstree/shamwari" class="sh-footer__social"><i class="fa-brands fa-bitbucket"></i></a>
+        <a href="https://x.com/shamwarinetwork" class="sh-footer__social"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://www.linkedin.com/showcase/shamwarinetwork" class="sh-footer__social"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:contact@shamwari.network" class="sh-footer__social"><i class="fa fa-envelope"></i></a>
+        
+      </div>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Platform</div>
+      <a href="shamwaripay"         class="sh-footer__link">ShamwariPay</a>
+      <a href="digitalassets"       class="sh-footer__link">Totem Exchange</a>
+      <a href="digitalcertificates" class="sh-footer__link">Certificates</a>
+      <a href="subscriptions"       class="sh-footer__link">Subscriptions</a>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Technology</div>
+      <a href="architecture"        class="sh-footer__link">Architecture</a>
+      <a href="security"            class="sh-footer__link">Post-Quantum Security</a>
+      <a href="accounts"            class="sh-footer__link">Accounts &amp; Identity</a>
+      <a href="compliance"          class="sh-footer__link">Compliance</a>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Resources</div>
+      <a href="solutions"    class="sh-footer__link">Solutions</a>
+      <a href="developers"   class="sh-footer__link">Developer Hub</a>
+      <a href="https://docs.shamwari.network" class="sh-footer__link">Documentation</a>
+      <a href="https://wallet.shamwari.network" class="sh-footer__link">Launch Wallet</a>
+    </div>
+  </div>
+  <div class="sh-footer__bottom">
+    <span>&copy; 2026 TheNamelessTree Networks. All rights reserved.</span>
+    <span class="sh-footer__bottom-right"><a href="https://thenamelesstree.co.zw" target="blank">thenamelesstree.co.zw</a></span>
+  </div>
+</footer>
+	
+<a href="#" class="sh-back-top" id="back-top" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></a>
+<script>(function(){var nav=document.getElementById("sh-nav");window.addEventListener("scroll",function(){nav.classList.toggle("sh-nav--scrolled",window.scrollY>50);});var tgl=document.getElementById("nav-toggle"),menu=document.getElementById("nav-menu");if(tgl&&menu){tgl.addEventListener("click",function(){tgl.classList.toggle("is-open");menu.classList.toggle("is-open");});}var bt=document.getElementById("back-top");if(bt){window.addEventListener("scroll",function(){bt.classList.toggle("is-visible",window.scrollY>400);});bt.addEventListener("click",function(e){e.preventDefault();window.scrollTo({top:0,behavior:"smooth"});});}var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add("is-visible");ro.unobserve(e.target);}});},{threshold:0.07});document.querySelectorAll(".sh-reveal,.pg-reveal").forEach(function(el){ro.observe(el);});})();</script>
+<script type="module" src="/src/main.js"></script>
+</body></html>

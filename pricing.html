@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<title>Pricing — Shamwari Network</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Transparent, flat-fee institutional pricing for central banks, commercial banks, governments and financial service providers on Shamwari — sovereign, post-quantum financial infrastructure for the SADC region.">
+<link href="/favicon.ico" rel="icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/pages.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="sh-nav" id="sh-nav">
+<div class="sh-nav__inner">
+  <a href="index" class="sh-nav__brand">
+    <div>
+      <img src="/img/banner.png" alt="Shamwari" height="40" />
+    </div>
+  </a>
+  <button class="sh-nav__toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="sh-nav__menu" id="nav-menu">
+    <a href="architecture"    class="sh-nav__link">Architecture</a>
+    <a href="compliance"      class="sh-nav__link">Compliance</a>
+    <a href="security"        class="sh-nav__link">Security</a>
+    <a href="solutions"       class="sh-nav__link">Solutions</a>
+    <a href="pricing"         class="sh-nav__link sh-nav__link--active">Pricing</a>
+    <a href="developers"      class="sh-nav__link">Developers</a>
+    <a href="index#contact"   class="sh-nav__link">Contact</a>
+  </div>
+</div>
+</nav>
+
+<!-- PRICING HERO -->
+<section class="pg-hero">
+  <div class="pg-hero__glow"></div>
+  <div class="pg-hero__inner">
+    <div class="pg-hero__content">
+      <div class="sh-eyebrow sh-eyebrow--teal">INSTITUTIONAL PRICING</div>
+      <h1 class="pg-hero__title">Pricing built for institutions,<br>not individuals.</h1>
+      <p class="pg-hero__sub">Flat, predictable subscription tiers for central banks, commercial banks, governments and financial service providers — priced in USD, with 20% off every annual plan. No smart-contract gas fees. No surprise percentage cuts.</p>
+      <div class="pg-hero__badges">
+        <span class="sh-badge sh-badge--teal">FLAT MONTHLY PRICING</span>
+        <span class="sh-badge sh-badge--gold">20% OFF ANNUAL</span>
+        <span class="sh-badge sh-badge--teal">FREE DEVELOPER SANDBOX</span>
+      </div>
+    </div>
+    <div class="pg-hero__icon-wrap">
+      <div class="pg-hero__icon-bg"></div>
+      <i class="pg-hero__icon fa-solid fa-sack-dollar"></i>
+    </div>
+  </div>
+</section>
+
+<div class="sh-container" style="padding-top:2.5rem;padding-bottom:0;display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center">
+  <a href="#merchants" class="sh-btn sh-btn--ghost sh-btn--sm">Merchants &amp; Businesses</a>
+  <a href="#fsp" class="sh-btn sh-btn--ghost sh-btn--sm">FSPs &amp; MFIs</a>
+  <a href="#banks" class="sh-btn sh-btn--ghost sh-btn--sm">Commercial Banks</a>
+  <a href="#government" class="sh-btn sh-btn--ghost sh-btn--sm">Governments &amp; Central Banks</a>
+</div>
+
+<!-- WHY THIS LOOKS DIFFERENT -->
+<section class="sh-section">
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--gold">WHY THIS LOOKS DIFFERENT</div>
+      <h2 class="sh-section__title">Priced like infrastructure.<br>Not skimmed like a transaction.</h2>
+      <p class="sh-section__sub">Legacy rails charge a percentage of every transaction that flows through them. Shamwari charges a flat fee for the capacity you need — so your costs don't scale with your success.</p>
+    </div>
+    <div class="sh-excl-mkt pg-reveal">
+      <div class="sh-excl-mkt__stat">
+        <div class="sh-excl-mkt__n sh-text--red">8&ndash;12%</div>
+        <div class="sh-excl-mkt__l">Average cross-border remittance corridor cost</div>
+      </div>
+      <div class="sh-excl-mkt__stat">
+        <div class="sh-excl-mkt__n sh-text--red">1.0&ndash;1.5%</div>
+        <div class="sh-excl-mkt__l">Typical interbank RTGS transfer fee</div>
+      </div>
+      <div class="sh-excl-mkt__stat">
+        <div class="sh-excl-mkt__n sh-text--teal">&lt;0.5%</div>
+        <div class="sh-excl-mkt__l">Shamwari blended B2B effective rate</div>
+      </div>
+      <div class="sh-excl-mkt__stat">
+        <div class="sh-excl-mkt__n sh-text--teal">Fixed</div>
+        <div class="sh-excl-mkt__l">Monthly OpEx, not a cut of your volume</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVERY TIER INCLUDES -->
+<section class="sh-section--navy">
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--teal">EVERY TIER INCLUDES</div>
+      <h2 class="sh-section__title">The moat isn't a line item.<br>It's the whole platform.</h2>
+      <p class="sh-section__sub">Post-quantum security and full sovereignty aren't premium add-ons. Every tier, from Merchant Basic to Bank Sovereign Partner, gets the same protocol-level guarantees.</p>
+    </div>
+    <div class="pg-features">
+      <div class="pg-feature pg-reveal">
+        <div class="pg-feature__accent pg-feature__accent--teal"></div>
+        <i class="pg-feature__icon fa-solid fa-shield-halved"></i>
+        <div>
+          <div class="pg-feature__title">Post-quantum security</div>
+          <div class="pg-feature__body">ML-KEM and ML-DSA encryption and signatures on every account and transaction, at every tier — never an add-on you have to pay up for.</div>
+        </div>
+      </div>
+      <div class="pg-feature pg-reveal">
+        <div class="pg-feature__accent pg-feature__accent--purple"></div>
+        <i class="pg-feature__icon fa-solid fa-flag"></i>
+        <div>
+          <div class="pg-feature__title">Full sovereignty</div>
+          <div class="pg-feature__body">Your jurisdiction chain, your regulator's authority, your rules, enforced at the protocol level — never a shared ledger you don't control.</div>
+        </div>
+      </div>
+      <div class="pg-feature pg-reveal">
+        <div class="pg-feature__accent pg-feature__accent--teal"></div>
+        <i class="pg-feature__icon fa-solid fa-code"></i>
+        <div>
+          <div class="pg-feature__title">Free sandbox access</div>
+          <div class="pg-feature__body">Build and test against the full protocol on our public testnet before you commit to a paid tier, or ever speak to sales.</div>
+        </div>
+      </div>
+      <div class="pg-feature pg-reveal">
+        <div class="pg-feature__accent pg-feature__accent--gold"></div>
+        <i class="pg-feature__icon fa-solid fa-scale-balanced"></i>
+        <div>
+          <div class="pg-feature__title">No gas fees, ever</div>
+          <div class="pg-feature__body">Every fee is disclosed upfront in your subscription. Nothing is bid away in a public mempool or spikes because the network is busy.</div>
+        </div>
+      </div>
+      <div class="pg-feature pg-reveal">
+        <div class="pg-feature__accent pg-feature__accent--gold"></div>
+        <i class="pg-feature__icon fa-solid fa-headset"></i>
+        <div>
+          <div class="pg-feature__title">A guaranteed support SLA</div>
+          <div class="pg-feature__body">Every tier carries a response-time commitment, from 24 hours on entry tiers down to 1 hour at the sovereign level.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="sh-section">
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--gold">HOW IT WORKS</div>
+      <h2 class="sh-section__title">From sandbox to signed agreement.</h2>
+      <p class="sh-section__sub">Every institutional engagement follows the same path. Nothing below requires a negotiation to get started.</p>
+    </div>
+    <div class="subs-how-grid">
+      <div class="subs-step pg-reveal">
+        <div class="subs-step__num">01</div>
+        <div class="subs-step__title">Sandbox &amp; Testnet</div>
+        <div class="subs-step__body">Explore the full protocol on our public testnet at no cost. Real transaction types, real settlement, real post-quantum signatures — no commercial agreement required to start.</div>
+      </div>
+      <div class="subs-step pg-reveal">
+        <div class="subs-step__num">02</div>
+        <div class="subs-step__title">Choose Your Tier</div>
+        <div class="subs-step__body">Pick the subscription that matches your expected volume. Every tier is a flat monthly or annual fee, and you can move up, down, or to pay-as-you-go at any time.</div>
+      </div>
+      <div class="subs-step pg-reveal">
+        <div class="subs-step__num">03</div>
+        <div class="subs-step__title">Go Live</div>
+        <div class="subs-step__body">Sign your integration agreement and move to mainnet. Sovereign and CBDC-issuance tiers get a dedicated onboarding process — talk to our team to scope it.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MERCHANTS & BUSINESSES -->
+<section class="sh-section--navy" id="merchants">
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--teal">FOR MERCHANTS &amp; BUSINESSES</div>
+      <h2 class="sh-section__title">Accept payments.<br>Move money. Stay compliant.</h2>
+      <p class="sh-section__sub">For retail businesses, SME merchants and e-commerce accepting payments and originating transfers. Exchange-offer publishing and currency minting are reserved for Business, FSP and Bank tiers.</p>
+      <a href="merchants" class="sh-btn sh-btn--ghost sh-btn--sm">See Merchant Use Cases &amp; Value Prop <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="dev-hw-grid pg-reveal">
+      <div class="dev-hw-card dev-hw-card--min">
+        <div class="dev-hw-card__tier">MERCHANT BASIC</div>
+        <div class="dev-hw-card__title">$25<span style="font-size:.5em;font-weight:600;color:var(--txt-muted)">/mo</span></div>
+        <div class="dev-hw-spec">
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Annual $240/yr &mdash; save $60</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Up to 500 transfers &amp; payments/mo ($50K cap)</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>50 exchange trades &middot; 5 loan ops included</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>$0.10 overage &middot; Standard SLA</div>
+        </div>
+      </div>
+      <div class="dev-hw-card dev-hw-card--rec">
+        <div class="dev-hw-card__tier">MERCHANT STANDARD</div>
+        <div class="dev-hw-card__title">$65<span style="font-size:.5em;font-weight:600;color:var(--txt-muted)">/mo</span></div>
+        <div class="dev-hw-spec">
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Annual $624/yr &mdash; save $156</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Up to 1,500 transfers &amp; payments/mo ($150K cap)</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>150 exchange trades &middot; 15 loan ops included</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>$0.08 overage &middot; 24-hour SLA</div>
+        </div>
+      </div>
+      <div class="dev-hw-card dev-hw-card--binder">
+        <div class="dev-hw-card__tier">MERCHANT GROWTH</div>
+        <div class="dev-hw-card__title">$130<span style="font-size:.5em;font-weight:600;color:var(--txt-muted)">/mo</span></div>
+        <div class="dev-hw-spec">
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Annual $1,248/yr &mdash; save $312</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Up to 3,500 transfers &amp; payments/mo ($350K cap)</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>350 exchange trades &middot; 30 loan ops included</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>$0.07 overage &middot; 12-hour SLA</div>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:2rem;font-size:.85rem;color:var(--txt-muted)">Running a larger corporate entity? Business tiers scale to $900/mo with full exchange-offer publishing rights — <a href="index#contact" class="sh-text--teal">talk to our team</a>.</p>
+  </div>
+</section>
+
+<!-- FINANCIAL SERVICE PROVIDERS & MFIs -->
+<section class="sh-section" id="fsp">
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--teal">FOR FINANCIAL SERVICE PROVIDERS</div>
+      <h2 class="sh-section__title">Payment aggregators, wallets<br>and remittance operators.</h2>
+      <p class="sh-section__sub">For IPEC/RBZ-licensed Financial Service Providers. Exchange-offer publishing unlocks from Connect; currency minting unlocks at Sovereign.</p>
+      <a href="fspmfi" class="sh-btn sh-btn--ghost sh-btn--sm">See FSP &amp; MFI Use Cases &amp; Value Prop <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="dev-hw-grid pg-reveal">
+      <div class="dev-hw-card dev-hw-card--min">
+        <div class="dev-hw-card__tier">FSP CONNECT</div>
+        <div class="dev-hw-card__title">$300<span style="font-size:.5em;font-weight:600;color:var(--txt-muted)">/mo</span></div>
+        <div class="dev-hw-spec">
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Annual $2,880/yr &mdash; save $720</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Up to 5,000 transfers &amp; payments/mo ($2M cap)</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>500 exchange trades &middot; Exchange-offer publishing</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>$0.10 overage &middot; 24-hour SLA</div>
+        </div>
+      </div>
+      <div class="dev-hw-card dev-hw-card--rec">
+        <div class="dev-hw-card__tier">FSP GATEWAY</div>
+        <div class="dev-hw-card__title">$700<span style="font-size:.5em;font-weight:600;color:var(--txt-muted)">/mo</span></div>
+        <div class="dev-hw-spec">
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Annual $6,720/yr &mdash; save $1,680</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Up to 15,000 transfers &amp; payments/mo ($5M cap)</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>1,500 exchange trades &middot; Totem management unlocked</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>$0.08 overage &middot; 12-hour SLA</div>
+        </div>
+      </div>
+      <div class="dev-hw-card dev-hw-card--binder">
+        <div class="dev-hw-card__tier">FSP PLATFORM</div>
+        <div class="dev-hw-card__title">$1,500<span style="font-size:.5em;font-weight:600;color:var(--txt-muted)">/mo</span></div>
+        <div class="dev-hw-spec">
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Annual $14,400/yr &mdash; save $3,600</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Up to 50,000 transfers &amp; payments/mo ($15M cap)</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>5,000 exchange trades &middot; Full issuance suite</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>$0.06 overage &middot; 4-hour SLA</div>
+        </div>
+      </div>
+      <div class="dev-hw-card">
+        <div class="dev-hw-card__tier" style="color:var(--txt-muted)">FSP SOVEREIGN</div>
+        <div class="dev-hw-card__title">$3,000<span style="font-size:.5em;font-weight:600;color:var(--txt-muted)">/mo</span></div>
+        <div class="dev-hw-spec">
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Annual $28,800/yr &mdash; save $7,200</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Up to 200,000 transfers &amp; payments/mo ($50M cap)</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Unlimited loan ops &middot; Full currency-minting rights</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>$0.04 overage &middot; 2-hour SLA</div>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:2rem;font-size:.85rem;color:var(--txt-muted)">Running a microfinance institution instead? MFI-specific tiers start at $200/mo, built around high-volume loan processing. <a href="fspmfi" class="sh-text--teal">See full MFI pricing &amp; use cases &rarr;</a></p>
+  </div>
+</section>
+
+<!-- COMMERCIAL BANKS -->
+<section class="sh-section--navy" id="banks">
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--teal">FOR COMMERCIAL BANKS</div>
+      <h2 class="sh-section__title">Core settlement infrastructure.<br>Not a bolt-on.</h2>
+      <p class="sh-section__sub">For RBZ-licensed commercial banks and custodians using Shamwari as settlement infrastructure. Banks act as institutional lenders on the network and are not eligible to apply for loans.</p>
+      <a href="banks" class="sh-btn sh-btn--ghost sh-btn--sm">See Bank Use Cases &amp; Value Prop <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="dev-hw-grid pg-reveal">
+      <div class="dev-hw-card dev-hw-card--min">
+        <div class="dev-hw-card__tier">BANK COMMUNITY</div>
+        <div class="dev-hw-card__title">$800<span style="font-size:.5em;font-weight:600;color:var(--txt-muted)">/mo</span></div>
+        <div class="dev-hw-spec">
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Annual $7,680/yr &mdash; save $1,920</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Up to 20,000 transfers &amp; payments/mo ($20M cap)</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>5,000 loan ops &middot; Full protocol suite</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>$0.08 overage &middot; 12-hour SLA</div>
+        </div>
+      </div>
+      <div class="dev-hw-card dev-hw-card--rec">
+        <div class="dev-hw-card__tier">BANK COMMERCIAL</div>
+        <div class="dev-hw-card__title">$2,000<span style="font-size:.5em;font-weight:600;color:var(--txt-muted)">/mo</span></div>
+        <div class="dev-hw-spec">
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Annual $19,200/yr &mdash; save $4,800</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Up to 100,000 transfers &amp; payments/mo ($100M cap)</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>25,000 loan ops &middot; CBDC bridging included</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>$0.05 overage &middot; 4-hour SLA</div>
+        </div>
+      </div>
+      <div class="dev-hw-card dev-hw-card--binder">
+        <div class="dev-hw-card__tier">BANK INSTITUTIONAL</div>
+        <div class="dev-hw-card__title">$5,000<span style="font-size:.5em;font-weight:600;color:var(--txt-muted)">/mo</span></div>
+        <div class="dev-hw-spec">
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Annual $48,000/yr &mdash; save $12,000</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Up to 500,000 transfers &amp; payments/mo ($500M cap)</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>100,000 loan ops &middot; Unlimited vault &amp; savings</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>$0.03 overage &middot; 2-hour SLA</div>
+        </div>
+      </div>
+      <div class="dev-hw-card">
+        <div class="dev-hw-card__tier" style="color:var(--txt-muted)">BANK SOVEREIGN PARTNER <span class="sh-badge sh-badge--gold-sm">BY AGREEMENT</span></div>
+        <div class="dev-hw-card__title">$12,000<span style="font-size:.5em;font-weight:600;color:var(--txt-muted)">/mo</span></div>
+        <div class="dev-hw-spec">
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Annual $115,200/yr &mdash; save $28,800</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Up to 2,000,000 transfers &amp; payments/mo ($2B cap)</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Unlimited loan &amp; vault ops &middot; CBDC issuance + dedicated node</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>$0.02 overage &middot; 1-hour SLA</div>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:2rem;font-size:.85rem;color:var(--txt-muted)">Bank Sovereign Partner requires an executed ShamwariPay Integration Agreement — <a href="index#contact" class="sh-text--teal">talk to our team</a> to scope it.</p>
+  </div>
+</section>
+
+<!-- GOVERNMENTS & CENTRAL BANKS -->
+<section class="sh-section" id="government">
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--teal">FOR GOVERNMENTS &amp; CENTRAL BANKS</div>
+      <h2 class="sh-section__title">Sovereign currency issuance,<br>on your terms.</h2>
+      <p class="sh-section__sub">For ministries, parastatals, municipalities and central banks. Government accounts are institutional lenders only and cannot apply for loans on the network.</p>
+      <a href="government" class="sh-btn sh-btn--ghost sh-btn--sm">See Government Use Cases &amp; Value Prop <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="dev-hw-grid pg-reveal">
+      <div class="dev-hw-card dev-hw-card--min">
+        <div class="dev-hw-card__tier">GOVT MUNICIPAL</div>
+        <div class="dev-hw-card__title">$500<span style="font-size:.5em;font-weight:600;color:var(--txt-muted)">/mo</span></div>
+        <div class="dev-hw-spec">
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Annual $4,800/yr &mdash; save $1,200</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Up to 10,000 transfers &amp; payments/mo ($10M cap)</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>1,000 exchange ops &middot; Municipal bond tokenisation</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>$0.08 overage &middot; 12-hour SLA</div>
+        </div>
+      </div>
+      <div class="dev-hw-card dev-hw-card--rec">
+        <div class="dev-hw-card__tier">GOVT MINISTRY</div>
+        <div class="dev-hw-card__title">$1,500<span style="font-size:.5em;font-weight:600;color:var(--txt-muted)">/mo</span></div>
+        <div class="dev-hw-spec">
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Annual $14,400/yr &mdash; save $3,600</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Up to 50,000 transfers &amp; payments/mo ($100M cap)</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>5,000 exchange ops &middot; Bond &amp; treasury token issuance</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>$0.05 overage &middot; 4-hour SLA</div>
+        </div>
+      </div>
+      <div class="dev-hw-card dev-hw-card--binder">
+        <div class="dev-hw-card__tier">GOVT CENTRAL <span class="sh-badge sh-badge--gold-sm">BY AGREEMENT</span></div>
+        <div class="dev-hw-card__title">$8,000<span style="font-size:.5em;font-weight:600;color:var(--txt-muted)">/mo</span></div>
+        <div class="dev-hw-spec">
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Annual $76,800/yr &mdash; save $19,200</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Up to 5,000,000 transfers &amp; payments/mo</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Unlimited exchange &amp; issuance ops &middot; Sovereign CBDC issuance</div>
+          <div class="dev-hw-spec-row"><i class="fa-solid fa-check"></i>Custom SLA agreement</div>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:2rem;font-size:.85rem;color:var(--txt-muted)">Govt Central (CBDC) requires a signed CBDC Infrastructure Agreement — <a href="index#contact" class="sh-text--teal">talk to our team</a> to scope it.</p>
+  </div>
+</section>
+
+<!-- PAY-AS-YOU-GO + FAIR USE -->
+<section class="sh-section--navy">
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--gold">GOOD TO KNOW</div>
+      <h2 class="sh-section__title">No subscription yet?<br>That's fine too.</h2>
+    </div>
+    <div class="pg-two-col">
+      <div class="pg-card2 pg-reveal">
+        <div class="pg-card2__accent pg-card2__accent--teal"></div>
+        <div class="pg-card2__title">Pay-as-you-go, if you're not ready</div>
+        <div class="pg-card2__body">Every account can transact without a subscription, at simple pay-as-you-go rates with no monthly commitment. It's the easiest way to put real value through Shamwari before choosing a tier.</div>
+        <ul class="pg-card2__list">
+          <li>Currency transfers: 0.75% (min $0.05, max $15)</li>
+          <li>Merchant payments: 0.50% (min $0.05, max $10)</li>
+          <li>Deposits to savings: always free</li>
+          <li>Full retail rate card and use cases on the <a href="personal" class="sh-text--teal">Individuals page</a></li>
+        </ul>
+      </div>
+      <div class="pg-card2 pg-reveal">
+        <div class="pg-card2__accent pg-card2__accent--gold"></div>
+        <div class="pg-card2__title">How fair-use limits work</div>
+        <div class="pg-card2__body">Every subscription tier includes a fair-use allowance. Here's what happens as you approach it.</div>
+        <ul class="pg-card2__list">
+          <li>Limits apply to both transaction count and monthly value — whichever you reach first</li>
+          <li>New subscribers get a one-month grace period at 120% of their limit</li>
+          <li>Unused capacity doesn't roll over, but annual subscribers get 10% higher limits at no extra cost</li>
+          <li>Go over your limit and you're simply billed at the overage rate — never cut off without warning</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="sh-cta">
+  <div class="sh-cta__glow"></div>
+  <div class="sh-cta__inner">
+    <div class="sh-eyebrow sh-eyebrow--teal">TALK TO US</div>
+    <h2 class="sh-cta__title">Ready to scope your tier?</h2>
+    <p class="sh-cta__sub">Sovereign, CBDC-issuance and custom-volume agreements are scoped directly with our team. Every other tier, you can start on today.</p>
+    <div class="sh-cta__actions">
+      <a href="mailto:partnerships@shamwari.network" class="sh-btn sh-btn--teal sh-btn--lg"><i class="fa-solid fa-users"></i> Talk to Partnerships</a>
+      <a href="solutions" class="sh-btn sh-btn--gold sh-btn--lg">View Solutions</a>
+      <a href="developers" class="sh-btn sh-btn--ghost sh-btn--lg"><i class="fa-solid fa-code"></i> Developer Hub</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="sh-footer">
+  <div class="sh-footer__grid">
+    <div>
+      <div class="sh-footer__wordmark">
+        <img src="/img/icon.png" height="72" width="72" />
+      </div>
+      <p class="sh-footer__tagline">Sovereign, quantum-resistant financial infrastructure for 4 billion people across Africa, LATAM, ASEAN and MENA.</p>
+      <div class="sh-footer__socials">
+        <a href="https://bitbucket.org/thenamelesstree/shamwari" class="sh-footer__social"><i class="fa-brands fa-bitbucket"></i></a>
+        <a href="https://x.com/shamwarinetwork" class="sh-footer__social"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://www.linkedin.com/showcase/shamwarinetwork" class="sh-footer__social"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:contact@shamwari.network" class="sh-footer__social"><i class="fa fa-envelope"></i></a>
+      </div>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Platform</div>
+      <a href="shamwaripay"         class="sh-footer__link">ShamwariPay</a>
+      <a href="digitalassets"       class="sh-footer__link">Totem Exchange</a>
+      <a href="digitalcertificates" class="sh-footer__link">Certificates</a>
+      <a href="subscriptions"       class="sh-footer__link">Subscriptions</a>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Technology</div>
+      <a href="architecture"        class="sh-footer__link">Architecture</a>
+      <a href="security"            class="sh-footer__link">Post-Quantum Security</a>
+      <a href="accounts"            class="sh-footer__link">Accounts &amp; Identity</a>
+      <a href="compliance"          class="sh-footer__link">Compliance</a>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Resources</div>
+      <a href="solutions"    class="sh-footer__link">Solutions</a>
+      <a href="pricing"      class="sh-footer__link">Pricing</a>
+      <a href="developers"   class="sh-footer__link">Developer Hub</a>
+      <a href="https://docs.shamwari.network" class="sh-footer__link">Documentation</a>
+      <a href="https://wallet.shamwari.network" class="sh-footer__link">Launch Wallet</a>
+    </div>
+  </div>
+  <div class="sh-footer__bottom">
+    <span>&copy; 2026 TheNamelessTree Networks. All rights reserved.</span>
+    <span class="sh-footer__bottom-right"><a href="https://thenamelesstree.co.zw" target="blank">thenamelesstree.co.zw</a></span>
+  </div>
+</footer>
+
+<a href="#" class="sh-back-top" id="back-top" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></a>
+
+<script>
+(function(){
+  var nav = document.getElementById('sh-nav');
+  window.addEventListener('scroll', function(){ nav.classList.toggle('sh-nav--scrolled', window.scrollY > 50); });
+
+  var tgl = document.getElementById('nav-toggle'), menu = document.getElementById('nav-menu');
+  if(tgl && menu){ tgl.addEventListener('click', function(){ tgl.classList.toggle('is-open'); menu.classList.toggle('is-open'); }); }
+
+  var bt = document.getElementById('back-top');
+  if(bt){
+    window.addEventListener('scroll', function(){ bt.classList.toggle('is-visible', window.scrollY > 400); });
+    bt.addEventListener('click', function(e){ e.preventDefault(); window.scrollTo({top:0,behavior:'smooth'}); });
+  }
+
+  var ro = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-visible'); ro.unobserve(e.target); } });
+  }, {threshold: 0.08, rootMargin: '0px 0px -30px 0px'});
+  document.querySelectorAll('.sh-reveal, .pg-reveal').forEach(function(el){ ro.observe(el); });
+})();
+</script>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Stablecoins & CBDCs on Shamwari | ShamwariPay</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="How Shamwari supports sovereign CBDCs, regulated stablecoins, deposit tokens, and e-money — all natively in the protocol, without smart contracts, with quantum-safe cryptography from genesis.">
+<link href="/favicon.ico" rel="icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+
+
+/* ── TOC (fixed sidebar) ──────────────────────────────────────────────── */
+.pg-toc {
+  position: fixed;
+  top: 5.5rem;
+  left: max(1rem, calc(50% - 680px));
+  width: 178px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  z-index: 80;
+}
+.pg-toc__label {
+  font-family: var(--font-display);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--txt-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.55rem;
+}
+.pg-toc__link {
+  font-size: 0.76rem;
+  color: var(--txt-muted);
+  padding: 0.28rem 0.6rem;
+  border-left: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  line-height: 1.35;
+}
+.pg-toc__link:hover,
+.pg-toc__link.is-active {
+  color: var(--teal);
+  border-left-color: var(--teal);
+}
+
+/* ── Content area offset when TOC visible ────────────────────────────── */
+@media (min-width: 1300px) {
+  .sc-content-wrap { margin-left: 200px; }
+}
+
+/* ── Stats bar colours ─────────────────────────────────────────────────  */
+.pg-stats__n--teal  { color: var(--teal); }
+.pg-stats__n--gold  { color: var(--gold); }
+.pg-stats__n--green { color: var(--green); }
+.pg-stats__n--red   { color: var(--red); }
+
+/* ── Currency type matrix table ─────────────────────────────────────── */
+.sc-matrix {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.83rem;
+  border: 1px solid var(--border-dk);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.sc-matrix thead tr { background: rgba(255,255,255,0.03); }
+.sc-matrix th {
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-dk);
+  color: var(--txt-muted);
+  white-space: nowrap;
+}
+.sc-matrix th:first-child { color: var(--teal); }
+.sc-matrix tbody tr {
+  border-bottom: 1px solid var(--border-dk);
+  background: var(--bg-card-dk);
+  transition: background 0.15s;
+}
+.sc-matrix tbody tr:nth-child(even) { background: rgba(255,255,255,0.015); }
+.sc-matrix tbody tr:last-child { border-bottom: none; }
+.sc-matrix tbody tr:hover { background: rgba(0,168,158,0.04); }
+.sc-matrix td {
+  padding: 0.8rem 1.1rem;
+  vertical-align: top;
+  line-height: 1.5;
+  color: var(--txt-secondary);
+  font-size: 0.81rem;
+}
+.sc-matrix td:first-child {
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+  color: var(--teal);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.sc-matrix td:nth-child(2) {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--txt-primary);
+}
+.sc-yes  { color: var(--green); }
+.sc-no   { color: var(--red); }
+.sc-part { color: var(--gold); }
+
+/* ── Architecture flow diagram ──────────────────────────────────────── */
+.sc-arch-flow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  align-items: center;
+  gap: 0;
+  margin: 2.5rem 0;
+}
+.sc-arch-node {
+  background: var(--bg-card-dk);
+  border: 1px solid var(--border-dk);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.sc-arch-node:hover {
+  border-color: rgba(0,168,158,0.35);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.25);
+}
+.sc-arch-node--gold { border-color: rgba(200,155,60,0.2); }
+.sc-arch-node--gold:hover { border-color: rgba(200,155,60,0.45); }
+.sc-arch-node--purple { border-color: rgba(139,92,246,0.2); }
+.sc-arch-node--purple:hover { border-color: rgba(139,92,246,0.45); }
+.sc-arch-node__icon {
+  font-size: 1.6rem;
+  margin-bottom: 0.7rem;
+  line-height: 1;
+}
+.sc-arch-node__label {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--txt-primary);
+  margin-bottom: 0.35rem;
+}
+.sc-arch-node__sub {
+  font-size: 0.72rem;
+  color: var(--txt-muted);
+  line-height: 1.45;
+}
+.sc-arch-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0 0.75rem;
+}
+.sc-arch-arrow__line {
+  width: 2px;
+  flex: 1;
+  min-height: 40px;
+  background: linear-gradient(to bottom, transparent, var(--teal), transparent);
+  opacity: 0.4;
+}
+.sc-arch-arrow__icon {
+  font-size: 0.75rem;
+  color: var(--teal);
+  opacity: 0.6;
+}
+@media (max-width: 900px) {
+  .sc-arch-flow {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  .sc-arch-arrow { flex-direction: row; padding: 0.5rem 0; min-height: 28px; }
+  .sc-arch-arrow__line { width: 40px; height: 2px; min-height: unset; background: linear-gradient(to right, transparent, var(--teal), transparent); }
+}
+
+/* ── Currency type cards ─────────────────────────────────────────────── */
+.sc-ctype-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.sc-ctype-card {
+  background: var(--bg-card-dk);
+  border: 1px solid var(--border-dk);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.25rem;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.sc-ctype-card:hover { transform: translateY(-3px); }
+.sc-ctype-card--cbdc      { border-top: 3px solid var(--teal); }
+.sc-ctype-card--cbdc:hover { border-color: var(--teal); box-shadow: 0 8px 28px rgba(0,168,158,0.12); }
+.sc-ctype-card--stable    { border-top: 3px solid var(--gold); }
+.sc-ctype-card--stable:hover { border-color: var(--gold); box-shadow: 0 8px 28px rgba(200,155,60,0.12); }
+.sc-ctype-card--deposit   { border-top: 3px solid var(--purple); }
+.sc-ctype-card--deposit:hover { border-color: var(--purple); box-shadow: 0 8px 28px rgba(139,92,246,0.12); }
+.sc-ctype-card--emoney    { border-top: 3px solid var(--green); }
+.sc-ctype-card--emoney:hover { border-color: var(--green); box-shadow: 0 8px 28px rgba(34,197,94,0.12); }
+.sc-ctype-card--native    { border-top: 3px solid var(--red); }
+.sc-ctype-card--native:hover { border-color: var(--red); box-shadow: 0 8px 28px rgba(224,82,82,0.12); }
+.sc-ctype-card__tag {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+.sc-ctype-card--cbdc    .sc-ctype-card__tag { color: var(--teal); }
+.sc-ctype-card--stable  .sc-ctype-card__tag { color: var(--gold); }
+.sc-ctype-card--deposit .sc-ctype-card__tag { color: var(--purple); }
+.sc-ctype-card--emoney  .sc-ctype-card__tag { color: var(--green); }
+.sc-ctype-card--native  .sc-ctype-card__tag { color: var(--red); }
+.sc-ctype-card__name {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--txt-primary);
+  margin-bottom: 0.6rem;
+  line-height: 1.25;
+}
+.sc-ctype-card__desc {
+  font-size: 0.78rem;
+  color: var(--txt-secondary);
+  line-height: 1.6;
+  margin-bottom: 0.9rem;
+}
+.sc-ctype-card__attrs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  border-top: 1px solid var(--border-dk);
+  padding-top: 0.8rem;
+  margin-top: 0.2rem;
+}
+.sc-ctype-card__attr {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  font-size: 0.73rem;
+  color: var(--txt-muted);
+  line-height: 1.4;
+}
+.sc-ctype-card__attr i { font-size: 0.55rem; flex-shrink: 0; margin-top: 0.25rem; }
+.sc-ctype-card--cbdc    .sc-ctype-card__attr i { color: var(--teal); }
+.sc-ctype-card--stable  .sc-ctype-card__attr i { color: var(--gold); }
+.sc-ctype-card--deposit .sc-ctype-card__attr i { color: var(--purple); }
+.sc-ctype-card--emoney  .sc-ctype-card__attr i { color: var(--green); }
+.sc-ctype-card--native  .sc-ctype-card__attr i { color: var(--red); }
+@media (max-width: 1100px) { .sc-ctype-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 700px)  { .sc-ctype-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px)  { .sc-ctype-grid { grid-template-columns: 1fr; } }
+
+/* ── SOVEREIGN flag detail block ─────────────────────────────────────── */
+.sc-sovereign-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+.sc-sovereign-code {
+  background: rgba(0,0,0,0.35);
+  border: 1px solid var(--border-dk);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+}
+.sc-sovereign-code code {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--teal-lt);
+  line-height: 1.85;
+  white-space: pre;
+  display: block;
+}
+.sc-sovereign-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.sc-sovereign-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.sc-sovereign-item__icon {
+  width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem;
+}
+.sc-sovereign-item__icon--teal   { background: var(--teal-ghost); color: var(--teal); }
+.sc-sovereign-item__icon--gold   { background: var(--gold-ghost); color: var(--gold); }
+.sc-sovereign-item__icon--purple { background: rgba(139,92,246,0.1); color: var(--purple); }
+.sc-sovereign-item__icon--green  { background: rgba(34,197,94,0.08); color: var(--green); }
+.sc-sovereign-item__title {
+  font-family: var(--font-display);
+  font-size: 0.85rem; font-weight: 700;
+  color: var(--txt-primary); margin-bottom: 0.2rem;
+}
+.sc-sovereign-item__body {
+  font-size: 0.78rem;
+  color: var(--txt-secondary);
+  line-height: 1.55;
+}
+@media (max-width: 900px) { .sc-sovereign-block { grid-template-columns: 1fr; } }
+
+/* ── BetaChain architecture grid ─────────────────────────────────────── */
+.sc-beta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+.sc-beta-card {
+  background: var(--bg-card-dk);
+  border: 1px solid var(--border-dk);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  transition: border-color 0.25s;
+}
+.sc-beta-card--teal   { border-left: 3px solid var(--teal); }
+.sc-beta-card--gold   { border-left: 3px solid var(--gold); }
+.sc-beta-card--purple { border-left: 3px solid var(--purple); }
+.sc-beta-card--green  { border-left: 3px solid var(--green); }
+.sc-beta-card--teal:hover   { box-shadow: 0 6px 20px rgba(0,168,158,0.1); }
+.sc-beta-card--gold:hover   { box-shadow: 0 6px 20px rgba(200,155,60,0.1); }
+.sc-beta-card--purple:hover { box-shadow: 0 6px 20px rgba(139,92,246,0.1); }
+.sc-beta-card--green:hover  { box-shadow: 0 6px 20px rgba(34,197,94,0.1); }
+.sc-beta-card__heading {
+  font-family: var(--font-display);
+  font-size: 1rem; font-weight: 800;
+  color: var(--txt-primary);
+  margin-bottom: 0.55rem;
+}
+.sc-beta-card__sub {
+  font-size: 0.79rem;
+  color: var(--txt-secondary);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+.sc-beta-card__list {
+  display: flex; flex-direction: column; gap: 0.3rem;
+}
+.sc-beta-card__item {
+  display: flex; gap: 0.5rem; align-items: flex-start;
+  font-size: 0.76rem; color: var(--txt-muted); line-height: 1.45;
+}
+.sc-beta-card__item i { font-size: 0.55rem; flex-shrink: 0; margin-top: 0.22rem; }
+.sc-beta-card--teal   .sc-beta-card__item i { color: var(--teal); }
+.sc-beta-card--gold   .sc-beta-card__item i { color: var(--gold); }
+.sc-beta-card--purple .sc-beta-card__item i { color: var(--purple); }
+.sc-beta-card--green  .sc-beta-card__item i { color: var(--green); }
+@media (max-width: 768px) { .sc-beta-grid { grid-template-columns: 1fr; } }
+
+/* ── Compliance control cards ────────────────────────────────────────── */
+.sc-ctrl-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.sc-ctrl-card {
+  background: var(--bg-card-dk);
+  border: 1px solid var(--border-dk);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: border-color 0.25s, transform 0.2s;
+}
+.sc-ctrl-card:hover { border-color: rgba(0,168,158,0.3); transform: translateY(-2px); }
+.sc-ctrl-card__icon {
+  width: 42px; height: 42px; border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; margin-bottom: 1rem;
+}
+.sc-ctrl-card__icon--teal   { background: var(--teal-ghost); color: var(--teal); }
+.sc-ctrl-card__icon--gold   { background: var(--gold-ghost); color: var(--gold); }
+.sc-ctrl-card__icon--red    { background: rgba(224,82,82,0.08); color: var(--red); }
+.sc-ctrl-card__icon--purple { background: rgba(139,92,246,0.1); color: var(--purple); }
+.sc-ctrl-card__icon--green  { background: rgba(34,197,94,0.08); color: var(--green); }
+.sc-ctrl-card__icon--cyan   { background: rgba(0,212,200,0.08); color: var(--teal-lt); }
+.sc-ctrl-card__title {
+  font-family: var(--font-display);
+  font-size: 0.9rem; font-weight: 700;
+  color: var(--txt-primary); margin-bottom: 0.55rem;
+}
+.sc-ctrl-card__desc {
+  font-size: 0.78rem; color: var(--txt-secondary); line-height: 1.6;
+}
+@media (max-width: 900px) { .sc-ctrl-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .sc-ctrl-grid { grid-template-columns: 1fr; } }
+
+/* ── Comparison vs other rails ───────────────────────────────────────── */
+.sc-compare {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--border-dk);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-top: 2rem;
+}
+.sc-compare__col {
+  border-right: 1px solid var(--border-dk);
+}
+.sc-compare__col:last-child { border-right: none; }
+.sc-compare__head {
+  padding: 1.1rem 1.25rem;
+  background: rgba(255,255,255,0.025);
+  border-bottom: 1px solid var(--border-dk);
+}
+.sc-compare__head-name {
+  font-family: var(--font-display);
+  font-size: 0.82rem; font-weight: 800;
+  color: var(--txt-primary); margin-bottom: 0.2rem;
+}
+.sc-compare__head-sub {
+  font-family: var(--font-mono);
+  font-size: 0.58rem; letter-spacing: 0.1em;
+  color: var(--txt-muted);
+}
+.sc-compare__col--shamwari .sc-compare__head { background: rgba(0,168,158,0.06); }
+.sc-compare__col--shamwari .sc-compare__head-sub { color: var(--teal); }
+.sc-compare__row {
+  display: flex; align-items: flex-start; gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.76rem; color: var(--txt-secondary);
+  border-bottom: 1px solid var(--border-dk);
+  line-height: 1.4;
+}
+.sc-compare__row:last-child { border-bottom: none; }
+.sc-compare__row i { font-size: 0.6rem; flex-shrink: 0; margin-top: 0.22rem; }
+.sc-compare__row--yes i { color: var(--green); }
+.sc-compare__row--no  i { color: var(--red); }
+.sc-compare__row--part i { color: var(--gold); }
+@media (max-width: 900px) { .sc-compare { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 550px) { .sc-compare { grid-template-columns: 1fr; } .sc-compare__col { border-right: none; border-bottom: 1px solid var(--border-dk); } }
+
+/* ── Market opportunity band ─────────────────────────────────────────── */
+.sc-market-band {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--border-dk);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.sc-market-item {
+  padding: 1.75rem 1.5rem;
+  border-right: 1px solid var(--border-dk);
+  text-align: center;
+}
+.sc-market-item:last-child { border-right: none; }
+.sc-market-item__n {
+  font-family: var(--font-display);
+  font-size: 2rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin-bottom: 0.35rem;
+}
+.sc-market-item__l {
+  font-size: 0.72rem; color: var(--txt-muted); line-height: 1.4; text-transform: uppercase; letter-spacing: 0.04em;
+}
+@media (max-width: 768px) { .sc-market-band { grid-template-columns: 1fr 1fr; } .sc-market-item:nth-child(2) { border-right: none; } }
+@media (max-width: 480px) { .sc-market-band { grid-template-columns: 1fr; } .sc-market-item { border-right: none; border-bottom: 1px solid var(--border-dk); } .sc-market-item:last-child { border-bottom: none; } }
+
+/* ── Inline callout box ───────────────────────────────────────────────── */
+.sc-callout {
+  border-radius: var(--radius);
+  padding: 1.5rem 1.75rem;
+  margin: 2rem 0;
+  display: flex; gap: 1rem; align-items: flex-start;
+}
+.sc-callout--teal { background: rgba(0,168,158,0.07); border: 1px solid rgba(0,168,158,0.2); }
+.sc-callout--gold { background: rgba(200,155,60,0.07); border: 1px solid rgba(200,155,60,0.2); }
+.sc-callout--red  { background: rgba(224,82,82,0.07); border: 1px solid rgba(224,82,82,0.2); }
+.sc-callout__icon { font-size: 1.2rem; flex-shrink: 0; padding-top: 0.1rem; }
+.sc-callout--teal .sc-callout__icon { color: var(--teal); }
+.sc-callout--gold .sc-callout__icon { color: var(--gold); }
+.sc-callout--red  .sc-callout__icon { color: var(--red); }
+.sc-callout__title {
+  font-family: var(--font-display);
+  font-size: 0.9rem; font-weight: 700;
+  color: var(--txt-primary); margin-bottom: 0.35rem;
+}
+.sc-callout__body {
+  font-size: 0.82rem; color: var(--txt-secondary); line-height: 1.65;
+}
+
+/* ── Light mode force ─────────────────────────────────────────────────── */
+@media (prefers-color-scheme: light) {
+  .pg-toc { background: rgba(8,15,30,0.95) !important; }
+  .sc-ctype-card, .sc-beta-card, .sc-ctrl-card, .sc-arch-node { background: var(--bg-card-dk) !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="sh-nav" id="sh-nav">
+<div class="sh-nav__inner">
+  <a href="home" class="sh-nav__brand">
+    <div><img src="/img/banner.png" alt="Shamwari" height="40"></div>
+  </a>
+  <button class="sh-nav__toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="sh-nav__menu" id="nav-menu">
+    <a href="architecture"   class="sh-nav__link">Architecture</a>
+    <a href="compliance"     class="sh-nav__link">Compliance</a>
+    <a href="security"       class="sh-nav__link">Security</a>
+    <a href="solutions"      class="sh-nav__link">Solutions</a>
+    <a href="developers"     class="sh-nav__link">Developers</a>
+  </div>
+</div>
+</nav>
+
+
+
+<!-- HERO -->
+<section class="pg-hero" id="overview">
+  <div class="pg-hero__glow pg-hero__glow--gold"></div>
+  <div class="pg-hero__inner sc-content-wrap">
+    <div class="pg-hero__content">
+      <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:0.75rem;">SHAMWARIPAY — MONETARY SYSTEM</div>
+      <div class="pg-hero__badges" style="margin-bottom:1rem;">
+        <span class="sh-badge sh-badge--teal">CBDC-NATIVE</span>
+        <span class="sh-badge sh-badge--gold">5 CURRENCY TYPES</span>
+        <span class="sh-badge sh-badge--teal">QUANTUM-SAFE</span>
+        <span class="sh-badge sh-badge--gold">NO SMART CONTRACTS</span>
+      </div>
+      <h1 class="pg-hero__title">Stablecoins &amp; CBDCs<br>on <span class="sh-text--teal">Shamwari</span></h1>
+      <p class="pg-hero__sub">Shamwari is one of the few blockchain platforms purpose-built for state-issued digital currency and regulated stable value instruments. Five native currency types, a SOVEREIGN genesis flag, a dedicated BetaChain CBDC architecture, and 13 programmable tax types — all enforced at the consensus layer, not the application layer.</p>
+    </div>
+    <div class="pg-hero__icon-wrap" style="width:140px;height:140px;">
+      <div class="pg-hero__icon-bg"></div>
+      <div style="position:relative;z-index:1;text-align:center;">
+        <div style="font-size:2.8rem;color:var(--gold);line-height:1;margin-bottom:0.4rem;"><i class="fa-solid fa-building-columns"></i></div>
+        <div style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.14em;color:var(--txt-muted);">SOVEREIGN</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="pg-stats sc-content-wrap">
+  <div class="pg-stats__item">
+    <div class="pg-stats__n pg-stats__n--teal">5</div>
+    <div class="pg-stats__l">Native currency types<br>enforced by consensus</div>
+  </div>
+  <div class="pg-stats__div"></div>
+  <div class="pg-stats__item">
+    <div class="pg-stats__n pg-stats__n--gold">134</div>
+    <div class="pg-stats__l">Central banks globally<br>exploring CBDC issuance</div>
+  </div>
+  <div class="pg-stats__div"></div>
+  <div class="pg-stats__item">
+    <div class="pg-stats__n pg-stats__n--teal">13</div>
+    <div class="pg-stats__l">Programmable tax types<br>in ShamwariPay</div>
+  </div>
+  <div class="pg-stats__div"></div>
+  <div class="pg-stats__item">
+    <div class="pg-stats__n pg-stats__n--gold">$13.7T</div>
+    <div class="pg-stats__l">CBDC market projection<br>by 2030 (BIS)</div>
+  </div>
+</div>
+
+
+<!-- WHAT ARE STABLECOINS AND CBDCS -->
+<section class="sh-section sh-section--navy sc-content-wrap" id="types">
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--gold">CURRENCY ARCHITECTURE</div>
+      <h2 class="sh-section__title">Five types. One unified monetary system.</h2>
+      <p class="sh-section__sub">ShamwariPay encodes five distinct currency types at the protocol level. Each carries a different issuer relationship, reserve model, and regulatory footprint. All five settle on the same ledger, are subject to the same quantum-safe cryptography, and share the same compliance infrastructure.</p>
+    </div>
+
+    <div class="sc-ctype-grid">
+
+      <!-- CBDC -->
+      <div class="sc-ctype-card sc-ctype-card--cbdc sh-reveal">
+        <span class="sc-ctype-card__tag">CURRENCY_CBDC</span>
+        <div class="sc-ctype-card__name">Central Bank Digital Currency</div>
+        <div class="sc-ctype-card__desc">Direct digital liability of the sovereign monetary authority. Legal tender, issued and redeemed by the central bank. The highest-trust currency type on the platform.</div>
+        <div class="sc-ctype-card__attrs">
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>SOVEREIGN flag stamped at genesis</div>
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>Non-deletable once issued</div>
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>BetaChain deployment model</div>
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>Full fee settlement capability</div>
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>Retail &amp; wholesale tiers supported</div>
+        </div>
+      </div>
+
+      <!-- STABLECOIN -->
+      <div class="sc-ctype-card sc-ctype-card--stable sh-reveal sh-reveal--delay-1">
+        <span class="sc-ctype-card__tag">CURRENCY_STABLE</span>
+        <div class="sc-ctype-card__name">Regulated Stablecoin</div>
+        <div class="sc-ctype-card__desc">Issued by a licensed private entity. Pegged to a fiat reference (USD, ZWG, BRL) and backed by verifiable on- or off-chain reserves. Requires regulator authorisation.</div>
+        <div class="sc-ctype-card__attrs">
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>Issuer identity bound at creation</div>
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>Reserve ratio enforced in protocol</div>
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>Regulator revocation rights</div>
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>Cross-chain bridge compatible</div>
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>Programmable redemption windows</div>
+        </div>
+      </div>
+
+      <!-- DEPOSIT TOKEN -->
+      <div class="sc-ctype-card sc-ctype-card--deposit sh-reveal sh-reveal--delay-2">
+        <span class="sc-ctype-card__tag">CURRENCY_DEPOSIT</span>
+        <div class="sc-ctype-card__name">Deposit Token</div>
+        <div class="sc-ctype-card__desc">Tokenised commercial bank deposit. 1:1 representation of a balance held at a regulated bank. Combines programmability with existing deposit insurance frameworks.</div>
+        <div class="sc-ctype-card__attrs">
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>Bank-issued, bank-redeemed</div>
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>Deposit guarantee scheme eligible</div>
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>KYC inherited from issuing bank</div>
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>Interest-bearing variants</div>
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>Intraday settlement finality</div>
+        </div>
+      </div>
+
+      <!-- E-MONEY -->
+      <div class="sc-ctype-card sc-ctype-card--emoney sh-reveal sh-reveal--delay-3">
+        <span class="sc-ctype-card__tag">CURRENCY_EMONEY</span>
+        <div class="sc-ctype-card__name">E-Money Token</div>
+        <div class="sc-ctype-card__desc">Prepaid electronic value stored in the protocol. Licensed under the national e-money framework. Ideal for mobile money operators, payment institutions, and fintech issuers.</div>
+        <div class="sc-ctype-card__attrs">
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>Float-backed model</div>
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>Capped balance limits (configurable)</div>
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>Merchant settlement native</div>
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>Offline-capable transaction model</div>
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>Consumer protection rules encoded</div>
+        </div>
+      </div>
+
+      <!-- NATIVE -->
+      <div class="sc-ctype-card sc-ctype-card--native sh-reveal sh-reveal--delay-4">
+        <span class="sc-ctype-card__tag">CURRENCY_NATIVE</span>
+        <div class="sc-ctype-card__name">Native Protocol Currency</div>
+        <div class="sc-ctype-card__desc">The base monetary unit of the Shamwari MainChain. Powers consensus fee settlement and bootstrap liquidity before a CBDC or stablecoin is deployed by an operator.</div>
+        <div class="sc-ctype-card__attrs">
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>Fee settlement on MainChain</div>
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>DEX base pair on Totem Exchange</div>
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>Block reward distribution</div>
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>DAO governance weight</div>
+          <div class="sc-ctype-card__attr"><i class="fa-solid fa-circle"></i>Staking &amp; forging collateral</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="sc-callout sc-callout--teal" style="margin-top:3rem;">
+      <div class="sc-callout__icon"><i class="fa-solid fa-shield-halved"></i></div>
+      <div>
+        <div class="sc-callout__title">All five currency types share one security baseline.</div>
+        <div class="sc-callout__body">Every transaction across all five types is signed with ML-DSA-2 (NIST FIPS 204) and key-encapsulated with ML-KEM-512 (NIST FIPS 203). No currency on Shamwari is vulnerable to harvest-now, decrypt-later attacks. Quantum safety is not an add-on — it is the only mode the protocol knows.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SOVEREIGN FLAG -->
+<section class="sh-section sc-content-wrap" id="sovereign">
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--teal">SOVEREIGN CURRENCY TYPE</div>
+      <h2 class="sh-section__title">A protocol flag for central bank money.</h2>
+      <p class="sh-section__sub">When a BetaChain is configured as a CBDC chain, the fee currency — the token the chain uses to settle consensus — is automatically stamped <span class="sh-code">SOVEREIGN</span> at genesis. This is a permanent, consensus-enforced designation with four concrete consequences.</p>
+    </div>
+
+    <div class="sc-sovereign-block sh-reveal">
+      <div>
+        <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1rem;">Protocol behaviour</div>
+        <div class="sc-sovereign-list">
+          <div class="sc-sovereign-item">
+            <div class="sc-sovereign-item__icon sc-sovereign-item__icon--teal"><i class="fa-solid fa-lock"></i></div>
+            <div>
+              <div class="sc-sovereign-item__title">Non-deletable</div>
+              <div class="sc-sovereign-item__body">Once a SOVEREIGN currency exists on a chain, no transaction — including one signed by the issuer — can delete it. The monetary unit is as permanent as the ledger itself.</div>
+            </div>
+          </div>
+          <div class="sc-sovereign-item">
+            <div class="sc-sovereign-item__icon sc-sovereign-item__icon--gold"><i class="fa-solid fa-coins"></i></div>
+            <div>
+              <div class="sc-sovereign-item__title">Fee settlement authority</div>
+              <div class="sc-sovereign-item__body">All transaction fees on the BetaChain settle in the SOVEREIGN currency automatically. No operator configuration is required — the chain is hard-wired at genesis to denominate fees in the central bank token.</div>
+            </div>
+          </div>
+          <div class="sc-sovereign-item">
+            <div class="sc-sovereign-item__icon sc-sovereign-item__icon--purple"><i class="fa-solid fa-dna"></i></div>
+            <div>
+              <div class="sc-sovereign-item__title">Genesis-only stamping</div>
+              <div class="sc-sovereign-item__body">The SOVEREIGN flag is applied once, at chain creation, via the genesis JSON loader. It cannot be retrofitted to an existing currency, preventing later attempts to elevate a token's status without a chain restart.</div>
+            </div>
+          </div>
+          <div class="sc-sovereign-item">
+            <div class="sc-sovereign-item__icon sc-sovereign-item__icon--green"><i class="fa-solid fa-check-double"></i></div>
+            <div>
+              <div class="sc-sovereign-item__title">Idempotency-guarded</div>
+              <div class="sc-sovereign-item__body">The <span class="sh-code">betaChainCurrency()</span> initialisation is guarded against double-execution. The SOVEREIGN currency is created exactly once, even across node restarts and blockchain replays.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1rem;">Genesis JSON — CBDC chain</div>
+        <div class="sc-sovereign-code">
+<code><span style="color:var(--txt-muted)">// shamwari_genesis_[CHAIN].json</span>
+{
+  "chain": {
+    "name": "<span style="color:var(--gold)">Reserve Bank Digital Dollar</span>",
+    "chainId": "<span style="color:var(--teal)">SHAMWARI-RBDD</span>",
+    "type": "<span style="color:var(--teal)">BETACHAIN</span>"
+  },
+  "feeToken": {
+    "code":     "<span style="color:var(--gold)">RBDD</span>",
+    "name":     "<span style="color:var(--gold)">RB Digital Dollar</span>",
+    "currencyType": "<span style="color:var(--teal)">CURRENCY_CBDC</span>",
+    <span style="color:var(--green)">// ← Set by protocol at genesis:</span>
+    "sovereign": <span style="color:var(--teal)">true</span>,
+    "deletable": <span style="color:var(--red)">false</span>
+  },
+  "issuer": {
+    "account": "<span style="color:var(--txt-muted)">CENTRAL_BANK_ACCOUNT_ID</span>",
+    "mintAuthority": "<span style="color:var(--txt-muted)">MINT_POLICY_ACCOUNT_ID</span>"
+  }
+}</code>
+        </div>
+
+        <div class="sc-callout sc-callout--gold" style="margin-top:1.5rem;">
+          <div class="sc-callout__icon"><i class="fa-solid fa-info-circle"></i></div>
+          <div>
+            <div class="sc-callout__title">Why this matters for monetary policy</div>
+            <div class="sc-callout__body">A CBDC platform where the fee token can be deleted is a CBDC platform with a single point of failure. Shamwari eliminates this risk at the protocol layer — the fee token and the monetary unit are constitutionally locked, as they are in every functioning monetary system.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- BETACHAIN MODEL -->
+<section class="sh-section sh-section--navy sc-content-wrap" id="betachain">
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--gold">BETACHAIN DEPLOYMENT MODEL</div>
+      <h2 class="sh-section__title">An entire central bank infrastructure on one chain.</h2>
+      <p class="sh-section__sub">BetaChains are permissioned child chains deployed by sovereign or institutional operators. Each BetaChain is a self-contained financial jurisdiction — its own fee token, its own governance rules, its own account permissions — secured by the Shamwari MainChain and post-quantum cryptography.</p>
+    </div>
+
+    <!-- ARCHITECTURE FLOW -->
+    <div class="sc-arch-flow sh-reveal">
+      <div class="sc-arch-node" style="border-top: 3px solid var(--teal);">
+        <div class="sc-arch-node__icon" style="color:var(--teal);"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="sc-arch-node__label">Shamwari MainChain</div>
+        <div class="sc-arch-node__sub">ML-DSA-2 · ML-KEM-512<br>Consensus anchor<br>Cross-chain settlement</div>
+      </div>
+
+      <div class="sc-arch-arrow">
+        <div class="sc-arch-arrow__line"></div>
+        <div class="sc-arch-arrow__icon"><i class="fa-solid fa-arrows-up-down"></i></div>
+        <div class="sc-arch-arrow__line"></div>
+      </div>
+
+      <div class="sc-arch-node sc-arch-node--gold" style="border-top: 3px solid var(--gold);">
+        <div class="sc-arch-node__icon" style="color:var(--gold);"><i class="fa-solid fa-building-columns"></i></div>
+        <div class="sc-arch-node__label">BetaChain (CBDC)</div>
+        <div class="sc-arch-node__sub">SOVEREIGN fee token<br>Central bank controls<br>Retail + wholesale rails</div>
+      </div>
+
+      <div class="sc-arch-arrow">
+        <div class="sc-arch-arrow__line"></div>
+        <div class="sc-arch-arrow__icon"><i class="fa-solid fa-arrows-up-down"></i></div>
+        <div class="sc-arch-arrow__line"></div>
+      </div>
+
+      <div class="sc-arch-node sc-arch-node--purple" style="border-top: 3px solid var(--purple);">
+        <div class="sc-arch-node__icon" style="color:var(--purple);"><i class="fa-solid fa-mobile-screen"></i></div>
+        <div class="sc-arch-node__label">End Participants</div>
+        <div class="sc-arch-node__sub">Citizens, businesses<br>PSPs, commercial banks<br>Government accounts</div>
+      </div>
+    </div>
+
+    <!-- BETACHAIN CAPABILITY CARDS -->
+    <div class="sc-beta-grid sh-reveal">
+
+      <div class="sc-beta-card sc-beta-card--teal">
+        <div class="sc-beta-card__heading">Tiered CBDC Architecture</div>
+        <div class="sc-beta-card__sub">BetaChains natively support two-tier CBDC models, where the central bank issues to commercial banks, who then distribute to retail participants — exactly mirroring the physical cash distribution model.</div>
+        <div class="sc-beta-card__list">
+          <div class="sc-beta-card__item"><i class="fa-solid fa-circle"></i>Tier-1: Central bank ↔ Commercial banks</div>
+          <div class="sc-beta-card__item"><i class="fa-solid fa-circle"></i>Tier-2: Commercial banks ↔ Citizens</div>
+          <div class="sc-beta-card__item"><i class="fa-solid fa-circle"></i>Balance caps per account tier</div>
+          <div class="sc-beta-card__item"><i class="fa-solid fa-circle"></i>Interbank settlement natively on-chain</div>
+        </div>
+      </div>
+
+      <div class="sc-beta-card sc-beta-card--gold">
+        <div class="sc-beta-card__heading">Wholesale CBDC Settlement</div>
+        <div class="sc-beta-card__sub">For inter-bank and government settlement use cases, BetaChains can be configured as wholesale rails where access is gated to KYC-verified institutional participants only.</div>
+        <div class="sc-beta-card__list">
+          <div class="sc-beta-card__item"><i class="fa-solid fa-circle"></i>Atomic delivery-vs-payment</div>
+          <div class="sc-beta-card__item"><i class="fa-solid fa-circle"></i>RTGS replacement on-chain</div>
+          <div class="sc-beta-card__item"><i class="fa-solid fa-circle"></i>Treasury bond tokenisation ready</div>
+          <div class="sc-beta-card__item"><i class="fa-solid fa-circle"></i>Cross-chain FX settlement (mBridge-pattern)</div>
+        </div>
+      </div>
+
+      <div class="sc-beta-card sc-beta-card--purple">
+        <div class="sc-beta-card__heading">Programmable Money Controls</div>
+        <div class="sc-beta-card__sub">Central banks retain full programmatic control over the monetary instrument. Unlike legacy programmable money approaches, all controls are consensus-enforced — not in a smart contract that can be exploited.</div>
+        <div class="sc-beta-card__list">
+          <div class="sc-beta-card__item"><i class="fa-solid fa-circle"></i>Expiry dates on individual notes</div>
+          <div class="sc-beta-card__item"><i class="fa-solid fa-circle"></i>Targeted stimulus (sector-locked spending)</div>
+          <div class="sc-beta-card__item"><i class="fa-solid fa-circle"></i>Negative interest rate capability</div>
+          <div class="sc-beta-card__item"><i class="fa-solid fa-circle"></i>Transaction velocity limits per account</div>
+        </div>
+      </div>
+
+      <div class="sc-beta-card sc-beta-card--green">
+        <div class="sc-beta-card__heading">Cross-Chain Interoperability</div>
+        <div class="sc-beta-card__sub">Multiple BetaChains can settle against each other through the MainChain. A Zimbabwe CBDC BetaChain and a Kenya e-money BetaChain can transact without leaving the Shamwari ecosystem.</div>
+        <div class="sc-beta-card__list">
+          <div class="sc-beta-card__item"><i class="fa-solid fa-circle"></i>MainChain-mediated atomic swaps</div>
+          <div class="sc-beta-card__item"><i class="fa-solid fa-circle"></i>Corridor FX rates set by protocol</div>
+          <div class="sc-beta-card__item"><i class="fa-solid fa-circle"></i>Remittance settlement under 3 seconds</div>
+          <div class="sc-beta-card__item"><i class="fa-solid fa-circle"></i>No correspondent banking required</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="sc-callout sc-callout--red" style="margin-top:2.5rem;">
+      <div class="sc-callout__icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      <div>
+        <div class="sc-callout__title">No smart contracts. No exploitable programmability.</div>
+        <div class="sc-callout__body">Every "programmable money" feature described above is implemented as a native transaction type or consensus rule — not as a smart contract. This is not a minor distinction. Smart contract exploits have drained over $3.8B from DeFi protocols. For a CBDC carrying the savings of millions of citizens, protocol-native is the only responsible choice.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ISSUER CONTROLS -->
+<section class="sh-section sc-content-wrap" id="controls">
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--teal">MONETARY CONTROLS</div>
+      <h2 class="sh-section__title">Every lever a central bank needs. None it doesn't.</h2>
+      <p class="sh-section__sub">Shamwari gives CBDC and stablecoin issuers the full toolkit of a modern monetary authority — encoded in the protocol, not in off-chain policy documents that participants can ignore.</p>
+    </div>
+
+    <div class="sc-ctrl-grid">
+      <div class="sc-ctrl-card sh-reveal">
+        <div class="sc-ctrl-card__icon sc-ctrl-card__icon--teal"><i class="fa-solid fa-print"></i></div>
+        <div class="sc-ctrl-card__title">Mint &amp; Burn Authority</div>
+        <div class="sc-ctrl-card__desc">The issuer account holds exclusive mint rights. New currency units are created via a signed <span class="sh-code">CURRENCY_ISSUANCE</span> transaction. Burn is permanent and consensus-finalised within the next block.</div>
+      </div>
+      <div class="sc-ctrl-card sh-reveal sh-reveal--delay-1">
+        <div class="sc-ctrl-card__icon sc-ctrl-card__icon--gold"><i class="fa-solid fa-percent"></i></div>
+        <div class="sc-ctrl-card__title">13 Programmable Tax Types</div>
+        <div class="sc-ctrl-card__desc">VAT, capital gains, withholding, Tobin tax, stamp duty and eight further types are native to ShamwariPay. Tax is calculated and withheld at the transaction level — no post-settlement reconciliation.</div>
+      </div>
+      <div class="sc-ctrl-card sh-reveal sh-reveal--delay-2">
+        <div class="sc-ctrl-card__icon sc-ctrl-card__icon--red"><i class="fa-solid fa-user-lock"></i></div>
+        <div class="sc-ctrl-card__title">Freeze &amp; Sanction Controls</div>
+        <div class="sc-ctrl-card__desc">Regulator-designated accounts can be frozen at the consensus layer. A frozen account cannot send or receive the affected currency — enforced by every validating node, not just the issuer's own API.</div>
+      </div>
+      <div class="sc-ctrl-card sh-reveal">
+        <div class="sc-ctrl-card__icon sc-ctrl-card__icon--purple"><i class="fa-solid fa-sliders"></i></div>
+        <div class="sc-ctrl-card__title">Supply Cap Configuration</div>
+        <div class="sc-ctrl-card__desc">Maximum supply can be set at creation and updated by the issuer within configurable bounds. Hard caps prevent algorithmic hyperinflation. The cap is a consensus rule, not an API gate a bad actor can bypass.</div>
+      </div>
+      <div class="sc-ctrl-card sh-reveal sh-reveal--delay-1">
+        <div class="sc-ctrl-card__icon sc-ctrl-card__icon--green"><i class="fa-solid fa-clock-rotate-left"></i></div>
+        <div class="sc-ctrl-card__title">Time-Locked Vaults</div>
+        <div class="sc-ctrl-card__desc">Users and issuers can lock balances in time-locked vaults with block-height precision. Useful for salary advances, government stimulus disbursement, and bond coupon payments without counterparty risk.</div>
+      </div>
+      <div class="sc-ctrl-card sh-reveal sh-reveal--delay-2">
+        <div class="sc-ctrl-card__icon sc-ctrl-card__icon--cyan"><i class="fa-solid fa-chart-line"></i></div>
+        <div class="sc-ctrl-card__title">Interest Accrual</div>
+        <div class="sc-ctrl-card__desc">Native block-height interest accrual is available on savings and vault accounts. Central banks can offer positive or negative interest rates on retail CBDC balances without any smart contract middleware.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- COMPLIANCE & PRIVACY -->
+<section class="sh-section sh-section--navy sc-content-wrap" id="compliance">
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--gold">COMPLIANCE &amp; PRIVACY</div>
+      <h2 class="sh-section__title">Regulatory-grade from the first block.</h2>
+      <p class="sh-section__sub">The most persistent objection to CBDC adoption is surveillance risk — the fear that programmable state money becomes a financial panopticon. Shamwari addresses this directly with privacy-preserving design choices that do not require sacrificing auditability.</p>
+    </div>
+
+    <!-- COMPARISON TABLE -->
+    <div style="overflow-x: auto; margin-top: 2rem;">
+      <table class="sc-matrix sh-reveal">
+        <thead>
+          <tr>
+            <th>Control / Feature</th>
+            <th>CBDC</th>
+            <th>Stablecoin</th>
+            <th>Deposit Token</th>
+            <th>E-Money</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SOVEREIGN flag</td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td><span class="sc-no"><i class="fa-solid fa-times"></i> No</span></td>
+            <td><span class="sc-no"><i class="fa-solid fa-times"></i> No</span></td>
+            <td><span class="sc-no"><i class="fa-solid fa-times"></i> No</span></td>
+            <td>Genesis-only, consensus-enforced</td>
+          </tr>
+          <tr>
+            <td>Non-deletable currency</td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td><span class="sc-no"><i class="fa-solid fa-times"></i> No</span></td>
+            <td><span class="sc-no"><i class="fa-solid fa-times"></i> No</span></td>
+            <td><span class="sc-no"><i class="fa-solid fa-times"></i> No</span></td>
+            <td>Permanent monetary anchor</td>
+          </tr>
+          <tr>
+            <td>KYC / AML enforcement</td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td>All types, consensus-enforced</td>
+          </tr>
+          <tr>
+            <td>Account freeze capability</td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td><span class="sc-part"><i class="fa-solid fa-minus"></i> Partial</span></td>
+            <td>E-money: balance limit only</td>
+          </tr>
+          <tr>
+            <td>Programmable expiry</td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td><span class="sc-part"><i class="fa-solid fa-minus"></i> Optional</span></td>
+            <td><span class="sc-no"><i class="fa-solid fa-times"></i> No</span></td>
+            <td><span class="sc-part"><i class="fa-solid fa-minus"></i> Optional</span></td>
+            <td>Block-height precision</td>
+          </tr>
+          <tr>
+            <td>Interest accrual</td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td><span class="sc-no"><i class="fa-solid fa-times"></i> No</span></td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td><span class="sc-no"><i class="fa-solid fa-times"></i> No</span></td>
+            <td>Native, no smart contract</td>
+          </tr>
+          <tr>
+            <td>ML-DSA-2 signing</td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td>NIST FIPS 204, all tx types</td>
+          </tr>
+          <tr>
+            <td>Fee settlement in currency</td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td><span class="sc-part"><i class="fa-solid fa-minus"></i> Operator</span></td>
+            <td><span class="sc-part"><i class="fa-solid fa-minus"></i> Operator</span></td>
+            <td><span class="sc-part"><i class="fa-solid fa-minus"></i> Operator</span></td>
+            <td>CBDC fee settlement is automatic</td>
+          </tr>
+          <tr>
+            <td>Cross-chain settlement</td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td><span class="sc-part"><i class="fa-solid fa-minus"></i> Limited</span></td>
+            <td><span class="sc-part"><i class="fa-solid fa-minus"></i> Limited</span></td>
+            <td>Via MainChain atomic swap</td>
+          </tr>
+          <tr>
+            <td>Regulator account at genesis</td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td><span class="sc-yes"><i class="fa-solid fa-check"></i> Yes</span></td>
+            <td>All types require regulator account</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sc-callout sc-callout--teal" style="margin-top:2.5rem;">
+      <div class="sc-callout__icon"><i class="fa-solid fa-eye-slash"></i></div>
+      <div>
+        <div class="sc-callout__title">Privacy by design, auditability by requirement</div>
+        <div class="sc-callout__body">Shamwari does not make privacy vs. auditability a binary choice. Transaction details are encrypted end-to-end using ML-KEM-512. Regulators with the appropriate account-level permission can decrypt and audit specific transaction streams without exposing data to other chain participants. Citizens' balances are not a public ledger.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- COMPARISON WITH OTHER RAILS -->
+<section class="sh-section sc-content-wrap" id="comparison">
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--teal">RAIL COMPARISON</div>
+      <h2 class="sh-section__title">Why not Ethereum, Stellar, or Ripple?</h2>
+      <p class="sh-section__sub">Every existing CBDC rail was either retrofitted from a general-purpose chain, built before post-quantum cryptography standards existed, or requires smart contract programmability — introducing the very complexity regulators are trying to avoid.</p>
+    </div>
+
+    <div class="sc-compare sh-reveal">
+
+      <div class="sc-compare__col sc-compare__col--shamwari">
+        <div class="sc-compare__head">
+          <div class="sc-compare__head-name">Shamwari</div>
+          <div class="sc-compare__head-sub">CBDC-NATIVE · PQC · NO CONTRACTS</div>
+        </div>
+        <div class="sc-compare__row sc-compare__row--yes"><i class="fa-solid fa-circle-check"></i>Purpose-built for CBDC &amp; stablecoins</div>
+        <div class="sc-compare__row sc-compare__row--yes"><i class="fa-solid fa-circle-check"></i>ML-DSA-2 + ML-KEM-512 from genesis</div>
+        <div class="sc-compare__row sc-compare__row--yes"><i class="fa-solid fa-circle-check"></i>SOVEREIGN currency type in protocol</div>
+        <div class="sc-compare__row sc-compare__row--yes"><i class="fa-solid fa-circle-check"></i>13 native tax types</div>
+        <div class="sc-compare__row sc-compare__row--yes"><i class="fa-solid fa-circle-check"></i>Zero smart contract surface</div>
+        <div class="sc-compare__row sc-compare__row--yes"><i class="fa-solid fa-circle-check"></i>Native KYC &amp; account permissioning</div>
+        <div class="sc-compare__row sc-compare__row--yes"><i class="fa-solid fa-circle-check"></i>BetaChain two-tier model</div>
+        <div class="sc-compare__row sc-compare__row--yes"><i class="fa-solid fa-circle-check"></i>RBZ / IPEC / SECZ engagement active</div>
+      </div>
+
+      <div class="sc-compare__col">
+        <div class="sc-compare__head">
+          <div class="sc-compare__head-name">Ethereum / EVM Chains</div>
+          <div class="sc-compare__head-sub">GENERAL PURPOSE</div>
+        </div>
+        <div class="sc-compare__row sc-compare__row--no"><i class="fa-solid fa-circle-xmark"></i>CBDC = smart contract, not native type</div>
+        <div class="sc-compare__row sc-compare__row--no"><i class="fa-solid fa-circle-xmark"></i>ECDSA — quantum-vulnerable</div>
+        <div class="sc-compare__row sc-compare__row--no"><i class="fa-solid fa-circle-xmark"></i>No SOVEREIGN concept at protocol level</div>
+        <div class="sc-compare__row sc-compare__row--no"><i class="fa-solid fa-circle-xmark"></i>Tax via off-chain middleware only</div>
+        <div class="sc-compare__row sc-compare__row--no"><i class="fa-solid fa-circle-xmark"></i>$3.8B+ smart contract exploit history</div>
+        <div class="sc-compare__row sc-compare__row--part"><i class="fa-solid fa-circle-minus"></i>KYC is application-layer, bypassable</div>
+        <div class="sc-compare__row sc-compare__row--no"><i class="fa-solid fa-circle-xmark"></i>No native two-tier CBDC model</div>
+        <div class="sc-compare__row sc-compare__row--part"><i class="fa-solid fa-circle-minus"></i>Regulatory status unclear in most markets</div>
+      </div>
+
+      <div class="sc-compare__col">
+        <div class="sc-compare__head">
+          <div class="sc-compare__head-name">Stellar / XRP Ledger</div>
+          <div class="sc-compare__head-sub">PAYMENT FOCUSED</div>
+        </div>
+        <div class="sc-compare__row sc-compare__row--part"><i class="fa-solid fa-circle-minus"></i>Payments-focused, not monetary system</div>
+        <div class="sc-compare__row sc-compare__row--no"><i class="fa-solid fa-circle-xmark"></i>ECDSA — quantum-vulnerable</div>
+        <div class="sc-compare__row sc-compare__row--no"><i class="fa-solid fa-circle-xmark"></i>No SOVEREIGN flag in protocol</div>
+        <div class="sc-compare__row sc-compare__row--no"><i class="fa-solid fa-circle-xmark"></i>No native tax infrastructure</div>
+        <div class="sc-compare__row sc-compare__row--part"><i class="fa-solid fa-circle-minus"></i>Limited smart contract surface</div>
+        <div class="sc-compare__row sc-compare__row--part"><i class="fa-solid fa-circle-minus"></i>KYC via anchor model (off-chain)</div>
+        <div class="sc-compare__row sc-compare__row--part"><i class="fa-solid fa-circle-minus"></i>Two-tier via anchor intermediaries</div>
+        <div class="sc-compare__row sc-compare__row--part"><i class="fa-solid fa-circle-minus"></i>Limited emerging market regulatory traction</div>
+      </div>
+
+      <div class="sc-compare__col">
+        <div class="sc-compare__head">
+          <div class="sc-compare__head-name">R3 Corda / Hyperledger</div>
+          <div class="sc-compare__head-sub">ENTERPRISE DLT</div>
+        </div>
+        <div class="sc-compare__row sc-compare__row--part"><i class="fa-solid fa-circle-minus"></i>Enterprise DLT, not public chain</div>
+        <div class="sc-compare__row sc-compare__row--part"><i class="fa-solid fa-circle-minus"></i>Some PQC migration in progress</div>
+        <div class="sc-compare__row sc-compare__row--no"><i class="fa-solid fa-circle-xmark"></i>No SOVEREIGN protocol type</div>
+        <div class="sc-compare__row sc-compare__row--part"><i class="fa-solid fa-circle-minus"></i>Tax via CorDapps (custom development)</div>
+        <div class="sc-compare__row sc-compare__row--part"><i class="fa-solid fa-circle-minus"></i>Smart contract / CorDapp surface</div>
+        <div class="sc-compare__row sc-compare__row--yes"><i class="fa-solid fa-circle-check"></i>Strong KYC model</div>
+        <div class="sc-compare__row sc-compare__row--yes"><i class="fa-solid fa-circle-check"></i>Two-tier CBDC feasible</div>
+        <div class="sc-compare__row sc-compare__row--part"><i class="fa-solid fa-circle-minus"></i>High cost, long procurement cycles</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- MARKET OPPORTUNITY -->
+<section class="sh-section sh-section--navy sc-content-wrap" id="market">
+  <div class="sh-container">
+    <div class="sh-section__header">
+      <div class="sh-eyebrow sh-eyebrow--gold">MARKET CONTEXT</div>
+      <h2 class="sh-section__title">The largest monetary upgrade in a generation.</h2>
+      <p class="sh-section__sub">The shift from physical cash to programmable digital currency is not a product category — it is monetary infrastructure. The window to establish the underlying rails is narrow, and it is open right now in every Shamwari target market.</p>
+    </div>
+
+    <div class="sc-market-band sh-reveal">
+      <div class="sc-market-item">
+        <div class="sc-market-item__n sh-text--teal">134</div>
+        <div class="sc-market-item__l">Countries exploring CBDC<br>as of Q1 2025 (BIS)</div>
+      </div>
+      <div class="sc-market-item">
+        <div class="sc-market-item__n sh-text--gold">$13.7T</div>
+        <div class="sc-market-item__l">Projected CBDC market<br>by 2030</div>
+      </div>
+      <div class="sc-market-item">
+        <div class="sc-market-item__n sh-text--teal">$200B+</div>
+        <div class="sc-market-item__l">Africa stablecoin transaction<br>volume in 2024</div>
+      </div>
+      <div class="sc-market-item">
+        <div class="sc-market-item__n sh-text--gold">11</div>
+        <div class="sc-market-item__l">African central banks in<br>active CBDC pilots</div>
+      </div>
+    </div>
+
+    <!-- REGIONAL BREAKDOWN -->
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 2rem;">
+
+      <div class="pg-card sh-reveal" style="border-left: 3px solid var(--teal);">
+        <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:0.75rem;">Africa</div>
+        <div class="pg-card__title" style="color:var(--txt-primary);font-size:1rem;">The continent moving fastest on CBDC</div>
+        <p class="pg-card__body">Nigeria's eNaira was the first African CBDC launch. Ghana, Rwanda, Kenya, Tanzania, and South Africa all have active research or pilot programmes. Zimbabwe's ZiG digitalisation creates a direct Shamwari opportunity — the RBZ has already confirmed a direct licence path via partner bank engagement.</p>
+        <div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:0.4rem;">
+          <span class="sh-badge sh-badge--teal">RBZ Engaged</span>
+          <span class="sh-badge sh-badge--teal">ZiG Digitalisation</span>
+          <span class="sh-badge sh-badge--teal">$48B Remittance Corridor</span>
+        </div>
+      </div>
+
+      <div class="pg-card sh-reveal sh-reveal--delay-1" style="border-left: 3px solid var(--gold);">
+        <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:0.75rem;">MENA</div>
+        <div class="pg-card__title" style="color:var(--txt-primary);font-size:1rem;">Sovereign wealth meets digital currency ambition</div>
+        <p class="pg-card__body">Saudi Arabia's Project Aber, UAE's mBridge participation, and Bahrain's CBDC sandbox represent a region actively building digital monetary infrastructure. Shamwari's BetaChain multi-CBDC model directly addresses the cross-border settlement need across Gulf currencies.</p>
+        <div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:0.4rem;">
+          <span class="sh-badge sh-badge--gold">mBridge Compatible</span>
+          <span class="sh-badge sh-badge--gold">Project Aber Pattern</span>
+          <span class="sh-badge sh-badge--gold">Multi-CBDC Settlement</span>
+        </div>
+      </div>
+
+      <div class="pg-card sh-reveal" style="border-left: 3px solid var(--purple);">
+        <div class="sh-eyebrow" style="color:var(--purple);margin-bottom:0.75rem;">LATAM</div>
+        <div class="pg-card__title" style="color:var(--txt-primary);font-size:1rem;">Inflation-proof digital currency demand</div>
+        <p class="pg-card__body">Brazil's Drex CBDC, Argentina's chronic dollarisation pressure, and Venezuela's failed Petro attempt all point to a region that needs a robust, programmable, quantum-safe monetary layer. Stablecoin adoption in Argentina is already the highest per-capita globally.</p>
+        <div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:0.4rem;">
+          <span class="sh-badge" style="background:rgba(139,92,246,0.12);color:#c4b5fd;border:1px solid rgba(139,92,246,0.25);">Drex-Pattern Ready</span>
+          <span class="sh-badge" style="background:rgba(139,92,246,0.12);color:#c4b5fd;border:1px solid rgba(139,92,246,0.25);">Stablecoin Native</span>
+        </div>
+      </div>
+
+      <div class="pg-card sh-reveal sh-reveal--delay-1" style="border-left: 3px solid var(--green);">
+        <div class="sh-eyebrow sh-eyebrow--green" style="margin-bottom:0.75rem;">ASEAN</div>
+        <div class="pg-card__title" style="color:var(--txt-primary);font-size:1rem;">Real-time payments infrastructure demand</div>
+        <p class="pg-card__body">Thailand's e-Baht, Singapore's MAS Digital Money pilot, and the Philippines BSP CBDC research represent a region already leading in real-time payment adoption. The ASEAN multilateral CBDC settlement corridor is a direct BetaChain multi-chain use case.</p>
+        <div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:0.4rem;">
+          <span class="sh-badge sh-badge--teal">MAS-Pattern Alignment</span>
+          <span class="sh-badge sh-badge--teal">ASEAN Corridor Settlement</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- CTA -->
+<section class="sh-cta">
+  <div class="sh-cta__glow"></div>
+  <div class="sh-cta__inner">
+    <div class="sh-eyebrow sh-eyebrow--teal">BUILD WITH SHAMWARI</div>
+    <h2 class="sh-cta__title">The CBDC infrastructure<br>your central bank needs is ready.</h2>
+    <p class="sh-cta__sub">Full source code, BetaChain deployment documentation, and testnet access available now. If you represent a central bank, regulatory authority, or licensed financial institution, reach out directly.</p>
+    <div class="sh-cta__actions">
+      <a href="shamwaripay"   class="sh-btn sh-btn--teal sh-btn--lg"><i class="fa-solid fa-coins"></i> ShamwariPay Docs</a>
+      <a href="compliance"    class="sh-btn sh-btn--gold sh-btn--lg"><i class="fa-solid fa-scale-balanced"></i> Compliance</a>
+      <a href="mailto:partnerships@shamwari.network" class="sh-btn sh-btn--ghost sh-btn--lg">Institutional Enquiries</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="sh-footer">
+  <div class="sh-footer__grid">
+    <div>
+      <div class="sh-footer__wordmark">
+        <img src="/img/icon.png" height="72" width="72" />
+      </div>
+      <p class="sh-footer__tagline">Quantum-resistant financial infrastructure for 4 billion people across Africa, LATAM, ASEAN and MENA.</p>
+      <div class="sh-footer__socials">
+        <a href="https://bitbucket.org/thenamelesstree/shamwari" class="sh-footer__social"><i class="fa-brands fa-bitbucket"></i></a>
+        <a href="https://x.com/shamwarinetwork" class="sh-footer__social"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://www.linkedin.com/showcase/shamwarinetwork" class="sh-footer__social"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:contact@shamwari.network" class="sh-footer__social"><i class="fa fa-envelope"></i></a>
+        
+      </div>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Platform</div>
+      <a href="shamwaripay"         class="sh-footer__link">ShamwariPay</a>
+      <a href="digitalassets"       class="sh-footer__link">Totem Exchange</a>
+      <a href="digitalcertificates" class="sh-footer__link">Certificates</a>
+      <a href="subscriptions"       class="sh-footer__link">Subscriptions</a>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Technology</div>
+      <a href="architecture"        class="sh-footer__link">Architecture</a>
+      <a href="security"            class="sh-footer__link">Post-Quantum Security</a>
+      <a href="accounts"            class="sh-footer__link">Accounts &amp; Identity</a>
+      <a href="compliance"          class="sh-footer__link">Compliance</a>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Resources</div>
+      <a href="solutions"    class="sh-footer__link">Solutions</a>
+      <a href="developers"   class="sh-footer__link">Developer Hub</a>
+      <a href="https://docs.shamwari.network" class="sh-footer__link">Documentation</a>
+      <a href="https://wallet.shamwari.network" class="sh-footer__link">Launch Wallet</a>
+    </div>
+  </div>
+  <div class="sh-footer__bottom">
+    <span>&copy; 2026 TheNamelessTree Networks. All rights reserved.</span>
+    <span class="sh-footer__bottom-right"><a href="https://thenamelesstree.co.zw" target="blank">thenamelesstree.co.zw</a></span>
+  </div>
+</footer>
+<a href="#" class="sh-back-top" id="back-top" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></a>
+
+<script>
+(function(){
+  /* Nav scroll */
+  var nav = document.getElementById('sh-nav');
+  window.addEventListener('scroll', function(){ nav.classList.toggle('sh-nav--scrolled', window.scrollY > 50); });
+
+  /* Hamburger */
+  var tgl = document.getElementById('nav-toggle'), menu = document.getElementById('nav-menu');
+  if(tgl && menu){ tgl.addEventListener('click', function(){ tgl.classList.toggle('is-open'); menu.classList.toggle('is-open'); }); }
+
+  /* Back-to-top */
+  var bt = document.getElementById('back-top');
+  if(bt){
+    window.addEventListener('scroll', function(){ bt.classList.toggle('is-visible', window.scrollY > 400); });
+    bt.addEventListener('click', function(e){ e.preventDefault(); window.scrollTo({top:0,behavior:'smooth'}); });
+  }
+
+  /* Scroll-reveal */
+  var ro = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-visible'); ro.unobserve(e.target); } });
+  }, {threshold: 0.08, rootMargin: '0px 0px -30px 0px'});
+  document.querySelectorAll('.sh-reveal, .pg-reveal').forEach(function(el){ ro.observe(el); });
+
+  /* TOC active link tracking */
+  var sections = ['overview','types','sovereign','betachain','controls','compliance','comparison','market'];
+  var tocLinks = {};
+  sections.forEach(function(id){
+    var el = document.getElementById(id);
+    var link = document.querySelector('[data-toc="' + id + '"]');
+    if(el && link) tocLinks[id] = { section: el, link: link };
+  });
+
+  var tocObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      var id = entry.target.id;
+      if(tocLinks[id]){
+        tocLinks[id].link.classList.toggle('is-active', entry.isIntersecting);
+      }
+    });
+  }, { rootMargin: '-10% 0px -80% 0px' });
+
+  Object.values(tocLinks).forEach(function(obj){ tocObserver.observe(obj.section); });
+})();
+</script>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><title>Accounts & Identity on Shamwari</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Ten typed account categories, post-quantum keypairs, encrypted identity, on-chain domains, and the world's first AI agent account type.">
+<link href="/favicon.ico" rel="icon">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+.pg-toc{position:sticky;top:72px;background:rgba(8,15,30,.95);border-bottom:1px solid var(--border-dk);z-index:100;padding:0 2rem;backdrop-filter:blur(12px)}
+.pg-toc__inner{max-width:1240px;margin:0 auto;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.pg-toc__inner::-webkit-scrollbar{display:none}
+.pg-toc__link{font-family:var(--font-display);font-size:.7rem;font-weight:600;letter-spacing:.06em;color:var(--txt-muted);padding:.82rem 1rem;border-bottom:2px solid transparent;white-space:nowrap;transition:color .2s,border-color .2s;text-decoration:none}
+.pg-toc__link:hover,.pg-toc__link.is-active{color:var(--teal);border-bottom-color:var(--teal)}
+.pg-sh{display:flex;align-items:flex-start;gap:1.5rem;margin-bottom:3rem}
+.pg-sh__num{font-family:var(--font-display);font-size:4rem;font-weight:800;color:rgba(255,255,255,.06);line-height:1;letter-spacing:-.05em;flex-shrink:0;user-select:none}
+.pg-sh__copy{flex:1}
+.pg-sh__title{font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:var(--txt-primary);line-height:1.2;letter-spacing:-.02em;margin-bottom:.75rem}
+.pg-sh__sub{font-size:.975rem;color:var(--txt-secondary);line-height:1.72;max-width:720px}
+@media(max-width:768px){.pg-toc{display:none}.pg-sh{flex-direction:column;gap:.5rem}.pg-sh__num{font-size:2.5rem}}
+</style><style>
+.acct-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+.acct-card{background:var(--bg-card-dk);border:1px solid var(--border-dk);border-radius:var(--radius);padding:1.5rem;display:flex;gap:1rem;align-items:flex-start;transition:border-color .25s,transform .25s;position:relative;overflow:hidden}
+.acct-card:hover{transform:translateY(-2px)}
+.acct-card--ai{border-color:rgba(139,92,246,.2);background:rgba(139,92,246,.03)}
+.acct-card--ai:hover{border-color:rgba(139,92,246,.4)}
+.acct-card:not(.acct-card--ai):hover{border-color:rgba(0,168,158,.35)}
+.acct-card__emoji{font-size:1.6rem;flex-shrink:0;line-height:1;padding-top:.1rem}
+.acct-card__name{font-family:var(--font-display);font-size:1rem;font-weight:800;color:var(--txt-primary);margin-bottom:.15rem;display:flex;align-items:center;gap:.5rem}
+.acct-card__type{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.12em;color:var(--teal);margin-bottom:.5rem}
+.acct-card--ai .acct-card__type{color:var(--purple)}
+.acct-card__desc{font-size:.84rem;color:var(--txt-secondary);line-height:1.6;margin-bottom:.75rem}
+.acct-card__perms{display:flex;flex-wrap:wrap;gap:.3rem}
+.acct-card__perm{font-family:var(--font-display);font-size:.6rem;font-weight:600;letter-spacing:.04em;padding:.13rem .5rem;border-radius:40px;border:1px solid}
+.acct-card:not(.acct-card--ai) .acct-card__perm{color:var(--teal);border-color:rgba(0,168,158,.3);background:rgba(0,168,158,.06)}
+.acct-card--ai .acct-card__perm{color:var(--purple);border-color:rgba(139,92,246,.3);background:rgba(139,92,246,.06)}
+.deriv-flow{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;background:var(--bg-card-dk);border:1px solid var(--border-dk);border-radius:var(--radius-xs);padding:1.25rem 1.4rem}
+.deriv-node{flex:1;min-width:80px;border:1px solid var(--border-dk);border-radius:6px;padding:.65rem .75rem;text-align:center}
+.deriv-node--seed{border-color:rgba(200,155,60,.3);background:rgba(200,155,60,.04)}
+.deriv-node--teal{border-color:rgba(0,168,158,.3);background:rgba(0,168,158,.04)}
+.deriv-node--gold{border-color:rgba(200,155,60,.3);background:rgba(200,155,60,.04)}
+.deriv-label{font-family:var(--font-display);font-size:.54rem;font-weight:700;letter-spacing:.1em;margin-bottom:.2rem}
+.deriv-node--seed .deriv-label{color:var(--gold)}.deriv-node--teal .deriv-label{color:var(--teal)}.deriv-node--gold .deriv-label{color:var(--gold)}
+.deriv-val{font-family:var(--font-mono);font-size:.65rem;color:var(--txt-primary);line-height:1.35}
+.deriv-arrow{color:var(--txt-muted);font-size:.75rem;flex-shrink:0}
+.deriv-split{display:flex;flex-direction:column;gap:.35rem;flex:1;min-width:80px}
+.ai-matrix{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
+.ai-row{display:flex;align-items:center;gap:.55rem;padding:.45rem .7rem;border-radius:var(--radius-xs);font-size:.78rem;color:var(--txt-secondary)}
+.ai-row--allow{background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.15)}
+.ai-row--deny{background:rgba(224,82,82,.06);border:1px solid rgba(224,82,82,.15)}
+.ai-badge{font-family:var(--font-display);font-size:.58rem;font-weight:700;letter-spacing:.05em;padding:.15rem .45rem;border-radius:40px;white-space:nowrap;flex-shrink:0}
+.ai-badge--allow{background:var(--green-dk);color:#fff}.ai-badge--deny{background:var(--red-dk);color:#fff}
+@media(max-width:768px){.acct-grid{grid-template-columns:1fr}.ai-matrix{grid-template-columns:1fr}.deriv-flow{flex-direction:column;align-items:stretch}.deriv-arrow{transform:rotate(90deg);align-self:center}}
+</style></head><body>
+<nav class="sh-nav" id="sh-nav"><div class="sh-nav__inner">
+  <a href="home" class="sh-nav__brand">
+    <div>
+    		<img src="/img/banner.png" alt="Shamwari Logo" height="40">
+    </div>
+  </a>
+  <button class="sh-nav__toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="sh-nav__menu" id="nav-menu">
+    <a href="architecture" class="sh-nav__link">Architecture</a>
+    <a href="compliance" class="sh-nav__link">Compliance</a>
+    <a href="security" class="sh-nav__link">Security</a>
+    <a href="solutions" class="sh-nav__link">Solutions</a>
+    <a href="developers" class="sh-nav__link">Developers</a></div>
+</div></nav>
+<section class="pg-hero" style="background: url('/img/cyber_orange_red.jpg') center/cover no-repeat;">
+  <div class="pg-hero__glow"></div>
+  <div class="sh-container pg-hero__inner">
+    <div class="pg-hero__content"><div class="sh-eyebrow sh-eyebrow--teal">IDENTITY LAYER</div>
+      <h1 class="pg-hero__title">Accounts &amp; Identity</h1><p class="pg-hero__sub">Shamwari recognises that real-world financial systems are populated by legally distinct actors. Ten account types, from licensed banks to autonomous AI agents, each with protocol-enforced permissions secured by NIST post-quantum cryptography. No anonymous addresses. Every participant is typed, accountable, and verifiable.</p>
+      <div class="pg-hero__badges"><span class="sh-badge sh-badge--teal">10 ACCOUNT TYPES</span><span class="sh-badge sh-badge--gold">AI AGENT TYPE</span><span class="sh-badge sh-badge--teal">DILITHIUM + KYBER</span><span class="sh-badge sh-badge--gold">ON-CHAIN DOMAINS</span><span class="sh-badge sh-badge--teal">ENCRYPTED IDENTITY</span><span class="sh-badge sh-badge--gold">PQC FROM GENESIS</span></div></div>
+    <div class="pg-hero__icon-wrap"><div class="pg-hero__icon-bg"></div><i class="fa-solid fa-address-card pg-hero__icon"></i></div>
+  </div></section><div class="pg-stats"><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--teal">11</div><div class="pg-stats__l">Typed account categories</div></div><div class="pg-stats__div"></div><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--gold">2</div><div class="pg-stats__l">PQC algorithms: ML-DSA Dilithium + ML-KEM Kyber</div></div><div class="pg-stats__div"></div><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--teal">1</div><div class="pg-stats__l">Seed phrase derives both signing and encryption keys</div></div><div class="pg-stats__div"></div><div class="pg-stats__item pg-reveal"><div class="pg-stats__n sh-text--gold" style="font-size:18px;">SHAMWARI-XXXX-XXXX-XXXX-XXXXX</div><div class="pg-stats__l">REED-SOLOMON format human friendly account addresses</div></div></div><nav class="pg-toc"><div class="pg-toc__inner"><a href="#account-types" class="pg-toc__link">01. Account Types</a><a href="#keypair" class="pg-toc__link">02. PQC Keypair</a><a href="#identity" class="pg-toc__link">03. Encrypted Identity</a><a href="#domains" class="pg-toc__link">04. On-Chain Domains</a><a href="#ai-accounts" class="pg-toc__link">05. AI Agent Accounts</a></div></nav><section class="sh-section" id="account-types"><div class="sh-container"><div class="pg-sh"><div class="pg-sh__num">01</div><div class="pg-sh__copy">
+  <div class="sh-eyebrow sh-eyebrow--teal">ACCOUNT TYPE SYSTEM</div>
+  <div class="pg-sh__title">Eleven account types. One platform.</div>
+  <p class="pg-sh__sub">Every Shamwari account has a declared type that determines its transactional capabilities at the consensus layer. Account type restrictions are enforced at gate 4 of the 7-gate transaction validation pipeline before any balance changes occur. No application-layer override is possible.</p>
+</div></div><div class="acct-grid">
+<div class="acct-card pg-reveal"><div class="acct-card__emoji"><i class="fa-solid fa-building pg-hero__icon"></i></div><div><div class="acct-card__name">BANK</div><div class="acct-card__type">AccountType.BANK</div><div class="acct-card__desc">Licensed commercial banks. Full monetary system access, CBDC issuance participation, elevated KYC requirements, and eligibility for central bank authority designation. Required to receive certain institutional payment types.</div><div class="acct-card__perms"><span class="acct-card__perm">CURRENCY_ISSUANCE</span><span class="acct-card__perm">All payment types</span><span class="acct-card__perm">Lending origination</span><span class="acct-card__perm">Reserve management</span></div></div></div>
+<div class="acct-card pg-reveal"><div class="acct-card__emoji"><i class="fa-solid fa-file-contract pg-hero__icon"></i></div><div><div class="acct-card__name">FSP</div><div class="acct-card__type">AccountType.FSP</div><div class="acct-card__desc">Financial Service Providers. Payment processing, currency exchange, Binder node participation, and cross-border settlement capabilities. Regulated access to the monetary system without full banking privileges.</div><div class="acct-card__perms"><span class="acct-card__perm">Payment processing</span><span class="acct-card__perm">FX exchange</span><span class="acct-card__perm">Binder eligible</span><span class="acct-card__perm">Settlement services</span></div></div></div>
+<div class="acct-card pg-reveal"><div class="acct-card__emoji"><i class="fa-solid fa-hand-holding-usd pg-hero__icon"></i></div><div><div class="acct-card__name">MFI</div><div class="acct-card__type">AccountType.MFI</div><div class="acct-card__desc">Micro-Finance Institutions. Loan origination and management, savings product administration, agricultural finance product access, and crowd-funded lending pool participation for underserved communities.</div><div class="acct-card__perms"><span class="acct-card__perm">Loan origination</span><span class="acct-card__perm">Savings products</span><span class="acct-card__perm">MFI lending pools</span><span class="acct-card__perm">Agri-finance</span></div></div></div>
+<div class="acct-card pg-reveal"><div class="acct-card__emoji"><i class="fa-solid fa-shop pg-hero__icon"></i></div><div><div class="acct-card__name">MERCHANT</div><div class="acct-card__type">AccountType.MERCHANT</div><div class="acct-card__desc">Registered merchants. Required to receive merchant-specific transactions that include sales, rewards distributions, commercial payment acceptance, and loyalty programmes and delivery management.</div><div class="acct-card__perms"><span class="acct-card__perm">LIST_PRODUCT</span><span class="acct-card__perm">STORE_PURCHASE receipt</span><span class="acct-card__perm">Reward distribution</span><span class="acct-card__perm">Merchant ratings</span></div></div></div>
+<div class="acct-card pg-reveal"><div class="acct-card__emoji"><i class="fa-solid fa-briefcase pg-hero__icon"></i></div><div><div class="acct-card__name">BUSINESS</div><div class="acct-card__type">AccountType.BUSINESS</div><div class="acct-card__desc">General businesses. Commerce, subscriptions, and asset trading with standard commercial capabilities across all product types. The default commercial participant type for organizations.</div><div class="acct-card__perms"><span class="acct-card__perm">Commerce</span><span class="acct-card__perm">Subscriptions</span><span class="acct-card__perm">Asset trading</span><span class="acct-card__perm">Standard payments</span></div></div></div>
+<div class="acct-card pg-reveal"><div class="acct-card__emoji"><i class="fa-solid fa-piggy-bank pg-hero__icon"></i></div><div><div class="acct-card__name">SAVINGS</div><div class="acct-card__type">AccountType.SAVINGS</div><div class="acct-card__desc">Savings account holders with KYC. Offers access to currency savings, vault, loans, insurance services. Also allow the receipt of payments like salaries and wages.</div><div class="acct-card__perms"><span class="acct-card__perm">CBDC access</span><span class="acct-card__perm">Savings goals</span><span class="acct-card__perm">Time-locked vaults</span><span class="acct-card__perm">Loan eligibility</span></div></div></div>
+<div class="acct-card pg-reveal"><div class="acct-card__emoji"><i class="fa-solid fa-user pg-hero__icon"></i></div><div><div class="acct-card__name">PERSONAL</div><div class="acct-card__type">AccountType.PERSONAL</div><div class="acct-card__desc">Individual nonconsumers. Limited to non-regulated usage of the platform.</div><div class="acct-card__perms"><span class="acct-card__perm">Voting</span><span class="acct-card__perm">Certificates</span><span class="acct-card__perm">Domains</span><span class="acct-card__perm">Subscriptions</span></div></div></div>
+<div class="acct-card pg-reveal"><div class="acct-card__emoji"><i class="fa-solid fa-code-merge pg-hero__icon"></i></div><div><div class="acct-card__name">DEVELOPER</div><div class="acct-card__type">AccountType.DEVELOPER</div><div class="acct-card__desc">Application developers. ContractLibrary upload, App Store registration, certificate issuance, and contract reference management. Required for publishing smart contracts and distributing applications through the protocol.</div><div class="acct-card__perms"><span class="acct-card__perm">App Store listing</span><span class="acct-card__perm">Certificate issuance</span><span class="acct-card__perm">ContractLibrary</span><span class="acct-card__perm">Early Access</span></div></div></div>
+<div class="acct-card acct-card--ai pg-reveal"><div class="acct-card__emoji"><i class="fa-solid fa-robot pg-hero__icon"></i></div><div><div class="acct-card__name">AUTONOMOUS <span class="sh-badge sh-badge--gold" style="font-size:.58rem">WORLD FIRST</span></div><div class="acct-card__type">AccountType.AUTONOMOUS</div><div class="acct-card__desc">Autonomous AI agents. AutonomousAccountControl rule engine enforces transaction-type whitelists, per-holding spending caps, rolling window limits, recipient whitelists, and minimum balance floors at the consensus layer. Hard limits that no agent can exceed.</div><div class="acct-card__perms"><span class="acct-card__perm">Tx type whitelist</span><span class="acct-card__perm">Spending caps</span><span class="acct-card__perm">Rolling windows</span><span class="acct-card__perm">Recipient lists</span><span class="acct-card__perm">Balance floors</span></div></div></div>
+<div class="acct-card pg-reveal"><div class="acct-card__emoji"><i class="fa-solid fa-circle pg-hero__icon"></i></div><div><div class="acct-card__name">NONE</div><div class="acct-card__type">AccountType.NONE</div><div class="acct-card__desc">Default unclassified accounts. Standard transactional capabilities without special regulatory treatment or institutional privileges. The default state for all accounts before explicit type declaration via SET_ACCOUNT_INFO.</div><div class="acct-card__perms"><span class="acct-card__perm">Standard transactions</span><span class="acct-card__perm">Basic capabilities</span><span class="acct-card__perm">No special roles</span></div></div></div>
+</div></div></section><section class="sh-section sh-section--navy" id="keypair"><div class="sh-container"><div class="pg-sh"><div class="pg-sh__num">02</div><div class="pg-sh__copy">
+  <div class="sh-eyebrow sh-eyebrow--teal">PQC KEYPAIR ARCHITECTURE</div>
+  <div class="pg-sh__title">Two keys. One seed. Complete security.</div>
+  <p class="pg-sh__sub">Every Shamwari account is secured by two NIST-standardised post-quantum keys: a Dilithium signing key and a Kyber encryption key, both derived from a single BIP39-adapted seed phrase. This is the first blockchain wallet architecture to deploy both NIST FIPS 203 and FIPS 204 as the primary (and only) cryptographic layer.</p>
+</div></div><div class="pg-two-col">
+<div>
+  <div class="pg-card2 pg-reveal" style="margin-bottom:1rem">
+    <div class="pg-card2__accent pg-card2__accent--teal"></div>
+    <h3 class="pg-card2__title">ML-DSA Dilithium: Signing Key (NIST FIPS 204)</h3>
+    <p class="pg-card2__body">Every transaction submitted by the account is signed with this key. The 2420-byte Dilithium signature is included in the transaction body and verified by every network node at gate 1 of the consensus pipeline. This is also the key used  by forger nodes for generating block signatures.</p>
+    <ul class="pg-card2__list">
+      <li>NIST standardised: FIPS 204 (finalised 2024)</li>
+      <li>Lattice-based: secure against Shor&rsquo;s algorithm at any key size</li>
+      <li>2420-byte signatures: deterministic, constant-time</li>
+      <li>1312-byte public key: stored on-chain in account table</li>
+      <li>0.1ms verification time: no performance impact at block production rates</li>
+      <li>Used for transaction signing, block signatures, and certificate issuance</li>
+    </ul>
+  </div>
+  <div class="pg-card2 pg-reveal">
+    <div class="pg-card2__accent pg-card2__accent--gold"></div>
+    <h3 class="pg-card2__title">ML-KEM Kyber: Encryption Key (NIST FIPS 203)</h3>
+    <p class="pg-card2__body">The account&rsquo;s Kyber public key is stored on-chain and used by other accounts and the protocol to encrypt data destined for this account. Only the account holder with the corresponding Kyber private key can decrypt it. Used for all sensitive on-chain data.</p>
+    <ul class="pg-card2__list">
+      <li>NIST standardised: FIPS 203 (finalised 2024)</li>
+      <li>800-byte public key: stored on-chain alongside Dilithium key</li>
+      <li>Encrypts AccountInfo identity metadata, purchase payloads, messages</li>
+      <li>Encrypts KYC permission data in BetaChainPermission records</li>
+      <li>Hybrid encryption: Kyber KEM + AES-256-GCM for bulk data</li>
+      <li>Private key (1632B) held exclusively by account holder that is never transmitted or exposed</li>
+    </ul>
+  </div>
+</div>
+<div>
+  <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1.25rem">KEY DERIVATION FLOW</div>
+  <div class="deriv-flow pg-reveal" style="margin-bottom:1.5rem">
+    <div class="deriv-node deriv-node--seed"><div class="deriv-label">SEED PHRASE</div><div class="deriv-val">12&ndash;24 BIP39<br>mnemonic words</div></div>
+    <div class="deriv-arrow">&rarr;</div>
+    <div class="deriv-node deriv-node--seed"><div class="deriv-label">PBKDF2 ROOT</div><div class="deriv-val">64-byte entropy<br>HMAC-SHA512</div></div>
+    <div class="deriv-arrow">&rarr;</div>
+    <div class="deriv-split">
+      <div class="deriv-node deriv-node--teal"><div class="deriv-label">DILITHIUM KEYPAIR</div><div class="deriv-val">Sign transactions &amp;<br>forge blocks</div></div>
+      <div class="deriv-node deriv-node--gold"><div class="deriv-label">KYBER KEYPAIR</div><div class="deriv-val">Encrypt &amp; decrypt<br>on-chain data</div></div>
+    </div>
+  </div> 
+  <div class="sh-eyebrow sh-eyebrow--teal" style="margin-top:3rem;">COMBINED PUBLIC KEY: 2112 BYTES ON-CHAIN</div>
+  <div class="pg-card2 pg-reveal" style="margin-bottom:1rem; margin-top:3rem;">
+    <div class="pg-card2__accent pg-card2__accent--teal"></div>
+    <h3 class="pg-card2__title">What Goes On-Chain</h3>
+    <p class="pg-card2__body">The 2112-byte combined public key (800B Kyber + 1312B Dilithium) is stored in the account table on activation. Account ID is derived from the Dilithium public key hash. No private key data is ever exposed or stored on the blockchain.</p>
+  </div>
+  <div class="pg-card2 pg-reveal" style="margin-top:3rem;">
+    <div class="pg-card2__accent pg-card2__accent--gold"></div>
+    <h3 class="pg-card2__title">Single Backup Recovery</h3>
+    <p class="pg-card2__body">One seed phrase recovers both PQC keys on any device. Deterministic derivation means the same words always produce the same keys. No cloud backup, no second phrase, no key file required.</p>
+  </div>
+</div></div>
+	<div class="pg-card2 pg-reveal" style="margin-top: 1rem;">
+    <div class="pg-card2__accent pg-card2__accent--red"></div> 
+    <h3 class="pg-card2__title">REED-SOLOMON ADDRESSES</h3>
+    <p class="pg-card2__body">Human-friendly account addresses are generated from the COMBINED PUBLIC KEY to create a :  <span class="sh-eyebrow sh-eyebrow--gold" style="font-size: 17px;">SHAMWARI-XXXX-XXXX-XXXX-XXXXX</span> format type. These addresses are used to reference accounts across the blockchain from transaction submissions to database entry and querying.
+    </p>
+  </div>  
+</div></section><section class="sh-section" id="identity"><div class="sh-container"><div class="pg-sh"><div class="pg-sh__num">03</div><div class="pg-sh__copy">
+  <div class="sh-eyebrow sh-eyebrow--gold">ENCRYPTED IDENTITY</div>
+  <div class="pg-sh__title">AccountInfo: Plain-text general information and encrypted KYC data.</div>
+  <p class="pg-sh__sub">Shamwari accounts can have set plain general information and also store identity metadata on-chain i.e. legal names, contact information, jurisdiction identifiers, personal identity information encrypted with the account&rsquo;s Kyber public key. The encrypted data ciphertext is permanently stored on-chain; only the account holder can decrypt and read or share it.</p>
+</div></div><div class="pg-two-col">
+<div>
+  <div class="pg-features">
+    <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div>
+  <div><div class="pg-feature__title">Kyber-Encrypted at Rest</div><div class="pg-feature__body">AccountInfo data is encrypted with the account's Kyber-512 public key using the hybrid KEM + AES-256 pattern. The blockchain stores ciphertext. Third parties, including node operators, cannot read the underlying identity data. Only the account holder with the Kyber private key can decrypt it.</div></div>
+</div><div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div>
+  <div><div class="pg-feature__title">Verifiable Without Exposure</div><div class="pg-feature__body">The existence of AccountInfo and its encrypted hash are publicly verifiable and counterparties can confirm that an account's ownership or profile. The limited plain information can be used for non-sensitive interactions while the encrypted data can be used for identity-specific KYC processes.</div></div>
+</div><div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div>
+  <div><div class="pg-feature__title">Selective Disclosure</div><div class="pg-feature__body">Account holders control what they disclose and to whom. Sharing the decrypted AccountInfo data with a specific counterparty (e.g., a bank) is a bilateral action and not a public broadcast. The blockchain holds the encrypted commitment; disclosure is off-chain and consent-based.</div></div>
+</div><div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div>
+  <div><div class="pg-feature__title">Immutable Record at Every Update</div><div class="pg-feature__body">Every SET_ACCOUNT_INFO transaction creates a versioned record in the AccountInfoTable. Historical identity states can be queried at any block height, providing an immutable timeline of field changes for compliance and audit purposes.</div></div>
+  </div><div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div>
+  <div><div class="pg-feature__title">Private by design</div><div class="pg-feature__body">Unlike privacy chains that use zero-knowledge proofs to obscure transactions, Shamwari's approach is different: transactions themselves are public (enabling regulatory audit), but sensitive payload data within transactions is Kyber-encrypted. Regulators can verify that a transaction occurred; only authorised parties can read its contents.</div></div> 
+</div>
+  </div>
+</div>
+<div> 
+  <div class="sh-eyebrow sh-eyebrow--teal" style="margin-bottom:1.25rem">ACCOUNTINFO FIELDS</div>
+  <div class="pg-card2 pg-reveal" style="margin-bottom:1rem">
+    <div class="pg-card2__accent pg-card2__accent--teal"></div>
+    <h3 class="pg-card2__title">Plain-text Fields (OPTIONAL)</h3>
+    <ul class="pg-card2__list">
+      <li><strong>Gender</strong> : for individuals </li>
+      <li><strong>Date of Birth</strong> ,  or date of incorporation for organizations</li>
+      <li><strong>Nationality</strong> : ISO 3166 country code</li>
+      <li><strong>Website URL</strong> : link to website</li>
+      <li><strong>Display Picture URL</strong> : link to image for wallet account display</li>
+      <li><strong>ReadME</strong> : introductory information on person or organization</li>
+    </ul>
+  </div>
+  <div class="pg-card2 pg-reveal" style="margin-bottom:1rem">
+    <div class="pg-card2__accent pg-card2__accent--gold"></div>
+    <h3 class="pg-card2__title">EncryptedData Fields (Examples)</h3>
+    <ul class="pg-card2__list">
+      <li><strong>Legal Name(s)</strong> &mdash; Full registered legal name or entity name</li>
+      <li><strong>Addresses</strong> &mdash; ISO 3166 country code or jurisdiction identifier and physical address</li>
+      <li><strong>Contact Details</strong> &mdash; Emails and phone numbers.</li>
+      <li><strong>Identity Number</strong> &mdash; National identity number for individuals</li>
+      <li><strong>Passport Number</strong> &mdash; National passport number for individuals</li>
+      <li><strong>Licence Number</strong> &mdash; Regulatory licence reference for BANK/FSP/MFI types</li>
+      <li><strong>Institution Code</strong> &mdash; BIC, routing code, or institutional identifier</li>
+    </ul>
+  </div>
+  <div class="pg-card2 pg-reveal" style="margin-bottom:1rem">
+    <div class="pg-card2__accent pg-card2__accent--teal"></div>
+    <h3 class="pg-card2__title">KYC Permission Record</h3>
+    <p class="pg-card2__body">CHAIN_ADMIN accounts store Kyber-encrypted KYC attestation data in BetaChainPermission records when granting CHAIN_USER access. This creates a permanent, cryptographically-anchored on-chain record of every KYC onboarding event &mdash; including timestamp, granting institution, and encrypted evidence reference.</p>
+  </div>
+</div></div></div></section><section class="sh-section sh-section--navy" id="domains"><div class="sh-container"><div class="pg-sh"><div class="pg-sh__num">04</div><div class="pg-sh__copy">
+  <div class="sh-eyebrow sh-eyebrow--teal">ON-CHAIN DOMAINS</div>
+  <div class="pg-sh__title">.shamwari.network domain-like account addresses</div>
+  <p class="pg-sh__sub">Every account can register a Shamwari native domain in the .shamwari.network namespace. Domains are stored on-chain, valid for approximately 1 year (365 &times; ~7200 blocks), and automatically expire without renewal. All domain lifecycle events are consensus transactions.</p>
+</div></div><div class="pg-two-col">
+<div>
+  <div class="pg-features">
+    <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div>
+  <div><div class="pg-feature__title">Register Once, Use Everywhere</div><div class="pg-feature__body">A domain like <span class="sh-code">mybank.shamwari.network</span> resolves to the registering account&rsquo;s address on any chain. Domains are valid globally by default and once registered, resolve across all BetaChains.  The registered domain can be used instead of the Solomon-Reed human-readable account address to reference a specific account with a known domain.</div></div>
+</div><div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div>
+  <div><div class="pg-feature__title">Automatic Expiry at Block Height</div><div class="pg-feature__body">Domain validity is managed by the AFTER_BLOCK_APPLY protocol automation. When the expiration block height is reached, and no renewal transaction was submitted and confirmed, the domain is automatically released for registration by other accounts. No manual deregistration required by the issuer.</div></div>
+</div><div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--teal"></div>
+  <div><div class="pg-feature__title">Transfer and Renewal Lifecycle</div><div class="pg-feature__body">Domains support ACCOUNT_DOMAIN_TRANSFER to another account, ACCOUNT_DOMAIN_RENEWAL within the 30-day renewal window, and ACCOUNT_DOMAIN_DEREGISTER for explicit release. All lifecycle events create immutable on-chain records and are enforced at consensus.</div></div>
+</div><div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div>
+  <div><div class="pg-feature__title">Namespace Security</div><div class="pg-feature__body">The .shamwari.network namespace is managed by the blockchain protocol preventing domain squatting and with no DNS-equivalent centralisation. Registration is first-come, first-served and enforced by the consensus rules of the blockchain.</div></div>
+</div>
+  </div>
+</div>
+<div>
+  <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1.25rem">DOMAIN TRANSACTION TYPES</div>
+  <div class="arch-tx-cluster pg-reveal">
+    <div class="arch-tx-cluster__head arch-tx-cluster__head--teal"><div class="arch-tx-cluster__title">DOMAIN LIFECYCLE</div><div class="arch-tx-cluster__count sh-text--teal">4</div></div>
+    <div class="arch-tx-cluster__list">
+      <div class="arch-tx-cluster__item">ACCOUNT_DOMAIN_REGISTER &mdash; Claim a .shamwari.network domain</div>
+      <div class="arch-tx-cluster__item">ACCOUNT_DOMAIN_RENEWAL &mdash; Extend within 30-day renewal window</div>
+      <div class="arch-tx-cluster__item">ACCOUNT_DOMAIN_TRANSFER &mdash; Transfer ownership to another account</div>
+      <div class="arch-tx-cluster__item">ACCOUNT_DOMAIN_DEREGISTER &mdash; Explicitly release before expiry</div>
+    </div>
+  </div>
+  <div style="margin-top:1.25rem">
+    <div class="pg-card2 pg-reveal">
+      <div class="pg-card2__accent pg-card2__accent--teal"></div>
+      <h3 class="pg-card2__title">Domain Validity Period</h3>
+      <ul class="pg-card2__list">
+        <li>Validity: ~1 year; calculated in blocks, not calendar time</li>
+        <li>At ~7200 blocks/day: approximately 2,628,000 blocks per year</li>
+        <li>Renewal window: 30 days (216,000 blocks) before expiry</li>
+        <li>Expiry: AFTER_BLOCK_APPLY releases domain automatically</li>
+        <li>Canonical expiration: expired domains immediately available for re-registration</li>
+      </ul>
+    </div>
+  </div>
+</div></div></div></section><section class="sh-section" id="ai-accounts"><div class="sh-container"><div class="pg-sh"><div class="pg-sh__num">05</div><div class="pg-sh__copy">
+  <div class="sh-eyebrow sh-eyebrow--purple">AI AGENT ACCOUNTS</div>
+  <div class="pg-sh__title">The world's first on-chain AI account type</div>
+  <p class="pg-sh__sub">AccountType.AUTONOMOUS is purpose-built for AI agents that need to transact on-chain. Hard spending limits, transaction type whitelists, recipient restrictions, and rolling window caps are all enforced at the consensus layer and not in off-chain monitoring software that can be bypassed or overridden.</p>
+</div></div><div class="pg-two-col">
+<div>
+  <div class="sh-eyebrow sh-eyebrow--purple" style="margin-bottom:1.25rem">AUTONOMOUS ACCOUNT CONTROL RULES</div>
+  <div class="pg-features">
+    <div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--purple"></div>
+  <div><div class="pg-feature__title">Transaction Type Whitelist</div><div class="pg-feature__body">The account owner configures a whitelist of permitted transaction types. An AI agent can be restricted to only CURRENCY_PAYMENT and SUBSCRIBE, or EXCHANGE_BUY and PURCHASES, or any permitted combination. Any transaction type not on the whitelist is rejected at gate 4 of the consensus pipeline.</div></div>
+</div><div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div>
+  <div><div class="pg-feature__title">Per-Holding Spending Cap</div><div class="pg-feature__body">Maximum spend per billing period per currency or asset holding. The agent cannot exceed this cap regardless of what instructions it receives. The cap is enforced by the consensus engine and the transaction simply fails with an InsufficientBalanceException before the agent can act on it.</div></div>
+</div><div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--purple"></div>
+  <div><div class="pg-feature__title">Rolling Window Limits</div><div class="pg-feature__body">Total spend across a configurable rolling block window (e.g., 7-day equivalent in blocks). This prevents an agent from "saving up" spend across low-activity periods and then bursting through its effective budget in a single high-activity period.</div></div>
+</div><div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--gold"></div>
+  <div><div class="pg-feature__title">Recipient Whitelist</div><div class="pg-feature__body">An agent can be restricted to transacting only with specific account IDs. Payments or trades to non-whitelisted recipients are rejected. This is the on-chain equivalent of a purchase order approval list in which the agent can only pay approved counterparties.</div></div>
+</div><div class="pg-feature pg-reveal"><div class="pg-feature__accent pg-feature__accent--purple"></div>
+  <div><div class="pg-feature__title">Minimum Balance Floor</div><div class="pg-feature__body">The AUTONOMOUS account cannot reduce its balance below a configured floor. This ensures the account always retains enough to cover its subscription obligations, next billing cycles, and any protocol-required minimum balances.</div></div>
+</div>
+  </div>
+</div>
+<div>
+  <div class="sh-eyebrow sh-eyebrow--gold" style="margin-bottom:1.25rem"> AUTONOMOUS AGENT PERMISSION MATRIX</div>
+  <div class="ai-matrix pg-reveal" style="margin-bottom:1.5rem">
+    <div class="ai-row ai-row--allow"><span class="ai-badge ai-badge--allow">ALLOW</span> Currency payments</div>
+    <div class="ai-row ai-row--allow"><span class="ai-badge ai-badge--allow">ALLOW</span> Asset trading</div>
+    <div class="ai-row ai-row--allow"><span class="ai-badge ai-badge--allow">ALLOW</span> Subscribe to services</div>
+    <div class="ai-row ai-row--allow"><span class="ai-badge ai-badge--allow">ALLOW</span> Commerce purchases</div>
+    <div class="ai-row ai-row--allow"><span class="ai-badge ai-badge--allow">ALLOW</span> Currency exchange</div>
+    <div class="ai-row ai-row--allow"><span class="ai-badge ai-badge--allow">ALLOW</span> Dividend receipt</div>
+    <div class="ai-row ai-row--deny"><span class="ai-badge ai-badge--deny">DENY</span> Issue certificates</div>
+    <div class="ai-row ai-row--deny"><span class="ai-badge ai-badge--deny">DENY</span> Insurance approval</div>
+    <div class="ai-row ai-row--deny"><span class="ai-badge ai-badge--deny">DENY</span> Grant permissions</div>
+    <div class="ai-row ai-row--deny"><span class="ai-badge ai-badge--deny">DENY</span> TotemApproval</div>
+    <div class="ai-row ai-row--deny"><span class="ai-badge ai-badge--deny">DENY</span> Currency issuance</div>
+    <div class="ai-row ai-row--deny"><span class="ai-badge ai-badge--deny">DENY</span> Chain config changes</div>
+  </div>
+  <div class="pg-cards3" style="grid-template-columns:1fr;gap:1rem">
+    <div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--purple"><i class="fa-solid fa-chart-line"></i></div>
+  <h3 class="pg-card__title">Autonomous Trading Desk</h3><p class="pg-card__body">Autonomous agents execute trades on the Totem Exchange within hard on-chain limits e.g max position size, permitted asset classes, daily volume cap. No off-chain monitoring needed. The blockchain enforces it.</p></div><div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--gold"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+  <h3 class="pg-card__title">Automated Loan Processing</h3><p class="pg-card__body">MFI agents process applications, verify credit scores, and disburse approved loans automatically with the protocol enforcing disbursement limits and approved recipient lists at consensus.</p></div><div class="pg-card pg-reveal"><div class="pg-card__icon pg-card__icon--teal"><i class="fa-solid fa-rotate"></i></div>
+  <h3 class="pg-card__title">Recurring Payment Automation</h3><p class="pg-card__body">Autonomous treasury agents manage subscription payments, supplier invoices, and dividend distributions within governance-approved parameters. Zero manual intervention. Zero bypass possible.</p></div>
+  </div>
+</div></div></div></section><section class="sh-cta"><div class="sh-cta__glow"></div><div class="sh-cta__inner">
+  <div class="sh-eyebrow sh-eyebrow--teal">CREATE AN ACCOUNT</div>
+  <h2 class="sh-cta__title">Post-quantum security. Identity Management. One seed phrase.</h2>
+  <p class="sh-cta__sub">Create and manage Shamwari accounts with the full suite of identity, domain, and key management tools.</p>
+  <div class="sh-cta__actions"><a href="https://wallet.shamwari.network" class="sh-btn sh-btn--teal sh-btn--lg">Launch Wallet</a><a href="security" class="sh-btn sh-btn--ghost sh-btn--lg">PQC Security</a><a href="compliance" class="sh-btn sh-btn--gold sh-btn--lg">Compliance Layer</a></div>
+</div></section>
+	
+<!-- FOOTER -->
+<footer class="sh-footer">
+  <div class="sh-footer__grid">
+    <div>
+      <div class="sh-footer__wordmark">
+        <img src="/img/icon.png" height="72" width="72" />
+      </div>
+      <p class="sh-footer__tagline">Quantum-resistant financial infrastructure for 4 billion people across Africa, LATAM, ASEAN and MENA.</p>
+      <div class="sh-footer__socials">
+        <a href="https://bitbucket.org/thenamelesstree/shamwari" class="sh-footer__social"><i class="fa-brands fa-bitbucket"></i></a>
+        <a href="https://x.com/shamwarinetwork" class="sh-footer__social"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://www.linkedin.com/showcase/shamwarinetwork" class="sh-footer__social"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:contact@shamwari.network" class="sh-footer__social"><i class="fa fa-envelope"></i></a>
+        
+      </div>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Platform</div>
+      <a href="shamwaripay"         class="sh-footer__link">ShamwariPay</a>
+      <a href="digitalassets"       class="sh-footer__link">Totem Exchange</a>
+      <a href="digitalcertificates" class="sh-footer__link">Certificates</a>
+      <a href="subscriptions"       class="sh-footer__link">Subscriptions</a>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Technology</div>
+      <a href="architecture"        class="sh-footer__link">Architecture</a>
+      <a href="security"            class="sh-footer__link">Post-Quantum Security</a>
+      <a href="accounts"            class="sh-footer__link">Accounts &amp; Identity</a>
+      <a href="compliance"          class="sh-footer__link">Compliance</a>
+    </div>
+    <div>
+      <div class="sh-footer__col-title">Resources</div>
+      <a href="solutions"    class="sh-footer__link">Solutions</a>
+      <a href="developers"   class="sh-footer__link">Developer Hub</a>
+      <a href="https://docs.shamwari.network" class="sh-footer__link">Documentation</a>
+      <a href="https://wallet.shamwari.network" class="sh-footer__link">Launch Wallet</a>
+    </div>
+  </div>
+  <div class="sh-footer__bottom">
+    <span>&copy; 2026 TheNamelessTree Networks. All rights reserved.</span>
+    <span class="sh-footer__bottom-right"><a href="https://thenamelesstree.co.zw" target="blank">thenamelesstree.co.zw</a></span>
+  </div>
+</footer>
+
+<a href="#" class="sh-back-top" id="back-top" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></a>
+<script type="module" src="/src/main.js"></script>
+<script>
+(function(){
+  var nav=document.getElementById('sh-nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('sh-nav--scrolled',window.scrollY>50);});
+  var tgl=document.getElementById('nav-toggle'),menu=document.getElementById('nav-menu');
+  if(tgl&&menu){tgl.addEventListener('click',function(){tgl.classList.toggle('is-open');menu.classList.toggle('is-open');});}
+  var bt=document.getElementById('back-top');
+  if(bt){window.addEventListener('scroll',function(){bt.classList.toggle('is-visible',window.scrollY>400);});bt.addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});});}
+  var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');ro.unobserve(e.target);}});},{threshold:0.07,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.sh-reveal,.pg-reveal').forEach(function(el){ro.observe(el);});
+  var tocLinks=document.querySelectorAll('.pg-toc__link');
+  var sections=Array.from(tocLinks).map(function(l){return document.querySelector(l.getAttribute('href'));});
+  window.addEventListener('scroll',function(){var sy=window.scrollY+150,cur=0;sections.forEach(function(s,i){if(s&&s.offsetTop<=sy)cur=i;});tocLinks.forEach(function(l,i){l.classList.toggle('is-active',i===cur);});});
+})();
+</script>
+</body></html>
